@@ -10,6 +10,8 @@ This is a **platform for forks** (rounded stones, Skyfield bake, etc.), not a fi
 
 Public Pages: [https://timdaw37.github.io/stonehenge-block-3d/](https://timdaw37.github.io/stonehenge-block-3d/) (redirects to `locked_overview.html`).
 
+Hover and pin both show OSGB and WGS84 (scene/plan grid, not GNSS; WGS84 converted from that grid). Same framing as [stonehenge-plan](https://timdaw37.github.io/stonehenge-plan/).
+
 ## Run locally
 
 From the repo root (ES modules + large terrain need HTTP):

@@ -1,6 +1,6 @@
 // locked_overview_app 20260919f — epoch sun/moon (chunk loader)
 const __base = new URL('.', import.meta.url).href;
-const __N = 11;
+const __N = 12;
 async function __load() {
   const parts = await Promise.all(
     Array.from({length: __N}, (_, i) =>

@@ -33,8 +33,12 @@
  .check{font-size:12px;margin-top:4px}
  #geoReadout{position:fixed;left:10px;bottom:10px;z-index:4;max-width:calc(100% - 20px);
  background:rgba(0,0,0,.78);color:#dce6f0;font:11px/1.35 ui-monospace,Menlo,Consolas,monospace;
- padding:6px 10px;border-radius:6px;pointer-events:none;white-space:pre}
+ padding:6px 10px;border-radius:6px;pointer-events:none;white-space:pre-wrap}
  #geoReadout .muted{opacity:.65}
+ #geoReadout #geoPinned{color:#f0a070;margin-top:2px}
+ #geoReadout #geoClear{pointer-events:auto;margin:4px 0 0;padding:2px 8px;font:11px system-ui,sans-serif;
+  background:#3d4a3a;color:#eee;border:0;border-radius:4px;cursor:pointer}
+ #geoReadout #geoClear[hidden]{display:none}
  @media (max-width:700px){
   #geoReadout{font-size:10px;padding:5px 8px;bottom:8px;left:8px}
  }
@@ -46,6 +50,7 @@
 <div id="hud">
   <div><b>Stonehenge</b></div>
   <div style="opacity:.85;font-size:12px;margin-top:2px">Sarsen grey | bluestones blue | Altar pink | stations 92/94 bright silver (markers only)</div>
+  <div style="opacity:.7;font-size:11px;margin-top:4px;line-height:1.35">Not GNSS. OSGB is the scene/plan grid (Rees frame); WGS84 converted from that. GE can sit ~1.5&nbsp;m east — we do not warp to GE. Hover for coords; short click to pin.</div>
   <div id="counts" class="row" style="opacity:.85"></div>
   <div class="row">
     <button type="button" id="btnTop" class="active">Top-down</button>
@@ -84,7 +89,11 @@
   <div id="msg"></div>
   <div id="sunReadout" class="row" style="font-size:11px;opacity:.9"></div>
 </div>
-<div id="geoReadout" aria-live="polite"><span class="muted">Cursor</span> —</div>
+<div id="geoReadout" aria-live="polite">
+  <div id="geoHover"><span class="muted">Hover</span> —</div>
+  <div id="geoPinned" hidden></div>
+  <button type="button" id="geoClear" hidden title="Clear pinned coordinate">Clear pin</button>
+</div>
 <canvas id="c"></canvas>
 <script src="./data/locked_poses.js"></script>
 <script src="./data/site_ground_od.js"></script>

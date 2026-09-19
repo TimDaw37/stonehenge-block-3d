@@ -58,3 +58,5 @@ Hover and pin both show OSGB and WGS84 (same framing as [stonehenge-plan](https:
 ## Epoch (sun / moon azimuths)
 
 HUD **Epoch** (Modern 2026 / c. 2500 BC / free year) drives obliquity for `approxSun` and moon standstill extremes (`ε + 5.145°`). Flat-horizon geometric az only; see `docs/epoch_sun_moon_2026-09-19.md`. Session key `sh_epoch_year`.
+
+- Public entry: `index.html` (Hoyle / LiDAR sky + Gleam·Half·Full limb). Twin: `model_path_a.html` (same content).

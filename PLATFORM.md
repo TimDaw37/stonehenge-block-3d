@@ -53,4 +53,4 @@ On viewports ≤700px the control panel (`#hud`) defaults collapsed; `#hudToggle
 
 ## Cursor georeference
 
-Pointer readout (`#geoReadout`) raycasts the y=0 origin-OD plane → OSGB36 E/N (via `CE`/`CN` + `localXZ` inverse) and WGS84 lat/lon (inline Airy TM + Helmert); no npm deps.
+Hover and pin both show OSGB and WGS84 (same framing as [stonehenge-plan](https://timdaw37.github.io/stonehenge-plan/)). `#geoReadout` raycasts the y=0 origin-OD plane → OSGB36 E/N (scene/plan grid via `CE`/`CN` + `localXZ` inverse) and WGS84 lat/lon (`vendor/osgb_wgs84.js`, Airy TM + Helmert). Not GNSS; Google Earth can sit ~1.5 m east — we do not warp to GE. Short click pins; Escape / Clear pin clears.

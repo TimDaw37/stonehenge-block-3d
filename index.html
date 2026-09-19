@@ -33,7 +33,7 @@
  #scaleWarn{display:none;position:fixed;left:50%;top:14px;transform:translateX(-50%);z-index:3;
  background:#7f1d1d;color:#fff7ed;font:700 13px system-ui,sans-serif;padding:8px 14px;border-radius:8px;pointer-events:none}
  .check{font-size:12px;margin-top:4px}
- #geoReadout{position:fixed;left:10px;bottom:10px;z-index:4;max-width:calc(100% - 20px);
+ #geoReadout{position:fixed;left:10px;bottom:10px;z-index:5;max-width:calc(100% - 20px);
  background:rgba(0,0,0,.78);color:#dce6f0;font:11px/1.35 ui-monospace,Menlo,Consolas,monospace;
  padding:6px 10px;border-radius:6px;pointer-events:none;white-space:pre-wrap}
  #geoReadout .muted{opacity:.65}
@@ -93,7 +93,7 @@
     </div>
   </div>
   <div class="check"><label style="display:inline;text-transform:none;letter-spacing:0;opacity:1"><input type="checkbox" id="geoOn" checked/> Georef / Coords</label></div>
-  <div style="opacity:.7;font-size:10px;margin:2px 0 4px 0;line-height:1.35">Hover freezes while dragging/orbiting so coords do not slide. Short tap = pin; Esc / Clear pin clears. Uncheck to hide the bottom box.</div>
+  <div style="opacity:.7;font-size:10px;margin:2px 0 4px 0;line-height:1.35">Tap/click for coords; short tap pins. Drag to orbit (coords pause while dragging). Short tap = pin; Esc / Clear pin clears. Uncheck to hide the bottom box.</div>
   <div class="check"><label style="display:inline;text-transform:none;letter-spacing:0;opacity:1"><input type="checkbox" id="showRay"/> Ray to centre</label></div>
   <div id="msg"></div>
   <div id="sunReadout" class="row" style="font-size:11px;opacity:.9"></div>
@@ -104,7 +104,7 @@
   <button type="button" id="geoClear" hidden title="Clear pinned coordinate">Clear pin</button>
 </div>
 <canvas id="c"></canvas>
-<script src="./data/locked_poses.js?v=20260919c"></script>
+<script src="./data/locked_poses.js?v=20260919d"></script>
 <script>
 /* lintel seat 2026-09-19: lengthen shorter uprights so tops match partners */
 (function () {
@@ -135,7 +135,7 @@
   }
 })();
 </script>
-<script src="./data/site_ground_od.js?v=20260919c"></script>
+<script src="./data/site_ground_od.js?v=20260919d"></script>
 <script type="importmap">
 {"imports":{"three":"./vendor/three.module.js","three/addons/":"./vendor/"}}
 </script>
@@ -146,6 +146,6 @@ setTimeout(function(){
  if(m)m.innerHTML='<b style="color:#f88">THREE.js failed to load</b>. Serve over http from project root.';
 },30000);
 </script>
-<script type="module" src="./vendor/locked_overview_app.20260919c.js"></script>
+<script type="module" src="./vendor/locked_overview_app.20260919d.js"></script>
 </body>
 </html>

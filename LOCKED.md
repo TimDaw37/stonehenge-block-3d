@@ -4,9 +4,12 @@ See [docs/LOCK_2026-09-19e_pages_mobile.md](docs/LOCK_2026-09-19e_pages_mobile.m
 
 Live: https://timdaw37.github.io/stonehenge-block-3d/
 
+Epoch sun/moon (2026-09-19f): [docs/epoch_sun_moon_2026-09-19.md](docs/epoch_sun_moon_2026-09-19.md).
+
 ## Snapshots
 - `index.html.lock-2026-09-19e` / `locked_overview.html.lock-2026-09-19e`
 - `vendor/locked_overview_app.lock-2026-09-19e.js`
+- Epoch ship: `vendor/locked_overview_app.20260919f.js` (`?v=20260919f`)
 - Prior HUD lock: `locked_overview.html.lock-2026-09-19-hud`
 
 ## Open
@@ -24,7 +27,7 @@ Live: https://timdaw37.github.io/stonehenge-block-3d/
 | bright silver #f0f4fa | station **markers** 92 / 94 only |
 
 ## Roadmap (post-lock)
-1. Epoch choice for sun/moon (Modern vs ~2500 BC) — next
+1. Epoch choice for sun/moon (Modern vs ~2500 BC) — **done 2026-09-19f** (`docs/epoch_sun_moon_2026-09-19.md`)
 2. Rounded / shaped stones fork
 3. Optional: Skyfield bake for deep past / true horizon altitude
 

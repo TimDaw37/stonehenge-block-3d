@@ -1,0 +1,81 @@
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/OrbitControls.js';
+import { osgbFromLocal, osgbToWgs84 } from './osgb_wgs84.js';
+window.__THREE_OK = true;
+
+const msg = document.getElementById('msg');
+const hudEl = document.getElementById('hud');
+const hudToggle = document.getElementById('hudToggle');
+const HUD_KEY = 'sh_hud_open';
+function isNarrow(){ return window.matchMedia('(max-width: 700px)').matches; }
+function setHudOpen(open){
+  if(!hudEl || !hudToggle) return;
+  hudEl.classList.toggle('collapsed', !open);
+  hudToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  hudToggle.textContent = open ? 'Controls ▾' : 'Controls ▸';
+  try { sessionStorage.setItem(HUD_KEY, open ? '1' : '0'); } catch(e) {}
+}
+function initHudCollapse(){
+  let open;
+  try {
+    const stored = sessionStorage.getItem(HUD_KEY);
+    if (stored === '0' || stored === '1') open = stored === '1';
+    else open = !isNarrow(); // default collapsed on narrow
+  } catch(e) { open = !isNarrow(); }
+  // On desktop CSS forces panel visible; still set aria state.
+  setHudOpen(open);
+  if (hudToggle) hudToggle.addEventListener('click', () => {
+    const nowOpen = hudToggle.getAttribute('aria-expanded') !== 'true';
+    setHudOpen(nowOpen);
+  });
+  // sessionStorage keeps preference across rotate; desktop CSS always shows #hud.
+}
+initHudCollapse();
+const countsEl = document.getElementById('counts');
+const LP = window.LOCKED_POSES;
+if (!LP || !LP.array) {
+ msg.textContent = 'Missing stone data.';
+ throw new Error('no LOCKED_POSES');
+}
+
+const CE = 412245.35, CN = 142194.11;
+function localXZ(e, n) { return { x: e - CE, z: -(n - CN) }; }
+const SARSEN_GREY = 0x8a8e94; // elephantine grey (lighter)
+const BLUESTONE = 0x6b8cae; // unchanged
+const ALTAR = 0xff69b4; // unchanged pink
+const MARKER_SILVER = 0xf0f4fa; // 92/94 markers only (bright silver)
+
+function colourFor(e) {
+ const id = String(e.id);
+ // Markers win over pose colour_class (e.g. gold_medium / seed).
+ if (id === '92' || id === '94') return MARKER_SILVER;
+ if (e.colour_class === 'blue_bluestone') return BLUESTONE;
+ if (id === '80' || e.colour_class === 'altar_pink') return ALTAR;
+ return SARSEN_GREY;
+}
+
+const byClass = {};
+for (const e of LP.array) byClass[e.colour_class] = (byClass[e.colour_class] || 0) + 1;
+countsEl.textContent = (LP.count || LP.array.length) + ' stones';
+
+const canvas = document.getElementById('c');
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.setSize(innerWidth, innerHeight);
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x2a3548);
+const hemi = new THREE.HemisphereLight(0xc9d4e8, 0x3d4a3a, 0.72);
+scene.add(hemi);
+const sunLight = new THREE.DirectionalLight(0xffe2a8, 1.35);
+sunLight.position.set(40, 60, 20);
+scene.add(sunLight);
+scene.add(sunLight.target);
+const fill = new THREE.DirectionalLight(0x8aa0b8, 0.35);
+fill.position.set(-30, 40, -20);
+scene.add(fill);
+
+const root = new THREE.Group();
+scene.add(root);
+

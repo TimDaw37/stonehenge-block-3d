@@ -324,4 +324,213 @@ function buildTerrainMeshes() {
  terrainHorizonMesh.renderOrder = -1;
  scene.add(terrainHorizonMesh);
  if (T.near) {
- terrainNear
+ terrainNearMesh = meshFromTerrainBlock(T.near);
+ terrainNearMesh.visible = false;
+ terrainNearMesh.renderOrder = -1;
+ terrainNearMesh.material = terrainNearMesh.material.clone();
+ terrainNearMesh.material.color = new THREE.Color(1.04, 1.04, 1.0);
+ scene.add(terrainNearMesh);
+ }
+ return true;
+}
+function setTerrain(on) {
+  terrainOn = !!on;
+  document.getElementById('btnTerrain').classList.toggle('active', terrainOn);
+  if (!terrainOn) {
+    if (terrainHorizonMesh) terrainHorizonMesh.visible = false;
+    if (terrainNearMesh) terrainNearMesh.visible = false;
+    placeSun();
+    return;
+  }
+  ensureTerrainLoaded(true).then(() => {
+    buildTerrainMeshes();
+    applyTerrainExag(terrainHorizonMesh);
+    applyTerrainExag(terrainNearMesh);
+    if (terrainHorizonMesh) terrainHorizonMesh.visible = true;
+    if (terrainNearMesh) terrainNearMesh.visible = true;
+    if (!topMode) { persp.far = 25000; persp.updateProjectionMatrix(); }
+    if (msg && /^Loading terrain/.test(msg.textContent || '')) msg.textContent = '';
+    placeSun();
+  }).catch((err) => {
+    console.warn(err);
+    terrainOn = false;
+    document.getElementById('btnTerrain').classList.remove('active');
+    if (msg) msg.textContent = 'Terrain load failed: ' + err;
+  });
+}
+
+function setLabels(on) {
+  labelsOn = !!on;
+  document.getElementById('btnLabels').classList.toggle('active', labelsOn);
+  for (const s of stoneBaseY) {
+    if (s.lab) s.lab.visible = labelsOn;
+  }
+}
+
+const ortho = new THREE.OrthographicCamera(-20, 20, 20, -20, 0.1, 25000);
+const persp = new THREE.PerspectiveCamera(45, innerWidth / innerHeight, 0.1, 25000);
+let cam = ortho, topMode = true;
+const controls = new OrbitControls(cam, canvas);
+controls.enableDamping = true;
+controls.maxDistance = 20000;
+
+/* Cursor georef: hover + optional pin — framing matches stonehenge-plan (OSGB grid → WGS84). */
+const geoEl = document.getElementById('geoReadout');
+const geoHoverEl = document.getElementById('geoHover');
+const geoPinnedEl = document.getElementById('geoPinned');
+const geoClearBtn = document.getElementById('geoClear');
+const geoToggle = document.getElementById('geoOn');
+const groundPlane = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
+const _ptr = new THREE.Vector2();
+const _raycaster = new THREE.Raycaster();
+const _hit = new THREE.Vector3();
+let pinnedGeo = null; // { e, n, text, x, z }
+let pinMesh = null;
+let _ptrDown = null;
+let geoOn = true;
+try {
+  const v = sessionStorage.getItem('sh_geo_on');
+  if (v === '0') geoOn = false;
+  else if (v === '1') geoOn = true;
+} catch (_) {}
+
+function applyGeoVisibility() {
+  if (geoEl) geoEl.style.display = geoOn ? '' : 'none';
+  if (geoToggle) geoToggle.checked = geoOn;
+  if (!geoOn) {
+    showHover(null);
+    if (pinMesh) pinMesh.visible = false;
+  } else {
+    showPinned();
+  }
+}
+function setGeoOn(on) {
+  geoOn = !!on;
+  try { sessionStorage.setItem('sh_geo_on', geoOn ? '1' : '0'); } catch (_) {}
+  applyGeoVisibility();
+}
+if (geoToggle) {
+  geoToggle.checked = geoOn;
+  geoToggle.addEventListener('change', () => setGeoOn(geoToggle.checked));
+}
+applyGeoVisibility();
+
+function suRef(e, n) {
+  return 'SU ' + String(Math.round(e - 400000)).padStart(5, '0')
+    + ' ' + String(Math.round(n - 100000)).padStart(5, '0');
+}
+/** Same major ways as stonehenge-plan: E/N + SU + lat/lon. */
+function fmtGeoLine(e, n) {
+  const w = osgbToWgs84(e, n);
+  const W = w.lon < 0 ? 'W' : 'E';
+  return 'E ' + e.toFixed(2) + '   N ' + n.toFixed(2) + '   ' + suRef(e, n)
+    + '   ' + w.lat.toFixed(6) + '° N  ' + Math.abs(w.lon).toFixed(6) + '° ' + W;
+}
+function hitGround(clientX, clientY) {
+  const rect = canvas.getBoundingClientRect();
+  _ptr.x = ((clientX - rect.left) / rect.width) * 2 - 1;
+  _ptr.y = -((clientY - rect.top) / rect.height) * 2 + 1;
+  _raycaster.setFromCamera(_ptr, cam);
+  if (!_raycaster.ray.intersectPlane(groundPlane, _hit)) return null;
+  const en = osgbFromLocal(_hit.x, _hit.z, CE, CN);
+  return { e: en.e, n: en.n, x: _hit.x, z: _hit.z, text: fmtGeoLine(en.e, en.n) };
+}
+function showHover(p) {
+  if (!geoHoverEl) return;
+  if (!p) { geoHoverEl.innerHTML = '<span class="muted">Hover</span> —'; return; }
+  geoHoverEl.textContent = p.text;
+}
+function ensurePinMesh() {
+  if (pinMesh) return pinMesh;
+  const g = new THREE.RingGeometry(0.35, 0.55, 32);
+  g.rotateX(-Math.PI / 2);
+  pinMesh = new THREE.Mesh(g, new THREE.MeshBasicMaterial({
+    color: 0xcc4400, transparent: true, opacity: 0.95, depthWrite: false,
+  }));
+  pinMesh.renderOrder = 10;
+  scene.add(pinMesh);
+  return pinMesh;
+}
+function showPinned() {
+  if (!geoPinnedEl) return;
+  if (!pinnedGeo) {
+    geoPinnedEl.hidden = true;
+    geoPinnedEl.textContent = '';
+    if (geoClearBtn) geoClearBtn.hidden = true;
+    if (pinMesh) pinMesh.visible = false;
+    return;
+  }
+  geoPinnedEl.hidden = false;
+  geoPinnedEl.textContent = 'pinned  ' + pinnedGeo.text;
+  if (geoClearBtn) geoClearBtn.hidden = false;
+  if (!geoOn) { if (pinMesh) pinMesh.visible = false; return; }
+  const m = ensurePinMesh();
+  m.visible = true;
+  m.position.set(pinnedGeo.x, 0.05, pinnedGeo.z);
+}
+function clearPin() {
+  pinnedGeo = null;
+  showPinned();
+}
+function pinAt(p) {
+  if (!p) return;
+  pinnedGeo = p;
+  showPinned();
+}
+/* Georef: freeze hover only after real drag (movement), not on OrbitControls
+ * "start". On mobile every touch fires controls start, which blocked pin/hover. */
+let _geoDragged = false;
+
+function hitGeo(clientX, clientY) {
+  const rect = canvas.getBoundingClientRect();
+  _ptr.x = ((clientX - rect.left) / rect.width) * 2 - 1;
+  _ptr.y = -((clientY - rect.top) / rect.height) * 2 + 1;
+  _raycaster.setFromCamera(_ptr, cam);
+  const stoneHits = _raycaster.intersectObjects(root.children, true);
+  if (stoneHits.length) {
+    const h = stoneHits[0].point;
+    const en = osgbFromLocal(h.x, h.z, CE, CN);
+    return { e: en.e, n: en.n, x: h.x, z: h.z, text: fmtGeoLine(en.e, en.n) };
+  }
+  return hitGround(clientX, clientY);
+}
+
+function onPointerGeo(ev) {
+  if (!geoOn) return;
+  if (_geoDragged) return;
+  if (_ptrDown) {
+    const dx = ev.clientX - _ptrDown.x, dy = ev.clientY - _ptrDown.y;
+    if (dx * dx + dy * dy > 25) { _geoDragged = true; return; }
+  }
+  // Live coords while finger/mouse is still (or moving slightly before orbit threshold).
+  showHover(hitGeo(ev.clientX, ev.clientY));
+}
+canvas.addEventListener('pointermove', onPointerGeo);
+canvas.addEventListener('pointerleave', () => { if (geoOn) showHover(null); });
+canvas.addEventListener('pointerdown', (ev) => {
+  if (!geoOn || ev.button !== 0) return;
+  _ptrDown = { x: ev.clientX, y: ev.clientY, t: performance.now() };
+  _geoDragged = false;
+  // Immediate sample on contact (mobile has no hover).
+  showHover(hitGeo(ev.clientX, ev.clientY));
+});
+canvas.addEventListener('pointerup', (ev) => {
+  if (!geoOn || ev.button !== 0 || !_ptrDown) return;
+  const dx = ev.clientX - _ptrDown.x, dy = ev.clientY - _ptrDown.y;
+  const ut = performance.now() - _ptrDown.t;
+  const wasDrag = _geoDragged || dx * dx + dy * dy > 25;
+  _ptrDown = null;
+  _geoDragged = false;
+  if (wasDrag) {
+    showHover(hitGeo(ev.clientX, ev.clientY));
+    return;
+  }
+  // Short tap = pin (ignore OrbitControls start — it fires on every mobile touch).
+  if (dt > 500) return;
+  pinAt(hitGeo(ev.clientX, ev.clientY));
+});
+if (geoClearBtn) geoClearBtn.addEventListener('click', (ev) => { ev.preventDefault(); clearPin(); });
+window.addEventListener('keydown', (ev) => { if (ev.key === 'Escape') clearPin(); });
+
+function addEdges(mesh, geo, col = 0x111111) {
+ mesh.add(n

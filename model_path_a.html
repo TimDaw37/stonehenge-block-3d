@@ -1,0 +1,1331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+<meta http-equiv="Pragma" content="no-cache"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Stonehenge 3D Model — Path A sky (preview)</title>
+<style>
+ html,body{margin:0;height:100%;background:#1a2430;color:#eee;font:13px/1.35 system-ui,sans-serif;overflow:hidden}
+ #c{position:fixed;inset:0;width:100%;height:100%;display:block}
+ #hudToggle{position:fixed;left:10px;top:10px;z-index:4;min-width:44px;min-height:44px;
+ padding:8px 12px;border:0;border-radius:8px;background:rgba(0,0,0,.88);color:#e8d9a8;
+ font:600 13px system-ui,sans-serif;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,.4)}
+ #hudToggle:hover{background:rgba(40,40,40,.95)}
+ #hud{position:fixed;left:10px;top:58px;width:360px;max-width:calc(100% - 20px);max-height:calc(100% - 70px);overflow:auto;
+ background:rgba(0,0,0,.84);padding:10px 12px;border-radius:8px;z-index:2}
+ #hud.collapsed{display:none}
+ #hud b{color:#e8d9a8}
+ @media (min-width:701px){
+  #hud{top:10px}
+  #hudToggle{display:none}
+  #hud.collapsed{display:block}
+ }
+ .sw{display:inline-block;width:12px;height:12px;border-radius:2px;margin-right:6px;vertical-align:-1px;border:1px solid #333}
+ button{margin:3px 3px 0 0;padding:4px 8px;border:0;border-radius:4px;background:#3d4a3a;color:#eee;cursor:pointer}
+ button:hover{background:#5a6b55}
+ button.active{background:#8a7a4a;color:#111}
+ .row{margin-top:6px}
+ label{display:block;margin:8px 0 2px;font-size:11px;letter-spacing:.04em;text-transform:uppercase;opacity:.8}
+ #msg{opacity:.9;margin-top:6px}
+ code{font-size:11px;opacity:.85}
+ #scaleWarn{display:none;position:fixed;left:50%;top:14px;transform:translateX(-50%);z-index:3;
+ background:#7f1d1d;color:#fff7ed;font:700 13px system-ui,sans-serif;padding:8px 14px;border-radius:8px;pointer-events:none}
+ .check{font-size:12px;margin-top:4px}
+ #geoReadout{position:fixed;left:10px;right:10px;bottom:10px;z-index:5;width:auto;max-width:none;
+ box-sizing:border-box;background:rgba(0,0,0,.88);color:#dce6f0;
+ font:12px/1.4 ui-monospace,Menlo,Consolas,monospace;padding:8px 10px;border-radius:8px;
+ pointer-events:none;white-space:normal;overflow-wrap:anywhere;word-break:break-word;
+ max-height:40vh;overflow-y:auto;box-shadow:0 2px 10px rgba(0,0,0,.45)}
+#geoReadout .muted{opacity:.65}
+#geoReadout #geoHover,#geoReadout #geoPinned{display:block;width:100%}
+#geoReadout #geoPinned{color:#f0a070;margin-top:4px}
+#geoReadout #geoClear{pointer-events:auto;margin:6px 0 0;padding:6px 12px;min-height:36px;
+ font:12px system-ui,sans-serif;background:#3d4a3a;color:#eee;border:0;border-radius:6px;cursor:pointer}
+#geoReadout #geoClear[hidden]{display:none}
+@media (max-width:700px){
+ #geoReadout{left:8px;right:8px;bottom:8px;font-size:11px;line-height:1.45;padding:10px 12px;
+  max-height:45vh}
+}
+
+ #pathABanner{position:fixed;left:0;right:0;top:0;z-index:6;background:#1a4a6e;color:#e8f0ff;
+  font:600 12px/1.35 system-ui,sans-serif;padding:8px 12px;text-align:center;
+  box-shadow:0 2px 8px rgba(0,0,0,.4);pointer-events:none}
+ #pathABanner a{color:#9ecbff;pointer-events:auto}
+ #hudToggle{top:46px}
+ #hud{top:94px}
+ @media (min-width:701px){
+  #hud{top:46px}
+  #hudToggle{display:none}
+ }
+</style>
+</head>
+<body>
+<div id="pathABanner">Path A · Hoyle horizon · Gleam / Half / Full · main model <a href="./index.html">index.html</a></div>
+<div id="scaleWarn">Exaggerated - silhouette not to scale</div>
+<button type="button" id="hudToggle" aria-expanded="true" aria-controls="hud" title="Show or hide controls">Controls ▾</button>
+<div id="hud">
+  <div><b>Stonehenge — Path A (Hoyle)</b></div>
+  <div style="opacity:.85;font-size:12px;margin-top:2px">Sarsen grey | bluestones blue | Altar pink | stations 92/94 silver</div>
+  <div id="counts" class="row" style="opacity:.85"></div>
+  <div class="row">
+    <button type="button" id="btnTop" class="active">Top-down</button>
+    <button type="button" id="btnOrbit">Orbit</button>
+    <button type="button" id="btnTerrain">Terrain</button>
+    <button type="button" id="btnLabels">Labels</button>
+  </div>
+  <label>Sky</label>
+  <div class="row">
+    <button type="button" id="btnSunOff" class="active">Off</button>
+    <button type="button" id="btnSunrise">Sunrise</button>
+    <button type="button" id="btnSunset">Sunset</button>
+    <button type="button" id="btnMoonrise">Moonrise</button>
+    <button type="button" id="btnMoonset">Moonset</button>
+  </div>
+  <label>Limb</label>
+  <div class="row">
+    <button type="button" id="btnLimbGleam" class="active">Gleam</button>
+    <button type="button" id="btnLimbHalf">Half orb</button>
+    <button type="button" id="btnLimbFull">Full orb</button>
+  </div>
+  <label>Epoch</label>
+  <div class="row">
+    <button type="button" id="btnEpochModern" class="active">Modern</button>
+    <button type="button" id="btnEpoch2500">c. 2500 BC</button>
+  </div>
+  <div class="row" style="align-items:center;gap:6px;margin:2px 0 4px 0">
+    <input type="number" id="epochYear" value="2026" step="1" style="width:5.5em;font:inherit;padding:2px 4px"/>
+    <span id="epochHelp" style="opacity:.7;font-size:10px">−2499 = 2500 BC · Path A epoch block</span>
+  </div>
+  <div id="sunDatePanel">
+    <label>Date <span id="doyLbl">21 Jun</span></label>
+    <input type="range" id="doy" min="1" max="365" value="172" style="width:100%"/>
+    <div class="row">
+      <button type="button" data-doy="80">21 Mar</button>
+      <button type="button" data-doy="172">21 Jun</button>
+      <button type="button" data-doy="266">23 Sep</button>
+      <button type="button" data-doy="355">21 Dec</button>
+    </div>
+  </div>
+  <div id="moonAzPanel" style="display:none">
+    <label>Azimuth <span id="moonAzLbl">most N</span></label>
+    <input type="range" id="moonAz" min="0" max="1000" value="0" style="width:100%"/>
+    <div class="row">
+      <button type="button" id="btnMoonAzN">Most N</button>
+      <button type="button" id="btnMoonAzMid">Mid</button>
+      <button type="button" id="btnMoonAzS">Most S</button>
+    </div>
+  </div>
+  <div class="check"><label style="display:inline;text-transform:none;letter-spacing:0;opacity:1"><input type="checkbox" id="geoOn" checked/> Georef / Coords</label></div>
+  <div class="check"><label style="display:inline;text-transform:none;letter-spacing:0;opacity:1"><input type="checkbox" id="showRay"/> Ray to centre</label></div>
+  <div id="msg"></div>
+  <div id="sunReadout" class="row" style="font-size:11px;opacity:.9"></div>
+</div>
+<div id="geoReadout" aria-live="polite">
+  <div id="geoHover"><span class="muted">Hover</span> —</div>
+  <div id="geoPinned" hidden></div>
+  <button type="button" id="geoClear" hidden title="Clear pinned coordinate">Clear pin</button>
+</div>
+<canvas id="c"></canvas>
+<script src="./data/locked_poses.js?v=restore2"></script>
+<script>
+/* lintel seat 2026-09-19: lengthen shorter uprights so tops match partners */
+(function () {
+  var LP = window.LOCKED_POSES;
+  if (!LP || !LP.array) return;
+  var H = {"1":4.23,"7":4.113,"22":3.99,"29":4.066,"30":4.104,"51":5.182,"58":5.212};
+  var N = {
+    "1":"height lengthened 2026-09-19 to meet lintel seat (pair with 2; lintel 102; also levels 101 with 30).",
+    "7":"height lengthened 2026-09-19 to meet lintel seat (pair with 6; lintel 107).",
+    "22":"height lengthened 2026-09-19 to meet lintel seat (pair with 21; lintel 122).",
+    "29":"height lengthened 2026-09-19 to meet lintel seat (pair with 30; lintel 130; cascade after 101/102 seat).",
+    "30":"height lengthened 2026-09-19 to meet lintel seat (pair with 1; lintel 101; cascades to 130 with 29)."
+  };
+  var APPEND = "height lengthened 2026-09-19 to meet lintel seat";
+  function apply(s) {
+    var id = String(s.id);
+    if (!(id in H)) return;
+    s.height_m = H[id];
+    if (N[id]) s.notes = N[id];
+    else if (id === "51") s.notes = ((s.notes || "") + (s.notes ? "; " : "") + APPEND + " (pair with 52; lintel 152).").replace(/^; /, "");
+    else if (id === "58") s.notes = ((s.notes || "") + (s.notes ? "; " : "") + APPEND + " (pair with 57; lintel 158).").replace(/^; /, "");
+  }
+  for (var i = 0; i < LP.array.length; i++) apply(LP.array[i]);
+  if (LP.by_id) {
+    Object.keys(H).forEach(function (id) {
+      if (LP.by_id[id]) apply(LP.by_id[id]);
+    });
+  }
+})();
+</script>
+<script src="./data/site_ground_od.js?v=restore2"></script>
+<script src="./data/sky_events_path_a_hoyle_sample.js?v=patha2"></script>
+<script type="importmap">
+{"imports":{"three":"./vendor/three.module.js","three/addons/":"./vendor/"}}
+</script>
+<script>
+setTimeout(function(){
+ if(window.__THREE_OK)return;
+ var m=document.getElementById('msg');
+ if(m)m.innerHTML='<b style="color:#f88">THREE.js failed to load</b>. Serve over http from project root.';
+},30000);
+</script>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/OrbitControls.js';
+import { osgbFromLocal, osgbToWgs84 } from './vendor/osgb_wgs84.js';
+window.__THREE_OK = true;
+
+const msg = document.getElementById('msg');
+const hudEl = document.getElementById('hud');
+const hudToggle = document.getElementById('hudToggle');
+const HUD_KEY = 'sh_hud_open';
+function isNarrow(){ return window.matchMedia('(max-width: 700px)').matches; }
+function setHudOpen(open){
+  if(!hudEl || !hudToggle) return;
+  hudEl.classList.toggle('collapsed', !open);
+  hudToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  hudToggle.textContent = open ? 'Controls ▾' : 'Controls ▸';
+  try { sessionStorage.setItem(HUD_KEY, open ? '1' : '0'); } catch(e) {}
+}
+function initHudCollapse(){
+  let open;
+  try {
+    const stored = sessionStorage.getItem(HUD_KEY);
+    if (stored === '0' || stored === '1') open = stored === '1';
+    else open = !isNarrow(); // default collapsed on narrow
+  } catch(e) { open = !isNarrow(); }
+  // On desktop CSS forces panel visible; still set aria state.
+  setHudOpen(open);
+  if (hudToggle) hudToggle.addEventListener('click', () => {
+    const nowOpen = hudToggle.getAttribute('aria-expanded') !== 'true';
+    setHudOpen(nowOpen);
+  });
+  // sessionStorage keeps preference across rotate; desktop CSS always shows #hud.
+}
+initHudCollapse();
+const countsEl = document.getElementById('counts');
+const LP = window.LOCKED_POSES;
+if (!LP || !LP.array) {
+ msg.textContent = 'Missing stone data.';
+ throw new Error('no LOCKED_POSES');
+}
+
+const CE = 412245.35, CN = 142194.11;
+function localXZ(e, n) { return { x: e - CE, z: -(n - CN) }; }
+const SARSEN_GREY = 0x8a8e94; // elephantine grey (lighter)
+const BLUESTONE = 0x6b8cae; // unchanged
+const ALTAR = 0xff69b4; // unchanged pink
+const MARKER_SILVER = 0xf0f4fa; // 92/94 markers only (bright silver)
+
+function colourFor(e) {
+ const id = String(e.id);
+ // Markers win over pose colour_class (e.g. gold_medium / seed).
+ if (id === '92' || id === '94') return MARKER_SILVER;
+ if (e.colour_class === 'blue_bluestone') return BLUESTONE;
+ if (id === '80' || e.colour_class === 'altar_pink') return ALTAR;
+ return SARSEN_GREY;
+}
+
+const byClass = {};
+for (const e of LP.array) byClass[e.colour_class] = (byClass[e.colour_class] || 0) + 1;
+countsEl.textContent = (LP.count || LP.array.length) + ' stones';
+
+const canvas = document.getElementById('c');
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.setSize(innerWidth, innerHeight);
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x2a3548);
+const hemi = new THREE.HemisphereLight(0xc9d4e8, 0x3d4a3a, 0.72);
+scene.add(hemi);
+const sunLight = new THREE.DirectionalLight(0xffe2a8, 1.35);
+sunLight.position.set(40, 60, 20);
+scene.add(sunLight);
+scene.add(sunLight.target);
+const fill = new THREE.DirectionalLight(0x8aa0b8, 0.35);
+fill.position.set(-30, 40, -20);
+scene.add(fill);
+
+const root = new THREE.Group();
+scene.add(root);
+
+let terrainHorizonMesh = null, terrainNearMesh = null, terrainOn = false, labelsOn = false;
+let exaggeration = 1, bodyMode = 'off', doy = 172, showRay = false;
+const stoneBaseY = [];
+let planMesh = null;
+
+function meshFromTerrainBlock(block) {
+  const geo = new THREE.BufferGeometry();
+  const pos = new Float32Array(block.positions);
+  geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  geo.setAttribute('normal', new THREE.Float32BufferAttribute(new Float32Array(block.normals), 3));
+  // Punch up Bulford-style: stronger contrast + slight saturation on baked hypso x hillshade
+  const cols = new Float32Array(block.colors);
+  const contrast = 1.55, bright = 0.06, sat = 1.25;
+  for (let i = 0; i < cols.length; i += 3) {
+    let r = cols[i], g = cols[i+1], b = cols[i+2];
+    r = (r - 0.5) * contrast + 0.5 + bright;
+    g = (g - 0.5) * contrast + 0.5 + bright;
+    b = (b - 0.5) * contrast + 0.5 + bright;
+    const l = 0.2126*r + 0.7152*g + 0.0722*b;
+    r = l + (r - l) * sat;
+    g = l + (g - l) * sat;
+    b = l + (b - l) * sat;
+    cols[i]   = Math.min(1, Math.max(0, r));
+    cols[i+1] = Math.min(1, Math.max(0, g));
+    cols[i+2] = Math.min(1, Math.max(0, b));
+  }
+  geo.setAttribute('color', new THREE.Float32BufferAttribute(cols, 3));
+  geo.setIndex(block.indices);
+  const y0 = new Float32Array(pos.length / 3);
+  for (let i = 0; i < y0.length; i++) y0[i] = pos[i * 3 + 1];
+  geo.userData.y0 = y0;
+  const mat = new THREE.MeshLambertMaterial({
+    vertexColors: true, side: THREE.DoubleSide, flatShading: false,
+  });
+  return new THREE.Mesh(geo, mat);
+}
+function applyTerrainExag(mesh) {
+ if (!mesh) return;
+ const y0 = mesh.geometry.userData.y0;
+ const pos = mesh.geometry.attributes.position;
+ for (let i = 0; i < y0.length; i++) pos.setY(i, y0[i] * exaggeration);
+ pos.needsUpdate = true;
+ mesh.geometry.computeVertexNormals();
+}
+let terrainLoadPromise = null;
+function ensureTerrainLoaded(announce) {
+  if (window.TERRAIN_HORIZON) return Promise.resolve(window.TERRAIN_HORIZON);
+  if (terrainLoadPromise) return terrainLoadPromise;
+  if (announce && msg) msg.textContent = 'Loading terrain...';
+  terrainLoadPromise = new Promise((resolve, reject) => {
+    const s = document.createElement('script');
+    s.src = './data/terrain_horizon.js';
+    s.async = true;
+    s.onload = () => {
+      if (!window.TERRAIN_HORIZON) reject(new Error('TERRAIN_HORIZON missing after load'));
+      else resolve(window.TERRAIN_HORIZON);
+    };
+    s.onerror = () => reject(new Error('failed to load data/terrain_horizon.js'));
+    document.head.appendChild(s);
+  });
+  return terrainLoadPromise;
+}
+function buildTerrainMeshes() {
+ const T = window.TERRAIN_HORIZON;
+ if (!T || !T.horizon) { console.warn('terrain_horizon.js missing'); return false; }
+ if (terrainHorizonMesh) return true;
+ terrainHorizonMesh = meshFromTerrainBlock(T.horizon);
+ terrainHorizonMesh.visible = false;
+ terrainHorizonMesh.renderOrder = -1;
+ scene.add(terrainHorizonMesh);
+ if (T.near) {
+ terrainNearMesh = meshFromTerrainBlock(T.near);
+ terrainNearMesh.visible = false;
+ terrainNearMesh.renderOrder = -1;
+ terrainNearMesh.material = terrainNearMesh.material.clone();
+ terrainNearMesh.material.color = new THREE.Color(1.04, 1.04, 1.0);
+ scene.add(terrainNearMesh);
+ }
+ return true;
+}
+function setTerrain(on) {
+  terrainOn = !!on;
+  document.getElementById('btnTerrain').classList.toggle('active', terrainOn);
+  if (!terrainOn) {
+    if (terrainHorizonMesh) terrainHorizonMesh.visible = false;
+    if (terrainNearMesh) terrainNearMesh.visible = false;
+    placeSun();
+    return;
+  }
+  ensureTerrainLoaded(true).then(() => {
+    buildTerrainMeshes();
+    applyTerrainExag(terrainHorizonMesh);
+    applyTerrainExag(terrainNearMesh);
+    if (terrainHorizonMesh) terrainHorizonMesh.visible = true;
+    if (terrainNearMesh) terrainNearMesh.visible = true;
+    if (!topMode) { persp.far = 25000; persp.updateProjectionMatrix(); }
+    if (msg && /^Loading terrain/.test(msg.textContent || '')) msg.textContent = '';
+    placeSun();
+  }).catch((err) => {
+    console.warn(err);
+    terrainOn = false;
+    document.getElementById('btnTerrain').classList.remove('active');
+    if (msg) msg.textContent = 'Terrain load failed: ' + err;
+  });
+}
+
+function setLabels(on) {
+  labelsOn = !!on;
+  document.getElementById('btnLabels').classList.toggle('active', labelsOn);
+  for (const s of stoneBaseY) {
+    if (s.lab) s.lab.visible = labelsOn;
+  }
+}
+
+const ortho = new THREE.OrthographicCamera(-20, 20, 20, -20, 0.1, 25000);
+const persp = new THREE.PerspectiveCamera(45, innerWidth / innerHeight, 0.1, 25000);
+let cam = ortho, topMode = true;
+const controls = new OrbitControls(cam, canvas);
+controls.enableDamping = true;
+controls.maxDistance = 20000;
+
+/* Cursor georef: hover + optional pin — framing matches stonehenge-plan (OSGB grid → WGS84). */
+const geoEl = document.getElementById('geoReadout');
+const geoHoverEl = document.getElementById('geoHover');
+const geoPinnedEl = document.getElementById('geoPinned');
+const geoClearBtn = document.getElementById('geoClear');
+const geoToggle = document.getElementById('geoOn');
+const groundPlane = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
+const _ptr = new THREE.Vector2();
+const _raycaster = new THREE.Raycaster();
+const _hit = new THREE.Vector3();
+let pinnedGeo = null; // { e, n, text, x, z }
+let pinMesh = null;
+let _ptrDown = null;
+let geoOn = true;
+try {
+  const v = sessionStorage.getItem('sh_geo_on');
+  if (v === '0') geoOn = false;
+  else if (v === '1') geoOn = true;
+} catch (_) {}
+
+function applyGeoVisibility() {
+  if (geoEl) geoEl.style.display = geoOn ? '' : 'none';
+  if (geoToggle) geoToggle.checked = geoOn;
+  if (!geoOn) {
+    showHover(null);
+    if (pinMesh) pinMesh.visible = false;
+  } else {
+    showPinned();
+  }
+}
+function setGeoOn(on) {
+  geoOn = !!on;
+  try { sessionStorage.setItem('sh_geo_on', geoOn ? '1' : '0'); } catch (_) {}
+  applyGeoVisibility();
+}
+if (geoToggle) {
+  geoToggle.checked = geoOn;
+  geoToggle.addEventListener('change', () => setGeoOn(geoToggle.checked));
+}
+applyGeoVisibility();
+
+function suRef(e, n) {
+  return 'SU ' + String(Math.round(e - 400000)).padStart(5, '0')
+    + ' ' + String(Math.round(n - 100000)).padStart(5, '0');
+}
+/** Same major ways as stonehenge-plan: E/N + SU + lat/lon. */
+function fmtGeoLine(e, n) {
+  const w = osgbToWgs84(e, n);
+  const W = w.lon < 0 ? 'W' : 'E';
+  return 'E ' + e.toFixed(2) + '   N ' + n.toFixed(2) + '   ' + suRef(e, n)
+    + '   ' + w.lat.toFixed(6) + '° N  ' + Math.abs(w.lon).toFixed(6) + '° ' + W;
+}
+function hitGround(clientX, clientY) {
+  const rect = canvas.getBoundingClientRect();
+  _ptr.x = ((clientX - rect.left) / rect.width) * 2 - 1;
+  _ptr.y = -((clientY - rect.top) / rect.height) * 2 + 1;
+  _raycaster.setFromCamera(_ptr, cam);
+  if (!_raycaster.ray.intersectPlane(groundPlane, _hit)) return null;
+  const en = osgbFromLocal(_hit.x, _hit.z, CE, CN);
+  return { e: en.e, n: en.n, x: _hit.x, z: _hit.z, text: fmtGeoLine(en.e, en.n) };
+}
+function showHover(p) {
+  if (!geoHoverEl) return;
+  if (!p) { geoHoverEl.innerHTML = '<span class="muted">Hover</span> —'; return; }
+  geoHoverEl.textContent = p.text;
+}
+function ensurePinMesh() {
+  if (pinMesh) return pinMesh;
+  const g = new THREE.RingGeometry(0.35, 0.55, 32);
+  g.rotateX(-Math.PI / 2);
+  pinMesh = new THREE.Mesh(g, new THREE.MeshBasicMaterial({
+    color: 0xcc4400, transparent: true, opacity: 0.95, depthWrite: false,
+  }));
+  pinMesh.renderOrder = 10;
+  scene.add(pinMesh);
+  return pinMesh;
+}
+function showPinned() {
+  if (!geoPinnedEl) return;
+  if (!pinnedGeo) {
+    geoPinnedEl.hidden = true;
+    geoPinnedEl.textContent = '';
+    if (geoClearBtn) geoClearBtn.hidden = true;
+    if (pinMesh) pinMesh.visible = false;
+    return;
+  }
+  geoPinnedEl.hidden = false;
+  geoPinnedEl.textContent = 'pinned  ' + pinnedGeo.text;
+  if (geoClearBtn) geoClearBtn.hidden = false;
+  if (!geoOn) { if (pinMesh) pinMesh.visible = false; return; }
+  const m = ensurePinMesh();
+  m.visible = true;
+  m.position.set(pinnedGeo.x, 0.05, pinnedGeo.z);
+}
+function clearPin() {
+  pinnedGeo = null;
+  showPinned();
+}
+function pinAt(p) {
+  if (!p) return;
+  pinnedGeo = p;
+  showPinned();
+}
+/* Georef: freeze hover only after real drag (movement), not on OrbitControls
+ * "start". On mobile every touch fires controls start, which blocked pin/hover. */
+let _geoDragged = false;
+
+function hitGeo(clientX, clientY) {
+  const rect = canvas.getBoundingClientRect();
+  _ptr.x = ((clientX - rect.left) / rect.width) * 2 - 1;
+  _ptr.y = -((clientY - rect.top) / rect.height) * 2 + 1;
+  _raycaster.setFromCamera(_ptr, cam);
+  const stoneHits = _raycaster.intersectObjects(root.children, true);
+  if (stoneHits.length) {
+    const h = stoneHits[0].point;
+    const en = osgbFromLocal(h.x, h.z, CE, CN);
+    return { e: en.e, n: en.n, x: h.x, z: h.z, text: fmtGeoLine(en.e, en.n) };
+  }
+  return hitGround(clientX, clientY);
+}
+
+function onPointerGeo(ev) {
+  if (!geoOn) return;
+  if (_geoDragged) return;
+  if (_ptrDown) {
+    const dx = ev.clientX - _ptrDown.x, dy = ev.clientY - _ptrDown.y;
+    if (dx * dx + dy * dy > 25) { _geoDragged = true; return; }
+  }
+  // Live coords while finger/mouse is still (or moving slightly before orbit threshold).
+  showHover(hitGeo(ev.clientX, ev.clientY));
+}
+canvas.addEventListener('pointermove', onPointerGeo);
+canvas.addEventListener('pointerleave', () => { if (geoOn) showHover(null); });
+canvas.addEventListener('pointerdown', (ev) => {
+  if (!geoOn || ev.button !== 0) return;
+  _ptrDown = { x: ev.clientX, y: ev.clientY, t: performance.now() };
+  _geoDragged = false;
+  // Immediate sample on contact (mobile has no hover).
+  showHover(hitGeo(ev.clientX, ev.clientY));
+});
+canvas.addEventListener('pointerup', (ev) => {
+  if (!geoOn || ev.button !== 0 || !_ptrDown) return;
+  const dx = ev.clientX - _ptrDown.x, dy = ev.clientY - _ptrDown.y;
+  const dt = performance.now() - _ptrDown.t;
+  const wasDrag = _geoDragged || dx * dx + dy * dy > 25;
+  _ptrDown = null;
+  _geoDragged = false;
+  if (wasDrag) {
+    showHover(hitGeo(ev.clientX, ev.clientY));
+    return;
+  }
+  // Short tap = pin (ignore OrbitControls start — it fires on every mobile touch).
+  if (dt > 500) return;
+  pinAt(hitGeo(ev.clientX, ev.clientY));
+});
+if (geoClearBtn) geoClearBtn.addEventListener('click', (ev) => { ev.preventDefault(); clearPin(); });
+window.addEventListener('keydown', (ev) => { if (ev.key === 'Escape') clearPin(); });
+
+function addEdges(mesh, geo, col = 0x111111) {
+ mesh.add(new THREE.LineSegments(
+ new THREE.EdgesGeometry(geo, 12),
+ new THREE.LineBasicMaterial({ color: col, transparent: true, opacity: 0.9 })
+ ));
+}
+function makeLabel(text) {
+ // Size canvas to the string so long labels (e.g. "92 (marker)") are not clipped.
+ const padX = 16, fontPx = 36;
+ const probe = document.createElement('canvas').getContext('2d');
+ probe.font = 'bold ' + fontPx + 'px system-ui,sans-serif';
+ const tw = Math.ceil(probe.measureText(text).width);
+ const c = document.createElement('canvas');
+ c.width = Math.max(128, tw + padX * 2);
+ c.height = 64;
+ const g = c.getContext('2d');
+ g.clearRect(0, 0, c.width, c.height);
+ g.font = 'bold ' + fontPx + 'px system-ui,sans-serif';
+ g.textAlign = 'center'; g.textBaseline = 'middle';
+ const cx = c.width / 2, cy = c.height / 2;
+ g.fillStyle = 'rgba(0,0,0,0.65)'; g.fillText(text, cx + 1, cy + 2);
+ g.fillStyle = '#fff'; g.fillText(text, cx, cy);
+ const tex = new THREE.CanvasTexture(c);
+ tex.colorSpace = THREE.SRGBColorSpace;
+ const spr = new THREE.Sprite(new THREE.SpriteMaterial({ map: tex, transparent: true, depthTest: false }));
+ // Keep short labels ~1.6 wide; scale width with canvas aspect so long text stays readable.
+ const baseH = 0.8;
+ const aspect = c.width / c.height;
+ spr.scale.set(baseH * aspect, baseH, 1);
+ spr.userData.labelAspect = aspect;
+ return spr;
+}
+function footprintOf(e) {
+ let along = e.footprint_along_m != null ? e.footprint_along_m : (e.width_m || 1);
+ let across = e.footprint_across_m != null ? e.footprint_across_m : (e.thickness_m || 1);
+ if ((e.status === 'fallen' || e.status === 'recumbent' || e.role === 'altar') && along < across) {
+ const t = along; along = across; across = t;
+ }
+ return [along, across];
+}
+function poseEN(e) { return { e: e.e_m, n: e.n_m }; }
+function poseYaw(e) { return e.yaw_deg != null ? e.yaw_deg : 0; }
+
+const ORIGIN_OD = (window.SITE_GROUND_OD && window.SITE_GROUND_OD.origin &&
+ window.SITE_GROUND_OD.origin.ground_od_m != null)
+ ? Number(window.SITE_GROUND_OD.origin.ground_od_m) : 102.588;
+const GROUND = (window.SITE_GROUND_OD && window.SITE_GROUND_OD.by_id) ? window.SITE_GROUND_OD.by_id : {};
+const LINTEL_SUPPORTS = {
+ '101': ['30','1'], '102': ['1','2'], '105': ['4','5'], '107': ['6','7'],
+ '122': ['21','22'], '130': ['29','30'],
+ // 152/158: trilithon lintels seated on 51/52 and 57/58 (present in n=90).
+ '152': ['51','52'], '154': ['53','54'], '158': ['57','58'],
+};
+const OUTER_PRESENT_LINTELS = new Set(['101','102','105','107','122','130']);
+const FALLEN_ON_GROUND = new Set(['120','127','160a','160b','160c']);
+const TRI_LINTELS = new Set(['152','154','156','158','160a','160b','160c']);
+const byId = {};
+for (const e of LP.array) byId[String(e.id)] = e;
+
+function groundOd(sid) {
+ const g = GROUND[String(sid)];
+ if (g && g.ground_od_m != null) return Number(g.ground_od_m);
+ return ORIGIN_OD;
+}
+function realHeight(e) {
+ const h = Number(e.height_m);
+ return (Number.isFinite(h) && h > 0) ? h : 0.4;
+}
+function labelScaleFor(H) { return Math.min(Math.max(H * 0.35, 0.9), 2.2); }
+function uprightTopRel(sid) {
+ const e = byId[String(sid)];
+ return (groundOd(sid) - ORIGIN_OD) + (e ? realHeight(e) : 0);
+}
+function isFallenLike(e) {
+ const st = String(e.status || ''), id = String(e.id);
+ if (FALLEN_ON_GROUND.has(id)) return true;
+ return st === 'fallen' || st === 'fallen_fragment' || st === 'recumbent' || st === 'on_ground';
+}
+function isPresentLintel(e) {
+ const role = String(e.role || ''), st = String(e.status || '');
+ if (role !== 'sarsen_lintel' && role !== 'trilithon_lintel') return false;
+ if (isFallenLike(e)) return false;
+ return st === 'standing' || st === 'present' || OUTER_PRESENT_LINTELS.has(String(e.id)) ||
+ (TRI_LINTELS.has(String(e.id)) && !isFallenLike(e));
+}
+function seatZ(e) {
+ const id = String(e.id), H = realHeight(e), gRel = groundOd(id) - ORIGIN_OD;
+ const supports = (e.supports && e.supports.length >= 2) ? e.supports : LINTEL_SUPPORTS[id];
+ if (isPresentLintel(e) && supports) {
+ const [a, b] = supports;
+ const topA = uprightTopRel(a), topB = uprightTopRel(b);
+ if (byId[a] || byId[b] || GROUND[a] || GROUND[b]) {
+ // Seat lintel underside on the taller upright crown (not the mean — mean left a visible air gap).
+ let base;
+ if (byId[a] && byId[b]) base = Math.max(topA, topB);
+ else if (byId[a]) base = topA;
+ else if (byId[b]) base = topB;
+ else base = Math.max(topA, topB);
+ return { baseRel: base, H, kind: 'lintel_on_uprights' };
+ }
+ }
+ return { baseRel: gRel, H, kind: 'on_ground' };
+}
+
+function rebuildStones() {
+ while (root.children.length) root.remove(root.children[0]);
+ stoneBaseY.length = 0;
+ let lintelSeatNotes = 0;
+ for (const e of LP.array) {
+ const col = colourFor(e);
+ const en = poseEN(e);
+ const p = localXZ(en.e, en.n);
+ const [along, across] = footprintOf(e);
+ const seat = seatZ(e);
+ const H = seat.H;
+ let geo;
+ if (e.footprint_shape === 'triangle') {
+ const r = Math.max(along, across) * 0.5;
+ geo = new THREE.CylinderGeometry(r, r, H, 3);
+ } else {
+ geo = new THREE.BoxGeometry(along, H, across);
+ }
+ const isMarker = (String(e.id) === '92' || String(e.id) === '94');
+ const mat = isMarker
+  ? new THREE.MeshStandardMaterial({
+      color: col, metalness: 0.82, roughness: 0.32,
+      transparent: true, opacity: 0.95,
+    })
+  : new THREE.MeshLambertMaterial({
+      color: col, transparent: true,
+      opacity: e.fig1_pixel_fail ? 0.55 : 0.78,
+    });
+ const mesh = new THREE.Mesh(geo, mat);
+ addEdges(mesh, geo);
+ const y0 = seat.baseRel + H / 2;
+ mesh.position.set(p.x, y0 * exaggeration, p.z);
+ mesh.scale.y = exaggeration;
+ mesh.rotation.y = THREE.MathUtils.degToRad(poseYaw(e));
+ mesh.userData = { id: e.id, seat, y0 };
+ root.add(mesh);
+ const lab = makeLabel(isMarker ? (String(e.id) + ' (marker)') : String(e.id));
+ const ls = labelScaleFor(H);
+ const aspect = (lab.userData && lab.userData.labelAspect) ? lab.userData.labelAspect : (1.6 / 0.8);
+ lab.scale.set(ls * 0.6 * aspect, ls * 0.6, 1);
+ const labY0 = seat.baseRel + H + 0.35;
+ lab.position.set(p.x, labY0 * exaggeration, p.z);
+ root.add(lab);
+ stoneBaseY.push({ mesh, lab, y0, labY0 });
+ if (seat.kind === 'lintel_on_uprights') lintelSeatNotes++;
+ }
+ // North arrow outside the stone circle (local -Z = true north)
+  {
+    const nArrow = new THREE.ArrowHelper(
+      new THREE.Vector3(0, 0, -1),
+      new THREE.Vector3(0, 0.8 * exaggeration, -72),
+      12, 0x5ad0ff, 1.4, 0.8
+    );
+    root.add(nArrow);
+    const nLab = makeLabel('N');
+    nLab.position.set(0, 3.2 * exaggeration, -86);
+    root.add(nLab);
+  }
+ if (msg && window.SITE_GROUND_OD) {
+ msg.textContent = 'Z seating: ground OD - origin ' + ORIGIN_OD.toFixed(3) + ' | outer lintels on uprights | fallen on ground | n_lintel_seated=' + lintelSeatNotes;
+ }
+}
+function applyStoneExag() {
+ for (const s of stoneBaseY) {
+ s.mesh.position.y = s.y0 * exaggeration;
+ s.mesh.scale.y = exaggeration;
+ s.lab.position.y = s.labY0 * exaggeration;
+ }
+}
+function setExaggeration(v, fromSun) {
+  exaggeration = 1; // UI removed; always true scale
+  const el = document.getElementById('exag');
+  const lb = document.getElementById('exLbl');
+  if (el) el.value = '1';
+  if (lb) lb.textContent = '1x';
+  const sw = document.getElementById('scaleWarn');
+  if (sw) sw.style.display = 'none';
+  applyTerrainExag(terrainHorizonMesh);
+  applyTerrainExag(terrainNearMesh);
+  applyStoneExag();
+  placeSun();
+}
+
+/* ---- Path A / Hoyle sun + moon (precomputed samples) ---- */
+const SOLAR_SD = 0.2667, SUN_REF = 4000;
+// Horizon mesh ~12 km square; body must sit past the sheet (Bulford distPastSheet).
+const TERRAIN_HALF_M = 6500;
+// Epoch for sun/moon azimuths (Modern 2026 vs c. 2500 BC = year -2499).
+// Path A preview uses its own session key so it does not fight index.html.
+const EPOCH_MODERN = 2026;
+const EPOCH_2500BC = -2499;
+let epochYear = EPOCH_MODERN;
+try {
+  const raw = sessionStorage.getItem('sh_path_a_epoch_year');
+  if (raw != null && raw !== '' && Number.isFinite(+raw)) epochYear = Math.trunc(+raw);
+} catch (e) { /* private mode */ }
+
+const MOON_INCL_DEG = 5.145;
+const SITE_LAT_DEG = 51.1789;
+const MOON_AZ_OFFSET_DEG = 0;
+
+let moonSpread = 0; // 0 = most northerly, 1 = most southerly
+let MOON_EXTREMES = { moonrise: { nAz: 40.30, sAz: 140.22 }, moonset: { nAz: 319.74, sAz: 219.75 } };
+
+/** @type {'first_gleam'|'half_orb'|'full_orb'} */
+let pathALimb = 'first_gleam';
+
+const LIMB_LABEL = {
+  first_gleam: 'Gleam',
+  half_orb: 'Half orb',
+  full_orb: 'Full orb',
+};
+const DOY_MIDSUMMER = 172;
+const DOY_MIDWINTER = 355;
+
+function getSkyEvents() {
+  return window.SKY_EVENTS_PATH_A_HOYLE || window.SKY_EVENTS_PATH_A || null;
+}
+
+function pathAEpochKey(year) {
+  // Map UI epoch to the two precomputed blocks in the sample JSON.
+  if (year === EPOCH_2500BC || year <= -2000) return 'bc2500';
+  return 'modern';
+}
+
+function obliquityDeg(year) {
+  const T = (year - 2000) / 100;
+  return 23.4392911 - (46.8150 / 3600) * T - (0.00059 / 3600) * T * T + (0.001813 / 3600) * T * T * T;
+}
+
+function moonExtremesSchematic(year) {
+  const eps = obliquityDeg(year);
+  const dmax = eps + MOON_INCL_DEG;
+  const lat = SITE_LAT_DEG * Math.PI / 180;
+  const x = Math.sin(dmax * Math.PI / 180) / Math.cos(lat);
+  const c = Math.max(-1, Math.min(1, x));
+  const nRise = Math.acos(c) * 180 / Math.PI;
+  const sRise = Math.acos(-c) * 180 / Math.PI;
+  const nSet = (360 - nRise) % 360;
+  const sSet = (360 - sRise) % 360;
+  const off = MOON_AZ_OFFSET_DEG;
+  return {
+    moonrise: { nAz: nRise + off, sAz: sRise - off },
+    moonset:  { nAz: nSet - off, sAz: sSet + off },
+    source: 'schematic',
+  };
+}
+
+function moonExtremesForYear(year) {
+  const SE = getSkyEvents();
+  const ek = pathAEpochKey(year);
+  const block = SE && SE.moon_major_standstill_envelope
+    && (ek === 'bc2500'
+      ? SE.moon_major_standstill_envelope.bc2500
+      : (SE.moon_major_standstill_envelope.modern_2025 || SE.moon_major_standstill_envelope.modern_2026));
+  if (!block || !block.events) return moonExtremesSchematic(year);
+  const e = block.events;
+  function pa(key) {
+    const ev = e[key];
+    if (!ev) return null;
+    const bl = ev.banton_limbs && ev.banton_limbs[pathALimb];
+    if (bl && Number.isFinite(+bl.az_deg)) return +bl.az_deg;
+    if (ev.all_limbs_path_a) {
+      const map = { first_gleam: 'upper', half_orb: 'centre', full_orb: 'lower' };
+      const L = ev.all_limbs_path_a[map[pathALimb] || 'upper'];
+      if (L && Number.isFinite(+L.az_deg)) return +L.az_deg;
+    }
+    if (ev.path_a && Number.isFinite(+ev.path_a.az_deg)) return +ev.path_a.az_deg;
+    return null;
+  }
+  const nRise = pa('northernmost_moonrise');
+  const sRise = pa('southernmost_moonrise');
+  const nSet = pa('northernmost_moonset');
+  const sSet = pa('southernmost_moonset');
+  if ([nRise, sRise, nSet, sSet].some((v) => v == null)) return moonExtremesSchematic(year);
+  return {
+    moonrise: { nAz: nRise, sAz: sRise },
+    moonset:  { nAz: nSet, sAz: sSet },
+    source: 'path_a',
+    epochKey: ek,
+  };
+}
+
+function epochLabel(year) {
+  if (year === EPOCH_2500BC || year === -2499) return '2500 BC';
+  if (year < 0) return Math.abs(year) + ' BC';
+  return String(year);
+}
+
+function refreshMoonExtremes() {
+  MOON_EXTREMES = moonExtremesForYear(epochYear);
+}
+
+refreshMoonExtremes();
+
+function sunSolsticeEventKey(doy, mode) {
+  const d = Math.round(+doy);
+  if (d === DOY_MIDSUMMER) return mode === 'sunrise' ? 'midsummer_sunrise' : 'midsummer_sunset';
+  if (d === DOY_MIDWINTER) return mode === 'sunrise' ? 'midwinter_sunrise' : 'midwinter_sunset';
+  return null;
+}
+
+function pathASunFromSample(doy, mode) {
+  const key = sunSolsticeEventKey(doy, mode);
+  if (!key) return null;
+  const SE = getSkyEvents();
+  if (!SE || !SE.sun_solstice) return null;
+  const ek = pathAEpochKey(epochYear);
+  const block = ek === 'bc2500' ? SE.sun_solstice.bc2500 : SE.sun_solstice.modern_2026;
+  if (!block || !block.events || !block.events[key]) return null;
+  const ev = block.events[key];
+  let az = null, alt = 0.35, limbUsed = pathALimb;
+  const bl = ev.banton_limbs && ev.banton_limbs[pathALimb];
+  if (bl && Number.isFinite(+bl.az_deg)) {
+    az = +bl.az_deg;
+    if (Number.isFinite(+bl.h_hor_deg)) alt = Math.max(0.05, +bl.h_hor_deg);
+  } else if (ev.all_limbs_path_a) {
+    const map = { first_gleam: 'upper', half_orb: 'centre', full_orb: 'lower' };
+    const L = ev.all_limbs_path_a[map[pathALimb] || 'upper'];
+    if (L && Number.isFinite(+L.az_deg)) {
+      az = +L.az_deg;
+      if (Number.isFinite(+L.h_hor_deg)) alt = Math.max(0.05, +L.h_hor_deg);
+    }
+  } else if (ev.path_a && Number.isFinite(+ev.path_a.az_deg)) {
+    az = +ev.path_a.az_deg;
+    if (Number.isFinite(+ev.path_a.h_hor_deg)) alt = Math.max(0.05, +ev.path_a.h_hor_deg);
+    limbUsed = 'first_gleam';
+  }
+  if (az == null) return null;
+  const decl = ev.declination_deg != null ? +ev.declination_deg : null;
+  const eps = block.obliquity_deg != null ? +block.obliquity_deg : obliquityDeg(epochYear);
+  return {
+    az, alt, decl, eps,
+    pathA: true,
+    eventKey: key,
+    limb: limbUsed,
+  };
+}
+
+function approxSunSchematic(d, mode) {
+  // Geometric flat-horizon rise/set az at Stonehenge lat; ε from epochYear.
+  // Used only for non-solstice DOY on this Path A page (HUD marks schematic).
+  const eps = obliquityDeg(epochYear);
+  const decl = eps * Math.sin(2 * Math.PI * (d - 81) / 365);
+  const lat = SITE_LAT_DEG * Math.PI / 180;
+  const x = Math.sin(decl * Math.PI / 180) / Math.cos(lat);
+  const c = Math.max(-1, Math.min(1, x));
+  const azRise = Math.acos(c) * 180 / Math.PI;
+  const azSet = 360 - azRise;
+  if (mode === 'sunrise') return { az: azRise, alt: 0.35 + Math.max(0, decl) * 0.01, decl, eps, pathA: false, schematic: true };
+  return { az: azSet, alt: 0.35 + Math.max(0, -decl) * 0.01, decl, eps, pathA: false, schematic: true };
+}
+
+function approxSun(d, mode) {
+  const pa = pathASunFromSample(d, mode);
+  if (pa) return pa;
+  return approxSunSchematic(d, mode);
+}
+
+function distPastTerrain(origin, dirx, dirz) {
+  const hx = TERRAIN_HALF_M, hz = TERRAIN_HALF_M;
+  let tx = Infinity, tz = Infinity;
+  if (dirx > 1e-8) tx = (hx - origin.x) / dirx;
+  else if (dirx < -1e-8) tx = (-hx - origin.x) / dirx;
+  if (dirz > 1e-8) tz = (hz - origin.z) / dirz;
+  else if (dirz < -1e-8) tz = (-hz - origin.z) / dirz;
+  const hit = Math.min(tx, tz);
+  if (!isFinite(hit) || hit < 500) return 20000;
+  // Keep celestial discs well beyond the mesh (was still intersecting hills at +2.5 km)
+  return Math.max(hit + 9000, 18000);
+}
+function doyToYMD(d, year) {
+  const y = (year != null && Number.isFinite(+year)) ? Math.trunc(+year) : epochYear;
+  // Civil calendar for display; for BCE years use absolute year for month lengths (non-leap).
+  const yLeap = y > 0 ? y : 1;
+  const md = [31, (yLeap % 4 === 0 && (yLeap % 100 !== 0 || yLeap % 400 === 0)) ? 29 : 28,
+    31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+  let n = Math.max(1, Math.min(md.reduce((a,b)=>a+b,0), Math.round(+d) || 1));
+  let m = 0;
+  while (m < 12 && n > md[m]) { n -= md[m]; m++; }
+  return { year: y, month: m + 1, day: n };
+}
+function localDateStartFromDoy(d) {
+  const ymd = doyToYMD(d, epochYear);
+  // Browser-local midnight for that calendar day (Tim: Europe/London).
+  // For BCE epochs, still use modern year for Date construction (labels use doyLabel).
+  const yForDate = ymd.year > 0 ? ymd.year : EPOCH_MODERN;
+  return new Date(yForDate, ymd.month - 1, ymd.day, 0, 0, 0, 0);
+}
+function moonAzFromSpread(mode, spread) {
+  const ex = MOON_EXTREMES[mode];
+  if (!ex) return null;
+  const t = Math.max(0, Math.min(1, +spread || 0));
+  // Interpolate north extreme -> south extreme (moonset nAz > sAz so this decreases)
+  const az = ex.nAz + (ex.sAz - ex.nAz) * t;
+  return { az, alt: 0.35, spread: t, nAz: ex.nAz, sAz: ex.sAz };
+}
+function moonSpreadLabel(mode, spread) {
+  const ev = moonAzFromSpread(mode, spread);
+  if (!ev) return '';
+  const t = ev.spread;
+  let tag = 'mid';
+  if (t < 0.02) tag = 'most N';
+  else if (t > 0.98) tag = 'most S';
+  return tag + ' | ' + ev.az.toFixed(1) + ' deg';
+}
+function updateMoonAzUi() {
+  const panel = document.getElementById('moonAzPanel');
+  const sunPanel = document.getElementById('sunDatePanel');
+  const moon = isMoonMode(bodyMode);
+  if (panel) panel.style.display = moon ? '' : 'none';
+  if (sunPanel) sunPanel.style.display = moon ? 'none' : '';
+  const sl = document.getElementById('moonAz');
+  if (sl) sl.value = String(Math.round(moonSpread * 1000));
+  const lb = document.getElementById('moonAzLbl');
+  if (lb && moon) lb.textContent = moonSpreadLabel(bodyMode, moonSpread);
+}
+function doyLabel(d) {
+  const names = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const ymd = doyToYMD(d, epochYear);
+  return ymd.day + ' ' + names[ymd.month - 1];
+}
+function fmtLocalTime(dt) {
+  if (!dt) return '';
+  try {
+    return dt.toLocaleString('en-GB', {
+      timeZone: 'Europe/London',
+      hour: '2-digit', minute: '2-digit', second: '2-digit',
+      day: '2-digit', month: 'short', year: 'numeric',
+      hour12: false,
+    }) + ' BST/GMT';
+  } catch (e) {
+    return String(dt);
+  }
+}
+function sunDir(azTrue) {
+ const r = THREE.MathUtils.degToRad(azTrue);
+ return { x: Math.sin(r), z: -Math.cos(r) };
+}
+const sunR = SUN_REF * Math.tan(SOLAR_SD * Math.PI / 180);
+function makeBodyDisc(color, glowColor, outerGlow) {
+ const g = new THREE.Group();
+ g.add(new THREE.Mesh(
+ new THREE.SphereGeometry(sunR, 24, 16),
+ new THREE.MeshBasicMaterial({ color, toneMapped: false, fog: false, depthTest: false })
+ ));
+ g.add(new THREE.Mesh(
+ new THREE.SphereGeometry(sunR * 3.2, 16, 12),
+ new THREE.MeshBasicMaterial({
+ color: glowColor, transparent: true, opacity: 0.55, depthWrite: false,
+ depthTest: false,
+ blending: THREE.AdditiveBlending, toneMapped: false, fog: false,
+ })
+ ));
+ g.add(new THREE.Mesh(
+ new THREE.SphereGeometry(sunR * 6.5, 16, 12),
+ new THREE.MeshBasicMaterial({
+ color: outerGlow, transparent: true, opacity: 0.18, depthWrite: false,
+ depthTest: false,
+ blending: THREE.AdditiveBlending, toneMapped: false, fog: false,
+ })
+ ));
+ g.visible = false;
+ scene.add(g);
+ return g;
+}
+const sunDisc = makeBodyDisc(0xfff6c2, 0xffc14d, 0xfff1c0);
+const moonDisc = makeBodyDisc(0xe8eef5, 0xb8c4d4, 0xd0d8e4);
+let bodyRay = null;
+function ensureBodyRay(hexColor) {
+  if (!bodyRay) {
+    bodyRay = new THREE.ArrowHelper(
+      new THREE.Vector3(0, 0, -1),
+      new THREE.Vector3(0, 0, 0),
+      1, hexColor, 2.5, 1.2
+    );
+    bodyRay.visible = false;
+    scene.add(bodyRay);
+  } else if (bodyRay.cone && bodyRay.cone.material) {
+    bodyRay.cone.material.color.setHex(hexColor);
+    bodyRay.line.material.color.setHex(hexColor);
+  }
+  return bodyRay;
+}
+
+function isMoonMode(m) { return m === 'moonrise' || m === 'moonset'; }
+function isSunMode(m) { return m === 'sunrise' || m === 'sunset'; }
+
+function placeSun() {
+ // Legacy name kept for call sites; places active sky body (sun or moon).
+ const readout = document.getElementById('sunReadout');
+ sunDisc.visible = false;
+ moonDisc.visible = false;
+ if (bodyRay) bodyRay.visible = false;
+ if (bodyMode === 'off' || !terrainOn) {
+   if (readout) readout.textContent = '';
+   return;
+ }
+ if (exaggeration > 1.01) setExaggeration(1, true);
+ const origin = new THREE.Vector3(0, 1.6 * exaggeration, 0);
+ let ev = null;
+ let note = '';
+ if (isSunMode(bodyMode)) {
+   ev = approxSun(doy, bodyMode);
+   note = '';
+ } else if (isMoonMode(bodyMode)) {
+   ev = moonAzFromSpread(bodyMode, moonSpread);
+   if (!ev) {
+     if (readout) readout.textContent = 'No moon azimuth';
+     return;
+   }
+   note = '';
+ } else {
+   if (readout) readout.textContent = '';
+   return;
+ }
+ const { x, z } = sunDir(ev.az);
+ const dist = distPastTerrain(origin, x, z);
+ const rise = Math.tan(ev.alt * Math.PI / 180) * exaggeration;
+ const pos = new THREE.Vector3(origin.x + x * dist, origin.y + rise * dist, origin.z + z * dist);
+ const disc = isMoonMode(bodyMode) ? moonDisc : sunDisc;
+ disc.visible = true;
+  disc.traverse((o) => {
+    if (o.isMesh && o.material) {
+      o.material.depthTest = false;
+      o.material.depthWrite = false;
+      o.material.needsUpdate = true;
+    }
+  });
+  disc.renderOrder = 20;
+  disc.position.copy(pos);
+ disc.scale.setScalar(Math.max(0.2, dist / SUN_REF));
+ if (isSunMode(bodyMode)) {
+   sunLight.position.copy(pos);
+   sunLight.target.position.copy(origin);
+   sunLight.target.updateMatrixWorld();
+   const dawn = bodyMode === 'sunrise' ? 1 : 0.55;
+   scene.background.setRGB(0.14 + 0.16 * dawn, 0.18 + 0.12 * dawn, 0.28 + 0.10 * dawn);
+ } else {
+   // Cooler night-ish sky while moon shown
+   scene.background.setRGB(0.08, 0.10, 0.16);
+ }
+ if (scene.fog) scene.fog.color.copy(scene.background);
+ const rayColor = isMoonMode(bodyMode) ? 0xc8d0dc : 0xffcc66;
+ ensureBodyRay(rayColor);
+ const dir = pos.clone().sub(origin);
+ const len = dir.length();
+ if (len > 1e-3) {
+   bodyRay.setDirection(dir.normalize());
+   bodyRay.position.copy(origin);
+   bodyRay.setLength(len, Math.min(40, len * 0.03), Math.min(20, len * 0.015));
+ }
+ bodyRay.visible = showRay;
+   if (readout) {
+   const title = isMoonMode(bodyMode)
+     ? moonSpreadLabel(bodyMode, moonSpread)
+     : doyLabel(doy);
+   const limbTxt = LIMB_LABEL[pathALimb] || pathALimb;
+   let bits = '<b>' + title + '</b> · ' + bodyMode + ' · ' + limbTxt + ' · az <b>' + ev.az.toFixed(2) + '°</b>';
+   if (isSunMode(bodyMode) && !ev.pathA) {
+     bits += ' <span style="color:#f0c674">(solstice presets for Path A)</span>';
+   }
+   readout.innerHTML = bits;
+ }
+}
+
+// Plan underlay (FIG1 / Cleal) intentionally removed from the public viewer.
+function focusTop() {
+ let minX = Infinity, maxX = -Infinity, minZ = Infinity, maxZ = -Infinity;
+ for (const e of LP.array) {
+ const en = poseEN(e);
+ const p = localXZ(en.e, en.n);
+ const [fa, fc] = footprintOf(e);
+ const r = Math.max(fa, fc) / 2 + 1;
+ minX = Math.min(minX, p.x - r); maxX = Math.max(maxX, p.x + r);
+ minZ = Math.min(minZ, p.z - r); maxZ = Math.max(maxZ, p.z + r);
+ }
+ const cx = (minX + maxX) / 2, cz = (minZ + maxZ) / 2;
+ const half = Math.max(maxX - minX, maxZ - minZ) / 2 * 1.08;
+ const aspect = innerWidth / innerHeight;
+ if (aspect >= 1) {
+ ortho.left = -half * aspect; ortho.right = half * aspect;
+ ortho.top = half; ortho.bottom = -half;
+ } else {
+ ortho.left = -half; ortho.right = half;
+ ortho.top = half / aspect; ortho.bottom = -half / aspect;
+ }
+ ortho.up.set(0, 0, -1);
+ ortho.position.set(cx, 80, cz);
+ ortho.lookAt(cx, 0, cz);
+ ortho.updateProjectionMatrix();
+ controls.target.set(cx, 0, cz);
+ controls.update();
+}
+function setTop() {
+ topMode = true; cam = ortho; controls.object = cam; controls.enableRotate = false;
+ document.getElementById('btnTop').classList.add('active');
+ document.getElementById('btnOrbit').classList.remove('active');
+ focusTop();
+}
+function setOrbit() {
+ topMode = false; cam = persp; controls.object = cam; controls.enableRotate = true;
+ const p = localXZ(412244.458, 142191.758);
+ persp.position.set(p.x + 22, 28 * Math.max(1, exaggeration), p.z + 18);
+ persp.far = 25000; persp.near = 0.1; persp.up.set(0, 1, 0);
+ persp.updateProjectionMatrix();
+ controls.target.set(p.x, 0, p.z);
+ controls.maxDistance = 20000; controls.update();
+ document.getElementById('btnOrbit').classList.add('active');
+ document.getElementById('btnTop').classList.remove('active');
+}
+
+document.getElementById('btnTop').onclick = setTop;
+document.getElementById('btnOrbit').onclick = setOrbit;
+document.getElementById('btnTerrain').onclick = () => {
+  setTerrain(!terrainOn);
+};
+document.getElementById('btnLabels').onclick = () => {
+  setLabels(!labelsOn);
+};
+function setBodyMode(mode) {
+ bodyMode = mode;
+ const modes = [
+   ['btnSunOff','off'],
+   ['btnSunrise','sunrise'],
+   ['btnSunset','sunset'],
+   ['btnMoonrise','moonrise'],
+   ['btnMoonset','moonset'],
+ ];
+ for (const [id, m] of modes) {
+   const el = document.getElementById(id);
+   if (el) el.classList.toggle('active', bodyMode === m);
+ }
+ if (bodyMode !== 'off' && !terrainOn) setTerrain(true);
+  updateMoonAzUi();
+  placeSun();
+
+}
+document.getElementById('btnSunOff').onclick = () => setBodyMode('off');
+document.getElementById('btnSunrise').onclick = () => setBodyMode('sunrise');
+document.getElementById('btnSunset').onclick = () => setBodyMode('sunset');
+document.getElementById('btnMoonrise').onclick = () => setBodyMode('moonrise');
+document.getElementById('btnMoonset').onclick = () => setBodyMode('moonset');
+document.getElementById('doy').oninput = (ev) => {
+ doy = +ev.target.value;
+ document.getElementById('doyLbl').textContent = doyLabel(doy);
+ placeSun();
+};
+document.querySelectorAll('[data-doy]').forEach((b) => {
+ b.onclick = () => {
+ doy = +b.dataset.doy;
+ document.getElementById('doy').value = String(doy);
+ document.getElementById('doyLbl').textContent = doyLabel(doy);
+ if (doy === 172) setBodyMode('sunrise');
+ if (doy === 355) setBodyMode('sunset');
+ placeSun();
+ };
+});
+document.getElementById('showRay').onchange = (e) => { showRay = e.target.checked; placeSun(); };
+
+document.getElementById('moonAz').oninput = (ev) => {
+  moonSpread = (+ev.target.value) / 1000;
+  const lb = document.getElementById('moonAzLbl');
+  if (lb && isMoonMode(bodyMode)) lb.textContent = moonSpreadLabel(bodyMode, moonSpread);
+  if (isMoonMode(bodyMode)) placeSun();
+};
+document.getElementById('btnMoonAzN').onclick = () => {
+  moonSpread = 0;
+  document.getElementById('moonAz').value = '0';
+  const lb = document.getElementById('moonAzLbl');
+  if (lb && isMoonMode(bodyMode)) lb.textContent = moonSpreadLabel(bodyMode, moonSpread);
+  if (isMoonMode(bodyMode)) placeSun();
+};
+document.getElementById('btnMoonAzMid').onclick = () => {
+  moonSpread = 0.5;
+  document.getElementById('moonAz').value = '500';
+  const lb = document.getElementById('moonAzLbl');
+  if (lb && isMoonMode(bodyMode)) lb.textContent = moonSpreadLabel(bodyMode, moonSpread);
+  if (isMoonMode(bodyMode)) placeSun();
+};
+document.getElementById('btnMoonAzS').onclick = () => {
+  moonSpread = 1;
+  document.getElementById('moonAz').value = '1000';
+  const lb = document.getElementById('moonAzLbl');
+  if (lb && isMoonMode(bodyMode)) lb.textContent = moonSpreadLabel(bodyMode, moonSpread);
+  if (isMoonMode(bodyMode)) placeSun();
+};
+
+addEventListener('resize', () => {
+ renderer.setSize(innerWidth, innerHeight);
+ persp.aspect = innerWidth / innerHeight;
+ persp.updateProjectionMatrix();
+ if (topMode) focusTop();
+});
+function tick() { requestAnimationFrame(tick); controls.update(); renderer.render(scene, cam); }
+
+
+function syncEpochUi() {
+  const y = epochYear;
+  const bMod = document.getElementById('btnEpochModern');
+  const bAnc = document.getElementById('btnEpoch2500');
+  if (bMod) bMod.classList.toggle('active', y === EPOCH_MODERN);
+  if (bAnc) bAnc.classList.toggle('active', y === EPOCH_2500BC);
+  const inp = document.getElementById('epochYear');
+  if (inp && document.activeElement !== inp) inp.value = String(y);
+  const help = document.getElementById('epochHelp');
+  if (help) help.textContent = (y < 0 ? (Math.abs(y) + ' BC') : String(y)) + ' · −2499 = 2500 BC';
+}
+
+function setEpochYear(year) {
+  const y = Math.trunc(+year);
+  if (!Number.isFinite(y)) return;
+  epochYear = y;
+  try { sessionStorage.setItem('sh_path_a_epoch_year', String(epochYear)); } catch (e) {}
+  refreshMoonExtremes();
+  syncEpochUi();
+  updateMoonAzUi();
+  placeSun();
+}
+
+function initEpochUi() {
+  const bMod = document.getElementById('btnEpochModern');
+  const bAnc = document.getElementById('btnEpoch2500');
+  const inp = document.getElementById('epochYear');
+  if (bMod) bMod.onclick = () => setEpochYear(EPOCH_MODERN);
+  if (bAnc) bAnc.onclick = () => setEpochYear(EPOCH_2500BC);
+  if (inp) {
+    inp.onchange = () => setEpochYear(inp.value);
+    inp.onkeydown = (ev) => { if (ev.key === 'Enter') { ev.preventDefault(); setEpochYear(inp.value); } };
+  }
+  syncEpochUi();
+}
+
+function syncLimbUi() {
+  const map = [
+    ['btnLimbGleam', 'first_gleam'],
+    ['btnLimbHalf', 'half_orb'],
+    ['btnLimbFull', 'full_orb'],
+  ];
+  for (const [id, L] of map) {
+    const el = document.getElementById(id);
+    if (el) el.classList.toggle('active', pathALimb === L);
+  }
+}
+function setPathALimb(L) {
+  if (!LIMB_LABEL[L]) return;
+  pathALimb = L;
+  try { sessionStorage.setItem('sh_path_a_limb', pathALimb); } catch (e) {}
+  refreshMoonExtremes();
+  syncLimbUi();
+  updateMoonAzUi();
+  placeSun();
+}
+function initPathAUi() {
+  try {
+    const L = sessionStorage.getItem('sh_path_a_limb');
+    if (L && LIMB_LABEL[L]) pathALimb = L;
+  } catch (e) {}
+  const g = document.getElementById('btnLimbGleam');
+  const hh = document.getElementById('btnLimbHalf');
+  const f = document.getElementById('btnLimbFull');
+  if (g) g.onclick = () => setPathALimb('first_gleam');
+  if (hh) hh.onclick = () => setPathALimb('half_orb');
+  if (f) f.onclick = () => setPathALimb('full_orb');
+  syncLimbUi();
+}
+
+rebuildStones();
+setOrbit();
+doy = 172;
+document.getElementById('doy').value = '172';
+document.getElementById('doyLbl').textContent = doyLabel(172);
+showRay = true;
+const rayCb = document.getElementById('showRay');
+if (rayCb) rayCb.checked = true;
+initEpochUi();
+initPathAUi();
+// Default: Modern + midsummer sunrise + Terrain + ray → ~50.4° Path A Gleam (Hoyle)
+setEpochYear(EPOCH_MODERN);
+setBodyMode('sunrise'); // also turns Terrain on + placeSun after load
+tick();
+window.__LOCKED_OVERVIEW_READY = true;
+/* plan underlay removed */
+window.__LOCKED_OVERVIEW = {
+ LP, scene, camera: () => cam, renderer, setTerrain,
+ terrainOn: () => terrainOn, setExaggeration, exaggeration: () => exaggeration,
+ epochYear: () => epochYear, setEpochYear, obliquityDeg, moonExtremesForYear,
+ pathALimb: () => pathALimb, setPathALimb,
+ getSkyEvents, approxSun,
+};
+</script>
+</body>
+</html>

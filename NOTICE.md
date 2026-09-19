@@ -13,6 +13,8 @@ Copyright © three.js authors.
 (MIT License), npm package `astronomy-engine@2.1.19`.
 Copyright © Don Cross / Cosine Kitty.
 
+Live moon UI uses the standstill azimuth dial; astronomy-engine is vendored for a future optional date-mode.
+
 ## Environment Agency LiDAR (derived terrain)
 
 `data/terrain_horizon.js` and `data/site_ground_od.js` are **derived**

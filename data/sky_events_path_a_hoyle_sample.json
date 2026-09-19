@@ -1,0 +1,1061 @@
+{
+  "title": "Stonehenge Path A sky events \u2014 topographic rise/set (workshop)",
+  "generated_at_utc": "2026-09-19T19:54:09Z",
+  "rule": "OFF live public index \u2014 do not promote without Tim saying promote",
+  "site": {
+    "name": "Stonehenge monument centre",
+    "lat_deg": 51.178851,
+    "lon_deg": -1.826177,
+    "height_m_od_approx": 102.0,
+    "eye": {
+      "lat_deg": 51.178851,
+      "lon_deg": -1.826177,
+      "od": 104.0,
+      "eye_agl_m": null,
+      "ground_od_m": null,
+      "verified": false,
+      "verification": "Stellarium landscape.ini [location] altitude=104 m (no separate CE/CN OSGB eye; matches Banton/Hoyle site).",
+      "local_xyz_note": "Hoyle twin uses landscape lat/lon/elev only; not Bulford CE/CN ray-cast."
+    }
+  },
+  "horizon_profile": {
+    "path": "data/horizon_profile_hoyle.json",
+    "step_deg": 0.25,
+    "n": 1440,
+    "source": {
+      "method": "Hoyle 2023 Stellarium landscape PNG skyline extraction",
+      "landscape_author": "David Hoyle",
+      "landscape_pack": "stonehenge_su1224742194 (standingstones.org)",
+      "landscape_ini": "/workspace/agent-tools/banton/hoyle/unpacked/landscape.ini",
+      "hoyle_dir": "/workspace/agent-tools/banton/hoyle/unpacked",
+      "stellarium_type": "old_style",
+      "calibrated": true,
+      "tan_mode": false,
+      "decor_alt_angle": 25.0,
+      "decor_angle_shift": -5.0,
+      "decor_angle_rotatez": -90.0,
+      "nbside": 8,
+      "panel_size_hw": [
+        3000,
+        5400
+      ],
+      "mapping_note": "Azimuth: Stellarium LandscapeOldStyle::getOpacity (left edge tex0 = North with decor_angle_rotatez=-90). Altitude: linear in decor band [decor_angle_shift, decor_angle_shift+decor_alt_angle] = [-5\u00b0, +20\u00b0]. Skyline = topmost opaque (alpha>128) pixel per column.",
+      "extractor": "tools/extract_hoyle_horizon.py",
+      "bennett_refraction_for_events": "applied in bulford_horizon.py event solver; alt_deg here is geometric skyline from panorama alpha"
+    },
+    "rebuild_solstitial_check": {
+      "midsummer_sunrise_az_deg": 50.0,
+      "midsummer_sunrise_h_hor_deg": 0.5875,
+      "midwinter_sunrise_az_deg": 129.6,
+      "midwinter_sunrise_h_hor_deg": 0.2625,
+      "note": "Geometric skyline alts from Hoyle panorama; events via sky_events_path_a.py --horizon this file."
+    }
+  },
+  "conventions": {
+    "refraction": "Bennett 1982 (apparent) / Saemundsson 1986 (true\u2192apparent in track)",
+    "solar_sd_deg": 0.26667,
+    "solar_parallax_deg": 0.002442,
+    "lunar_sd_deg": 0.259,
+    "lunar_parallax_mean_deg": 0.9507,
+    "lunar_inclination_deg": 5.145396,
+    "limb_default": "upper (first/last gleam)",
+    "banton_limb_map": {
+      "first_gleam": "upper",
+      "half_orb": "centre",
+      "full_orb": "lower"
+    },
+    "banton_labels": "first_gleam=upper, half_orb=centre, full_orb=lower",
+    "solver": "ref/bulford_alignment/bulford_horizon.py",
+    "protocol": "ref/bulford_alignment/BULFORD_HORIZON_PROTOCOL.md"
+  },
+  "headlines": {
+    "modern_midsummer_sunrise_path_a_az_deg": 50.4078,
+    "modern_midsummer_sunrise_flat_az_deg": 49.2556,
+    "modern_midsummer_sunrise_delta_vs_flat_deg": 1.1522,
+    "bc2500_midsummer_sunrise_path_a_az_deg": 49.3208,
+    "bc2500_midsummer_sunrise_flat_az_deg": 48.2094,
+    "published_sh_axis_deg": 49.1,
+    "bc2500_midsummer_sunrise_vs_published_49_1": 0.2208,
+    "modern_northernmost_moonset_path_a_az_deg": 318.8276,
+    "modern_northernmost_moonset_flat_bennett_az_deg": 319.5161,
+    "schematic_northernmost_moonset_az_deg": 319.74,
+    "modern_northernmost_moonset_delta_vs_schematic_deg": -0.9124,
+    "bc2500_northernmost_moonset_path_a_az_deg": 319.9668,
+    "ae_modern_midsummer_sunrise_topo_utc": "2026-06-21T03:57:33Z",
+    "ae_modern_midsummer_sunrise_topo_az_deg": 50.4077,
+    "ae_modern_midsummer_sunrise_flat_az_deg": 49.2801,
+    "banton_bc2500_winter_sr_first_gleam_az_deg": 129.5516,
+    "banton_bc2500_winter_sr_half_orb_az_deg": 129.9685,
+    "banton_bc2500_winter_sr_full_orb_az_deg": 130.3774,
+    "banton_target_winter_sr_first_gleam_az_deg": 129.604167,
+    "banton_target_winter_sr_full_orb_az_deg": 130.371389,
+    "delta_bc2500_winter_sr_first_gleam_vs_banton_deg": -0.0526,
+    "delta_bc2500_winter_sr_full_orb_vs_banton_deg": 0.006,
+    "banton_larkhill1910_first_gleam_path_a_az_deg": 50.3792,
+    "banton_larkhill1910_full_orb_path_a_az_deg": 51.249,
+    "delta_larkhill1910_first_gleam_vs_banton_deg": -0.0007,
+    "delta_larkhill1910_full_orb_vs_banton_deg": -0.0094,
+    "banton_bc2500_midsummer_sr_first_gleam_az_deg": 49.3208,
+    "banton_bc2500_midsummer_sr_half_orb_az_deg": 49.7859,
+    "banton_bc2500_midsummer_sr_full_orb_az_deg": 50.2461
+  },
+  "banton_comparison": {
+    "title": "Banton comparison \u2014 first_gleam / half_orb / full_orb",
+    "banton_limb_map": {
+      "first_gleam": "upper",
+      "half_orb": "centre",
+      "full_orb": "lower"
+    },
+    "hoyle_stellarium_site": {
+      "lat_deg": 51.178851,
+      "lon_deg": -1.826177,
+      "altitude_m": 104,
+      "stellarium_version": "0.22.2",
+      "landscape": "Hoyle 2023 LiDAR (standingstones.org stonehenge_su1224742194)"
+    },
+    "horizon_profile_path": "data/horizon_profile_hoyle.json",
+    "horizon_status": "Hoyle twin active \u2014 skyline from Stellarium old_style panorama (horizon_profile_hoyle.json). Pack: /workspace/agent-tools/banton/hoyle/unpacked/ (lat 51.178851 lon -1.826177 elev 104 m). Bulford profile retained as data/horizon_profile.json for compare.",
+    "method_note": "Path A = bulford_horizon.event_azimuth / events_all_limbs + Hoyle-extracted horizon_profile_hoyle.json. Banton pipeline = Stellarium 0.22.2 + same Hoyle pack (opacity/skyline).",
+    "events": {
+      "modern_midsummer_sunrise_vs_larkhill_1910": {
+        "label": "Modern midsummer sunrise vs Larkhill 1910 published",
+        "event": "midsummer_sunrise",
+        "calendar_year_astronomical": 1910.0,
+        "declination_deg": 23.450993,
+        "obliquity_deg": 23.450993,
+        "rising": true,
+        "horizon_note": "Horizon from loaded profile \u2014 see banton_comparison.horizon_status.",
+        "banton_targets_key": "larkhill_1910_midsummer_sunrise",
+        "banton_target_source": "Banton blog Larkhill Sun Gap Revisited (15 Feb 2025)",
+        "limbs": {
+          "first_gleam": {
+            "az_deg": 50.3792,
+            "az_dms": "50\u00b022\u203245.1\u2033",
+            "h_hor_deg": 0.5958,
+            "bulford_limb": "upper",
+            "banton_label": "first_gleam",
+            "banton_target_az_deg": 50.379861,
+            "delta_path_a_minus_banton_deg": -0.0007,
+            "banton_target_dms": "50\u00b022\u203247.5\u2033"
+          },
+          "half_orb": {
+            "az_deg": 50.8236,
+            "az_dms": "50\u00b049\u203225.0\u2033",
+            "h_hor_deg": 0.6042,
+            "bulford_limb": "centre",
+            "banton_label": "half_orb",
+            "banton_target_az_deg": null,
+            "delta_path_a_minus_banton_deg": null
+          },
+          "full_orb": {
+            "az_deg": 51.249,
+            "az_dms": "51\u00b014\u203256.4\u2033",
+            "h_hor_deg": 0.6042,
+            "bulford_limb": "lower",
+            "banton_label": "full_orb",
+            "banton_target_az_deg": 51.258361,
+            "delta_path_a_minus_banton_deg": -0.0094,
+            "banton_target_dms": "51\u00b015\u203230.1\u2033"
+          }
+        },
+        "delta_summary_deg": {
+          "first_gleam": -0.0007,
+          "half_orb": null,
+          "full_orb": -0.0094
+        },
+        "all_limbs_bulford": {
+          "upper": {
+            "az_deg": 50.3792,
+            "h_hor_deg": 0.5958
+          },
+          "centre": {
+            "az_deg": 50.8236,
+            "h_hor_deg": 0.6042
+          },
+          "lower": {
+            "az_deg": 51.249,
+            "h_hor_deg": 0.6042
+          }
+        }
+      },
+      "bc2500_midwinter_sunrise": {
+        "label": "c. 2500 BC midwinter sunrise vs Banton JSA",
+        "event": "midwinter_sunrise",
+        "calendar_year_astronomical": -2499.0,
+        "declination_deg": -23.974226,
+        "obliquity_deg": 23.974226,
+        "rising": true,
+        "horizon_note": "Horizon from loaded profile \u2014 see banton_comparison.horizon_status.",
+        "banton_targets_key": "bc2500_midwinter_sunrise",
+        "banton_target_source": "Banton JSA 11.2 (2026) + Hoyle landscape",
+        "limbs": {
+          "first_gleam": {
+            "az_deg": 129.5516,
+            "az_dms": "129\u00b033\u20325.8\u2033",
+            "h_hor_deg": 0.2608,
+            "bulford_limb": "upper",
+            "banton_label": "first_gleam",
+            "banton_target_az_deg": 129.604167,
+            "delta_path_a_minus_banton_deg": -0.0526,
+            "banton_target_dms": "129\u00b036\u203215\u2033"
+          },
+          "half_orb": {
+            "az_deg": 129.9685,
+            "az_dms": "129\u00b058\u20326.6\u2033",
+            "h_hor_deg": 0.2542,
+            "bulford_limb": "centre",
+            "banton_label": "half_orb",
+            "banton_target_az_deg": null,
+            "delta_path_a_minus_banton_deg": null
+          },
+          "full_orb": {
+            "az_deg": 130.3774,
+            "az_dms": "130\u00b022\u203238.6\u2033",
+            "h_hor_deg": 0.2416,
+            "bulford_limb": "lower",
+            "banton_label": "full_orb",
+            "banton_target_az_deg": 130.371389,
+            "delta_path_a_minus_banton_deg": 0.006,
+            "banton_target_dms": "130\u00b022\u203217\u2033"
+          }
+        },
+        "delta_summary_deg": {
+          "first_gleam": -0.0526,
+          "half_orb": null,
+          "full_orb": 0.006
+        },
+        "all_limbs_bulford": {
+          "upper": {
+            "az_deg": 129.5516,
+            "h_hor_deg": 0.2608
+          },
+          "centre": {
+            "az_deg": 129.9685,
+            "h_hor_deg": 0.2542
+          },
+          "lower": {
+            "az_deg": 130.3774,
+            "h_hor_deg": 0.2416
+          }
+        }
+      },
+      "bc2500_midsummer_sunrise": {
+        "label": "c. 2500 BC midsummer sunrise (Path A limbs; no JSA target)",
+        "event": "midsummer_sunrise",
+        "calendar_year_astronomical": -2499.0,
+        "declination_deg": 23.974226,
+        "obliquity_deg": 23.974226,
+        "rising": true,
+        "horizon_note": "Horizon from loaded profile \u2014 see banton_comparison.horizon_status.",
+        "banton_targets_key": "bc2500_midsummer_sunrise",
+        "banton_target_source": "Path A only \u2014 no JSA published midsummer SR azimuths",
+        "limbs": {
+          "first_gleam": {
+            "az_deg": 49.3208,
+            "az_dms": "49\u00b019\u203214.9\u2033",
+            "h_hor_deg": 0.5649,
+            "bulford_limb": "upper",
+            "banton_label": "first_gleam",
+            "banton_target_az_deg": null,
+            "delta_path_a_minus_banton_deg": null
+          },
+          "half_orb": {
+            "az_deg": 49.7859,
+            "az_dms": "49\u00b047\u20329.2\u2033",
+            "h_hor_deg": 0.5804,
+            "bulford_limb": "centre",
+            "banton_label": "half_orb",
+            "banton_target_az_deg": null,
+            "delta_path_a_minus_banton_deg": null
+          },
+          "full_orb": {
+            "az_deg": 50.2461,
+            "az_dms": "50\u00b014\u203246.0\u2033",
+            "h_hor_deg": 0.5957,
+            "bulford_limb": "lower",
+            "banton_label": "full_orb",
+            "banton_target_az_deg": null,
+            "delta_path_a_minus_banton_deg": null
+          }
+        },
+        "delta_summary_deg": {
+          "first_gleam": null,
+          "half_orb": null,
+          "full_orb": null
+        },
+        "all_limbs_bulford": {
+          "upper": {
+            "az_deg": 49.3208,
+            "h_hor_deg": 0.5649
+          },
+          "centre": {
+            "az_deg": 49.7859,
+            "h_hor_deg": 0.5804
+          },
+          "lower": {
+            "az_deg": 50.2461,
+            "h_hor_deg": 0.5957
+          }
+        }
+      },
+      "modern_2026_midsummer_sunrise_vs_larkhill_1910": {
+        "label": "2026 midsummer sunrise vs Larkhill 1910 published (\u03b5 differs from 1910)",
+        "event": "midsummer_sunrise",
+        "calendar_year_astronomical": 2026.0,
+        "declination_deg": 23.43591,
+        "obliquity_deg": 23.43591,
+        "rising": true,
+        "horizon_note": "Horizon from loaded profile \u2014 see banton_comparison.horizon_status.",
+        "banton_targets_key": "larkhill_1910_midsummer_sunrise",
+        "banton_target_source": "Banton blog Larkhill Sun Gap Revisited (15 Feb 2025)",
+        "limbs": {
+          "first_gleam": {
+            "az_deg": 50.4078,
+            "az_dms": "50\u00b024\u203228.1\u2033",
+            "h_hor_deg": 0.5958,
+            "bulford_limb": "upper",
+            "banton_label": "first_gleam",
+            "banton_target_az_deg": 50.379861,
+            "delta_path_a_minus_banton_deg": 0.0279,
+            "banton_target_dms": "50\u00b022\u203247.5\u2033"
+          },
+          "half_orb": {
+            "az_deg": 50.8521,
+            "az_dms": "50\u00b051\u20327.6\u2033",
+            "h_hor_deg": 0.6042,
+            "bulford_limb": "centre",
+            "banton_label": "half_orb",
+            "banton_target_az_deg": null,
+            "delta_path_a_minus_banton_deg": null
+          },
+          "full_orb": {
+            "az_deg": 51.2789,
+            "az_dms": "51\u00b016\u203244.0\u2033",
+            "h_hor_deg": 0.6051,
+            "bulford_limb": "lower",
+            "banton_label": "full_orb",
+            "banton_target_az_deg": 51.258361,
+            "delta_path_a_minus_banton_deg": 0.0205,
+            "banton_target_dms": "51\u00b015\u203230.1\u2033"
+          }
+        },
+        "delta_summary_deg": {
+          "first_gleam": 0.0279,
+          "half_orb": null,
+          "full_orb": 0.0205
+        },
+        "all_limbs_bulford": {
+          "upper": {
+            "az_deg": 50.4078,
+            "h_hor_deg": 0.5958
+          },
+          "centre": {
+            "az_deg": 50.8521,
+            "h_hor_deg": 0.6042
+          },
+          "lower": {
+            "az_deg": 51.2789,
+            "h_hor_deg": 0.6051
+          }
+        }
+      }
+    },
+    "published_targets": {
+      "larkhill_1910_midsummer_sunrise": {
+        "first_gleam": 50.379861,
+        "half_orb": null,
+        "full_orb": 51.258361,
+        "source": "Banton blog Larkhill Sun Gap Revisited (15 Feb 2025)",
+        "dms": {
+          "first_gleam": "50\u00b022\u203247.5\u2033",
+          "full_orb": "51\u00b015\u203230.1\u2033"
+        }
+      },
+      "bc2500_midwinter_sunrise": {
+        "first_gleam": 129.604167,
+        "half_orb": null,
+        "full_orb": 130.371389,
+        "source": "Banton JSA 11.2 (2026) + Hoyle landscape",
+        "dms": {
+          "first_gleam": "129\u00b036\u203215\u2033",
+          "full_orb": "130\u00b022\u203217\u2033"
+        },
+        "utc": {
+          "first_gleam": "08:24:04",
+          "full_orb": "08:31:01"
+        },
+        "declination_dms": "\u221223\u00b058\u203240.7\u2033",
+        "declination_deg": -23.977972
+      },
+      "bc2500_midsummer_sunrise": {
+        "first_gleam": null,
+        "half_orb": null,
+        "full_orb": null,
+        "source": "Path A only \u2014 no JSA published midsummer SR azimuths"
+      }
+    }
+  },
+  "sun_solstice": {
+    "modern_2026": {
+      "label": "Modern (2026)",
+      "calendar_year_astronomical": 2026.0,
+      "note": "Astronomical year numbering: 1 BC = 0, 2500 BC = \u22122499. Solstitial \u03b4 = \u00b1\u03b5 (Laskar 1986 via bulford_horizon.obliquity).",
+      "obliquity_deg": 23.43591,
+      "method": "bulford_horizon.event_azimuth + Bennett/Saemundsson refraction + solar SD/parallax",
+      "limb_default": "upper",
+      "events": {
+        "midsummer_sunrise": {
+          "declination_deg": 23.43591,
+          "path_a": {
+            "az_deg": 50.4078,
+            "h_hor_deg": 0.5958,
+            "limb": "upper"
+          },
+          "flat_horizon": {
+            "az_deg": 49.2556,
+            "h_hor_deg": 0.0,
+            "limb": "upper"
+          },
+          "delta_az_vs_flat_deg": 1.1522,
+          "all_limbs_path_a": {
+            "upper": {
+              "az_deg": 50.4078,
+              "h_hor_deg": 0.5958
+            },
+            "centre": {
+              "az_deg": 50.8521,
+              "h_hor_deg": 0.6042
+            },
+            "lower": {
+              "az_deg": 51.2789,
+              "h_hor_deg": 0.6051
+            }
+          },
+          "banton_limbs": {
+            "first_gleam": {
+              "az_deg": 50.4078,
+              "az_dms": "50\u00b024\u203228.1\u2033",
+              "h_hor_deg": 0.5958,
+              "bulford_limb": "upper",
+              "banton_label": "first_gleam"
+            },
+            "half_orb": {
+              "az_deg": 50.8521,
+              "az_dms": "50\u00b051\u20327.6\u2033",
+              "h_hor_deg": 0.6042,
+              "bulford_limb": "centre",
+              "banton_label": "half_orb"
+            },
+            "full_orb": {
+              "az_deg": 51.2789,
+              "az_dms": "51\u00b016\u203244.0\u2033",
+              "h_hor_deg": 0.6051,
+              "bulford_limb": "lower",
+              "banton_label": "full_orb"
+            }
+          },
+          "delta_az_vs_published_sh_axis_49_1": 1.3078
+        },
+        "midsummer_sunset": {
+          "declination_deg": 23.43591,
+          "path_a": {
+            "az_deg": 310.035,
+            "h_hor_deg": 0.3625,
+            "limb": "upper"
+          },
+          "flat_horizon": {
+            "az_deg": 310.7444,
+            "h_hor_deg": 0.0,
+            "limb": "upper"
+          },
+          "delta_az_vs_flat_deg": -0.7094,
+          "all_limbs_path_a": {
+            "upper": {
+              "az_deg": 310.035,
+              "h_hor_deg": 0.3625
+            },
+            "centre": {
+              "az_deg": 309.6025,
+              "h_hor_deg": 0.3625
+            },
+            "lower": {
+              "az_deg": 309.1736,
+              "h_hor_deg": 0.3625
+            }
+          },
+          "banton_limbs": {
+            "first_gleam": {
+              "az_deg": 310.035,
+              "az_dms": "310\u00b002\u20326.0\u2033",
+              "h_hor_deg": 0.3625,
+              "bulford_limb": "upper",
+              "banton_label": "first_gleam"
+            },
+            "half_orb": {
+              "az_deg": 309.6025,
+              "az_dms": "309\u00b036\u20329.0\u2033",
+              "h_hor_deg": 0.3625,
+              "bulford_limb": "centre",
+              "banton_label": "half_orb"
+            },
+            "full_orb": {
+              "az_deg": 309.1736,
+              "az_dms": "309\u00b010\u203225.0\u2033",
+              "h_hor_deg": 0.3625,
+              "bulford_limb": "lower",
+              "banton_label": "full_orb"
+            }
+          }
+        },
+        "midwinter_sunrise": {
+          "declination_deg": -23.43591,
+          "path_a": {
+            "az_deg": 128.5693,
+            "h_hor_deg": 0.2769,
+            "limb": "upper"
+          },
+          "flat_horizon": {
+            "az_deg": 128.0482,
+            "h_hor_deg": 0.0,
+            "limb": "upper"
+          },
+          "delta_az_vs_flat_deg": 0.5211,
+          "all_limbs_path_a": {
+            "upper": {
+              "az_deg": 128.5693,
+              "h_hor_deg": 0.2769
+            },
+            "centre": {
+              "az_deg": 128.9817,
+              "h_hor_deg": 0.2708
+            },
+            "lower": {
+              "az_deg": 129.393,
+              "h_hor_deg": 0.2625
+            }
+          },
+          "banton_limbs": {
+            "first_gleam": {
+              "az_deg": 128.5693,
+              "az_dms": "128\u00b034\u20329.5\u2033",
+              "h_hor_deg": 0.2769,
+              "bulford_limb": "upper",
+              "banton_label": "first_gleam"
+            },
+            "half_orb": {
+              "az_deg": 128.9817,
+              "az_dms": "128\u00b058\u203254.1\u2033",
+              "h_hor_deg": 0.2708,
+              "bulford_limb": "centre",
+              "banton_label": "half_orb"
+            },
+            "full_orb": {
+              "az_deg": 129.393,
+              "az_dms": "129\u00b023\u203234.8\u2033",
+              "h_hor_deg": 0.2625,
+              "bulford_limb": "lower",
+              "banton_label": "full_orb"
+            }
+          }
+        },
+        "midwinter_sunset": {
+          "declination_deg": -23.43591,
+          "path_a": {
+            "az_deg": 231.1053,
+            "h_hor_deg": 0.4507,
+            "limb": "upper"
+          },
+          "flat_horizon": {
+            "az_deg": 231.9518,
+            "h_hor_deg": 0.0,
+            "limb": "upper"
+          },
+          "delta_az_vs_flat_deg": -0.8466,
+          "all_limbs_path_a": {
+            "upper": {
+              "az_deg": 231.1053,
+              "h_hor_deg": 0.4507
+            },
+            "centre": {
+              "az_deg": 230.6502,
+              "h_hor_deg": 0.4658
+            },
+            "lower": {
+              "az_deg": 230.2077,
+              "h_hor_deg": 0.4722
+            }
+          },
+          "banton_limbs": {
+            "first_gleam": {
+              "az_deg": 231.1053,
+              "az_dms": "231\u00b006\u203219.1\u2033",
+              "h_hor_deg": 0.4507,
+              "bulford_limb": "upper",
+              "banton_label": "first_gleam"
+            },
+            "half_orb": {
+              "az_deg": 230.6502,
+              "az_dms": "230\u00b039\u20320.7\u2033",
+              "h_hor_deg": 0.4658,
+              "bulford_limb": "centre",
+              "banton_label": "half_orb"
+            },
+            "full_orb": {
+              "az_deg": 230.2077,
+              "az_dms": "230\u00b012\u203227.7\u2033",
+              "h_hor_deg": 0.4722,
+              "bulford_limb": "lower",
+              "banton_label": "full_orb"
+            }
+          }
+        }
+      }
+    },
+    "bc2500": {
+      "label": "c. 2500 BC (\u22122499)",
+      "calendar_year_astronomical": -2499.0,
+      "note": "Astronomical year numbering: 1 BC = 0, 2500 BC = \u22122499. Solstitial \u03b4 = \u00b1\u03b5 (Laskar 1986 via bulford_horizon.obliquity).",
+      "obliquity_deg": 23.974226,
+      "method": "bulford_horizon.event_azimuth + Bennett/Saemundsson refraction + solar SD/parallax",
+      "limb_default": "upper",
+      "events": {
+        "midsummer_sunrise": {
+          "declination_deg": 23.974226,
+          "path_a": {
+            "az_deg": 49.3208,
+            "h_hor_deg": 0.5649,
+            "limb": "upper"
+          },
+          "flat_horizon": {
+            "az_deg": 48.2094,
+            "h_hor_deg": 0.0,
+            "limb": "upper"
+          },
+          "delta_az_vs_flat_deg": 1.1114,
+          "all_limbs_path_a": {
+            "upper": {
+              "az_deg": 49.3208,
+              "h_hor_deg": 0.5649
+            },
+            "centre": {
+              "az_deg": 49.7859,
+              "h_hor_deg": 0.5804
+            },
+            "lower": {
+              "az_deg": 50.2461,
+              "h_hor_deg": 0.5957
+            }
+          },
+          "banton_limbs": {
+            "first_gleam": {
+              "az_deg": 49.3208,
+              "az_dms": "49\u00b019\u203214.9\u2033",
+              "h_hor_deg": 0.5649,
+              "bulford_limb": "upper",
+              "banton_label": "first_gleam"
+            },
+            "half_orb": {
+              "az_deg": 49.7859,
+              "az_dms": "49\u00b047\u20329.2\u2033",
+              "h_hor_deg": 0.5804,
+              "bulford_limb": "centre",
+              "banton_label": "half_orb"
+            },
+            "full_orb": {
+              "az_deg": 50.2461,
+              "az_dms": "50\u00b014\u203246.0\u2033",
+              "h_hor_deg": 0.5957,
+              "bulford_limb": "lower",
+              "banton_label": "full_orb"
+            }
+          },
+          "delta_az_vs_published_sh_axis_49_1": 0.2208
+        },
+        "midsummer_sunset": {
+          "declination_deg": 23.974226,
+          "path_a": {
+            "az_deg": 311.0747,
+            "h_hor_deg": 0.36,
+            "limb": "upper"
+          },
+          "flat_horizon": {
+            "az_deg": 311.7906,
+            "h_hor_deg": 0.0,
+            "limb": "upper"
+          },
+          "delta_az_vs_flat_deg": -0.7158,
+          "all_limbs_path_a": {
+            "upper": {
+              "az_deg": 311.0747,
+              "h_hor_deg": 0.36
+            },
+            "centre": {
+              "az_deg": 310.6306,
+              "h_hor_deg": 0.3625
+            },
+            "lower": {
+              "az_deg": 310.1953,
+              "h_hor_deg": 0.3625
+            }
+          },
+          "banton_limbs": {
+            "first_gleam": {
+              "az_deg": 311.0747,
+              "az_dms": "311\u00b004\u203228.9\u2033",
+              "h_hor_deg": 0.36,
+              "bulford_limb": "upper",
+              "banton_label": "first_gleam"
+            },
+            "half_orb": {
+              "az_deg": 310.6306,
+              "az_dms": "310\u00b037\u203250.2\u2033",
+              "h_hor_deg": 0.3625,
+              "bulford_limb": "centre",
+              "banton_label": "half_orb"
+            },
+            "full_orb": {
+              "az_deg": 310.1953,
+              "az_dms": "310\u00b011\u203243.1\u2033",
+              "h_hor_deg": 0.3625,
+              "bulford_limb": "lower",
+              "banton_label": "full_orb"
+            }
+          }
+        },
+        "midwinter_sunrise": {
+          "declination_deg": -23.974226,
+          "path_a": {
+            "az_deg": 129.5516,
+            "h_hor_deg": 0.2608,
+            "limb": "upper"
+          },
+          "flat_horizon": {
+            "az_deg": 129.0537,
+            "h_hor_deg": 0.0,
+            "limb": "upper"
+          },
+          "delta_az_vs_flat_deg": 0.4979,
+          "all_limbs_path_a": {
+            "upper": {
+              "az_deg": 129.5516,
+              "h_hor_deg": 0.2608
+            },
+            "centre": {
+              "az_deg": 129.9685,
+              "h_hor_deg": 0.2542
+            },
+            "lower": {
+              "az_deg": 130.3774,
+              "h_hor_deg": 0.2416
+            }
+          },
+          "banton_limbs": {
+            "first_gleam": {
+              "az_deg": 129.5516,
+              "az_dms": "129\u00b033\u20325.8\u2033",
+              "h_hor_deg": 0.2608,
+              "bulford_limb": "upper",
+              "banton_label": "first_gleam"
+            },
+            "half_orb": {
+              "az_deg": 129.9685,
+              "az_dms": "129\u00b058\u20326.6\u2033",
+              "h_hor_deg": 0.2542,
+              "bulford_limb": "centre",
+              "banton_label": "half_orb"
+            },
+            "full_orb": {
+              "az_deg": 130.3774,
+              "az_dms": "130\u00b022\u203238.6\u2033",
+              "h_hor_deg": 0.2416,
+              "bulford_limb": "lower",
+              "banton_label": "full_orb"
+            }
+          }
+        },
+        "midwinter_sunset": {
+          "declination_deg": -23.974226,
+          "path_a": {
+            "az_deg": 230.036,
+            "h_hor_deg": 0.478,
+            "limb": "upper"
+          },
+          "flat_horizon": {
+            "az_deg": 230.9463,
+            "h_hor_deg": 0.0,
+            "limb": "upper"
+          },
+          "delta_az_vs_flat_deg": -0.9104,
+          "all_limbs_path_a": {
+            "upper": {
+              "az_deg": 230.036,
+              "h_hor_deg": 0.478
+            },
+            "centre": {
+              "az_deg": 229.5902,
+              "h_hor_deg": 0.4845
+            },
+            "lower": {
+              "az_deg": 229.1472,
+              "h_hor_deg": 0.4875
+            }
+          },
+          "banton_limbs": {
+            "first_gleam": {
+              "az_deg": 230.036,
+              "az_dms": "230\u00b002\u20329.6\u2033",
+              "h_hor_deg": 0.478,
+              "bulford_limb": "upper",
+              "banton_label": "first_gleam"
+            },
+            "half_orb": {
+              "az_deg": 229.5902,
+              "az_dms": "229\u00b035\u203224.7\u2033",
+              "h_hor_deg": 0.4845,
+              "bulford_limb": "centre",
+              "banton_label": "half_orb"
+            },
+            "full_orb": {
+              "az_deg": 229.1472,
+              "az_dms": "229\u00b008\u203249.9\u2033",
+              "h_hor_deg": 0.4875,
+              "bulford_limb": "lower",
+              "banton_label": "full_orb"
+            }
+          }
+        }
+      }
+    }
+  },
+  "moon_major_standstill_envelope": {
+    "modern_2025": {
+      "label": "Modern major standstill envelope (2025)",
+      "calendar_year_astronomical": 2025.0,
+      "obliquity_deg": 23.43604,
+      "lunar_inclination_deg": 5.145396,
+      "declination_extreme_deg": 28.581436,
+      "method": "Envelope extremes at \u03b4 = \u00b1(\u03b5 + i); same Bulford limb chain with lunar SD=0.259\u00b0 and mean horizontal parallax=0.9507\u00b0. Not a dated ephemeris moon; major-standstill geometric envelope.",
+      "limb_default": "upper",
+      "events": {
+        "northernmost_moonrise": {
+          "declination_deg": 28.581436,
+          "path_a": {
+            "az_deg": 41.6716,
+            "h_hor_deg": 0.5318,
+            "limb": "upper"
+          },
+          "flat_horizon_bennett": {
+            "az_deg": 40.4839,
+            "h_hor_deg": 0.0,
+            "limb": "upper"
+          },
+          "delta_az_vs_flat_bennett_deg": 1.1877,
+          "schematic_dial_az_deg": 40.3,
+          "delta_az_vs_schematic_dial_deg": 1.3716
+        },
+        "northernmost_moonset": {
+          "declination_deg": 28.581436,
+          "path_a": {
+            "az_deg": 318.8276,
+            "h_hor_deg": 0.3042,
+            "limb": "upper"
+          },
+          "flat_horizon_bennett": {
+            "az_deg": 319.5161,
+            "h_hor_deg": 0.0,
+            "limb": "upper"
+          },
+          "delta_az_vs_flat_bennett_deg": -0.6885,
+          "schematic_dial_az_deg": 319.74,
+          "delta_az_vs_schematic_dial_deg": -0.9124
+        },
+        "southernmost_moonrise": {
+          "declination_deg": -28.581436,
+          "path_a": {
+            "az_deg": 140.3871,
+            "h_hor_deg": 0.1792,
+            "limb": "upper"
+          },
+          "flat_horizon_bennett": {
+            "az_deg": 139.9693,
+            "h_hor_deg": 0.0,
+            "limb": "upper"
+          },
+          "delta_az_vs_flat_bennett_deg": 0.4178,
+          "schematic_dial_az_deg": 140.22,
+          "delta_az_vs_schematic_dial_deg": 0.1671
+        },
+        "southernmost_moonset": {
+          "declination_deg": -28.581436,
+          "path_a": {
+            "az_deg": 219.1266,
+            "h_hor_deg": 0.3875,
+            "limb": "upper"
+          },
+          "flat_horizon_bennett": {
+            "az_deg": 220.0307,
+            "h_hor_deg": 0.0,
+            "limb": "upper"
+          },
+          "delta_az_vs_flat_bennett_deg": -0.9041,
+          "schematic_dial_az_deg": 219.75,
+          "delta_az_vs_schematic_dial_deg": -0.6234
+        }
+      },
+      "schematic_flat_dial_contrast": {
+        "source": "docs/moon_standstill_azimuth_dial_2026-09-19.md (AE SearchRiseSet 2024\u201325)",
+        "moonrise_most_N_az": 40.3,
+        "moonrise_most_S_az": 140.22,
+        "moonset_most_N_az": 319.74,
+        "moonset_most_S_az": 219.75
+      }
+    },
+    "bc2500": {
+      "label": "c. 2500 BC major standstill envelope",
+      "calendar_year_astronomical": -2499.0,
+      "obliquity_deg": 23.974226,
+      "lunar_inclination_deg": 5.145396,
+      "declination_extreme_deg": 29.119622,
+      "method": "Envelope extremes at \u03b4 = \u00b1(\u03b5 + i); same Bulford limb chain with lunar SD=0.259\u00b0 and mean horizontal parallax=0.9507\u00b0. Not a dated ephemeris moon; major-standstill geometric envelope.",
+      "limb_default": "upper",
+      "events": {
+        "northernmost_moonrise": {
+          "declination_deg": 29.119622,
+          "path_a": {
+            "az_deg": 40.5889,
+            "h_hor_deg": 0.5595,
+            "limb": "upper"
+          },
+          "flat_horizon_bennett": {
+            "az_deg": 39.3116,
+            "h_hor_deg": 0.0,
+            "limb": "upper"
+          },
+          "delta_az_vs_flat_bennett_deg": 1.2773,
+          "schematic_dial_az_deg": 40.3,
+          "delta_az_vs_schematic_dial_deg": 0.2889
+        },
+        "northernmost_moonset": {
+          "declination_deg": 29.119622,
+          "path_a": {
+            "az_deg": 319.9668,
+            "h_hor_deg": 0.3114,
+            "limb": "upper"
+          },
+          "flat_horizon_bennett": {
+            "az_deg": 320.6884,
+            "h_hor_deg": 0.0,
+            "limb": "upper"
+          },
+          "delta_az_vs_flat_bennett_deg": -0.7216,
+          "schematic_dial_az_deg": 319.74,
+          "delta_az_vs_schematic_dial_deg": 0.2268
+        },
+        "southernmost_moonrise": {
+          "declination_deg": -29.119622,
+          "path_a": {
+            "az_deg": 141.6103,
+            "h_hor_deg": 0.1912,
+            "limb": "upper"
+          },
+          "flat_horizon_bennett": {
+            "az_deg": 141.153,
+            "h_hor_deg": 0.0,
+            "limb": "upper"
+          },
+          "delta_az_vs_flat_bennett_deg": 0.4573,
+          "schematic_dial_az_deg": 140.22,
+          "delta_az_vs_schematic_dial_deg": 1.3903
+        },
+        "southernmost_moonset": {
+          "declination_deg": -29.119622,
+          "path_a": {
+            "az_deg": 217.9392,
+            "h_hor_deg": 0.3792,
+            "limb": "upper"
+          },
+          "flat_horizon_bennett": {
+            "az_deg": 218.847,
+            "h_hor_deg": 0.0,
+            "limb": "upper"
+          },
+          "delta_az_vs_flat_bennett_deg": -0.9078,
+          "schematic_dial_az_deg": 219.75,
+          "delta_az_vs_schematic_dial_deg": -1.8108
+        }
+      },
+      "schematic_flat_dial_contrast": {
+        "source": "docs/moon_standstill_azimuth_dial_2026-09-19.md (AE SearchRiseSet 2024\u201325)",
+        "moonrise_most_N_az": 40.3,
+        "moonrise_most_S_az": 140.22,
+        "moonset_most_N_az": 319.74,
+        "moonset_most_S_az": 219.75
+      }
+    }
+  },
+  "astronomy_engine_modern_timed": {
+    "available": true,
+    "package": "astronomy-engine",
+    "observer": {
+      "lat": 51.178851,
+      "lon": -1.826177,
+      "height_m": 102.0
+    },
+    "midsummer_2026_flat_SearchRiseSet": {
+      "sunrise": {
+        "az_deg": 49.2801,
+        "alt_deg": -0.2068,
+        "dec_deg": 23.4358,
+        "utc": "2026-06-21T03:51:47Z",
+        "method": "astronomy-engine SearchRiseSet + Horizon(Normal) \u2014 geometric/flat horizon"
+      },
+      "sunset": {
+        "az_deg": 310.7184,
+        "alt_deg": -0.2068,
+        "dec_deg": 23.4351,
+        "utc": "2026-06-21T20:26:26Z",
+        "method": "astronomy-engine SearchRiseSet + Horizon(Normal) \u2014 geometric/flat horizon"
+      }
+    },
+    "midsummer_2026_path_a_topographic": {
+      "sunrise": {
+        "az_deg": 50.4077,
+        "h_hor_deg": 0.5958,
+        "utc": "2026-06-21T03:57:33Z",
+        "limb": "upper",
+        "method": "astronomy-engine Equator/Horizon airless + Bulford Bennett limb vs horizon_profile"
+      },
+      "sunset": {
+        "az_deg": 310.0336,
+        "h_hor_deg": 0.3625,
+        "utc": "2026-06-21T20:22:56Z",
+        "limb": "upper",
+        "method": "astronomy-engine Equator/Horizon airless + Bulford Bennett limb vs horizon_profile"
+      }
+    },
+    "moon_sample_2025_06_15": {
+      "note": "Single calendar day; not standstill envelope. Topographic upper-limb crossings.",
+      "moonrise": {
+        "az_deg": 119.1654,
+        "h_hor_deg": 0.2542,
+        "utc": "2025-06-15T23:36:42Z",
+        "limb": "upper",
+        "method": "astronomy-engine Equator/Horizon airless + Bulford Bennett limb vs horizon_profile"
+      },
+      "moonset": {
+        "az_deg": 243.875,
+        "h_hor_deg": 0.5417,
+        "utc": "2025-06-16T08:54:11Z",
+        "limb": "upper",
+        "method": "astronomy-engine Equator/Horizon airless + Bulford Bennett limb vs horizon_profile"
+      }
+    }
+  },
+  "notes": [
+    "Path A midsummer sunrise near ~49.1\u201349.3\u00b0 is the c. 2500 BC topographic upper-limb result; Modern (smaller \u03b5) is ~1\u00b0 further east.",
+    "Schematic moon dial 319.7\u00b0 is flat SearchRiseSet (2024\u201325); Path A northernmost moonset uses measured skyline + lunar parallax.",
+    "astronomy-engine ancient dates are not used for primary azimuths (Laskar/Bulford preferred for \u22122499).",
+    "Live https://timdaw37.github.io/stonehenge-block-3d/ index.html was not modified.",
+    "banton_comparison: first_gleam/half_orb/full_orb vs Banton; horizon from --horizon (Bulford or Hoyle twin)."
+  ]
+}

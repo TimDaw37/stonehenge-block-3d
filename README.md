@@ -8,6 +8,16 @@ This is a **platform for forks** (rounded stones, Skyfield bake, etc.), not a fi
 
 ## Live
 
+## Pages
+
+| URL | Role |
+|-----|------|
+| [index.html](index.html) / live root | **Stable** public viewer — do not experiment here |
+| [epoch.html](epoch.html) | Epoch / sky preview build (Modern vs ~2500 BC) |
+
+Live stable: https://timdaw37.github.io/stonehenge-block-3d/  
+Epoch preview: https://timdaw37.github.io/stonehenge-block-3d/epoch.html
+
 Public Pages: [https://timdaw37.github.io/stonehenge-block-3d/](https://timdaw37.github.io/stonehenge-block-3d/) (redirects to `locked_overview.html`).
 
 Hover and pin both show OSGB and WGS84 (scene/plan grid, not GNSS; WGS84 converted from that grid). Same framing as [stonehenge-plan](https://timdaw37.github.io/stonehenge-plan/).

@@ -33,17 +33,21 @@
  #scaleWarn{display:none;position:fixed;left:50%;top:14px;transform:translateX(-50%);z-index:3;
  background:#7f1d1d;color:#fff7ed;font:700 13px system-ui,sans-serif;padding:8px 14px;border-radius:8px;pointer-events:none}
  .check{font-size:12px;margin-top:4px}
- #geoReadout{position:fixed;left:10px;bottom:10px;z-index:5;max-width:calc(100% - 20px);
- background:rgba(0,0,0,.78);color:#dce6f0;font:11px/1.35 ui-monospace,Menlo,Consolas,monospace;
- padding:6px 10px;border-radius:6px;pointer-events:none;white-space:pre-wrap}
- #geoReadout .muted{opacity:.65}
- #geoReadout #geoPinned{color:#f0a070;margin-top:2px}
- #geoReadout #geoClear{pointer-events:auto;margin:4px 0 0;padding:2px 8px;font:11px system-ui,sans-serif;
-  background:#3d4a3a;color:#eee;border:0;border-radius:4px;cursor:pointer}
- #geoReadout #geoClear[hidden]{display:none}
- @media (max-width:700px){
-  #geoReadout{font-size:10px;padding:5px 8px;bottom:8px;left:8px}
- }
+ #geoReadout{position:fixed;left:10px;right:10px;bottom:10px;z-index:5;width:auto;max-width:none;
+ box-sizing:border-box;background:rgba(0,0,0,.88);color:#dce6f0;
+ font:12px/1.4 ui-monospace,Menlo,Consolas,monospace;padding:8px 10px;border-radius:8px;
+ pointer-events:none;white-space:normal;overflow-wrap:anywhere;word-break:break-word;
+ max-height:40vh;overflow-y:auto;box-shadow:0 2px 10px rgba(0,0,0,.45)}
+#geoReadout .muted{opacity:.65}
+#geoReadout #geoHover,#geoReadout #geoPinned{display:block;width:100%}
+#geoReadout #geoPinned{color:#f0a070;margin-top:4px}
+#geoReadout #geoClear{pointer-events:auto;margin:6px 0 0;padding:6px 12px;min-height:36px;
+ font:12px system-ui,sans-serif;background:#3d4a3a;color:#eee;border:0;border-radius:6px;cursor:pointer}
+#geoReadout #geoClear[hidden]{display:none}
+@media (max-width:700px){
+ #geoReadout{left:8px;right:8px;bottom:8px;font-size:11px;line-height:1.45;padding:10px 12px;
+  max-height:45vh}
+}
 </style>
 </head>
 <body>
@@ -104,7 +108,7 @@
   <button type="button" id="geoClear" hidden title="Clear pinned coordinate">Clear pin</button>
 </div>
 <canvas id="c"></canvas>
-<script src="./data/locked_poses.js?v=20260919d"></script>
+<script src="./data/locked_poses.js?v=20260919e"></script>
 <script>
 /* lintel seat 2026-09-19: lengthen shorter uprights so tops match partners */
 (function () {
@@ -135,7 +139,7 @@
   }
 })();
 </script>
-<script src="./data/site_ground_od.js?v=20260919d"></script>
+<script src="./data/site_ground_od.js?v=20260919e"></script>
 <script type="importmap">
 {"imports":{"three":"./vendor/three.module.js","three/addons/":"./vendor/"}}
 </script>
@@ -146,6 +150,6 @@ setTimeout(function(){
  if(m)m.innerHTML='<b style="color:#f88">THREE.js failed to load</b>. Serve over http from project root.';
 },30000);
 </script>
-<script type="module" src="./vendor/locked_overview_app.20260919d.js"></script>
+<script type="module" src="./vendor/locked_overview_app.20260919e.js"></script>
 </body>
 </html>

@@ -1,1 +1,21 @@
-@/workspace/stonehenge-block-3d/sky_accurate.html
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/><meta name="robots" content="noindex,nofollow"/>
+<title>WORKSHOP — Path A sky — NOT PUBLIC</title>
+<style>body{font:14px system-ui;background:#12161a;color:#e8e6e0;margin:24px}a{color:#9ecbff}</style>
+</head><body>
+<div style="background:#8b0000;color:#fff;padding:10px;font-weight:700">WORKSHOP — NOT PUBLIC · lab page</div>
+<h1>Path A sky accuracy (lab)</h1>
+<p>Default horizon: <b>Hoyle</b>. Limb labels: <b>Gleam</b> | <b>Half orb</b> | <b>Full orb</b>.</p>
+<p>Public 3D viewer: <a href="./model_path_a.html">model_path_a.html</a> (Hoyle only).</p>
+<p>Full interactive lab UI temporarily slimmed — open sample JSON:
+<code>data/sky_events_path_a_hoyle_sample.json</code> or reload after full restore.</p>
+<p><a href="./data/sky_events_path_a_hoyle_sample.js">hoyle sample JS</a></p>
+<script src="./data/sky_events_path_a_hoyle_sample.js"></script>
+<script>
+const SE = window.SKY_EVENTS_PATH_A_HOYLE;
+document.body.insertAdjacentHTML('beforeend', SE
+  ? '<pre style="background:#000;padding:12px;overflow:auto">2500 BC N-most moonset:\n Gleam '+SE.headlines.bc2500_northernmost_moonset_gleam_az_deg+'\n Half '+SE.headlines.bc2500_northernmost_moonset_half_orb_az_deg+'\n Full '+SE.headlines.bc2500_northernmost_moonset_full_orb_az_deg+'</pre>'
+  : '<p class="warn">Sample JS not loaded</p>');
+</script>
+</body></html>

@@ -102,6 +102,36 @@
 </div>
 <canvas id="c"></canvas>
 <script src="./data/locked_poses.js"></script>
+<script>
+/* lintel seat 2026-09-19: lengthen shorter uprights so tops match partners */
+(function () {
+  var LP = window.LOCKED_POSES;
+  if (!LP || !LP.array) return;
+  var H = {"1":4.23,"7":4.113,"22":3.99,"29":4.066,"30":4.104,"51":5.182,"58":5.212};
+  var N = {
+    "1":"height lengthened 2026-09-19 to meet lintel seat (pair with 2; lintel 102; also levels 101 with 30).",
+    "7":"height lengthened 2026-09-19 to meet lintel seat (pair with 6; lintel 107).",
+    "22":"height lengthened 2026-09-19 to meet lintel seat (pair with 21; lintel 122).",
+    "29":"height lengthened 2026-09-19 to meet lintel seat (pair with 30; lintel 130; cascade after 101/102 seat).",
+    "30":"height lengthened 2026-09-19 to meet lintel seat (pair with 1; lintel 101; cascades to 130 with 29)."
+  };
+  var APPEND = "height lengthened 2026-09-19 to meet lintel seat";
+  function apply(s) {
+    var id = String(s.id);
+    if (!(id in H)) return;
+    s.height_m = H[id];
+    if (N[id]) s.notes = N[id];
+    else if (id === "51") s.notes = ((s.notes || "") + (s.notes ? "; " : "") + APPEND + " (pair with 52; lintel 152).").replace(/^; /, "");
+    else if (id === "58") s.notes = ((s.notes || "") + (s.notes ? "; " : "") + APPEND + " (pair with 57; lintel 158).").replace(/^; /, "");
+  }
+  for (var i = 0; i < LP.array.length; i++) apply(LP.array[i]);
+  if (LP.by_id) {
+    Object.keys(H).forEach(function (id) {
+      if (LP.by_id[id]) apply(LP.by_id[id]);
+    });
+  }
+})();
+</script>
 <script src="./data/site_ground_od.js"></script>
 <script type="importmap">
 {"imports":{"three":"./vendor/three.module.js","three/addons/":"./vendor/"}}

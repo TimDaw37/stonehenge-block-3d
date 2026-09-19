@@ -55,7 +55,7 @@ Import map (relative paths):
 | Bluestone blue | Outer + horseshoe bluestones |
 | Pink | Altar Stone (80) |
 | Cream | Stone 156 |
-| Silver | Stations 92 / 94 |
+| Bright silver | Stations 92 / 94 (markers only) |
 | Gold | Medium / provisional |
 | Grey | Seed-only |
 

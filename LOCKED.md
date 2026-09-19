@@ -32,7 +32,7 @@ See also:
 | Bluestone blue-grey `#6b8cae` | Outer circle + horseshoe bluestones |
 | Altar pink | Stone 80 (Altar) |
 | Cream | Stone 156 |
-| Silver markers | Station stones 92 / 94 |
+| Bright silver markers | Stations 92 / 94 — markers only (not modelled stones) |
 | Gold (medium) | Partial / provisional locks (e.g. 53, 54, 21) |
 | Grey seed | Seed-only (154) |
 

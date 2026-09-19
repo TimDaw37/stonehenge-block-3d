@@ -1,0 +1,23 @@
+name: assemble-path-a-public
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'data/_agent_restore/**'
+      - 'tools/assemble_model_path_a.py'
+jobs:
+  assemble:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Assemble public Path A files
+        run: python3 tools/assemble_model_path_a.py
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add model_path_a.html data/sky_events_path_a_hoyle_sample.js data/sky_events_path_a_hoyle_sample.json || true
+          git diff --staged --quiet || git commit -m "assemble Path A public files (Hoyle Gleam/Half/Full + moon limbs)"
+          git push

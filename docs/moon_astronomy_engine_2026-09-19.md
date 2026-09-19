@@ -1,3 +1,7 @@
+> **SUPERSEDED (2026-09-19)** — Live viewer path is the standstill **azimuth dial**, not date ephemeris / SearchRiseSet.
+> See **CURRENT**: [`docs/moon_standstill_azimuth_dial_2026-09-19.md`](moon_standstill_azimuth_dial_2026-09-19.md).
+> This note remains as historical context; `vendor/astronomy.esm.js` is kept for a future optional date-mode.
+
 # Moonrise / moonset via astronomy-engine (2026-09-19)
 
 ## Implemented

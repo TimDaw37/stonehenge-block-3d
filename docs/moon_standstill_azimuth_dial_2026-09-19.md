@@ -1,5 +1,7 @@
 # Moon standstill azimuth dial — 2026-09-19
 
+**CURRENT** — this is the live moon UI path in `locked_overview.html` (Most N ↔ Most S dial; not live date ephemeris).
+
 Replaced calendar/doy moon control with a dial between most-northerly and most-southerly moonrise/moonset.
 
 Extremes from astronomy-engine SearchRiseSet scan at Stonehenge (51.1789N, 1.8262W) over 2024-01-01 .. 2025-12-31 (major standstill season):

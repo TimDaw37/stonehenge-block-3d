@@ -18,6 +18,11 @@ jobs:
           python3 - <<'PY'
           import base64, zlib, pathlib
           parts = [pathlib.Path(f'tools/model_path_a.p{i}.b64').read_text().strip() for i in range(3)]
+          # Repair two paste-corruption sites known in p2 from MCP push transcription
+          p2 = parts[2]
+          p2 = p2.replace('Dnn46lZt', 'Dnn86lZt', 1)
+          p2 = p2.replace('YqNapNMw', 'YqPapNMw', 1)
+          parts[2] = p2
           data = zlib.decompress(base64.b64decode(''.join(parts)))
           pathlib.Path('model_path_a.html').write_bytes(data)
           print('wrote', len(data))

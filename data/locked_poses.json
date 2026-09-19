@@ -14,7 +14,7 @@
       "width_m": 1.993,
       "thickness_m": 1.22,
       "length_m": null,
-      "height_m": 3.96,
+      "height_m": 4.23,
       "z_base_m": 0.0,
       "footprint_along_m": 1.993,
       "footprint_across_m": 1.22,
@@ -35,7 +35,8 @@
           "height_m"
         ],
         "provisional": []
-      }
+      },
+      "notes": " | 2026-09-19: height lengthened to meet lintel seat (was 3.96)."
     },
     {
       "id": "2",
@@ -196,7 +197,7 @@
       "width_m": 1.863,
       "thickness_m": 1.005,
       "length_m": null,
-      "height_m": 3.96,
+      "height_m": 4.113,
       "z_base_m": 0.0,
       "footprint_along_m": 1.863,
       "footprint_across_m": 1.005,
@@ -218,7 +219,8 @@
         ],
         "provisional": [],
         "note": "AUTO dens_in=0.844 lock=0.922 nn=3.30m W/T=1.85"
-      }
+      },
+      "notes": " | 2026-09-19: height lengthened to meet lintel seat (was 3.96)."
     },
     {
       "id": "8",
@@ -521,7 +523,7 @@
       "width_m": 1.777,
       "thickness_m": 0.929,
       "length_m": null,
-      "height_m": 3.81,
+      "height_m": 3.99,
       "z_base_m": 0.0,
       "footprint_along_m": 1.777,
       "footprint_across_m": 0.929,
@@ -534,7 +536,8 @@
         "by": "Plan Pose Checker",
         "at": "2026-09-14T14:17+01:00",
         "note": "visual clean; dens soft"
-      }
+      },
+      "notes": " | 2026-09-19: height lengthened to meet lintel seat (was 3.81)."
     },
     {
       "id": "23",
@@ -722,7 +725,7 @@
       "width_m": 1.906,
       "thickness_m": 1.192,
       "length_m": null,
-      "height_m": 3.96,
+      "height_m": 4.066,
       "z_base_m": 0.0,
       "footprint_along_m": 1.906,
       "footprint_across_m": 1.192,
@@ -743,7 +746,8 @@
           "height_m"
         ],
         "note": "lock 0.914 dens 0.903"
-      }
+      },
+      "notes": " | 2026-09-19: height lengthened to meet lintel seat (was 3.96)."
     },
     {
       "id": "30",
@@ -755,7 +759,7 @@
       "width_m": 2.085,
       "thickness_m": 1.392,
       "length_m": null,
-      "height_m": 3.96,
+      "height_m": 4.104,
       "z_base_m": 0.0,
       "footprint_along_m": 2.085,
       "footprint_across_m": 1.392,
@@ -776,7 +780,8 @@
           "height_m"
         ],
         "provisional": []
-      }
+      },
+      "notes": " | 2026-09-19: height lengthened to meet lintel seat (was 3.96)."
     },
     {
       "id": "31",
@@ -1364,7 +1369,7 @@
       "width_m": 2.487,
       "thickness_m": 1.032,
       "length_m": null,
-      "height_m": 4.98,
+      "height_m": 5.182,
       "z_base_m": 0.0,
       "footprint_along_m": 2.487,
       "footprint_across_m": 1.032,
@@ -1373,7 +1378,7 @@
       "colour_class": "green_locked",
       "source_file": "data/stone51_locked.json",
       "height_source": "cleal_app5_or_scene",
-      "notes": "Johnson 2008 solid ink OBB seed; scene/locked soft start",
+      "notes": "Johnson 2008 solid ink OBB seed; scene/locked soft start | 2026-09-19: height lengthened to meet lintel seat (was 4.98).",
       "lock": {
         "status": "accepted",
         "by": "Tim Daw",
@@ -1592,7 +1597,7 @@
       "width_m": 2.521,
       "thickness_m": 1.043,
       "length_m": null,
-      "height_m": 5.18,
+      "height_m": 5.212,
       "z_base_m": 0.0,
       "footprint_along_m": 2.521,
       "footprint_across_m": 1.043,
@@ -1601,7 +1606,7 @@
       "colour_class": "green_locked",
       "source_file": "data/stone58_locked.json",
       "height_source": "cleal_app5_or_scene",
-      "notes": "Johnson 2008 solid ink OBB seed; scene/locked soft start",
+      "notes": "Johnson 2008 solid ink OBB seed; scene/locked soft start | 2026-09-19: height lengthened to meet lintel seat (was 5.18).",
       "lock": {
         "status": "accepted",
         "by": "Tim Daw",

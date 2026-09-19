@@ -1,8 +1,9 @@
 /** Assembles plain parts into the locked overview app module. */
 const base = new URL('.', import.meta.url);
-const texts = await Promise.all([0,1,2].map(i =>
+const n = 5;
+const texts = await Promise.all([...Array(n).keys()].map(i =>
   fetch(new URL('./locked_overview_app.part' + i + '.js.txt', base)).then(r => {
-    if (!r.ok) throw new Error('missing part ' + i);
+    if (!r.ok) throw new Error('missing part ' + i + ' HTTP ' + r.status);
     return r.text();
   })
 ));

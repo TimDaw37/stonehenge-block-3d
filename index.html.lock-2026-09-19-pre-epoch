@@ -77,15 +77,6 @@
     <button type="button" id="btnMoonrise">Moonrise</button>
     <button type="button" id="btnMoonset">Moonset</button>
   </div>
-  <label>Epoch</label>
-  <div class="row">
-    <button type="button" id="btnEpochModern" class="active">Modern</button>
-    <button type="button" id="btnEpoch2500">c. 2500 BC</button>
-  </div>
-  <div class="row" style="align-items:center;gap:6px;margin:2px 0 4px 0">
-    <input type="number" id="epochYear" value="2026" step="1" style="width:5.5em;font:inherit;padding:2px 4px"/>
-    <span id="epochHelp" style="opacity:.7;font-size:10px">−2499 = 2500 BC</span>
-  </div>
   <div id="sunDatePanel">
     <label>Date <span id="doyLbl">21 Jun</span></label>
     <input type="range" id="doy" min="1" max="365" value="172" style="width:100%"/>
@@ -699,57 +690,16 @@ function setExaggeration(v, fromSun) {
 const SOLAR_SD = 0.2667, SUN_REF = 4000;
 // Horizon mesh ~12 km square; body must sit past the sheet (Bulford distPastSheet).
 const TERRAIN_HALF_M = 6500;
-// Epoch for sun/moon azimuths (Modern 2026 vs c. 2500 BC = year -2499).
-// Persisted in sessionStorage key sh_epoch_year.
-const EPOCH_MODERN = 2026;
-const EPOCH_2500BC = -2499;
-let epochYear = EPOCH_MODERN;
-try {
-  const raw = sessionStorage.getItem('sh_epoch_year');
-  if (raw != null && raw !== '' && Number.isFinite(+raw)) epochYear = Math.trunc(+raw);
-} catch (e) { /* private mode */ }
+const ASTRO_YEAR = 2026;
 
-const MOON_INCL_DEG = 5.145;
-const SITE_LAT_DEG = 51.1789;
-// Locked 2024–25 scan moonrise most-N 40.30°; geometric Modern ≈ 40.26° (Δ < 3°) — no offset.
-const MOON_AZ_OFFSET_DEG = 0;
-
+// Live moon UI: dial/static standstill extremes (scanned once via astronomy-engine 2024–25),
+// not live date/ephemeris rise-set. See docs/moon_standstill_azimuth_dial_2026-09-19.md (CURRENT).
+// Moonrise: most N ~40.3 deg, most S ~140.2 deg. Moonset: most S ~219.8, most N ~319.7.
+const MOON_EXTREMES = {
+  moonrise: { nAz: 40.30, sAz: 140.22 },
+  moonset:  { nAz: 319.74, sAz: 219.75 },
+};
 let moonSpread = 0; // 0 = most northerly, 1 = most southerly
-let MOON_EXTREMES = { moonrise: { nAz: 40.30, sAz: 140.22 }, moonset: { nAz: 319.74, sAz: 219.75 } };
-
-function obliquityDeg(year) {
-  const T = (year - 2000) / 100;
-  return 23.4392911 - (46.8150 / 3600) * T - (0.00059 / 3600) * T * T + (0.001813 / 3600) * T * T * T;
-}
-
-function moonExtremesForYear(year) {
-  const eps = obliquityDeg(year);
-  const dmax = eps + MOON_INCL_DEG;
-  const lat = SITE_LAT_DEG * Math.PI / 180;
-  const x = Math.sin(dmax * Math.PI / 180) / Math.cos(lat);
-  const c = Math.max(-1, Math.min(1, x));
-  const nRise = Math.acos(c) * 180 / Math.PI;
-  const sRise = Math.acos(-c) * 180 / Math.PI;
-  const nSet = (360 - nRise) % 360;
-  const sSet = (360 - sRise) % 360;
-  const off = MOON_AZ_OFFSET_DEG;
-  return {
-    moonrise: { nAz: nRise + off, sAz: sRise - off },
-    moonset:  { nAz: nSet - off, sAz: sSet + off },
-  };
-}
-
-function epochLabel(year) {
-  if (year === EPOCH_2500BC || year === -2499) return '2500 BC';
-  if (year < 0) return Math.abs(year) + ' BC';
-  return String(year);
-}
-
-function refreshMoonExtremes() {
-  MOON_EXTREMES = moonExtremesForYear(epochYear);
-}
-
-refreshMoonExtremes();
 
 function distPastTerrain(origin, dirx, dirz) {
   const hx = TERRAIN_HALF_M, hz = TERRAIN_HALF_M;
@@ -764,34 +714,24 @@ function distPastTerrain(origin, dirx, dirz) {
   return Math.max(hit + 9000, 18000);
 }
 function approxSun(d, mode) {
-  // Geometric flat-horizon rise/set az at Stonehenge lat; ε from epochYear.
-  const eps = obliquityDeg(epochYear);
-  const decl = eps * Math.sin(2 * Math.PI * (d - 81) / 365);
-  const lat = SITE_LAT_DEG * Math.PI / 180;
-  const x = Math.sin(decl * Math.PI / 180) / Math.cos(lat);
-  const c = Math.max(-1, Math.min(1, x));
-  const azRise = Math.acos(c) * 180 / Math.PI;
-  const azSet = 360 - azRise;
-  if (mode === 'sunrise') return { az: azRise, alt: 0.35 + Math.max(0, decl) * 0.01, decl, eps };
-  return { az: azSet, alt: 0.35 + Math.max(0, -decl) * 0.01, decl, eps };
+ const decl = 23.4 * Math.sin(2 * Math.PI * (d - 81) / 365);
+ const azRise = 90 - decl * 1.7;
+ const azSet = 270 + decl * 1.7;
+ if (mode === 'sunrise') return { az: azRise, alt: 0.35 + Math.max(0, decl) * 0.01 };
+ return { az: azSet, alt: 0.35 + Math.max(0, -decl) * 0.01 };
 }
 function doyToYMD(d, year) {
-  const y = (year != null && Number.isFinite(+year)) ? Math.trunc(+year) : epochYear;
-  // Civil calendar for display; for BCE years use absolute year for month lengths (non-leap).
-  const yLeap = y > 0 ? y : 1;
-  const md = [31, (yLeap % 4 === 0 && (yLeap % 100 !== 0 || yLeap % 400 === 0)) ? 29 : 28,
+  const md = [31, (year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0)) ? 29 : 28,
     31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
   let n = Math.max(1, Math.min(md.reduce((a,b)=>a+b,0), Math.round(+d) || 1));
   let m = 0;
   while (m < 12 && n > md[m]) { n -= md[m]; m++; }
-  return { year: y, month: m + 1, day: n };
+  return { year, month: m + 1, day: n };
 }
 function localDateStartFromDoy(d) {
-  const ymd = doyToYMD(d, epochYear);
+  const ymd = doyToYMD(d, ASTRO_YEAR);
   // Browser-local midnight for that calendar day (Tim: Europe/London).
-  // For BCE epochs, still use modern year for Date construction (labels use doyLabel).
-  const yForDate = ymd.year > 0 ? ymd.year : EPOCH_MODERN;
-  return new Date(yForDate, ymd.month - 1, ymd.day, 0, 0, 0, 0);
+  return new Date(ymd.year, ymd.month - 1, ymd.day, 0, 0, 0, 0);
 }
 function moonAzFromSpread(mode, spread) {
   const ex = MOON_EXTREMES[mode];
@@ -823,7 +763,7 @@ function updateMoonAzUi() {
 }
 function doyLabel(d) {
   const names = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  const ymd = doyToYMD(d, epochYear);
+  const ymd = doyToYMD(d, ASTRO_YEAR);
   return ymd.day + ' ' + names[ymd.month - 1];
 }
 function fmtLocalTime(dt) {
@@ -961,8 +901,7 @@ function placeSun() {
    const title = isMoonMode(bodyMode)
      ? moonSpreadLabel(bodyMode, moonSpread)
      : doyLabel(doy);
-   const ep = 'epoch ' + epochLabel(epochYear);
-   readout.innerHTML = '<b>' + title + '</b> | ' + bodyMode + ' | az <b>' + ev.az.toFixed(1) + ' deg</b> | ' + ep;
+   readout.innerHTML = '<b>' + title + '</b> | ' + bodyMode + ' | az <b>' + ev.az.toFixed(1) + ' deg</b>';
  }
 }
 
@@ -1096,43 +1035,6 @@ addEventListener('resize', () => {
 });
 function tick() { requestAnimationFrame(tick); controls.update(); renderer.render(scene, cam); }
 
-
-function syncEpochUi() {
-  const y = epochYear;
-  const bMod = document.getElementById('btnEpochModern');
-  const bAnc = document.getElementById('btnEpoch2500');
-  if (bMod) bMod.classList.toggle('active', y === EPOCH_MODERN);
-  if (bAnc) bAnc.classList.toggle('active', y === EPOCH_2500BC);
-  const inp = document.getElementById('epochYear');
-  if (inp && document.activeElement !== inp) inp.value = String(y);
-  const help = document.getElementById('epochHelp');
-  if (help) help.textContent = (y < 0 ? (Math.abs(y) + ' BC') : ('year ' + y)) + ' · −2499 = 2500 BC';
-}
-
-function setEpochYear(year) {
-  const y = Math.trunc(+year);
-  if (!Number.isFinite(y)) return;
-  epochYear = y;
-  try { sessionStorage.setItem('sh_epoch_year', String(epochYear)); } catch (e) {}
-  refreshMoonExtremes();
-  syncEpochUi();
-  updateMoonAzUi();
-  placeSun();
-}
-
-function initEpochUi() {
-  const bMod = document.getElementById('btnEpochModern');
-  const bAnc = document.getElementById('btnEpoch2500');
-  const inp = document.getElementById('epochYear');
-  if (bMod) bMod.onclick = () => setEpochYear(EPOCH_MODERN);
-  if (bAnc) bAnc.onclick = () => setEpochYear(EPOCH_2500BC);
-  if (inp) {
-    inp.onchange = () => setEpochYear(inp.value);
-    inp.onkeydown = (ev) => { if (ev.key === 'Enter') { ev.preventDefault(); setEpochYear(inp.value); } };
-  }
-  syncEpochUi();
-}
-
 rebuildStones();
 setOrbit();
 doy = 172;
@@ -1141,7 +1043,6 @@ document.getElementById('doyLbl').textContent = doyLabel(172);
 showRay = true;
 const rayCb = document.getElementById('showRay');
 if (rayCb) rayCb.checked = true;
-initEpochUi();
 setBodyMode('sunrise'); // also turns Terrain on + placeSun after load
 tick();
 window.__LOCKED_OVERVIEW_READY = true;
@@ -1149,7 +1050,6 @@ window.__LOCKED_OVERVIEW_READY = true;
 window.__LOCKED_OVERVIEW = {
  LP, scene, camera: () => cam, renderer, setTerrain,
  terrainOn: () => terrainOn, setExaggeration, exaggeration: () => exaggeration,
- epochYear: () => epochYear, setEpochYear, obliquityDeg, moonExtremesForYear,
 };
 </script>
 </body>

@@ -1,0 +1,14 @@
+name: check-twins
+on:
+  push:
+  pull_request:
+jobs:
+  twins:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Check data twins
+        run: python tools/check_data_twins.py

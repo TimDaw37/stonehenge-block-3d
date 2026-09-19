@@ -5,7 +5,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
 <meta http-equiv="Pragma" content="no-cache"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Stonehenge 3D Model — Path A sky (preview)</title>
+<title>Stonehenge 3D Model</title>
 <style>
  html,body{margin:0;height:100%;background:#1a2430;color:#eee;font:13px/1.35 system-ui,sans-serif;overflow:hidden}
  #c{position:fixed;inset:0;width:100%;height:100%;display:block}
@@ -49,25 +49,14 @@
   max-height:45vh}
 }
 
- #pathABanner{position:fixed;left:0;right:0;top:0;z-index:6;background:#1a4a6e;color:#e8f0ff;
-  font:600 12px/1.35 system-ui,sans-serif;padding:8px 12px;text-align:center;
-  box-shadow:0 2px 8px rgba(0,0,0,.4);pointer-events:none}
- #pathABanner a{color:#9ecbff;pointer-events:auto}
- #hudToggle{top:46px}
- #hud{top:94px}
- @media (min-width:701px){
-  #hud{top:46px}
-  #hudToggle{display:none}
- }
 </style>
 </head>
 <body>
-<div id="pathABanner">Path A · Hoyle horizon · Gleam / Half / Full · main model <a href="./index.html">index.html</a></div>
 <div id="scaleWarn">Exaggerated - silhouette not to scale</div>
 <button type="button" id="hudToggle" aria-expanded="true" aria-controls="hud" title="Show or hide controls">Controls ▾</button>
 <div id="hud">
-  <div><b>Stonehenge — Path A (Hoyle)</b></div>
-  <div style="opacity:.85;font-size:12px;margin-top:2px">Sarsen grey | bluestones blue | Altar pink | stations 92/94 silver</div>
+  <div><b>Stonehenge</b></div>
+  <div style="opacity:.85;font-size:12px;margin-top:2px">Sarsen grey | bluestones blue | Altar pink | stations 92/94 bright silver (markers only)</div>
   <div id="counts" class="row" style="opacity:.85"></div>
   <div class="row">
     <button type="button" id="btnTop" class="active">Top-down</button>
@@ -89,6 +78,9 @@
     <button type="button" id="btnLimbHalf">Half orb</button>
     <button type="button" id="btnLimbFull">Full orb</button>
   </div>
+  <div id="skyCaveat" style="opacity:.75;font-size:10px;line-height:1.35;margin:4px 0 6px">
+    Azimuths use a LiDAR horizon with refraction/parallax. Gleam / Half orb / Full orb match Banton’s limb stages.
+  </div>
   <label>Epoch</label>
   <div class="row">
     <button type="button" id="btnEpochModern" class="active">Modern</button>
@@ -96,7 +88,7 @@
   </div>
   <div class="row" style="align-items:center;gap:6px;margin:2px 0 4px 0">
     <input type="number" id="epochYear" value="2026" step="1" style="width:5.5em;font:inherit;padding:2px 4px"/>
-    <span id="epochHelp" style="opacity:.7;font-size:10px">−2499 = 2500 BC · Path A epoch block</span>
+    <span id="epochHelp" style="opacity:.7;font-size:10px">−2499 = 2500 BC · Modern / c.2500 BC</span>
   </div>
   <div id="sunDatePanel">
     <label>Date <span id="doyLbl">21 Jun</span></label>
@@ -719,17 +711,29 @@ function setExaggeration(v, fromSun) {
   placeSun();
 }
 
-/* ---- Path A / Hoyle sun + moon (precomputed samples) ---- */
-const SOLAR_SD = 0.2667, SUN_REF = 4000;
+/* ---- Hoyle sun + moon (precomputed Path A samples) ---- */
+const SOLAR_SD = 0.2667, LUNAR_SD = 0.259, SUN_REF = 4000;
+/** Bulford/Banton: disc centre alt so Gleam/Half/Full differ vs skyline.
+ *  Gleam = upper limb on horizon (centre below); Half = centre on horizon;
+ *  Full = lower limb on horizon (centre above). Do not clamp Gleam up to +0.05°. */
+function limbCentreAltDeg(hHorDeg, limb, sdDeg) {
+  const h = +hHorDeg;
+  const sd = (sdDeg != null && Number.isFinite(+sdDeg)) ? +sdDeg : SOLAR_SD;
+  if (!Number.isFinite(h)) return 0.35;
+  if (limb === 'first_gleam') return h - sd;
+  if (limb === 'full_orb') return h + sd;
+  return h; // half_orb / centre
+}
+
 // Horizon mesh ~12 km square; body must sit past the sheet (Bulford distPastSheet).
 const TERRAIN_HALF_M = 6500;
 // Epoch for sun/moon azimuths (Modern 2026 vs c. 2500 BC = year -2499).
-// Path A preview uses its own session key so it does not fight index.html.
+// Epoch year shares index session key sh_epoch_year; limb in sh_limb.
 const EPOCH_MODERN = 2026;
 const EPOCH_2500BC = -2499;
 let epochYear = EPOCH_MODERN;
 try {
-  const raw = sessionStorage.getItem('sh_path_a_epoch_year');
+  const raw = sessionStorage.getItem('sh_epoch_year');
   if (raw != null && raw !== '' && Number.isFinite(+raw)) epochYear = Math.trunc(+raw);
 } catch (e) { /* private mode */ }
 
@@ -796,15 +800,24 @@ function moonExtremesForYear(year) {
   function pa(key) {
     const ev = e[key];
     if (!ev) return null;
+    let az = null, hHor = null;
     const bl = ev.banton_limbs && ev.banton_limbs[pathALimb];
-    if (bl && Number.isFinite(+bl.az_deg)) return +bl.az_deg;
-    if (ev.all_limbs_path_a) {
+    if (bl && Number.isFinite(+bl.az_deg)) {
+      az = +bl.az_deg;
+      if (Number.isFinite(+bl.h_hor_deg)) hHor = +bl.h_hor_deg;
+    } else if (ev.all_limbs_path_a) {
       const map = { first_gleam: 'upper', half_orb: 'centre', full_orb: 'lower' };
       const L = ev.all_limbs_path_a[map[pathALimb] || 'upper'];
-      if (L && Number.isFinite(+L.az_deg)) return +L.az_deg;
+      if (L && Number.isFinite(+L.az_deg)) {
+        az = +L.az_deg;
+        if (Number.isFinite(+L.h_hor_deg)) hHor = +L.h_hor_deg;
+      }
+    } else if (ev.path_a && Number.isFinite(+ev.path_a.az_deg)) {
+      az = +ev.path_a.az_deg;
+      if (Number.isFinite(+ev.path_a.h_hor_deg)) hHor = +ev.path_a.h_hor_deg;
     }
-    if (ev.path_a && Number.isFinite(+ev.path_a.az_deg)) return +ev.path_a.az_deg;
-    return null;
+    if (az == null) return null;
+    return { az, hHor };
   }
   const nRise = pa('northernmost_moonrise');
   const sRise = pa('southernmost_moonrise');
@@ -812,8 +825,8 @@ function moonExtremesForYear(year) {
   const sSet = pa('southernmost_moonset');
   if ([nRise, sRise, nSet, sSet].some((v) => v == null)) return moonExtremesSchematic(year);
   return {
-    moonrise: { nAz: nRise, sAz: sRise },
-    moonset:  { nAz: nSet, sAz: sSet },
+    moonrise: { nAz: nRise.az, sAz: sRise.az, nH: nRise.hHor, sH: sRise.hHor },
+    moonset:  { nAz: nSet.az, sAz: sSet.az, nH: nSet.hHor, sH: sSet.hHor },
     source: 'path_a',
     epochKey: ek,
   };
@@ -851,17 +864,17 @@ function pathASunFromSample(doy, mode) {
   const bl = ev.banton_limbs && ev.banton_limbs[pathALimb];
   if (bl && Number.isFinite(+bl.az_deg)) {
     az = +bl.az_deg;
-    if (Number.isFinite(+bl.h_hor_deg)) alt = Math.max(0.05, +bl.h_hor_deg);
+    if (Number.isFinite(+bl.h_hor_deg)) alt = limbCentreAltDeg(+bl.h_hor_deg, pathALimb, SOLAR_SD);
   } else if (ev.all_limbs_path_a) {
     const map = { first_gleam: 'upper', half_orb: 'centre', full_orb: 'lower' };
     const L = ev.all_limbs_path_a[map[pathALimb] || 'upper'];
     if (L && Number.isFinite(+L.az_deg)) {
       az = +L.az_deg;
-      if (Number.isFinite(+L.h_hor_deg)) alt = Math.max(0.05, +L.h_hor_deg);
+      if (Number.isFinite(+L.h_hor_deg)) alt = limbCentreAltDeg(+L.h_hor_deg, pathALimb, SOLAR_SD);
     }
   } else if (ev.path_a && Number.isFinite(+ev.path_a.az_deg)) {
     az = +ev.path_a.az_deg;
-    if (Number.isFinite(+ev.path_a.h_hor_deg)) alt = Math.max(0.05, +ev.path_a.h_hor_deg);
+    if (Number.isFinite(+ev.path_a.h_hor_deg)) alt = limbCentreAltDeg(+ev.path_a.h_hor_deg, pathALimb, SOLAR_SD);
     limbUsed = 'first_gleam';
   }
   if (az == null) return null;
@@ -877,7 +890,7 @@ function pathASunFromSample(doy, mode) {
 
 function approxSunSchematic(d, mode) {
   // Geometric flat-horizon rise/set az at Stonehenge lat; ε from epochYear.
-  // Used only for non-solstice DOY on this Path A page (HUD marks schematic).
+  // Used only for non-solstice DOY (HUD marks schematic).
   const eps = obliquityDeg(epochYear);
   const decl = eps * Math.sin(2 * Math.PI * (d - 81) / 365);
   const lat = SITE_LAT_DEG * Math.PI / 180;
@@ -931,7 +944,12 @@ function moonAzFromSpread(mode, spread) {
   const t = Math.max(0, Math.min(1, +spread || 0));
   // Interpolate north extreme -> south extreme (moonset nAz > sAz so this decreases)
   const az = ex.nAz + (ex.sAz - ex.nAz) * t;
-  return { az, alt: 0.35, spread: t, nAz: ex.nAz, sAz: ex.sAz };
+  let alt = 0.35;
+  if (Number.isFinite(+ex.nH) && Number.isFinite(+ex.sH)) {
+    const hHor = +ex.nH + (+ex.sH - +ex.nH) * t;
+    alt = limbCentreAltDeg(hHor, pathALimb, LUNAR_SD);
+  }
+  return { az, alt, spread: t, nAz: ex.nAz, sAz: ex.sAz };
 }
 function moonSpreadLabel(mode, spread) {
   const ev = moonAzFromSpread(mode, spread);
@@ -978,15 +996,16 @@ function sunDir(azTrue) {
 const sunR = SUN_REF * Math.tan(SOLAR_SD * Math.PI / 180);
 function makeBodyDisc(color, glowColor, outerGlow) {
  const g = new THREE.Group();
+ // depthTest true so LiDAR hills clip the part of the orb still behind the skyline
  g.add(new THREE.Mesh(
  new THREE.SphereGeometry(sunR, 24, 16),
- new THREE.MeshBasicMaterial({ color, toneMapped: false, fog: false, depthTest: false })
+ new THREE.MeshBasicMaterial({ color, toneMapped: false, fog: false, depthTest: true, depthWrite: true })
  ));
  g.add(new THREE.Mesh(
  new THREE.SphereGeometry(sunR * 3.2, 16, 12),
  new THREE.MeshBasicMaterial({
  color: glowColor, transparent: true, opacity: 0.55, depthWrite: false,
- depthTest: false,
+ depthTest: true,
  blending: THREE.AdditiveBlending, toneMapped: false, fog: false,
  })
  ));
@@ -994,7 +1013,7 @@ function makeBodyDisc(color, glowColor, outerGlow) {
  new THREE.SphereGeometry(sunR * 6.5, 16, 12),
  new THREE.MeshBasicMaterial({
  color: outerGlow, transparent: true, opacity: 0.18, depthWrite: false,
- depthTest: false,
+ depthTest: true,
  blending: THREE.AdditiveBlending, toneMapped: false, fog: false,
  })
  ));
@@ -1060,12 +1079,13 @@ function placeSun() {
  disc.visible = true;
   disc.traverse((o) => {
     if (o.isMesh && o.material) {
-      o.material.depthTest = false;
-      o.material.depthWrite = false;
+      o.material.depthTest = true;
+      // core writes depth; glow shells stay depthWrite:false from makeBodyDisc
+      if (!o.material.transparent) o.material.depthWrite = true;
       o.material.needsUpdate = true;
     }
   });
-  disc.renderOrder = 20;
+  disc.renderOrder = 2;
   disc.position.copy(pos);
  disc.scale.setScalar(Math.max(0.2, dist / SUN_REF));
  if (isSunMode(bodyMode)) {
@@ -1096,7 +1116,7 @@ function placeSun() {
    const limbTxt = LIMB_LABEL[pathALimb] || pathALimb;
    let bits = '<b>' + title + '</b> · ' + bodyMode + ' · ' + limbTxt + ' · az <b>' + ev.az.toFixed(2) + '°</b>';
    if (isSunMode(bodyMode) && !ev.pathA) {
-     bits += ' <span style="color:#f0c674">(solstice presets for Path A)</span>';
+     bits += ' <span style="color:#f0c674">(solstice presets)</span>';
    }
    readout.innerHTML = bits;
  }
@@ -1249,7 +1269,7 @@ function setEpochYear(year) {
   const y = Math.trunc(+year);
   if (!Number.isFinite(y)) return;
   epochYear = y;
-  try { sessionStorage.setItem('sh_path_a_epoch_year', String(epochYear)); } catch (e) {}
+  try { sessionStorage.setItem('sh_epoch_year', String(epochYear)); } catch (e) {}
   refreshMoonExtremes();
   syncEpochUi();
   updateMoonAzUi();
@@ -1283,7 +1303,7 @@ function syncLimbUi() {
 function setPathALimb(L) {
   if (!LIMB_LABEL[L]) return;
   pathALimb = L;
-  try { sessionStorage.setItem('sh_path_a_limb', pathALimb); } catch (e) {}
+  try { sessionStorage.setItem('sh_limb', pathALimb); } catch (e) {}
   refreshMoonExtremes();
   syncLimbUi();
   updateMoonAzUi();
@@ -1291,7 +1311,7 @@ function setPathALimb(L) {
 }
 function initPathAUi() {
   try {
-    const L = sessionStorage.getItem('sh_path_a_limb');
+    const L = sessionStorage.getItem('sh_limb');
     if (L && LIMB_LABEL[L]) pathALimb = L;
   } catch (e) {}
   const g = document.getElementById('btnLimbGleam');
@@ -1313,7 +1333,7 @@ const rayCb = document.getElementById('showRay');
 if (rayCb) rayCb.checked = true;
 initEpochUi();
 initPathAUi();
-// Default: Modern + midsummer sunrise + Terrain + ray → ~50.4° Path A Gleam (Hoyle)
+// Default: Modern + midsummer sunrise + Terrain + ray → ~50.4° Gleam (Hoyle horizon)
 setEpochYear(EPOCH_MODERN);
 setBodyMode('sunrise'); // also turns Terrain on + placeSun after load
 tick();

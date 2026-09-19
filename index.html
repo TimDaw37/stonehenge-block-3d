@@ -2,10 +2,88 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
-<meta http-equiv="refresh" content="0;url=locked_overview.html"/>
-<title>Stonehenge — redirect</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta http-equiv="Cache-Control" content="no-cache"/>
+<title>Stonehenge - Locked poses overview</title>
+<style>
+html,body{margin:0;height:100%;background:#1a2430;color:#eee;font:13px/1.35 system-ui,sans-serif;overflow:hidden}
+#c{position:fixed;inset:0;width:100%;height:100%;display:block}
+#hudToggle{position:fixed;left:10px;top:10px;z-index:4;min-width:44px;min-height:44px;padding:8px 12px;border:0;border-radius:8px;background:rgba(0,0,0,.88);color:#e8d9a8;font:600 13px system-ui,sans-serif;cursor:pointer}
+#hud{position:fixed;left:10px;top:58px;width:360px;max-width:calc(100% - 20px);max-height:calc(100% - 70px);overflow:auto;background:rgba(0,0,0,.84);padding:10px 12px;border-radius:8px;z-index:2}
+#hud.collapsed{display:none}#hud b{color:#e8d9a8}
+@media(min-width:701px){#hud{top:10px}#hudToggle{display:none}#hud.collapsed{display:block}}
+button{margin:3px 3px 0 0;padding:4px 8px;border:0;border-radius:4px;background:#3d4a3a;color:#eee;cursor:pointer}
+button:hover{background:#5a6b55}button.active{background:#8a7a4a;color:#111}
+.row{margin-top:6px}label{display:block;margin:8px 0 2px;font-size:11px;letter-spacing:.04em;text-transform:uppercase;opacity:.8}
+#geoReadout{position:fixed;left:10px;right:10px;bottom:10px;z-index:5;background:rgba(0,0,0,.88);color:#dce6f0;font:12px/1.4 ui-monospace,Menlo,Consolas,monospace;padding:8px 10px;border-radius:8px;pointer-events:none;max-height:40vh;overflow-y:auto}
+#geoReadout .muted{opacity:.65}#geoPinned{color:#f0a070;margin-top:4px}
+#geoClear{pointer-events:auto;margin:6px 0 0;padding:6px 12px;min-height:36px;font:12px system-ui,sans-serif;background:#3d4a3a;color:#eee;border:0;border-radius:6px;cursor:pointer}
+#scaleWarn{display:none;position:fixed;left:50%;top:14px;transform:translateX(-50%);z-index:3;background:#7f1d1d;color:#fff7ed;font:700 13px system-ui,sans-serif;padding:8px 14px;border-radius:8px}
+</style>
 </head>
 <body>
-<p><a href="locked_overview.html">Open locked overview</a> (index restored shortly with Epoch UI).</p>
+<div id="scaleWarn">Exaggerated - silhouette not to scale</div>
+<button type="button" id="hudToggle" aria-expanded="true" aria-controls="hud">Controls ▾</button>
+<div id="hud">
+  <div><b>Stonehenge</b></div>
+  <div id="counts" class="row" style="opacity:.85"></div>
+  <div class="row">
+    <button type="button" id="btnTop" class="active">Top-down</button>
+    <button type="button" id="btnOrbit">Orbit</button>
+    <button type="button" id="btnTerrain">Terrain</button>
+    <button type="button" id="btnLabels">Labels</button>
+  </div>
+  <label>Sky</label>
+  <div class="row">
+    <button type="button" id="btnSunOff" class="active">Off</button>
+    <button type="button" id="btnSunrise">Sunrise</button>
+    <button type="button" id="btnSunset">Sunset</button>
+    <button type="button" id="btnMoonrise">Moonrise</button>
+    <button type="button" id="btnMoonset">Moonset</button>
+  </div>
+  <label>Epoch</label>
+  <div class="row">
+    <button type="button" id="btnEpochModern" class="active">Modern</button>
+    <button type="button" id="btnEpoch2500">c. 2500 BC</button>
+  </div>
+  <div class="row" style="align-items:center;gap:6px;margin:2px 0 4px 0">
+    <input type="number" id="epochYear" value="2026" step="1" style="width:5.5em;font:inherit;padding:2px 4px"/>
+    <span id="epochHelp" style="opacity:.7;font-size:10px">−2499 = 2500 BC</span>
+  </div>
+  <div id="sunDatePanel">
+    <label>Date <span id="doyLbl">21 Jun</span></label>
+    <input type="range" id="doy" min="1" max="365" value="172" style="width:100%"/>
+    <div class="row">
+      <button type="button" data-doy="80">21 Mar</button>
+      <button type="button" data-doy="172">21 Jun</button>
+      <button type="button" data-doy="266">23 Sep</button>
+      <button type="button" data-doy="355">21 Dec</button>
+    </div>
+  </div>
+  <div id="moonAzPanel" style="display:none">
+    <label>Azimuth <span id="moonAzLbl">most N</span></label>
+    <input type="range" id="moonAz" min="0" max="1000" value="0" style="width:100%"/>
+    <div class="row">
+      <button type="button" id="btnMoonAzN">Most N</button>
+      <button type="button" id="btnMoonAzMid">Mid</button>
+      <button type="button" id="btnMoonAzS">Most S</button>
+    </div>
+  </div>
+  <div class="check"><label style="display:inline;text-transform:none;letter-spacing:0;opacity:1"><input type="checkbox" id="geoOn" checked/> Georef / Coords</label></div>
+  <div class="check"><label style="display:inline;text-transform:none;letter-spacing:0;opacity:1"><input type="checkbox" id="showRay"/> Ray to centre</label></div>
+  <div id="msg"></div>
+  <div id="sunReadout" class="row" style="font-size:11px;opacity:.9"></div>
+</div>
+<div id="geoReadout" aria-live="polite">
+  <div id="geoHover"><span class="muted">Hover</span> —</div>
+  <div id="geoPinned" hidden></div>
+  <button type="button" id="geoClear" hidden>Clear pin</button>
+</div>
+<canvas id="c"></canvas>
+<script src="./data/locked_poses.js?v=20260919f"></script>
+<script src="./data/site_ground_od.js?v=20260919f"></script>
+<script type="importmap">{"imports":{"three":"./vendor/three.module.js","three/addons/":"./vendor/"}}</script>
+<script>setTimeout(function(){if(window.__THREE_OK)return;var m=document.getElementById('msg');if(m)m.innerHTML='<b style="color:#f88">THREE.js failed to load</b>';},30000);</script>
+<script type="module" src="./vendor/locked_overview_app.20260919f.js"></script>
 </body>
 </html>

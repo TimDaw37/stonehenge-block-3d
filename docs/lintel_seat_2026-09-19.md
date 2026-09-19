@@ -19,4 +19,12 @@ Uprights lengthened (old → new `height_m`):
 
 Pairs left alone (|Δtop| ≤ 0.05 m): 105 (4/5), 154 (53/54).
 
-Also: HUD **Georef / Coords** toggle (`sessionStorage` `sh_geo_on`, default on); clearer coord help; stale “152/158 not in dataset” comment removed (they are in n=90).
+On Pages, height overrides are also applied at load in `locked_overview.html` until the pose twins on `main` are fully updated.
+
+Formula: `uprightTopRel(sid) = groundOd(sid) - ORIGIN_OD + z_base + height_m`.
+
+Also: Georef toggle in HUD (default on); clearer coord help; stale “152/158 not in dataset” comment removed (they are in n=90).
+
+## Georef hover (2026-09-19 follow-up)
+
+Hover georef **freezes while OrbitControls is dragging** (`controls` start/end + pointer movement threshold). Same screen pixel would otherwise hit a moving world point and coords appeared to slide under the finger. Short tap still pins; pinned E/N text is world-fixed. HUD **Georef / Coords** checkbox (`sessionStorage` `sh_geo_on`) hides `#geoReadout` when off.

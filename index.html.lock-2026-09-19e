@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+<meta http-equiv="Pragma" content="no-cache"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Stonehenge - Locked poses overview</title>
+<style>
+ html,body{margin:0;height:100%;background:#1a2430;color:#eee;font:13px/1.35 system-ui,sans-serif;overflow:hidden}
+ #c{position:fixed;inset:0;width:100%;height:100%;display:block}
+ #hudToggle{position:fixed;left:10px;top:10px;z-index:4;min-width:44px;min-height:44px;
+ padding:8px 12px;border:0;border-radius:8px;background:rgba(0,0,0,.88);color:#e8d9a8;
+ font:600 13px system-ui,sans-serif;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,.4)}
+ #hudToggle:hover{background:rgba(40,40,40,.95)}
+ #hud{position:fixed;left:10px;top:58px;width:360px;max-width:calc(100% - 20px);max-height:calc(100% - 70px);overflow:auto;
+ background:rgba(0,0,0,.84);padding:10px 12px;border-radius:8px;z-index:2}
+ #hud.collapsed{display:none}
+ #hud b{color:#e8d9a8}
+ @media (min-width:701px){
+  #hud{top:10px}
+  #hudToggle{display:none}
+  #hud.collapsed{display:block}
+ }
+ .sw{display:inline-block;width:12px;height:12px;border-radius:2px;margin-right:6px;vertical-align:-1px;border:1px solid #333}
+ button{margin:3px 3px 0 0;padding:4px 8px;border:0;border-radius:4px;background:#3d4a3a;color:#eee;cursor:pointer}
+ button:hover{background:#5a6b55}
+ button.active{background:#8a7a4a;color:#111}
+ .row{margin-top:6px}
+ label{display:block;margin:8px 0 2px;font-size:11px;letter-spacing:.04em;text-transform:uppercase;opacity:.8}
+ #msg{opacity:.9;margin-top:6px}
+ code{font-size:11px;opacity:.85}
+ #scaleWarn{display:none;position:fixed;left:50%;top:14px;transform:translateX(-50%);z-index:3;
+ background:#7f1d1d;color:#fff7ed;font:700 13px system-ui,sans-serif;padding:8px 14px;border-radius:8px;pointer-events:none}
+ .check{font-size:12px;margin-top:4px}
+ #geoReadout{position:fixed;left:10px;right:10px;bottom:10px;z-index:5;width:auto;max-width:none;
+ box-sizing:border-box;background:rgba(0,0,0,.88);color:#dce6f0;
+ font:12px/1.4 ui-monospace,Menlo,Consolas,monospace;padding:8px 10px;border-radius:8px;
+ pointer-events:none;white-space:normal;overflow-wrap:anywhere;word-break:break-word;
+ max-height:40vh;overflow-y:auto;box-shadow:0 2px 10px rgba(0,0,0,.45)}
+#geoReadout .muted{opacity:.65}
+#geoReadout #geoHover,#geoReadout #geoPinned{display:block;width:100%}
+#geoReadout #geoPinned{color:#f0a070;margin-top:4px}
+#geoReadout #geoClear{pointer-events:auto;margin:6px 0 0;padding:6px 12px;min-height:36px;
+ font:12px system-ui,sans-serif;background:#3d4a3a;color:#eee;border:0;border-radius:6px;cursor:pointer}
+#geoReadout #geoClear[hidden]{display:none}
+@media (max-width:700px){
+ #geoReadout{left:8px;right:8px;bottom:8px;font-size:11px;line-height:1.45;padding:10px 12px;
+  max-height:45vh}
+}
+</style>
+</head>
+<body>
+<div id="scaleWarn">Exaggerated - silhouette not to scale</div>
+<button type="button" id="hudToggle" aria-expanded="true" aria-controls="hud" title="Show or hide controls">Controls ▾</button>
+<div id="hud">
+  <div><b>Stonehenge</b></div>
+  <div style="opacity:.85;font-size:12px;margin-top:2px">Sarsen grey | bluestones blue | Altar pink | stations 92/94 bright silver (markers only)</div>
+  <div style="opacity:.75;font-size:11px;margin-top:4px;line-height:1.4">
+    <b>Coords</b> (bottom): OSGB E/N, SU grid, WGS84 — same framing as stonehenge-plan.<br/>
+    Hover = live; short click = pin; Clear pin / Esc clears.<br/>
+    Not GNSS. OSGB is the scene/Rees plan grid; WGS84 from that OSGB. GE may sit ~1.5&nbsp;m east — we do not warp to GE.<br/>
+    Uncheck <b>Georef</b> to hide the bottom box (handy on mobile).
+  </div>
+  <div id="counts" class="row" style="opacity:.85"></div>
+  <div class="row">
+    <button type="button" id="btnTop" class="active">Top-down</button>
+    <button type="button" id="btnOrbit">Orbit</button>
+    <button type="button" id="btnTerrain">Terrain</button>
+    <button type="button" id="btnLabels">Labels</button>
+  </div>
+  <label>Sky</label>
+  <div class="row">
+    <button type="button" id="btnSunOff" class="active">Off</button>
+    <button type="button" id="btnSunrise">Sunrise</button>
+    <button type="button" id="btnSunset">Sunset</button>
+    <button type="button" id="btnMoonrise">Moonrise</button>
+    <button type="button" id="btnMoonset">Moonset</button>
+  </div>
+  <div id="sunDatePanel">
+    <label>Date <span id="doyLbl">21 Jun</span></label>
+    <input type="range" id="doy" min="1" max="365" value="172" style="width:100%"/>
+    <div class="row">
+      <button type="button" data-doy="80">21 Mar</button>
+      <button type="button" data-doy="172">21 Jun</button>
+      <button type="button" data-doy="266">23 Sep</button>
+      <button type="button" data-doy="355">21 Dec</button>
+    </div>
+  </div>
+  <div id="moonAzPanel" style="display:none">
+    <label>Azimuth <span id="moonAzLbl">most N</span></label>
+    <input type="range" id="moonAz" min="0" max="1000" value="0" style="width:100%"/>
+    <div class="row">
+      <button type="button" id="btnMoonAzN">Most N</button>
+      <button type="button" id="btnMoonAzMid">Mid</button>
+      <button type="button" id="btnMoonAzS">Most S</button>
+    </div>
+  </div>
+  <div class="check"><label style="display:inline;text-transform:none;letter-spacing:0;opacity:1"><input type="checkbox" id="geoOn" checked/> Georef / Coords</label></div>
+  <div style="opacity:.7;font-size:10px;margin:2px 0 4px 0;line-height:1.35">Tap/click for coords; short tap pins. Drag to orbit (coords pause while dragging). Short tap = pin; Esc / Clear pin clears. Uncheck to hide the bottom box.</div>
+  <div class="check"><label style="display:inline;text-transform:none;letter-spacing:0;opacity:1"><input type="checkbox" id="showRay"/> Ray to centre</label></div>
+  <div id="msg"></div>
+  <div id="sunReadout" class="row" style="font-size:11px;opacity:.9"></div>
+</div>
+<div id="geoReadout" aria-live="polite">
+  <div id="geoHover"><span class="muted">Hover</span> —</div>
+  <div id="geoPinned" hidden></div>
+  <button type="button" id="geoClear" hidden title="Clear pinned coordinate">Clear pin</button>
+</div>
+<canvas id="c"></canvas>
+<script src="./data/locked_poses.js?v=20260919e"></script>
+<script>
+/* lintel seat 2026-09-19: lengthen shorter uprights so tops match partners */
+(function () {
+  var LP = window.LOCKED_POSES;
+  if (!LP || !LP.array) return;
+  var H = {"1":4.23,"7":4.113,"22":3.99,"29":4.066,"30":4.104,"51":5.182,"58":5.212};
+  var N = {
+    "1":"height lengthened 2026-09-19 to meet lintel seat (pair with 2; lintel 102; also levels 101 with 30).",
+    "7":"height lengthened 2026-09-19 to meet lintel seat (pair with 6; lintel 107).",
+    "22":"height lengthened 2026-09-19 to meet lintel seat (pair with 21; lintel 122).",
+    "29":"height lengthened 2026-09-19 to meet lintel seat (pair with 30; lintel 130; cascade after 101/102 seat).",
+    "30":"height lengthened 2026-09-19 to meet lintel seat (pair with 1; lintel 101; cascades to 130 with 29)."
+  };
+  var APPEND = "height lengthened 2026-09-19 to meet lintel seat";
+  function apply(s) {
+    var id = String(s.id);
+    if (!(id in H)) return;
+    s.height_m = H[id];
+    if (N[id]) s.notes = N[id];
+    else if (id === "51") s.notes = ((s.notes || "") + (s.notes ? "; " : "") + APPEND + " (pair with 52; lintel 152).").replace(/^; /, "");
+    else if (id === "58") s.notes = ((s.notes || "") + (s.notes ? "; " : "") + APPEND + " (pair with 57; lintel 158).").replace(/^; /, "");
+  }
+  for (var i = 0; i < LP.array.length; i++) apply(LP.array[i]);
+  if (LP.by_id) {
+    Object.keys(H).forEach(function (id) {
+      if (LP.by_id[id]) apply(LP.by_id[id]);
+    });
+  }
+})();
+</script>
+<script src="./data/site_ground_od.js?v=20260919e"></script>
+<script type="importmap">
+{"imports":{"three":"./vendor/three.module.js","three/addons/":"./vendor/"}}
+</script>
+<script>
+setTimeout(function(){
+ if(window.__THREE_OK)return;
+ var m=document.getElementById('msg');
+ if(m)m.innerHTML='<b style="color:#f88">THREE.js failed to load</b>. Serve over http from project root.';
+},30000);
+</script>
+<script type="module" src="./vendor/locked_overview_app.20260919e.js"></script>
+</body>
+</html>

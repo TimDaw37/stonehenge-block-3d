@@ -1,59 +1,31 @@
-# Locked Minecraft-box platform — 19 Sep 2026 HUD tidy baseline
+# Locked poses — **CURRENT lock 19 Sep 2026e (Pages mobile/georef)**
 
-**Current lock:** 19 Sep 2026 — tidy HUD platform baseline  
-**Snapshot:** [`locked_overview.html.lock-2026-09-19-hud`](locked_overview.html.lock-2026-09-19-hud)  
-**Viewer:** [`locked_overview.html`](locked_overview.html)
+See [docs/LOCK_2026-09-19e_pages_mobile.md](docs/LOCK_2026-09-19e_pages_mobile.md).
 
-> **Post-lock (19 Sep 2026):** live `locked_overview.html` gained a retractable mobile Controls toggle (`sessionStorage` `sh_hud_open`). The `.lock-2026-09-19-hud` snapshot is **no longer byte-identical** to the live file — keep it as the HUD-platform lock; do not overwrite.
+Live: https://timdaw37.github.io/stonehenge-block-3d/
 
-This repository is the **public platform** for further refinements (next fork target: rounded / organic stones). Do not treat the boxes as a finished reconstruction claim.
+## Snapshots
+- `index.html.lock-2026-09-19e` / `locked_overview.html.lock-2026-09-19e`
+- `vendor/locked_overview_app.lock-2026-09-19e.js`
+- Prior HUD lock: `locked_overview.html.lock-2026-09-19-hud`
 
-## Roadmap
+## Open
+- Interactive: [index.html](index.html) (also `locked_overview.html`)
+- Data: [data/locked_poses.js](data/locked_poses.js) (**n = 90**)
+- Ground: [data/site_ground_od.js](data/site_ground_od.js)
+- Terrain: [data/terrain_horizon.js](data/terrain_horizon.js)
 
-| # | Item | Status |
-|---|------|--------|
-| 1 | Moon standstill dial (Most N ↔ Most S; astronomy-engine historical) | **DONE** (19 Sep 2026) |
-| 2 | Horizon terrain (EA LiDAR derived mesh, lazy ~18 MB) | **DONE** (toggle; loads on Terrain / sky body) |
-| 3 | Sun seasonal placeholders + ray to centre | **DONE** (platform) |
-| 4 | Tighten code + publish GitHub public platform | **DONE** (this repo) |
-| 5 | Rounded / shaped stones fork | **NEXT** (fork; keep this lock) |
-
-See also:
-
-- [`docs/LOCK_2026-09-19_hud_platform.md`](docs/LOCK_2026-09-19_hud_platform.md)
-- [`docs/LOCK_2026-09-19_overview.md`](docs/LOCK_2026-09-19_overview.md)
-- [`PLATFORM.md`](PLATFORM.md)
-
-## Colours
-
+## Colours (viewer)
 | Colour | Meaning |
 |--------|---------|
-| Sarsen light elephant-grey | Outer / trilithon sarsens (locked boxes) |
-| Bluestone blue-grey `#6b8cae` | Outer circle + horseshoe bluestones |
-| Altar pink | Stone 80 (Altar) |
-| Cream | Stone 156 |
-| Bright silver markers | Stations 92 / 94 — markers only (not modelled stones) |
-| Gold (medium) | Partial / provisional locks (e.g. 53, 54, 21) |
-| Grey seed | Seed-only (154) |
+| elephant grey #8a8e94 | all sarsens |
+| blue #6b8cae | bluestones |
+| pink | Altar 80 |
+| bright silver #f0f4fa | station **markers** 92 / 94 only |
 
-Counts live in the HUD (`data/locked_poses.js`).
+## Roadmap (post-lock)
+1. Epoch choice for sun/moon (Modern vs ~2500 BC) — next
+2. Rounded / shaped stones fork
+3. Optional: Skyfield bake for deep past / true horizon altitude
 
-## Data contracts
-
-| File | Role |
-|------|------|
-| `data/locked_poses.js` / `.json` | Locked stone poses (`array` + `by_id`) |
-| `data/site_ground_od.js` / `.json` | Per-stone ground OD seating (EA 1 m DTM sample) |
-| `data/terrain_horizon.js` | Lazy horizon + near terrain mesh (~18 MB) |
-
-## How to run
-
-```bash
-python -m http.server 8000
-```
-
-Open `http://localhost:8000/locked_overview.html` (not `file://`).
-
-## Platform note
-
-Keep lock snapshots when forking. Pose XY and seating maths stay locked unless Tim opens a new lock; visual / mesh shape forks should copy this baseline first.
+Older halt: [HALT_2026-09-14.md](HALT_2026-09-14.md) (do not resume that PPC churn path).

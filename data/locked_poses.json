@@ -1,8 +1,8 @@
 {
   "title": "Stonehenge locked poses overview",
-  "generated_at": "2026-09-19T11:54+01:00",
+  "generated_at": "2026-09-19T22:09:14Z",
   "frame": "OSGB",
-  "count": 90,
+  "count": 93,
   "array": [
     {
       "id": "1",
@@ -510,7 +510,7 @@
         "status": "medium",
         "by": "Plan Pose Checker",
         "at": "2026-09-14T14:17+01:00",
-        "note": "MEDIUM conf \u0394yaw\u221226.4\u00b0; prefer ink over seed"
+        "note": "MEDIUM conf Δyaw−26.4°; prefer ink over seed"
       }
     },
     {
@@ -679,7 +679,7 @@
         "note": "Tim eyeball export approved 2026-09-15T11:59Z (outers_27_lintels_nudge.html); outer uprigh"
       },
       "height_source": "Cleal App.5 standing",
-      "notes": "Tim lock 27. \u0394e=+0.200 m, \u0394n=\u22120.050 m vs scene_seed_kept; yaw/W\u00d7T\u00d7H unchanged. Completes outer upright circle (missing sockets 13/17/18/20/24 unmodelled)."
+      "notes": "Tim lock 27. Δe=+0.200 m, Δn=−0.050 m vs scene_seed_kept; yaw/W×T×H unchanged. Completes outer upright circle (missing sockets 13/17/18/20/24 unmodelled)."
     },
     {
       "id": "28",
@@ -789,7 +789,7 @@
       "status": "standing",
       "e_m": 412255.51,
       "n_m": 142200.468,
-      "yaw_deg": -28.41,
+      "yaw_deg": -58.41,
       "width_m": 1.136,
       "thickness_m": 0.658,
       "length_m": null,
@@ -797,15 +797,15 @@
       "z_base_m": 0.0,
       "footprint_along_m": 1.136,
       "footprint_across_m": 0.658,
-      "accuracy_class": "locked",
+      "accuracy_class": "plan_locked",
       "lock_status": "accepted",
-      "colour_class": "blue_bluestone",
+      "colour_class": "blue",
       "source_file": "data/stone31_locked.json",
       "height_source": "cleal_app5_banton",
       "lock": {
         "status": "accepted",
         "by": "Tim Daw",
-        "at": "2026-09-15T13:25+01:00",
+        "at": "2026-09-19T23:08+01:00",
         "accept": [
           "e_m",
           "n_m",
@@ -815,17 +815,17 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim eyeball export approved 2026-09-15T12:21Z (bluestones_outer_nudge.html); outer bluestone"
+        "note": "Outer bluestone Johnson underlay nudge export publish"
       },
-      "notes": "Added from fig1 ink + labels.json pin (missing from scene). Cleal App.5 H=1.88."
+      "notes": "Added from fig1 ink + labels.json pin (missing from scene). Cleal App.5 H=1.88. | 2026-09-19: outer blue Johnson nudge publish"
     },
     {
       "id": "32",
       "role": "bluestone",
       "status": "standing",
-      "e_m": 412256.889,
+      "e_m": 412256.739,
       "n_m": 142195.448,
-      "yaw_deg": 19.26,
+      "yaw_deg": -0.74,
       "width_m": 1.369,
       "thickness_m": 0.851,
       "length_m": null,
@@ -833,15 +833,15 @@
       "z_base_m": 0.0,
       "footprint_along_m": 1.369,
       "footprint_across_m": 0.851,
-      "accuracy_class": "locked",
+      "accuracy_class": "plan_locked",
       "lock_status": "accepted",
-      "colour_class": "blue_bluestone",
+      "colour_class": "blue",
       "source_file": "data/stone32_locked.json",
       "height_source": "placeholder",
       "lock": {
         "status": "accepted",
         "by": "Tim Daw",
-        "at": "2026-09-15T13:25+01:00",
+        "at": "2026-09-19T23:08+01:00",
         "accept": [
           "e_m",
           "n_m",
@@ -851,9 +851,9 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim eyeball export approved 2026-09-15T12:21Z (bluestones_outer_nudge.html); outer bluestone"
+        "note": "Outer bluestone Johnson underlay nudge export publish"
       },
-      "notes": "SPLIT from merged seed 2.145\u00d71.566; upright-only fig1 ink (Voronoi vs 150). ink W\u00d7T 1.369\u00d70.851."
+      "notes": "SPLIT from merged seed 2.145×1.566; upright-only fig1 ink (Voronoi vs 150). ink W×T 1.369×0.851. | 2026-09-19: outer blue Johnson nudge publish"
     },
     {
       "id": "34",
@@ -869,15 +869,15 @@
       "z_base_m": 0.0,
       "footprint_along_m": 1.062,
       "footprint_across_m": 0.69,
-      "accuracy_class": "locked",
+      "accuracy_class": "plan_locked",
       "lock_status": "accepted",
-      "colour_class": "blue_bluestone",
+      "colour_class": "blue",
       "source_file": "data/stone34_locked.json",
       "height_source": "cleal_app5_banton",
       "lock": {
         "status": "accepted",
         "by": "Tim Daw",
-        "at": "2026-09-15T13:25+01:00",
+        "at": "2026-09-19T23:08+01:00",
         "accept": [
           "e_m",
           "n_m",
@@ -887,9 +887,9 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim eyeball export approved 2026-09-15T12:21Z (bluestones_outer_nudge.html); outer bluestone"
+        "note": "Outer bluestone Johnson underlay nudge export publish"
       },
-      "notes": "Existing scene/stones3d seed (schematic)."
+      "notes": "Existing scene/stones3d seed (schematic). | 2026-09-19: outer blue Johnson nudge publish"
     },
     {
       "id": "36",
@@ -897,7 +897,7 @@
       "status": "standing",
       "e_m": 412244.011,
       "n_m": 142181.064,
-      "yaw_deg": 81.1,
+      "yaw_deg": 71.1,
       "width_m": 1.263,
       "thickness_m": 0.819,
       "length_m": null,
@@ -905,15 +905,15 @@
       "z_base_m": 0.0,
       "footprint_along_m": 1.263,
       "footprint_across_m": 0.819,
-      "accuracy_class": "locked",
+      "accuracy_class": "plan_locked",
       "lock_status": "accepted",
-      "colour_class": "blue_bluestone",
+      "colour_class": "blue",
       "source_file": "data/stone36_locked.json",
       "height_source": "stones3d",
       "lock": {
         "status": "accepted",
         "by": "Tim Daw",
-        "at": "2026-09-15T13:25+01:00",
+        "at": "2026-09-19T23:08+01:00",
         "accept": [
           "e_m",
           "n_m",
@@ -923,33 +923,33 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim eyeball export approved 2026-09-15T12:21Z (bluestones_outer_nudge.html); outer bluestone"
+        "note": "Outer bluestone Johnson underlay nudge export publish"
       },
-      "notes": "Existing scene/stones3d seed (schematic)."
+      "notes": "Existing scene/stones3d seed (schematic). | 2026-09-19: outer blue Johnson nudge publish"
     },
     {
       "id": "37",
       "role": "bluestone",
       "status": "standing",
-      "e_m": 412242.686,
-      "n_m": 142183.086,
-      "yaw_deg": -20.63,
-      "width_m": 1.222,
-      "thickness_m": 0.63,
+      "e_m": 412242.636,
+      "n_m": 142183.036,
+      "yaw_deg": -15.63,
+      "width_m": 1.022,
+      "thickness_m": 0.38,
       "length_m": null,
       "height_m": 1.27,
       "z_base_m": 0.0,
-      "footprint_along_m": 1.222,
-      "footprint_across_m": 0.63,
-      "accuracy_class": "locked",
+      "footprint_along_m": 1.022,
+      "footprint_across_m": 0.38,
+      "accuracy_class": "plan_locked",
       "lock_status": "accepted",
-      "colour_class": "blue_bluestone",
+      "colour_class": "blue",
       "source_file": "data/stone37_locked.json",
       "height_source": "cleal_app5_banton",
       "lock": {
         "status": "accepted",
         "by": "Tim Daw",
-        "at": "2026-09-15T13:25+01:00",
+        "at": "2026-09-19T23:08+01:00",
         "accept": [
           "e_m",
           "n_m",
@@ -959,33 +959,33 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim eyeball export approved 2026-09-15T12:21Z (bluestones_outer_nudge.html); outer bluestone"
+        "note": "Outer bluestone Johnson underlay nudge export publish"
       },
-      "notes": "Existing scene/stones3d seed (schematic)."
+      "notes": "Existing scene/stones3d seed (schematic). | 2026-09-19: outer blue Johnson nudge publish"
     },
     {
       "id": "38",
       "role": "bluestone",
       "status": "standing",
-      "e_m": 412240.246,
-      "n_m": 142184.34,
-      "yaw_deg": -36.78,
-      "width_m": 1.442,
-      "thickness_m": 0.41,
+      "e_m": 412240.196,
+      "n_m": 142183.94,
+      "yaw_deg": 18.22,
+      "width_m": 0.942,
+      "thickness_m": 0.66,
       "length_m": null,
       "height_m": 1.0,
       "z_base_m": 0.0,
-      "footprint_along_m": 1.442,
-      "footprint_across_m": 0.41,
-      "accuracy_class": "locked",
+      "footprint_along_m": 0.942,
+      "footprint_across_m": 0.66,
+      "accuracy_class": "plan_locked",
       "lock_status": "accepted",
-      "colour_class": "blue_bluestone",
+      "colour_class": "blue",
       "source_file": "data/stone38_locked.json",
       "height_source": "stones3d",
       "lock": {
         "status": "accepted",
         "by": "Tim Daw",
-        "at": "2026-09-15T13:25+01:00",
+        "at": "2026-09-19T23:08+01:00",
         "accept": [
           "e_m",
           "n_m",
@@ -995,33 +995,33 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim eyeball export approved 2026-09-15T12:21Z (bluestones_outer_nudge.html); outer bluestone"
+        "note": "Outer bluestone Johnson underlay nudge export publish"
       },
-      "notes": "Existing scene/stones3d seed (schematic)."
+      "notes": "Existing scene/stones3d seed (schematic). | 2026-09-19: outer blue Johnson nudge publish"
     },
     {
       "id": "39",
       "role": "bluestone",
       "status": "standing",
-      "e_m": 412238.839,
+      "e_m": 412238.789,
       "n_m": 142184.948,
       "yaw_deg": 50.36,
-      "width_m": 1.367,
+      "width_m": 1.217,
       "thickness_m": 0.602,
       "length_m": null,
       "height_m": 1.0,
       "z_base_m": 0.0,
-      "footprint_along_m": 1.367,
+      "footprint_along_m": 1.217,
       "footprint_across_m": 0.602,
-      "accuracy_class": "locked",
+      "accuracy_class": "plan_locked",
       "lock_status": "accepted",
-      "colour_class": "blue_bluestone",
+      "colour_class": "blue",
       "source_file": "data/stone39_locked.json",
       "height_source": "stones3d",
       "lock": {
         "status": "accepted",
         "by": "Tim Daw",
-        "at": "2026-09-15T13:25+01:00",
+        "at": "2026-09-19T23:08+01:00",
         "accept": [
           "e_m",
           "n_m",
@@ -1031,17 +1031,17 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim eyeball export approved 2026-09-15T12:21Z (bluestones_outer_nudge.html); outer bluestone"
+        "note": "Outer bluestone Johnson underlay nudge export publish"
       },
-      "notes": "Existing scene/stones3d seed (schematic)."
+      "notes": "Existing scene/stones3d seed (schematic). | 2026-09-19: outer blue Johnson nudge publish"
     },
     {
       "id": "41",
       "role": "bluestone",
       "status": "standing",
-      "e_m": 412232.732,
+      "e_m": 412232.682,
       "n_m": 142191.765,
-      "yaw_deg": 62.39,
+      "yaw_deg": 57.39,
       "width_m": 1.976,
       "thickness_m": 0.544,
       "length_m": null,
@@ -1049,15 +1049,15 @@
       "z_base_m": 0.0,
       "footprint_along_m": 1.976,
       "footprint_across_m": 0.544,
-      "accuracy_class": "locked",
+      "accuracy_class": "plan_locked",
       "lock_status": "accepted",
-      "colour_class": "blue_bluestone",
+      "colour_class": "blue",
       "source_file": "data/stone41_locked.json",
       "height_source": "stones3d",
       "lock": {
         "status": "accepted",
         "by": "Tim Daw",
-        "at": "2026-09-15T13:25+01:00",
+        "at": "2026-09-19T23:08+01:00",
         "accept": [
           "e_m",
           "n_m",
@@ -1067,33 +1067,33 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim eyeball export approved 2026-09-15T12:21Z (bluestones_outer_nudge.html); outer bluestone"
+        "note": "Outer bluestone Johnson underlay nudge export publish"
       },
-      "notes": "Existing scene/stones3d seed (schematic)."
+      "notes": "Existing scene/stones3d seed (schematic). | 2026-09-19: outer blue Johnson nudge publish"
     },
     {
       "id": "42",
       "role": "bluestone",
       "status": "standing",
-      "e_m": 412236.169,
-      "n_m": 142200.391,
+      "e_m": 412236.219,
+      "n_m": 142200.241,
       "yaw_deg": -79.56,
-      "width_m": 1.646,
+      "width_m": 1.746,
       "thickness_m": 0.835,
       "length_m": null,
       "height_m": 1.0,
       "z_base_m": 0.0,
-      "footprint_along_m": 1.646,
+      "footprint_along_m": 1.746,
       "footprint_across_m": 0.835,
-      "accuracy_class": "locked",
+      "accuracy_class": "plan_locked",
       "lock_status": "accepted",
-      "colour_class": "blue_bluestone",
+      "colour_class": "blue",
       "source_file": "data/stone42_locked.json",
       "height_source": "stones3d",
       "lock": {
         "status": "accepted",
         "by": "Tim Daw",
-        "at": "2026-09-15T13:25+01:00",
+        "at": "2026-09-19T23:08+01:00",
         "accept": [
           "e_m",
           "n_m",
@@ -1103,9 +1103,9 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim eyeball export approved 2026-09-15T12:21Z (bluestones_outer_nudge.html); outer bluestone"
+        "note": "Outer bluestone Johnson underlay nudge export publish"
       },
-      "notes": "Existing scene/stones3d seed (schematic)."
+      "notes": "Existing scene/stones3d seed (schematic). | 2026-09-19: outer blue Johnson nudge publish"
     },
     {
       "id": "43",
@@ -1114,22 +1114,22 @@
       "e_m": 412238.907,
       "n_m": 142203.439,
       "yaw_deg": 101.79,
-      "width_m": 1.395,
-      "thickness_m": 0.55,
+      "width_m": 1.145,
+      "thickness_m": 0.78,
       "length_m": null,
       "height_m": 1.0,
       "z_base_m": 0.0,
-      "footprint_along_m": 1.395,
-      "footprint_across_m": 0.55,
-      "accuracy_class": "locked",
+      "footprint_along_m": 1.145,
+      "footprint_across_m": 0.78,
+      "accuracy_class": "plan_locked",
       "lock_status": "accepted",
-      "colour_class": "blue_bluestone",
+      "colour_class": "blue",
       "source_file": "data/stone43_locked.json",
       "height_source": "stones3d",
       "lock": {
         "status": "accepted",
         "by": "Tim Daw",
-        "at": "2026-09-15T13:25+01:00",
+        "at": "2026-09-19T23:08+01:00",
         "accept": [
           "e_m",
           "n_m",
@@ -1139,33 +1139,33 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim eyeball export approved 2026-09-15T12:21Z (bluestones_outer_nudge.html); outer bluestone"
+        "note": "Outer bluestone Johnson underlay nudge export publish"
       },
-      "notes": "Existing scene/stones3d seed (schematic)."
+      "notes": "Existing scene/stones3d seed (schematic). | 2026-09-19: outer blue Johnson nudge publish"
     },
     {
       "id": "44",
       "role": "bluestone",
       "status": "standing",
-      "e_m": 412240.468,
+      "e_m": 412240.318,
       "n_m": 142200.954,
       "yaw_deg": 64.34,
       "width_m": 1.121,
-      "thickness_m": 0.55,
+      "thickness_m": 0.956,
       "length_m": null,
       "height_m": 1.0,
       "z_base_m": 0.0,
       "footprint_along_m": 1.121,
-      "footprint_across_m": 0.55,
-      "accuracy_class": "locked",
+      "footprint_across_m": 0.956,
+      "accuracy_class": "plan_locked",
       "lock_status": "accepted",
-      "colour_class": "blue_bluestone",
+      "colour_class": "blue",
       "source_file": "data/stone44_locked.json",
       "height_source": "stones3d",
       "lock": {
         "status": "accepted",
         "by": "Tim Daw",
-        "at": "2026-09-15T13:25+01:00",
+        "at": "2026-09-19T23:08+01:00",
         "accept": [
           "e_m",
           "n_m",
@@ -1175,33 +1175,33 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim eyeball export approved 2026-09-15T12:21Z (bluestones_outer_nudge.html); outer bluestone"
+        "note": "Outer bluestone Johnson underlay nudge export publish"
       },
-      "notes": "Existing scene/stones3d seed (schematic)."
+      "notes": "Existing scene/stones3d seed (schematic). | 2026-09-19: outer blue Johnson nudge publish"
     },
     {
       "id": "45",
       "role": "bluestone",
       "status": "standing",
       "e_m": 412241.723,
-      "n_m": 142205.822,
+      "n_m": 142205.672,
       "yaw_deg": -74.18,
-      "width_m": 2.148,
+      "width_m": 2.398,
       "thickness_m": 0.819,
       "length_m": null,
       "height_m": 1.0,
       "z_base_m": 0.0,
-      "footprint_along_m": 2.148,
+      "footprint_along_m": 2.398,
       "footprint_across_m": 0.819,
-      "accuracy_class": "locked",
+      "accuracy_class": "plan_locked",
       "lock_status": "accepted",
-      "colour_class": "blue_bluestone",
+      "colour_class": "blue",
       "source_file": "data/stone45_locked.json",
       "height_source": "stones3d",
       "lock": {
         "status": "accepted",
         "by": "Tim Daw",
-        "at": "2026-09-15T13:25+01:00",
+        "at": "2026-09-19T23:08+01:00",
         "accept": [
           "e_m",
           "n_m",
@@ -1211,33 +1211,33 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim eyeball export approved 2026-09-15T12:21Z (bluestones_outer_nudge.html); outer bluestone"
+        "note": "Outer bluestone Johnson underlay nudge export publish"
       },
-      "notes": "Existing scene/stones3d seed (schematic)."
+      "notes": "Existing scene/stones3d seed (schematic). | 2026-09-19: outer blue Johnson nudge publish"
     },
     {
       "id": "46",
       "role": "bluestone",
       "status": "standing",
-      "e_m": 412249.789,
-      "n_m": 142205.298,
-      "yaw_deg": 60.41,
-      "width_m": 1.141,
-      "thickness_m": 0.66,
+      "e_m": 412249.689,
+      "n_m": 142205.048,
+      "yaw_deg": -24.59,
+      "width_m": 0.891,
+      "thickness_m": 0.61,
       "length_m": null,
       "height_m": 0.96,
       "z_base_m": 0.0,
-      "footprint_along_m": 1.141,
-      "footprint_across_m": 0.66,
-      "accuracy_class": "locked",
+      "footprint_along_m": 0.891,
+      "footprint_across_m": 0.61,
+      "accuracy_class": "plan_locked",
       "lock_status": "accepted",
-      "colour_class": "blue_bluestone",
+      "colour_class": "blue",
       "source_file": "data/stone46_locked.json",
       "height_source": "cleal_app5_banton",
       "lock": {
         "status": "accepted",
         "by": "Tim Daw",
-        "at": "2026-09-15T13:25+01:00",
+        "at": "2026-09-19T23:08+01:00",
         "accept": [
           "e_m",
           "n_m",
@@ -1247,33 +1247,33 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim eyeball export approved 2026-09-15T12:21Z (bluestones_outer_nudge.html); outer bluestone"
+        "note": "Outer bluestone Johnson underlay nudge export publish"
       },
-      "notes": "Existing scene/stones3d seed (schematic)."
+      "notes": "Existing scene/stones3d seed (schematic). | 2026-09-19: outer blue Johnson nudge publish"
     },
     {
       "id": "47",
       "role": "bluestone",
       "status": "standing",
-      "e_m": 412251.462,
-      "n_m": 142204.621,
-      "yaw_deg": 33.69,
-      "width_m": 1.346,
+      "e_m": 412251.312,
+      "n_m": 142204.521,
+      "yaw_deg": -31.31,
+      "width_m": 1.096,
       "thickness_m": 0.673,
       "length_m": null,
       "height_m": 1.45,
       "z_base_m": 0.0,
-      "footprint_along_m": 1.346,
+      "footprint_along_m": 1.096,
       "footprint_across_m": 0.673,
-      "accuracy_class": "locked",
+      "accuracy_class": "plan_locked",
       "lock_status": "accepted",
-      "colour_class": "blue_bluestone",
+      "colour_class": "blue",
       "source_file": "data/stone47_locked.json",
       "height_source": "cleal_app5_banton",
       "lock": {
         "status": "accepted",
         "by": "Tim Daw",
-        "at": "2026-09-15T13:25+01:00",
+        "at": "2026-09-19T23:08+01:00",
         "accept": [
           "e_m",
           "n_m",
@@ -1283,33 +1283,33 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim eyeball export approved 2026-09-15T12:21Z (bluestones_outer_nudge.html); outer bluestone"
+        "note": "Outer bluestone Johnson underlay nudge export publish"
       },
-      "notes": "Existing scene/stones3d seed (schematic)."
+      "notes": "Existing scene/stones3d seed (schematic). | 2026-09-19: outer blue Johnson nudge publish"
     },
     {
       "id": "48",
       "role": "bluestone",
       "status": "standing",
       "e_m": 412252.02,
-      "n_m": 142202.975,
-      "yaw_deg": -60.78,
+      "n_m": 142203.125,
+      "yaw_deg": -50.78,
       "width_m": 1.188,
-      "thickness_m": 0.962,
+      "thickness_m": 0.712,
       "length_m": null,
       "height_m": 1.0,
       "z_base_m": 0.0,
       "footprint_along_m": 1.188,
-      "footprint_across_m": 0.962,
-      "accuracy_class": "locked",
+      "footprint_across_m": 0.712,
+      "accuracy_class": "plan_locked",
       "lock_status": "accepted",
-      "colour_class": "blue_bluestone",
+      "colour_class": "blue",
       "source_file": "data/stone48_locked.json",
       "height_source": "stones3d",
       "lock": {
         "status": "accepted",
         "by": "Tim Daw",
-        "at": "2026-09-15T13:25+01:00",
+        "at": "2026-09-19T23:08+01:00",
         "accept": [
           "e_m",
           "n_m",
@@ -1319,33 +1319,33 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim eyeball export approved 2026-09-15T12:21Z (bluestones_outer_nudge.html); outer bluestone"
+        "note": "Outer bluestone Johnson underlay nudge export publish"
       },
-      "notes": "Existing scene/stones3d seed (schematic)."
+      "notes": "Existing scene/stones3d seed (schematic). | 2026-09-19: outer blue Johnson nudge publish"
     },
     {
       "id": "49",
       "role": "bluestone",
       "status": "standing",
-      "e_m": 412253.926,
-      "n_m": 142202.468,
-      "yaw_deg": 24.21,
-      "width_m": 0.955,
-      "thickness_m": 0.739,
+      "e_m": 412253.726,
+      "n_m": 142202.268,
+      "yaw_deg": -40.79,
+      "width_m": 1.105,
+      "thickness_m": 0.439,
       "length_m": null,
       "height_m": 1.9,
       "z_base_m": 0.0,
-      "footprint_along_m": 0.955,
-      "footprint_across_m": 0.739,
-      "accuracy_class": "locked",
+      "footprint_along_m": 1.105,
+      "footprint_across_m": 0.439,
+      "accuracy_class": "plan_locked",
       "lock_status": "accepted",
-      "colour_class": "blue_bluestone",
+      "colour_class": "blue",
       "source_file": "data/stone49_locked.json",
       "height_source": "cleal_app5_banton",
       "lock": {
         "status": "accepted",
         "by": "Tim Daw",
-        "at": "2026-09-15T13:25+01:00",
+        "at": "2026-09-19T23:08+01:00",
         "accept": [
           "e_m",
           "n_m",
@@ -1355,9 +1355,9 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim eyeball export approved 2026-09-15T12:21Z (bluestones_outer_nudge.html); outer bluestone"
+        "note": "Outer bluestone Johnson underlay nudge export publish"
       },
-      "notes": "Existing scene/stones3d seed (schematic)."
+      "notes": "Existing scene/stones3d seed (schematic). | 2026-09-19: outer blue Johnson nudge publish"
     },
     {
       "id": "51",
@@ -1392,7 +1392,7 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
+        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
         "export": "exports/trilithons_centre_export_2026-09-19.json",
         "underlay": "Johnson 2008"
       }
@@ -1430,7 +1430,7 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
+        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
         "export": "exports/trilithons_centre_export_2026-09-19.json",
         "underlay": "Johnson 2008"
       }
@@ -1468,7 +1468,7 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
+        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
         "export": "exports/trilithons_centre_export_2026-09-19.json",
         "underlay": "Johnson 2008"
       }
@@ -1506,7 +1506,7 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
+        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
         "export": "exports/trilithons_centre_export_2026-09-19.json",
         "underlay": "Johnson 2008"
       }
@@ -1544,7 +1544,7 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
+        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
         "export": "exports/trilithons_centre_export_2026-09-19.json",
         "underlay": "Johnson 2008"
       }
@@ -1582,7 +1582,7 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
+        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
         "export": "exports/trilithons_centre_export_2026-09-19.json",
         "underlay": "Johnson 2008"
       }
@@ -1620,7 +1620,7 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
+        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
         "export": "exports/trilithons_centre_export_2026-09-19.json",
         "underlay": "Johnson 2008"
       }
@@ -1658,7 +1658,7 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
+        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
         "export": "exports/trilithons_centre_export_2026-09-19.json",
         "underlay": "Johnson 2008"
       }
@@ -2078,7 +2078,7 @@
       "colour_class": "altar_pink",
       "source_file": "data/altar80_locked.json",
       "height_source": "pink",
-      "notes": "Tim pink start \u2014 place may need nudge on Johnson",
+      "notes": "Tim pink start — place may need nudge on Johnson",
       "lock": {
         "status": "accepted",
         "by": "Tim Daw",
@@ -2092,7 +2092,7 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
+        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
         "export": "exports/trilithons_centre_export_2026-09-19.json",
         "underlay": "Johnson 2008"
       },
@@ -2136,7 +2136,7 @@
       "lock_status": "seed",
       "colour_class": "grey_seed",
       "source_file": "data/scene.json",
-      "height_source": "scene.json (AGL placeholder \u2014 no OD seating yet)",
+      "height_source": "scene.json (AGL placeholder — no OD seating yet)",
       "notes": "Station stone 91 from scene.json (fig1). Seed for eyeball.",
       "lock": {
         "status": "seed",
@@ -2173,7 +2173,7 @@
       "lock_status": "seed",
       "colour_class": "gold_medium",
       "source_file": "fig1 diamond centre (ink detection) + scene91/93 offset",
-      "height_source": "placeholder 1.0 m AGL \u2014 no OD seating",
+      "height_source": "placeholder 1.0 m AGL — no OD seating",
       "notes": "Station stone 92 triangular placeholder (missing from scene). Fig1 label + 91/93 offset. | 2026-09-19: re-seeded to fig1 diamond centre (px 790.0,1354.0), not label centroid. Was 412257.559/142154.52. | 2026-09-19: Tim eyeball +1.2 m east (N unchanged). Was 412256.281/142153.669. | 2026-09-19: Tim +0.5 m east (N unchanged). Was 412257.481/142153.669. | 2026-09-19: Tim nudge dE -0.2 dN -0.3. Was 412257.981/142153.669.",
       "lock": {
         "status": "seed",
@@ -2210,7 +2210,7 @@
       "lock_status": "seed",
       "colour_class": "grey_seed",
       "source_file": "data/scene.json",
-      "height_source": "scene.json (AGL placeholder \u2014 no OD seating yet)",
+      "height_source": "scene.json (AGL placeholder — no OD seating yet)",
       "notes": "Station stone 93 from scene.json (fig1). Seed for eyeball.",
       "lock": {
         "status": "seed",
@@ -2247,7 +2247,7 @@
       "lock_status": "seed",
       "colour_class": "gold_medium",
       "source_file": "fig1 diamond centre (ink detection) + scene91/93 offset",
-      "height_source": "placeholder 1.0 m AGL \u2014 no OD seating",
+      "height_source": "placeholder 1.0 m AGL — no OD seating",
       "notes": "Station stone 94 triangular placeholder (missing from scene). Fig1 label + 91/93 offset. | 2026-09-19: re-seeded to fig1 diamond centre (px 449.4,203.4), not label centroid. Was 412233.283/142236.221. | 2026-09-19: Tim eyeball +1.2 m east (N unchanged). Was 412232.104/142235.274. | 2026-09-19: Tim +0.5 m east (N unchanged). Was 412233.304/142235.274. | 2026-09-19: Tim nudge dE -0.2 dN -0.3. Was 412233.804/142235.274.",
       "lock": {
         "status": "seed",
@@ -2284,7 +2284,7 @@
       "lock_status": "seed",
       "colour_class": "gold_medium",
       "source_file": "data/scene.json",
-      "height_source": "scene.json (AGL placeholder \u2014 no OD seating yet)",
+      "height_source": "scene.json (AGL placeholder — no OD seating yet)",
       "notes": "Slaughter Stone (95) from scene.json. Seed for eyeball. | 2026-09-19: Tim nudge +0.25 m along long axis (yaw 50 deg, NE-ish).",
       "lock": {
         "status": "seed",
@@ -2321,7 +2321,7 @@
       "lock_status": "seed",
       "colour_class": "gold_medium",
       "source_file": "data/scene.json",
-      "height_source": "scene.json (AGL placeholder \u2014 no OD seating yet)",
+      "height_source": "scene.json (AGL placeholder — no OD seating yet)",
       "notes": "Heelstone (96) from scene.json. Seed for eyeball.",
       "lock": {
         "status": "seed",
@@ -2379,7 +2379,7 @@
         ],
         "note": "Present outer lintel; XY/yaw from laptop support midpoints/mean yaw (provisional). height_m set so top OD matches 101. Centre trilithon locks preserved."
       },
-      "notes": "Outer lintel thickness norm to 101 on 2026-09-19: old scene.thickness_m=0.8 \u2192 height_m/scene.thickness_m=0.8. target_top_od=107.144."
+      "notes": "Outer lintel thickness norm to 101 on 2026-09-19: old scene.thickness_m=0.8 → height_m/scene.thickness_m=0.8. target_top_od=107.144."
     },
     {
       "id": "102",
@@ -2421,7 +2421,7 @@
         ],
         "note": "Present outer lintel; XY/yaw from laptop support midpoints/mean yaw (provisional). height_m set so top OD matches 101. Centre trilithon locks preserved. | 2026-09-19: recentred to support midpoint; yaw=chord bearing mid-upright to mid-upright. height_m kept (norm to 101 OD)."
       },
-      "notes": "Outer lintel thickness norm to 101 on 2026-09-19: old scene.thickness_m=0.8 \u2192 height_m/scene.thickness_m=0.728. target_top_od=107.144. | 2026-09-19: recentred to support midpoint; yaw=chord bearing mid-upright to mid-upright. height_m kept (norm to 101 OD)."
+      "notes": "Outer lintel thickness norm to 101 on 2026-09-19: old scene.thickness_m=0.8 → height_m/scene.thickness_m=0.728. target_top_od=107.144. | 2026-09-19: recentred to support midpoint; yaw=chord bearing mid-upright to mid-upright. height_m kept (norm to 101 OD)."
     },
     {
       "id": "105",
@@ -2463,7 +2463,7 @@
         ],
         "note": "Present outer lintel; XY/yaw from laptop support midpoints/mean yaw (provisional). height_m set so top OD matches 101. Centre trilithon locks preserved. | 2026-09-19: recentred to support midpoint; yaw=chord bearing mid-upright to mid-upright. height_m kept (norm to 101 OD)."
       },
-      "notes": "Outer lintel thickness norm to 101 on 2026-09-19: old scene.thickness_m=0.8 \u2192 height_m/scene.thickness_m=0.6175. target_top_od=107.144. | 2026-09-19: recentred to support midpoint; yaw=chord bearing mid-upright to mid-upright. height_m kept (norm to 101 OD)."
+      "notes": "Outer lintel thickness norm to 101 on 2026-09-19: old scene.thickness_m=0.8 → height_m/scene.thickness_m=0.6175. target_top_od=107.144. | 2026-09-19: recentred to support midpoint; yaw=chord bearing mid-upright to mid-upright. height_m kept (norm to 101 OD)."
     },
     {
       "id": "107",
@@ -2505,7 +2505,7 @@
         ],
         "note": "Present outer lintel; XY/yaw from laptop support midpoints/mean yaw (provisional). height_m set so top OD matches 101. Centre trilithon locks preserved."
       },
-      "notes": "Outer lintel thickness norm to 101 on 2026-09-19: old scene.thickness_m=0.8 \u2192 height_m/scene.thickness_m=0.7065. target_top_od=107.144."
+      "notes": "Outer lintel thickness norm to 101 on 2026-09-19: old scene.thickness_m=0.8 → height_m/scene.thickness_m=0.7065. target_top_od=107.144."
     },
     {
       "id": "120",
@@ -2541,7 +2541,7 @@
         "provisional": [],
         "note": "Tim eyeball export approved 2026-09-15T11:59Z (outers_27_lintels_nudge.html); fallen outer"
       },
-      "notes": "Tim lock 120 fallen lintel. \u0394yaw=\u22127.00\u00b0 (7.93\u21920.93); e/n/W\u00d7T\u00d7H unchanged vs fig1 ink seed. Originally ~20\u201321 span; fabric N of 19."
+      "notes": "Tim lock 120 fallen lintel. Δyaw=−7.00° (7.93→0.93); e/n/W×T×H unchanged vs fig1 ink seed. Originally ~20–21 span; fabric N of 19."
     },
     {
       "id": "122",
@@ -2583,7 +2583,7 @@
         ],
         "note": "Present outer lintel; XY/yaw from laptop support midpoints/mean yaw (provisional). height_m set so top OD matches 101. Centre trilithon locks preserved. | 2026-09-19: recentred to support midpoint; yaw=chord bearing mid-upright to mid-upright. height_m kept (norm to 101 OD)."
       },
-      "notes": "Outer lintel thickness norm to 101 on 2026-09-19: old scene.thickness_m=0.8 \u2192 height_m/scene.thickness_m=0.682. target_top_od=107.144. | 2026-09-19: recentred to support midpoint; yaw=chord bearing mid-upright to mid-upright. height_m kept (norm to 101 OD)."
+      "notes": "Outer lintel thickness norm to 101 on 2026-09-19: old scene.thickness_m=0.8 → height_m/scene.thickness_m=0.682. target_top_od=107.144. | 2026-09-19: recentred to support midpoint; yaw=chord bearing mid-upright to mid-upright. height_m kept (norm to 101 OD)."
     },
     {
       "id": "127",
@@ -2619,7 +2619,7 @@
         "provisional": [],
         "note": "Tim eyeball export approved 2026-09-15T11:59Z (outers_27_lintels_nudge.html); fallen outer"
       },
-      "notes": "Tim lock 127 fallen lintel. \u0394e=+0.100 m vs fig1 ink seed; n/yaw/W\u00d7T\u00d7H unchanged. Was lintel bleed on 26 seed."
+      "notes": "Tim lock 127 fallen lintel. Δe=+0.100 m vs fig1 ink seed; n/yaw/W×T×H unchanged. Was lintel bleed on 26 seed."
     },
     {
       "id": "130",
@@ -2661,31 +2661,31 @@
         ],
         "note": "Present outer lintel; XY/yaw from laptop support midpoints/mean yaw (provisional). height_m set so top OD matches 101. Centre trilithon locks preserved."
       },
-      "notes": "Outer lintel thickness norm to 101 on 2026-09-19: old scene.thickness_m=0.8 \u2192 height_m/scene.thickness_m=0.718. target_top_od=107.144."
+      "notes": "Outer lintel thickness norm to 101 on 2026-09-19: old scene.thickness_m=0.8 → height_m/scene.thickness_m=0.718. target_top_od=107.144."
     },
     {
       "id": "150",
       "role": "bluestone_lintel",
       "status": "fallen",
       "e_m": 412256.833,
-      "n_m": 142196.413,
+      "n_m": 142196.463,
       "yaw_deg": 52.91,
-      "width_m": 2.44,
-      "thickness_m": 0.559,
+      "width_m": 2.49,
+      "thickness_m": 0.609,
       "length_m": null,
       "height_m": 0.5,
       "z_base_m": 0.0,
-      "footprint_along_m": 2.44,
-      "footprint_across_m": 0.559,
-      "accuracy_class": "locked",
+      "footprint_along_m": 2.49,
+      "footprint_across_m": 0.609,
+      "accuracy_class": "plan_locked",
       "lock_status": "accepted",
-      "colour_class": "blue_bluestone",
+      "colour_class": "blue",
       "source_file": "data/stone150_locked.json",
       "height_source": "placeholder_fallen_bluestone_lintel",
       "lock": {
         "status": "accepted",
         "by": "Tim Daw",
-        "at": "2026-09-15T13:25+01:00",
+        "at": "2026-09-19T23:08+01:00",
         "accept": [
           "e_m",
           "n_m",
@@ -2695,9 +2695,9 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim eyeball export approved 2026-09-15T12:21Z (bluestones_outer_nudge.html); outer bluestone"
+        "note": "Outer bluestone Johnson underlay nudge export publish"
       },
-      "notes": "NEW: split from 32 merged hatch. fig1 ink long\u22481.685m; W set to laser c.2.44m (StonehengeLaserScan p.50). labels pin (775.8,742.1). Fallen bluestone lintel with mortises."
+      "notes": "NEW: split from 32 merged hatch. fig1 ink long≈1.685m; W set to laser c.2.44m (StonehengeLaserScan p.50). labels pin (775.8,742.1). Fallen bluestone lintel with mortises. | 2026-09-19: outer blue Johnson nudge publish"
     },
     {
       "id": "152",
@@ -2718,7 +2718,7 @@
       "colour_class": "green_locked",
       "source_file": "data/stone152_locked.json",
       "height_source": "placeholder_fallen_agl",
-      "notes": "Scene/CSV present lintel \u2014 nudge on Johnson",
+      "notes": "Scene/CSV present lintel — nudge on Johnson",
       "lock": {
         "status": "accepted",
         "by": "Tim Daw",
@@ -2732,7 +2732,7 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
+        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
         "export": "exports/trilithons_centre_export_2026-09-19.json",
         "underlay": "Johnson 2008"
       }
@@ -2756,7 +2756,7 @@
       "colour_class": "green_locked",
       "source_file": "data/stone154_locked.json",
       "height_source": "placeholder_fallen_agl",
-      "notes": "Scene/CSV present lintel \u2014 nudge on Johnson",
+      "notes": "Scene/CSV present lintel — nudge on Johnson",
       "lock": {
         "status": "accepted",
         "by": "Tim Daw",
@@ -2770,7 +2770,7 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
+        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
         "export": "exports/trilithons_centre_export_2026-09-19.json",
         "underlay": "Johnson 2008"
       }
@@ -2794,7 +2794,7 @@
       "colour_class": "cream_156",
       "source_file": "data/stone156_locked.json",
       "height_source": "pink",
-      "notes": "Pink L\u00d7W\u00d7H kept; place/yaw nudged toward Johnson hatch",
+      "notes": "Pink L×W×H kept; place/yaw nudged toward Johnson hatch",
       "lock": {
         "status": "accepted",
         "by": "Tim Daw",
@@ -2808,7 +2808,7 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
+        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
         "export": "exports/trilithons_centre_export_2026-09-19.json",
         "underlay": "Johnson 2008"
       },
@@ -2857,7 +2857,7 @@
       "colour_class": "green_locked",
       "source_file": "data/stone158_locked.json",
       "height_source": "placeholder_fallen_agl",
-      "notes": "Scene/CSV present lintel \u2014 nudge on Johnson",
+      "notes": "Scene/CSV present lintel — nudge on Johnson",
       "lock": {
         "status": "accepted",
         "by": "Tim Daw",
@@ -2871,7 +2871,7 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
+        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
         "export": "exports/trilithons_centre_export_2026-09-19.json",
         "underlay": "Johnson 2008"
       }
@@ -2896,7 +2896,7 @@
       "colour_class": "grey_seed",
       "source_file": "data/labels.json + locked 160b vector on fig1 affine",
       "height_source": "placeholder_fallen_agl",
-      "notes": "Centre lintel fragment 160a seeded 2026-09-19: fig1 label px\u2192EN vector from locked 160b. Tim eyeball.",
+      "notes": "Centre lintel fragment 160a seeded 2026-09-19: fig1 label px→EN vector from locked 160b. Tim eyeball.",
       "lock": {
         "status": "seed",
         "by": "Grok Build / Taskmaster",
@@ -2946,7 +2946,7 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
+        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
         "export": "exports/trilithons_centre_export_2026-09-19.json",
         "underlay": "Johnson 2008"
       }
@@ -2984,7 +2984,7 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
+        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
         "export": "exports/trilithons_centre_export_2026-09-19.json",
         "underlay": "Johnson 2008"
       }
@@ -3022,7 +3022,7 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
+        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
         "export": "exports/trilithons_centre_export_2026-09-19.json",
         "underlay": "Johnson 2008"
       },
@@ -3075,7 +3075,7 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
+        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
         "export": "exports/trilithons_centre_export_2026-09-19.json",
         "underlay": "Johnson 2008"
       },
@@ -3093,7 +3093,7 @@
           "density_outside": 0.8741
         },
         "chosen": "tim_lock + scene_ring@tim",
-        "note": "High outside density \u2014 overlaps Altar ink on fig1 (expected)."
+        "note": "High outside density — overlaps Altar ink on fig1 (expected)."
       }
     },
     {
@@ -3129,7 +3129,7 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
+        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
         "export": "exports/trilithons_centre_export_2026-09-19.json",
         "underlay": "Johnson 2008"
       }
@@ -3167,7 +3167,7 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
+        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
         "export": "exports/trilithons_centre_export_2026-09-19.json",
         "underlay": "Johnson 2008"
       }
@@ -3205,7 +3205,7 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
+        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
         "export": "exports/trilithons_centre_export_2026-09-19.json",
         "underlay": "Johnson 2008"
       }
@@ -3317,6 +3317,115 @@
         "note": "Tim eyeball nudge approved 2026-09-15"
       },
       "notes": "Tim eyeball lock 9b. H=Cleal App.5 AGL."
+    },
+    {
+      "id": "33",
+      "role": "bluestone",
+      "status": "empty_socket_placeholder",
+      "e_m": 412256.803,
+      "n_m": 142188.478,
+      "yaw_deg": 69.73,
+      "width_m": 0.5,
+      "thickness_m": 0.35,
+      "length_m": null,
+      "height_m": 1.68,
+      "z_base_m": 0.0,
+      "footprint_along_m": 0.5,
+      "footprint_across_m": 0.35,
+      "accuracy_class": "plan_locked",
+      "lock_status": "accepted",
+      "colour_class": "blue",
+      "source_file": "data/stone33_locked.json",
+      "lock": {
+        "status": "accepted",
+        "by": "Tim Daw",
+        "at": "2026-09-19T23:08+01:00",
+        "accept": [
+          "e_m",
+          "n_m",
+          "yaw_deg",
+          "width_m",
+          "thickness_m",
+          "height_m"
+        ],
+        "provisional": [],
+        "note": "Outer bluestone Johnson underlay nudge export publish"
+      },
+      "notes": "PROVISIONAL empty-socket / missing-fabric placeholder 2026-09-19. XY: labels.json pin 33 @ (792.7,845.6) via fig1 Cleal OSGB affine. Alt: ring mid 32–34 → 412255.978,142188.535 (Δ=2.15m); mid(33e,33f)→412253.584,142185.414. Modest W×T 1.00×0.60. Awaiting Tim eyeball on Johnson underlay — DO NOT merge to locked_poses / public Pages. | 2026-09-19 Johnson outer bluestone publish (new)"
+    },
+    {
+      "id": "35",
+      "role": "bluestone",
+      "status": "empty_socket_placeholder",
+      "e_m": 412249.901,
+      "n_m": 142182.547,
+      "yaw_deg": 125.66,
+      "width_m": 0.5,
+      "thickness_m": 0.35,
+      "length_m": null,
+      "height_m": 1.0,
+      "z_base_m": 0.0,
+      "footprint_along_m": 0.5,
+      "footprint_across_m": 0.35,
+      "accuracy_class": "plan_locked",
+      "lock_status": "accepted",
+      "colour_class": "blue",
+      "source_file": "data/stone35_locked.json",
+      "lock": {
+        "status": "accepted",
+        "by": "Tim Daw",
+        "at": "2026-09-19T23:08+01:00",
+        "accept": [
+          "e_m",
+          "n_m",
+          "yaw_deg",
+          "width_m",
+          "thickness_m",
+          "height_m"
+        ],
+        "provisional": [
+          "height_m"
+        ],
+        "note": "Outer bluestone Johnson underlay nudge export publish"
+      },
+      "notes": "PROVISIONAL empty-socket / missing-fabric placeholder 2026-09-19. XY: ring angular mid between locked 34 and 36 about CE/CN. Alt: mid(35a,35b)→412250.670,142182.198 (Δ=2.93m). Modest W×T 1.00×0.60. Awaiting Tim eyeball on Johnson underlay — DO NOT merge to locked_poses / public Pages. | 2026-09-19 Johnson outer bluestone publish (new)"
+    },
+    {
+      "id": "40",
+      "role": "bluestone",
+      "status": "empty_socket_placeholder",
+      "e_m": 412233.688,
+      "n_m": 142190.501,
+      "yaw_deg": 84.38,
+      "width_m": 0.55,
+      "thickness_m": 0.5,
+      "length_m": null,
+      "height_m": 1.0,
+      "z_base_m": 0.0,
+      "footprint_along_m": 0.55,
+      "footprint_across_m": 0.5,
+      "accuracy_class": "plan_locked",
+      "lock_status": "accepted",
+      "colour_class": "blue",
+      "source_file": "data/stone40_locked.json",
+      "lock": {
+        "status": "accepted",
+        "by": "Tim Daw",
+        "at": "2026-09-19T23:08+01:00",
+        "accept": [
+          "e_m",
+          "n_m",
+          "yaw_deg",
+          "width_m",
+          "thickness_m",
+          "height_m"
+        ],
+        "provisional": [
+          "height_m"
+        ],
+        "note": "Outer bluestone Johnson underlay nudge export publish"
+      },
+      "notes": "PROVISIONAL empty-socket / missing-fabric placeholder 2026-09-19. XY: labels.json pin 40 @ (505.1,903.8) via fig1 Cleal OSGB affine. Alt: ring mid 39–41 → 412235.205,142187.631 (Δ=3.33m); mid(40c,40g)→412234.312,142189.137. Modest W×T 1.00×0.60. Awaiting Tim eyeball on Johnson underlay — DO NOT merge to locked_poses / public Pages. | 2026-09-19 Johnson outer bluestone publish (new)"
     }
   ],
   "by_id": {
@@ -3330,7 +3439,7 @@
       "width_m": 1.993,
       "thickness_m": 1.22,
       "length_m": null,
-      "height_m": 3.96,
+      "height_m": 4.23,
       "z_base_m": 0.0,
       "footprint_along_m": 1.993,
       "footprint_across_m": 1.22,
@@ -3351,7 +3460,8 @@
           "height_m"
         ],
         "provisional": []
-      }
+      },
+      "notes": " | 2026-09-19: height lengthened to meet lintel seat (was 3.96)."
     },
     "2": {
       "id": "2",
@@ -3512,7 +3622,7 @@
       "width_m": 1.863,
       "thickness_m": 1.005,
       "length_m": null,
-      "height_m": 3.96,
+      "height_m": 4.113,
       "z_base_m": 0.0,
       "footprint_along_m": 1.863,
       "footprint_across_m": 1.005,
@@ -3534,7 +3644,8 @@
         ],
         "provisional": [],
         "note": "AUTO dens_in=0.844 lock=0.922 nn=3.30m W/T=1.85"
-      }
+      },
+      "notes": " | 2026-09-19: height lengthened to meet lintel seat (was 3.96)."
     },
     "8": {
       "id": "8",
@@ -3571,78 +3682,6 @@
         "note": "Tim eyeball nudge approved 2026-09-15"
       },
       "notes": "Tim eyeball lock 8. H=Cleal App.5 AGL."
-    },
-    "9a": {
-      "id": "9a",
-      "role": "sarsen_upright",
-      "status": "fallen_fragment",
-      "e_m": 412253.516,
-      "n_m": 142179.51,
-      "yaw_deg": 32.41,
-      "width_m": 1.893,
-      "thickness_m": 1.506,
-      "length_m": null,
-      "height_m": 0.76,
-      "z_base_m": 0.0,
-      "footprint_along_m": 1.893,
-      "footprint_across_m": 1.506,
-      "accuracy_class": "locked",
-      "lock_status": "accepted",
-      "colour_class": "highlight_9a",
-      "source_file": "data/stone9a_locked.json",
-      "height_source": "Cleal App.5 AGL",
-      "lock": {
-        "status": "accepted",
-        "by": "Tim Daw",
-        "at": "2026-09-15T09:40+01:00",
-        "accept": [
-          "e_m",
-          "n_m",
-          "yaw_deg",
-          "width_m",
-          "thickness_m",
-          "height_m"
-        ],
-        "provisional": [],
-        "note": "Tim eyeball nudge approved 2026-09-15"
-      },
-      "notes": "Tim eyeball lock 9a. H=Cleal App.5 AGL."
-    },
-    "9b": {
-      "id": "9b",
-      "role": "sarsen_upright",
-      "status": "fallen_fragment",
-      "e_m": 412254.621,
-      "n_m": 142177.54,
-      "yaw_deg": -39.66,
-      "width_m": 2.294,
-      "thickness_m": 1.731,
-      "length_m": null,
-      "height_m": 0.76,
-      "z_base_m": 0.0,
-      "footprint_along_m": 2.294,
-      "footprint_across_m": 1.731,
-      "accuracy_class": "locked",
-      "lock_status": "accepted",
-      "colour_class": "highlight_9b",
-      "source_file": "data/stone9b_locked.json",
-      "height_source": "Cleal App.5 AGL",
-      "lock": {
-        "status": "accepted",
-        "by": "Tim Daw",
-        "at": "2026-09-15T09:40+01:00",
-        "accept": [
-          "e_m",
-          "n_m",
-          "yaw_deg",
-          "width_m",
-          "thickness_m",
-          "height_m"
-        ],
-        "provisional": [],
-        "note": "Tim eyeball nudge approved 2026-09-15"
-      },
-      "notes": "Tim eyeball lock 9b. H=Cleal App.5 AGL."
     },
     "10": {
       "id": "10",
@@ -3896,7 +3935,7 @@
         "status": "medium",
         "by": "Plan Pose Checker",
         "at": "2026-09-14T14:17+01:00",
-        "note": "MEDIUM conf \u0394yaw\u221226.4\u00b0; prefer ink over seed"
+        "note": "MEDIUM conf Δyaw−26.4°; prefer ink over seed"
       }
     },
     "22": {
@@ -3909,7 +3948,7 @@
       "width_m": 1.777,
       "thickness_m": 0.929,
       "length_m": null,
-      "height_m": 3.81,
+      "height_m": 3.99,
       "z_base_m": 0.0,
       "footprint_along_m": 1.777,
       "footprint_across_m": 0.929,
@@ -3922,7 +3961,8 @@
         "by": "Plan Pose Checker",
         "at": "2026-09-14T14:17+01:00",
         "note": "visual clean; dens soft"
-      }
+      },
+      "notes": " | 2026-09-19: height lengthened to meet lintel seat (was 3.81)."
     },
     "23": {
       "id": "23",
@@ -4064,7 +4104,7 @@
         "note": "Tim eyeball export approved 2026-09-15T11:59Z (outers_27_lintels_nudge.html); outer uprigh"
       },
       "height_source": "Cleal App.5 standing",
-      "notes": "Tim lock 27. \u0394e=+0.200 m, \u0394n=\u22120.050 m vs scene_seed_kept; yaw/W\u00d7T\u00d7H unchanged. Completes outer upright circle (missing sockets 13/17/18/20/24 unmodelled)."
+      "notes": "Tim lock 27. Δe=+0.200 m, Δn=−0.050 m vs scene_seed_kept; yaw/W×T×H unchanged. Completes outer upright circle (missing sockets 13/17/18/20/24 unmodelled)."
     },
     "28": {
       "id": "28",
@@ -4110,7 +4150,7 @@
       "width_m": 1.906,
       "thickness_m": 1.192,
       "length_m": null,
-      "height_m": 3.96,
+      "height_m": 4.066,
       "z_base_m": 0.0,
       "footprint_along_m": 1.906,
       "footprint_across_m": 1.192,
@@ -4131,7 +4171,8 @@
           "height_m"
         ],
         "note": "lock 0.914 dens 0.903"
-      }
+      },
+      "notes": " | 2026-09-19: height lengthened to meet lintel seat (was 3.96)."
     },
     "30": {
       "id": "30",
@@ -4143,7 +4184,7 @@
       "width_m": 2.085,
       "thickness_m": 1.392,
       "length_m": null,
-      "height_m": 3.96,
+      "height_m": 4.104,
       "z_base_m": 0.0,
       "footprint_along_m": 2.085,
       "footprint_across_m": 1.392,
@@ -4164,7 +4205,8 @@
           "height_m"
         ],
         "provisional": []
-      }
+      },
+      "notes": " | 2026-09-19: height lengthened to meet lintel seat (was 3.96)."
     },
     "31": {
       "id": "31",
@@ -4172,7 +4214,7 @@
       "status": "standing",
       "e_m": 412255.51,
       "n_m": 142200.468,
-      "yaw_deg": -28.41,
+      "yaw_deg": -58.41,
       "width_m": 1.136,
       "thickness_m": 0.658,
       "length_m": null,
@@ -4180,15 +4222,15 @@
       "z_base_m": 0.0,
       "footprint_along_m": 1.136,
       "footprint_across_m": 0.658,
-      "accuracy_class": "locked",
+      "accuracy_class": "plan_locked",
       "lock_status": "accepted",
-      "colour_class": "blue_bluestone",
+      "colour_class": "blue",
       "source_file": "data/stone31_locked.json",
       "height_source": "cleal_app5_banton",
       "lock": {
         "status": "accepted",
         "by": "Tim Daw",
-        "at": "2026-09-15T13:25+01:00",
+        "at": "2026-09-19T23:08+01:00",
         "accept": [
           "e_m",
           "n_m",
@@ -4198,17 +4240,17 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim eyeball export approved 2026-09-15T12:21Z (bluestones_outer_nudge.html); outer bluestone"
+        "note": "Outer bluestone Johnson underlay nudge export publish"
       },
-      "notes": "Added from fig1 ink + labels.json pin (missing from scene). Cleal App.5 H=1.88."
+      "notes": "Added from fig1 ink + labels.json pin (missing from scene). Cleal App.5 H=1.88. | 2026-09-19: outer blue Johnson nudge publish"
     },
     "32": {
       "id": "32",
       "role": "bluestone",
       "status": "standing",
-      "e_m": 412256.889,
+      "e_m": 412256.739,
       "n_m": 142195.448,
-      "yaw_deg": 19.26,
+      "yaw_deg": -0.74,
       "width_m": 1.369,
       "thickness_m": 0.851,
       "length_m": null,
@@ -4216,15 +4258,15 @@
       "z_base_m": 0.0,
       "footprint_along_m": 1.369,
       "footprint_across_m": 0.851,
-      "accuracy_class": "locked",
+      "accuracy_class": "plan_locked",
       "lock_status": "accepted",
-      "colour_class": "blue_bluestone",
+      "colour_class": "blue",
       "source_file": "data/stone32_locked.json",
       "height_source": "placeholder",
       "lock": {
         "status": "accepted",
         "by": "Tim Daw",
-        "at": "2026-09-15T13:25+01:00",
+        "at": "2026-09-19T23:08+01:00",
         "accept": [
           "e_m",
           "n_m",
@@ -4234,9 +4276,9 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim eyeball export approved 2026-09-15T12:21Z (bluestones_outer_nudge.html); outer bluestone"
+        "note": "Outer bluestone Johnson underlay nudge export publish"
       },
-      "notes": "SPLIT from merged seed 2.145\u00d71.566; upright-only fig1 ink (Voronoi vs 150). ink W\u00d7T 1.369\u00d70.851."
+      "notes": "SPLIT from merged seed 2.145×1.566; upright-only fig1 ink (Voronoi vs 150). ink W×T 1.369×0.851. | 2026-09-19: outer blue Johnson nudge publish"
     },
     "34": {
       "id": "34",
@@ -4252,15 +4294,15 @@
       "z_base_m": 0.0,
       "footprint_along_m": 1.062,
       "footprint_across_m": 0.69,
-      "accuracy_class": "locked",
+      "accuracy_class": "plan_locked",
       "lock_status": "accepted",
-      "colour_class": "blue_bluestone",
+      "colour_class": "blue",
       "source_file": "data/stone34_locked.json",
       "height_source": "cleal_app5_banton",
       "lock": {
         "status": "accepted",
         "by": "Tim Daw",
-        "at": "2026-09-15T13:25+01:00",
+        "at": "2026-09-19T23:08+01:00",
         "accept": [
           "e_m",
           "n_m",
@@ -4270,9 +4312,9 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim eyeball export approved 2026-09-15T12:21Z (bluestones_outer_nudge.html); outer bluestone"
+        "note": "Outer bluestone Johnson underlay nudge export publish"
       },
-      "notes": "Existing scene/stones3d seed (schematic)."
+      "notes": "Existing scene/stones3d seed (schematic). | 2026-09-19: outer blue Johnson nudge publish"
     },
     "36": {
       "id": "36",
@@ -4280,7 +4322,7 @@
       "status": "standing",
       "e_m": 412244.011,
       "n_m": 142181.064,
-      "yaw_deg": 81.1,
+      "yaw_deg": 71.1,
       "width_m": 1.263,
       "thickness_m": 0.819,
       "length_m": null,
@@ -4288,15 +4330,15 @@
       "z_base_m": 0.0,
       "footprint_along_m": 1.263,
       "footprint_across_m": 0.819,
-      "accuracy_class": "locked",
+      "accuracy_class": "plan_locked",
       "lock_status": "accepted",
-      "colour_class": "blue_bluestone",
+      "colour_class": "blue",
       "source_file": "data/stone36_locked.json",
       "height_source": "stones3d",
       "lock": {
         "status": "accepted",
         "by": "Tim Daw",
-        "at": "2026-09-15T13:25+01:00",
+        "at": "2026-09-19T23:08+01:00",
         "accept": [
           "e_m",
           "n_m",
@@ -4306,33 +4348,33 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim eyeball export approved 2026-09-15T12:21Z (bluestones_outer_nudge.html); outer bluestone"
+        "note": "Outer bluestone Johnson underlay nudge export publish"
       },
-      "notes": "Existing scene/stones3d seed (schematic)."
+      "notes": "Existing scene/stones3d seed (schematic). | 2026-09-19: outer blue Johnson nudge publish"
     },
     "37": {
       "id": "37",
       "role": "bluestone",
       "status": "standing",
-      "e_m": 412242.686,
-      "n_m": 142183.086,
-      "yaw_deg": -20.63,
-      "width_m": 1.222,
-      "thickness_m": 0.63,
+      "e_m": 412242.636,
+      "n_m": 142183.036,
+      "yaw_deg": -15.63,
+      "width_m": 1.022,
+      "thickness_m": 0.38,
       "length_m": null,
       "height_m": 1.27,
       "z_base_m": 0.0,
-      "footprint_along_m": 1.222,
-      "footprint_across_m": 0.63,
-      "accuracy_class": "locked",
+      "footprint_along_m": 1.022,
+      "footprint_across_m": 0.38,
+      "accuracy_class": "plan_locked",
       "lock_status": "accepted",
-      "colour_class": "blue_bluestone",
+      "colour_class": "blue",
       "source_file": "data/stone37_locked.json",
       "height_source": "cleal_app5_banton",
       "lock": {
         "status": "accepted",
         "by": "Tim Daw",
-        "at": "2026-09-15T13:25+01:00",
+        "at": "2026-09-19T23:08+01:00",
         "accept": [
           "e_m",
           "n_m",
@@ -4342,33 +4384,33 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim eyeball export approved 2026-09-15T12:21Z (bluestones_outer_nudge.html); outer bluestone"
+        "note": "Outer bluestone Johnson underlay nudge export publish"
       },
-      "notes": "Existing scene/stones3d seed (schematic)."
+      "notes": "Existing scene/stones3d seed (schematic). | 2026-09-19: outer blue Johnson nudge publish"
     },
     "38": {
       "id": "38",
       "role": "bluestone",
       "status": "standing",
-      "e_m": 412240.246,
-      "n_m": 142184.34,
-      "yaw_deg": -36.78,
-      "width_m": 1.442,
-      "thickness_m": 0.41,
+      "e_m": 412240.196,
+      "n_m": 142183.94,
+      "yaw_deg": 18.22,
+      "width_m": 0.942,
+      "thickness_m": 0.66,
       "length_m": null,
       "height_m": 1.0,
       "z_base_m": 0.0,
-      "footprint_along_m": 1.442,
-      "footprint_across_m": 0.41,
-      "accuracy_class": "locked",
+      "footprint_along_m": 0.942,
+      "footprint_across_m": 0.66,
+      "accuracy_class": "plan_locked",
       "lock_status": "accepted",
-      "colour_class": "blue_bluestone",
+      "colour_class": "blue",
       "source_file": "data/stone38_locked.json",
       "height_source": "stones3d",
       "lock": {
         "status": "accepted",
         "by": "Tim Daw",
-        "at": "2026-09-15T13:25+01:00",
+        "at": "2026-09-19T23:08+01:00",
         "accept": [
           "e_m",
           "n_m",
@@ -4378,33 +4420,33 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim eyeball export approved 2026-09-15T12:21Z (bluestones_outer_nudge.html); outer bluestone"
+        "note": "Outer bluestone Johnson underlay nudge export publish"
       },
-      "notes": "Existing scene/stones3d seed (schematic)."
+      "notes": "Existing scene/stones3d seed (schematic). | 2026-09-19: outer blue Johnson nudge publish"
     },
     "39": {
       "id": "39",
       "role": "bluestone",
       "status": "standing",
-      "e_m": 412238.839,
+      "e_m": 412238.789,
       "n_m": 142184.948,
       "yaw_deg": 50.36,
-      "width_m": 1.367,
+      "width_m": 1.217,
       "thickness_m": 0.602,
       "length_m": null,
       "height_m": 1.0,
       "z_base_m": 0.0,
-      "footprint_along_m": 1.367,
+      "footprint_along_m": 1.217,
       "footprint_across_m": 0.602,
-      "accuracy_class": "locked",
+      "accuracy_class": "plan_locked",
       "lock_status": "accepted",
-      "colour_class": "blue_bluestone",
+      "colour_class": "blue",
       "source_file": "data/stone39_locked.json",
       "height_source": "stones3d",
       "lock": {
         "status": "accepted",
         "by": "Tim Daw",
-        "at": "2026-09-15T13:25+01:00",
+        "at": "2026-09-19T23:08+01:00",
         "accept": [
           "e_m",
           "n_m",
@@ -4414,17 +4456,17 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim eyeball export approved 2026-09-15T12:21Z (bluestones_outer_nudge.html); outer bluestone"
+        "note": "Outer bluestone Johnson underlay nudge export publish"
       },
-      "notes": "Existing scene/stones3d seed (schematic)."
+      "notes": "Existing scene/stones3d seed (schematic). | 2026-09-19: outer blue Johnson nudge publish"
     },
     "41": {
       "id": "41",
       "role": "bluestone",
       "status": "standing",
-      "e_m": 412232.732,
+      "e_m": 412232.682,
       "n_m": 142191.765,
-      "yaw_deg": 62.39,
+      "yaw_deg": 57.39,
       "width_m": 1.976,
       "thickness_m": 0.544,
       "length_m": null,
@@ -4432,15 +4474,15 @@
       "z_base_m": 0.0,
       "footprint_along_m": 1.976,
       "footprint_across_m": 0.544,
-      "accuracy_class": "locked",
+      "accuracy_class": "plan_locked",
       "lock_status": "accepted",
-      "colour_class": "blue_bluestone",
+      "colour_class": "blue",
       "source_file": "data/stone41_locked.json",
       "height_source": "stones3d",
       "lock": {
         "status": "accepted",
         "by": "Tim Daw",
-        "at": "2026-09-15T13:25+01:00",
+        "at": "2026-09-19T23:08+01:00",
         "accept": [
           "e_m",
           "n_m",
@@ -4450,33 +4492,33 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim eyeball export approved 2026-09-15T12:21Z (bluestones_outer_nudge.html); outer bluestone"
+        "note": "Outer bluestone Johnson underlay nudge export publish"
       },
-      "notes": "Existing scene/stones3d seed (schematic)."
+      "notes": "Existing scene/stones3d seed (schematic). | 2026-09-19: outer blue Johnson nudge publish"
     },
     "42": {
       "id": "42",
       "role": "bluestone",
       "status": "standing",
-      "e_m": 412236.169,
-      "n_m": 142200.391,
+      "e_m": 412236.219,
+      "n_m": 142200.241,
       "yaw_deg": -79.56,
-      "width_m": 1.646,
+      "width_m": 1.746,
       "thickness_m": 0.835,
       "length_m": null,
       "height_m": 1.0,
       "z_base_m": 0.0,
-      "footprint_along_m": 1.646,
+      "footprint_along_m": 1.746,
       "footprint_across_m": 0.835,
-      "accuracy_class": "locked",
+      "accuracy_class": "plan_locked",
       "lock_status": "accepted",
-      "colour_class": "blue_bluestone",
+      "colour_class": "blue",
       "source_file": "data/stone42_locked.json",
       "height_source": "stones3d",
       "lock": {
         "status": "accepted",
         "by": "Tim Daw",
-        "at": "2026-09-15T13:25+01:00",
+        "at": "2026-09-19T23:08+01:00",
         "accept": [
           "e_m",
           "n_m",
@@ -4486,9 +4528,9 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim eyeball export approved 2026-09-15T12:21Z (bluestones_outer_nudge.html); outer bluestone"
+        "note": "Outer bluestone Johnson underlay nudge export publish"
       },
-      "notes": "Existing scene/stones3d seed (schematic)."
+      "notes": "Existing scene/stones3d seed (schematic). | 2026-09-19: outer blue Johnson nudge publish"
     },
     "43": {
       "id": "43",
@@ -4497,22 +4539,22 @@
       "e_m": 412238.907,
       "n_m": 142203.439,
       "yaw_deg": 101.79,
-      "width_m": 1.395,
-      "thickness_m": 0.55,
+      "width_m": 1.145,
+      "thickness_m": 0.78,
       "length_m": null,
       "height_m": 1.0,
       "z_base_m": 0.0,
-      "footprint_along_m": 1.395,
-      "footprint_across_m": 0.55,
-      "accuracy_class": "locked",
+      "footprint_along_m": 1.145,
+      "footprint_across_m": 0.78,
+      "accuracy_class": "plan_locked",
       "lock_status": "accepted",
-      "colour_class": "blue_bluestone",
+      "colour_class": "blue",
       "source_file": "data/stone43_locked.json",
       "height_source": "stones3d",
       "lock": {
         "status": "accepted",
         "by": "Tim Daw",
-        "at": "2026-09-15T13:25+01:00",
+        "at": "2026-09-19T23:08+01:00",
         "accept": [
           "e_m",
           "n_m",
@@ -4522,33 +4564,33 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim eyeball export approved 2026-09-15T12:21Z (bluestones_outer_nudge.html); outer bluestone"
+        "note": "Outer bluestone Johnson underlay nudge export publish"
       },
-      "notes": "Existing scene/stones3d seed (schematic)."
+      "notes": "Existing scene/stones3d seed (schematic). | 2026-09-19: outer blue Johnson nudge publish"
     },
     "44": {
       "id": "44",
       "role": "bluestone",
       "status": "standing",
-      "e_m": 412240.468,
+      "e_m": 412240.318,
       "n_m": 142200.954,
       "yaw_deg": 64.34,
       "width_m": 1.121,
-      "thickness_m": 0.55,
+      "thickness_m": 0.956,
       "length_m": null,
       "height_m": 1.0,
       "z_base_m": 0.0,
       "footprint_along_m": 1.121,
-      "footprint_across_m": 0.55,
-      "accuracy_class": "locked",
+      "footprint_across_m": 0.956,
+      "accuracy_class": "plan_locked",
       "lock_status": "accepted",
-      "colour_class": "blue_bluestone",
+      "colour_class": "blue",
       "source_file": "data/stone44_locked.json",
       "height_source": "stones3d",
       "lock": {
         "status": "accepted",
         "by": "Tim Daw",
-        "at": "2026-09-15T13:25+01:00",
+        "at": "2026-09-19T23:08+01:00",
         "accept": [
           "e_m",
           "n_m",
@@ -4558,33 +4600,33 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim eyeball export approved 2026-09-15T12:21Z (bluestones_outer_nudge.html); outer bluestone"
+        "note": "Outer bluestone Johnson underlay nudge export publish"
       },
-      "notes": "Existing scene/stones3d seed (schematic)."
+      "notes": "Existing scene/stones3d seed (schematic). | 2026-09-19: outer blue Johnson nudge publish"
     },
     "45": {
       "id": "45",
       "role": "bluestone",
       "status": "standing",
       "e_m": 412241.723,
-      "n_m": 142205.822,
+      "n_m": 142205.672,
       "yaw_deg": -74.18,
-      "width_m": 2.148,
+      "width_m": 2.398,
       "thickness_m": 0.819,
       "length_m": null,
       "height_m": 1.0,
       "z_base_m": 0.0,
-      "footprint_along_m": 2.148,
+      "footprint_along_m": 2.398,
       "footprint_across_m": 0.819,
-      "accuracy_class": "locked",
+      "accuracy_class": "plan_locked",
       "lock_status": "accepted",
-      "colour_class": "blue_bluestone",
+      "colour_class": "blue",
       "source_file": "data/stone45_locked.json",
       "height_source": "stones3d",
       "lock": {
         "status": "accepted",
         "by": "Tim Daw",
-        "at": "2026-09-15T13:25+01:00",
+        "at": "2026-09-19T23:08+01:00",
         "accept": [
           "e_m",
           "n_m",
@@ -4594,33 +4636,33 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim eyeball export approved 2026-09-15T12:21Z (bluestones_outer_nudge.html); outer bluestone"
+        "note": "Outer bluestone Johnson underlay nudge export publish"
       },
-      "notes": "Existing scene/stones3d seed (schematic)."
+      "notes": "Existing scene/stones3d seed (schematic). | 2026-09-19: outer blue Johnson nudge publish"
     },
     "46": {
       "id": "46",
       "role": "bluestone",
       "status": "standing",
-      "e_m": 412249.789,
-      "n_m": 142205.298,
-      "yaw_deg": 60.41,
-      "width_m": 1.141,
-      "thickness_m": 0.66,
+      "e_m": 412249.689,
+      "n_m": 142205.048,
+      "yaw_deg": -24.59,
+      "width_m": 0.891,
+      "thickness_m": 0.61,
       "length_m": null,
       "height_m": 0.96,
       "z_base_m": 0.0,
-      "footprint_along_m": 1.141,
-      "footprint_across_m": 0.66,
-      "accuracy_class": "locked",
+      "footprint_along_m": 0.891,
+      "footprint_across_m": 0.61,
+      "accuracy_class": "plan_locked",
       "lock_status": "accepted",
-      "colour_class": "blue_bluestone",
+      "colour_class": "blue",
       "source_file": "data/stone46_locked.json",
       "height_source": "cleal_app5_banton",
       "lock": {
         "status": "accepted",
         "by": "Tim Daw",
-        "at": "2026-09-15T13:25+01:00",
+        "at": "2026-09-19T23:08+01:00",
         "accept": [
           "e_m",
           "n_m",
@@ -4630,33 +4672,33 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim eyeball export approved 2026-09-15T12:21Z (bluestones_outer_nudge.html); outer bluestone"
+        "note": "Outer bluestone Johnson underlay nudge export publish"
       },
-      "notes": "Existing scene/stones3d seed (schematic)."
+      "notes": "Existing scene/stones3d seed (schematic). | 2026-09-19: outer blue Johnson nudge publish"
     },
     "47": {
       "id": "47",
       "role": "bluestone",
       "status": "standing",
-      "e_m": 412251.462,
-      "n_m": 142204.621,
-      "yaw_deg": 33.69,
-      "width_m": 1.346,
+      "e_m": 412251.312,
+      "n_m": 142204.521,
+      "yaw_deg": -31.31,
+      "width_m": 1.096,
       "thickness_m": 0.673,
       "length_m": null,
       "height_m": 1.45,
       "z_base_m": 0.0,
-      "footprint_along_m": 1.346,
+      "footprint_along_m": 1.096,
       "footprint_across_m": 0.673,
-      "accuracy_class": "locked",
+      "accuracy_class": "plan_locked",
       "lock_status": "accepted",
-      "colour_class": "blue_bluestone",
+      "colour_class": "blue",
       "source_file": "data/stone47_locked.json",
       "height_source": "cleal_app5_banton",
       "lock": {
         "status": "accepted",
         "by": "Tim Daw",
-        "at": "2026-09-15T13:25+01:00",
+        "at": "2026-09-19T23:08+01:00",
         "accept": [
           "e_m",
           "n_m",
@@ -4666,33 +4708,33 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim eyeball export approved 2026-09-15T12:21Z (bluestones_outer_nudge.html); outer bluestone"
+        "note": "Outer bluestone Johnson underlay nudge export publish"
       },
-      "notes": "Existing scene/stones3d seed (schematic)."
+      "notes": "Existing scene/stones3d seed (schematic). | 2026-09-19: outer blue Johnson nudge publish"
     },
     "48": {
       "id": "48",
       "role": "bluestone",
       "status": "standing",
       "e_m": 412252.02,
-      "n_m": 142202.975,
-      "yaw_deg": -60.78,
+      "n_m": 142203.125,
+      "yaw_deg": -50.78,
       "width_m": 1.188,
-      "thickness_m": 0.962,
+      "thickness_m": 0.712,
       "length_m": null,
       "height_m": 1.0,
       "z_base_m": 0.0,
       "footprint_along_m": 1.188,
-      "footprint_across_m": 0.962,
-      "accuracy_class": "locked",
+      "footprint_across_m": 0.712,
+      "accuracy_class": "plan_locked",
       "lock_status": "accepted",
-      "colour_class": "blue_bluestone",
+      "colour_class": "blue",
       "source_file": "data/stone48_locked.json",
       "height_source": "stones3d",
       "lock": {
         "status": "accepted",
         "by": "Tim Daw",
-        "at": "2026-09-15T13:25+01:00",
+        "at": "2026-09-19T23:08+01:00",
         "accept": [
           "e_m",
           "n_m",
@@ -4702,33 +4744,33 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim eyeball export approved 2026-09-15T12:21Z (bluestones_outer_nudge.html); outer bluestone"
+        "note": "Outer bluestone Johnson underlay nudge export publish"
       },
-      "notes": "Existing scene/stones3d seed (schematic)."
+      "notes": "Existing scene/stones3d seed (schematic). | 2026-09-19: outer blue Johnson nudge publish"
     },
     "49": {
       "id": "49",
       "role": "bluestone",
       "status": "standing",
-      "e_m": 412253.926,
-      "n_m": 142202.468,
-      "yaw_deg": 24.21,
-      "width_m": 0.955,
-      "thickness_m": 0.739,
+      "e_m": 412253.726,
+      "n_m": 142202.268,
+      "yaw_deg": -40.79,
+      "width_m": 1.105,
+      "thickness_m": 0.439,
       "length_m": null,
       "height_m": 1.9,
       "z_base_m": 0.0,
-      "footprint_along_m": 0.955,
-      "footprint_across_m": 0.739,
-      "accuracy_class": "locked",
+      "footprint_along_m": 1.105,
+      "footprint_across_m": 0.439,
+      "accuracy_class": "plan_locked",
       "lock_status": "accepted",
-      "colour_class": "blue_bluestone",
+      "colour_class": "blue",
       "source_file": "data/stone49_locked.json",
       "height_source": "cleal_app5_banton",
       "lock": {
         "status": "accepted",
         "by": "Tim Daw",
-        "at": "2026-09-15T13:25+01:00",
+        "at": "2026-09-19T23:08+01:00",
         "accept": [
           "e_m",
           "n_m",
@@ -4738,9 +4780,85 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim eyeball export approved 2026-09-15T12:21Z (bluestones_outer_nudge.html); outer bluestone"
+        "note": "Outer bluestone Johnson underlay nudge export publish"
       },
-      "notes": "Existing scene/stones3d seed (schematic)."
+      "notes": "Existing scene/stones3d seed (schematic). | 2026-09-19: outer blue Johnson nudge publish"
+    },
+    "51": {
+      "id": "51",
+      "role": "trilithon_upright",
+      "status": "standing",
+      "e_m": 412254.217,
+      "n_m": 142191.6,
+      "yaw_deg": 48.27,
+      "width_m": 2.487,
+      "thickness_m": 1.032,
+      "length_m": null,
+      "height_m": 5.182,
+      "z_base_m": 0.0,
+      "footprint_along_m": 2.487,
+      "footprint_across_m": 1.032,
+      "accuracy_class": "locked",
+      "lock_status": "accepted",
+      "colour_class": "green_locked",
+      "source_file": "data/stone51_locked.json",
+      "height_source": "cleal_app5_or_scene",
+      "notes": "Johnson 2008 solid ink OBB seed; scene/locked soft start | 2026-09-19: height lengthened to meet lintel seat (was 4.98).",
+      "lock": {
+        "status": "accepted",
+        "by": "Tim Daw",
+        "at": "2026-09-19T10:32+01:00",
+        "accept": [
+          "e_m",
+          "n_m",
+          "yaw_deg",
+          "width_m",
+          "thickness_m",
+          "height_m"
+        ],
+        "provisional": [],
+        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
+        "export": "exports/trilithons_centre_export_2026-09-19.json",
+        "underlay": "Johnson 2008"
+      }
+    },
+    "52": {
+      "id": "52",
+      "role": "trilithon_upright",
+      "status": "standing",
+      "e_m": 412252.31,
+      "n_m": 142189.543,
+      "yaw_deg": 46.44,
+      "width_m": 2.535,
+      "thickness_m": 1.19,
+      "length_m": null,
+      "height_m": 5.08,
+      "z_base_m": 0.0,
+      "footprint_along_m": 2.535,
+      "footprint_across_m": 1.19,
+      "accuracy_class": "locked",
+      "lock_status": "accepted",
+      "colour_class": "green_locked",
+      "source_file": "data/stone52_locked.json",
+      "height_source": "cleal_app5_or_scene",
+      "notes": "Johnson 2008 solid ink OBB seed; scene/locked soft start",
+      "lock": {
+        "status": "accepted",
+        "by": "Tim Daw",
+        "at": "2026-09-19T10:32+01:00",
+        "accept": [
+          "e_m",
+          "n_m",
+          "yaw_deg",
+          "width_m",
+          "thickness_m",
+          "height_m"
+        ],
+        "provisional": [],
+        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
+        "export": "exports/trilithons_centre_export_2026-09-19.json",
+        "underlay": "Johnson 2008"
+      }
     },
     "53": {
       "id": "53",
@@ -4775,7 +4893,7 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
+        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
         "export": "exports/trilithons_centre_export_2026-09-19.json",
         "underlay": "Johnson 2008"
       }
@@ -4813,31 +4931,31 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
+        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
         "export": "exports/trilithons_centre_export_2026-09-19.json",
         "underlay": "Johnson 2008"
       }
     },
-    "55a": {
-      "id": "55a",
+    "56": {
+      "id": "56",
       "role": "trilithon_upright",
-      "status": "fallen",
-      "e_m": 412240.017,
-      "n_m": 142187.533,
-      "yaw_deg": 49.18,
-      "width_m": 4.327,
-      "thickness_m": 2.343,
+      "status": "standing",
+      "e_m": 412238.308,
+      "n_m": 142189.509,
+      "yaw_deg": -40.73,
+      "width_m": 2.072,
+      "thickness_m": 0.765,
       "length_m": null,
-      "height_m": 1,
+      "height_m": 6.55,
       "z_base_m": 0.0,
-      "footprint_along_m": 4.327,
-      "footprint_across_m": 2.343,
+      "footprint_along_m": 2.072,
+      "footprint_across_m": 0.765,
       "accuracy_class": "locked",
       "lock_status": "accepted",
       "colour_class": "green_locked",
-      "source_file": "data/stone55a_locked.json",
-      "height_source": "placeholder_fallen_agl",
-      "notes": "Johnson 2008 lean hatch-bound seed (constrained soft prior); Tim: south=55a on-80=55b",
+      "source_file": "data/stone56_locked.json",
+      "height_source": "cleal_app5_or_scene",
+      "notes": "Johnson 2008 solid ink OBB seed; scene/locked soft start",
       "lock": {
         "status": "accepted",
         "by": "Tim Daw",
@@ -4851,46 +4969,31 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
+        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
         "export": "exports/trilithons_centre_export_2026-09-19.json",
         "underlay": "Johnson 2008"
-      },
-      "fig1_pixel": {
-        "tim_box": {
-          "score": 0.438,
-          "pass": true,
-          "density_inside": 0.8845,
-          "density_outside": 0.4465
-        },
-        "scene_ring_at_tim": {
-          "score": 0.3818,
-          "pass": true,
-          "density_inside": 0.7786,
-          "density_outside": 0.3967
-        },
-        "chosen": "tim_lock + scene_ring@tim"
       }
     },
-    "55b": {
-      "id": "55b",
+    "57": {
+      "id": "57",
       "role": "trilithon_upright",
-      "status": "fallen",
-      "e_m": 412242.776,
-      "n_m": 142190.677,
-      "yaw_deg": 47.8,
-      "width_m": 3.831,
-      "thickness_m": 2.162,
+      "status": "standing",
+      "e_m": 412237.433,
+      "n_m": 142194.835,
+      "yaw_deg": 58.94,
+      "width_m": 2.468,
+      "thickness_m": 0.947,
       "length_m": null,
-      "height_m": 1,
+      "height_m": 5.18,
       "z_base_m": 0.0,
-      "footprint_along_m": 3.831,
-      "footprint_across_m": 2.162,
+      "footprint_along_m": 2.468,
+      "footprint_across_m": 0.947,
       "accuracy_class": "locked",
       "lock_status": "accepted",
       "colour_class": "green_locked",
-      "source_file": "data/stone55b_locked.json",
-      "height_source": "placeholder_fallen_agl",
-      "notes": "Johnson 2008 lean hatch-bound seed (constrained soft prior); Tim: south=55a on-80=55b",
+      "source_file": "data/stone57_locked.json",
+      "height_source": "cleal_app5_or_scene",
+      "notes": "Johnson 2008 solid ink OBB seed; scene/locked soft start",
       "lock": {
         "status": "accepted",
         "by": "Tim Daw",
@@ -4904,25 +5007,85 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
+        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
         "export": "exports/trilithons_centre_export_2026-09-19.json",
         "underlay": "Johnson 2008"
-      },
-      "fig1_pixel": {
-        "tim_box": {
-          "score": 0.2108,
-          "pass": true,
-          "density_inside": 0.9538,
-          "density_outside": 0.743
-        },
-        "scene_ring_at_tim": {
-          "score": 0.1199,
-          "pass": true,
-          "density_inside": 0.994,
-          "density_outside": 0.8741
-        },
-        "chosen": "tim_lock + scene_ring@tim",
-        "note": "High outside density \u2014 overlaps Altar ink on fig1 (expected)."
+      }
+    },
+    "58": {
+      "id": "58",
+      "role": "trilithon_upright",
+      "status": "standing",
+      "e_m": 412238.835,
+      "n_m": 142197.292,
+      "yaw_deg": 59.91,
+      "width_m": 2.521,
+      "thickness_m": 1.043,
+      "length_m": null,
+      "height_m": 5.212,
+      "z_base_m": 0.0,
+      "footprint_along_m": 2.521,
+      "footprint_across_m": 1.043,
+      "accuracy_class": "locked",
+      "lock_status": "accepted",
+      "colour_class": "green_locked",
+      "source_file": "data/stone58_locked.json",
+      "height_source": "cleal_app5_or_scene",
+      "notes": "Johnson 2008 solid ink OBB seed; scene/locked soft start | 2026-09-19: height lengthened to meet lintel seat (was 5.18).",
+      "lock": {
+        "status": "accepted",
+        "by": "Tim Daw",
+        "at": "2026-09-19T10:32+01:00",
+        "accept": [
+          "e_m",
+          "n_m",
+          "yaw_deg",
+          "width_m",
+          "thickness_m",
+          "height_m"
+        ],
+        "provisional": [],
+        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
+        "export": "exports/trilithons_centre_export_2026-09-19.json",
+        "underlay": "Johnson 2008"
+      }
+    },
+    "60": {
+      "id": "60",
+      "role": "trilithon_upright",
+      "status": "standing",
+      "e_m": 412244.587,
+      "n_m": 142202.564,
+      "yaw_deg": 29.07,
+      "width_m": 2.327,
+      "thickness_m": 1.088,
+      "length_m": null,
+      "height_m": 5.03,
+      "z_base_m": 0.0,
+      "footprint_along_m": 2.327,
+      "footprint_across_m": 1.088,
+      "accuracy_class": "locked",
+      "lock_status": "accepted",
+      "colour_class": "green_locked",
+      "source_file": "data/stone60_locked.json",
+      "height_source": "cleal_app5_or_scene",
+      "notes": "Johnson 2008 solid ink OBB seed; scene/locked soft start",
+      "lock": {
+        "status": "accepted",
+        "by": "Tim Daw",
+        "at": "2026-09-19T10:32+01:00",
+        "accept": [
+          "e_m",
+          "n_m",
+          "yaw_deg",
+          "width_m",
+          "thickness_m",
+          "height_m"
+        ],
+        "provisional": [],
+        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
+        "export": "exports/trilithons_centre_export_2026-09-19.json",
+        "underlay": "Johnson 2008"
       }
     },
     "61": {
@@ -4960,42 +5123,6 @@
         "note": "Tim eyeball export approved 2026-09-15T14:18Z (bluestones_horseshoe_nudge.html); horseshoe bluestone"
       },
       "notes": "Tim lock horseshoe 61; status=standing; johnson_plan_ink_seed"
-    },
-    "61a": {
-      "id": "61a",
-      "role": "bluestone",
-      "status": "standing",
-      "e_m": 412251.79,
-      "n_m": 142191.754,
-      "yaw_deg": -90.99,
-      "width_m": 0.419,
-      "thickness_m": 0.2,
-      "length_m": null,
-      "height_m": 0.5,
-      "z_base_m": 0.0,
-      "footprint_along_m": 0.419,
-      "footprint_across_m": 0.2,
-      "accuracy_class": "locked",
-      "lock_status": "accepted",
-      "colour_class": "blue_bluestone",
-      "source_file": "data/stone61a_locked.json",
-      "height_source": "placeholder_stump",
-      "lock": {
-        "status": "accepted",
-        "by": "Tim Daw",
-        "at": "2026-09-15T15:20+01:00",
-        "accept": [
-          "e_m",
-          "n_m",
-          "yaw_deg",
-          "width_m",
-          "thickness_m",
-          "height_m"
-        ],
-        "provisional": [],
-        "note": "Tim eyeball export approved 2026-09-15T14:18Z (bluestones_horseshoe_nudge.html); horseshoe bluestone"
-      },
-      "notes": "Tim lock horseshoe 61a; status=standing; johnson_plan_ink_seed"
     },
     "62": {
       "id": "62",
@@ -5376,7 +5503,7 @@
       "colour_class": "altar_pink",
       "source_file": "data/altar80_locked.json",
       "height_source": "pink",
-      "notes": "Tim pink start \u2014 place may need nudge on Johnson",
+      "notes": "Tim pink start — place may need nudge on Johnson",
       "lock": {
         "status": "accepted",
         "by": "Tim Daw",
@@ -5390,7 +5517,7 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
+        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
         "export": "exports/trilithons_centre_export_2026-09-19.json",
         "underlay": "Johnson 2008"
       },
@@ -5415,240 +5542,33 @@
       },
       "overview_pose_source": "Tim centre nudge lock 2026-09-19 (Johnson underlay)"
     },
-    "120": {
-      "id": "120",
-      "role": "sarsen_lintel",
-      "status": "fallen",
-      "e_m": 412227.842,
-      "n_m": 142196.34,
-      "yaw_deg": 0.93,
-      "width_m": 1.607,
-      "thickness_m": 0.99,
-      "length_m": null,
-      "height_m": 0.8,
-      "z_base_m": 0.0,
-      "footprint_along_m": 1.607,
-      "footprint_across_m": 0.99,
-      "accuracy_class": "locked",
-      "lock_status": "accepted",
-      "colour_class": "green_locked",
-      "source_file": "data/stone120_locked.json",
-      "height_source": "default fallen lintel vertical 0.80 m",
-      "lock": {
-        "status": "accepted",
-        "by": "Tim Daw",
-        "at": "2026-09-15T12:59+01:00",
-        "accept": [
-          "e_m",
-          "n_m",
-          "yaw_deg",
-          "width_m",
-          "thickness_m",
-          "height_m"
-        ],
-        "provisional": [],
-        "note": "Tim eyeball export approved 2026-09-15T11:59Z (outers_27_lintels_nudge.html); fallen outer"
-      },
-      "notes": "Tim lock 120 fallen lintel. \u0394yaw=\u22127.00\u00b0 (7.93\u21920.93); e/n/W\u00d7T\u00d7H unchanged vs fig1 ink seed. Originally ~20\u201321 span; fabric N of 19."
-    },
-    "127": {
-      "id": "127",
-      "role": "sarsen_lintel",
-      "status": "fallen",
-      "e_m": 412245.672,
-      "n_m": 142209.732,
-      "yaw_deg": 81.38,
-      "width_m": 2.342,
-      "thickness_m": 0.793,
-      "length_m": null,
-      "height_m": 0.8,
-      "z_base_m": 0.0,
-      "footprint_along_m": 2.342,
-      "footprint_across_m": 0.793,
-      "accuracy_class": "locked",
-      "lock_status": "accepted",
-      "colour_class": "green_locked",
-      "source_file": "data/stone127_locked.json",
-      "height_source": "default fallen lintel vertical 0.80 m",
-      "lock": {
-        "status": "accepted",
-        "by": "Tim Daw",
-        "at": "2026-09-15T12:59+01:00",
-        "accept": [
-          "e_m",
-          "n_m",
-          "yaw_deg",
-          "width_m",
-          "thickness_m",
-          "height_m"
-        ],
-        "provisional": [],
-        "note": "Tim eyeball export approved 2026-09-15T11:59Z (outers_27_lintels_nudge.html); fallen outer"
-      },
-      "notes": "Tim lock 127 fallen lintel. \u0394e=+0.100 m vs fig1 ink seed; n/yaw/W\u00d7T\u00d7H unchanged. Was lintel bleed on 26 seed."
-    },
-    "150": {
-      "id": "150",
-      "role": "bluestone_lintel",
-      "status": "fallen",
-      "e_m": 412256.833,
-      "n_m": 142196.413,
-      "yaw_deg": 52.91,
-      "width_m": 2.44,
-      "thickness_m": 0.559,
-      "length_m": null,
-      "height_m": 0.5,
-      "z_base_m": 0.0,
-      "footprint_along_m": 2.44,
-      "footprint_across_m": 0.559,
-      "accuracy_class": "locked",
-      "lock_status": "accepted",
-      "colour_class": "blue_bluestone",
-      "source_file": "data/stone150_locked.json",
-      "height_source": "placeholder_fallen_bluestone_lintel",
-      "lock": {
-        "status": "accepted",
-        "by": "Tim Daw",
-        "at": "2026-09-15T13:25+01:00",
-        "accept": [
-          "e_m",
-          "n_m",
-          "yaw_deg",
-          "width_m",
-          "thickness_m",
-          "height_m"
-        ],
-        "provisional": [],
-        "note": "Tim eyeball export approved 2026-09-15T12:21Z (bluestones_outer_nudge.html); outer bluestone"
-      },
-      "notes": "NEW: split from 32 merged hatch. fig1 ink long\u22481.685m; W set to laser c.2.44m (StonehengeLaserScan p.50). labels pin (775.8,742.1). Fallen bluestone lintel with mortises."
-    },
-    "154": {
-      "id": "154",
-      "role": "trilithon_lintel",
-      "status": "present",
-      "e_m": 412246.376,
-      "n_m": 142186.059,
-      "yaw_deg": 24.17,
-      "width_m": 4.857,
-      "thickness_m": 1.361,
-      "length_m": null,
-      "height_m": 0.8,
-      "z_base_m": 0.0,
-      "footprint_along_m": 4.857,
-      "footprint_across_m": 1.361,
-      "accuracy_class": "locked",
-      "lock_status": "accepted",
-      "colour_class": "green_locked",
-      "source_file": "data/stone154_locked.json",
-      "height_source": "placeholder_fallen_agl",
-      "notes": "Scene/CSV present lintel \u2014 nudge on Johnson",
-      "lock": {
-        "status": "accepted",
-        "by": "Tim Daw",
-        "at": "2026-09-19T10:32+01:00",
-        "accept": [
-          "e_m",
-          "n_m",
-          "yaw_deg",
-          "width_m",
-          "thickness_m",
-          "height_m"
-        ],
-        "provisional": [],
-        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
-        "export": "exports/trilithons_centre_export_2026-09-19.json",
-        "underlay": "Johnson 2008"
-      }
-    },
-    "156": {
-      "id": "156",
-      "role": "trilithon_lintel",
-      "status": "fallen",
-      "e_m": 412241.936,
-      "n_m": 142192.951,
-      "yaw_deg": 67.05,
-      "width_m": 4.68,
-      "thickness_m": 0.95,
-      "length_m": null,
-      "height_m": 1.05,
-      "z_base_m": 0.1,
-      "footprint_along_m": 4.68,
-      "footprint_across_m": 0.95,
-      "accuracy_class": "locked",
-      "lock_status": "accepted",
-      "colour_class": "cream_156",
-      "source_file": "data/stone156_locked.json",
-      "height_source": "pink",
-      "notes": "Pink L\u00d7W\u00d7H kept; place/yaw nudged toward Johnson hatch",
-      "lock": {
-        "status": "accepted",
-        "by": "Tim Daw",
-        "at": "2026-09-19T10:32+01:00",
-        "accept": [
-          "e_m",
-          "n_m",
-          "yaw_deg",
-          "width_m",
-          "thickness_m",
-          "height_m"
-        ],
-        "provisional": [],
-        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
-        "export": "exports/trilithons_centre_export_2026-09-19.json",
-        "underlay": "Johnson 2008"
-      },
-      "tim_pink_archive": {
-        "e_m": 412243.026,
-        "n_m": 142188.059,
-        "yaw_deg": 71.6,
-        "file": "data/stone156_from_pink.json"
-      },
-      "fig1_pixel": {
-        "tim_pink_ring": {
-          "score": -0.1652,
-          "pass": false
-        },
-        "scene_ring": {
-          "score": -0.028,
-          "pass": false,
-          "density_inside": 0.4735,
-          "density_outside": 0.5016
-        },
-        "pink_ring_at_scene": {
-          "score": 0.0152,
-          "pass": false
-        },
-        "chosen": "scene_ring",
-        "fails_fig1": true
-      },
-      "overview_pose_source": "Tim centre nudge lock 2026-09-19 (Johnson underlay)"
-    },
-    "51": {
-      "id": "51",
-      "role": "trilithon_upright",
+    "91": {
+      "id": "91",
+      "role": "station_stone",
       "status": "standing",
-      "e_m": 412254.217,
-      "n_m": 142191.6,
-      "yaw_deg": 48.27,
-      "width_m": 2.487,
-      "thickness_m": 1.032,
+      "e_m": 412285.696,
+      "n_m": 142173.451,
+      "yaw_deg": -37.04,
+      "width_m": 2.466,
+      "thickness_m": 1.389,
       "length_m": null,
-      "height_m": 4.98,
+      "height_m": 1.0,
       "z_base_m": 0.0,
-      "footprint_along_m": 2.487,
-      "footprint_across_m": 1.032,
-      "accuracy_class": "locked",
-      "lock_status": "accepted",
-      "colour_class": "green_locked",
-      "source_file": "data/stone51_locked.json",
-      "height_source": "cleal_app5_or_scene",
-      "notes": "Johnson 2008 solid ink OBB seed; scene/locked soft start",
+      "footprint_along_m": 2.466,
+      "footprint_across_m": 1.389,
+      "footprint_shape": "box",
+      "accuracy_class": "seed_only",
+      "lock_status": "seed",
+      "colour_class": "grey_seed",
+      "source_file": "data/scene.json",
+      "height_source": "scene.json (AGL placeholder — no OD seating yet)",
+      "notes": "Station stone 91 from scene.json (fig1). Seed for eyeball.",
       "lock": {
-        "status": "accepted",
-        "by": "Tim Daw",
-        "at": "2026-09-19T10:32+01:00",
-        "accept": [
+        "status": "seed",
+        "by": "Grok Build / Taskmaster",
+        "at": "2026-09-19T11:40+01:00",
+        "accept": [],
+        "provisional": [
           "e_m",
           "n_m",
           "yaw_deg",
@@ -5656,37 +5576,36 @@
           "thickness_m",
           "height_m"
         ],
-        "provisional": [],
-        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
-        "export": "exports/trilithons_centre_export_2026-09-19.json",
-        "underlay": "Johnson 2008"
+        "note": "Seed for Tim eyeball on fig1; not PPC-locked. No height OD work yet."
       }
     },
-    "52": {
-      "id": "52",
-      "role": "trilithon_upright",
+    "92": {
+      "id": "92",
+      "role": "station_stone",
       "status": "standing",
-      "e_m": 412252.31,
-      "n_m": 142189.543,
-      "yaw_deg": 46.44,
-      "width_m": 2.535,
-      "thickness_m": 1.19,
+      "e_m": 412257.781,
+      "n_m": 142153.369,
+      "yaw_deg": 0.0,
+      "width_m": 1.2,
+      "thickness_m": 1.2,
       "length_m": null,
-      "height_m": 5.08,
+      "height_m": 1.0,
       "z_base_m": 0.0,
-      "footprint_along_m": 2.535,
-      "footprint_across_m": 1.19,
-      "accuracy_class": "locked",
-      "lock_status": "accepted",
-      "colour_class": "green_locked",
-      "source_file": "data/stone52_locked.json",
-      "height_source": "cleal_app5_or_scene",
-      "notes": "Johnson 2008 solid ink OBB seed; scene/locked soft start",
+      "footprint_along_m": 1.2,
+      "footprint_across_m": 1.2,
+      "footprint_shape": "triangle",
+      "accuracy_class": "seed_only",
+      "lock_status": "seed",
+      "colour_class": "gold_medium",
+      "source_file": "fig1 diamond centre (ink detection) + scene91/93 offset",
+      "height_source": "placeholder 1.0 m AGL — no OD seating",
+      "notes": "Station stone 92 triangular placeholder (missing from scene). Fig1 label + 91/93 offset. | 2026-09-19: re-seeded to fig1 diamond centre (px 790.0,1354.0), not label centroid. Was 412257.559/142154.52. | 2026-09-19: Tim eyeball +1.2 m east (N unchanged). Was 412256.281/142153.669. | 2026-09-19: Tim +0.5 m east (N unchanged). Was 412257.481/142153.669. | 2026-09-19: Tim nudge dE -0.2 dN -0.3. Was 412257.981/142153.669.",
       "lock": {
-        "status": "accepted",
-        "by": "Tim Daw",
-        "at": "2026-09-19T10:32+01:00",
-        "accept": [
+        "status": "seed",
+        "by": "Grok Build / Taskmaster",
+        "at": "2026-09-19T11:54+01:00",
+        "accept": [],
+        "provisional": [
           "e_m",
           "n_m",
           "yaw_deg",
@@ -5694,37 +5613,36 @@
           "thickness_m",
           "height_m"
         ],
-        "provisional": [],
-        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
-        "export": "exports/trilithons_centre_export_2026-09-19.json",
-        "underlay": "Johnson 2008"
+        "note": "Triangular pillar placeholder; not in scene.json. | 2026-09-19: re-seeded to fig1 diamond centre (px 790.0,1354.0), not label centroid. Was 412257.559/142154.52. | 2026-09-19: Tim eyeball +1.2 m east (N unchanged). Was 412256.281/142153.669. | 2026-09-19: Tim +0.5 m east (N unchanged). Was 412257.481/142153.669. | 2026-09-19: Tim nudge dE -0.2 dN -0.3. Was 412257.981/142153.669."
       }
     },
-    "56": {
-      "id": "56",
-      "role": "trilithon_upright",
+    "93": {
+      "id": "93",
+      "role": "station_stone",
       "status": "standing",
-      "e_m": 412238.308,
-      "n_m": 142189.509,
-      "yaw_deg": -40.73,
-      "width_m": 2.072,
-      "thickness_m": 0.765,
+      "e_m": 412207.09,
+      "n_m": 142212.978,
+      "yaw_deg": 66.01,
+      "width_m": 1.095,
+      "thickness_m": 0.746,
       "length_m": null,
-      "height_m": 6.55,
+      "height_m": 1.22,
       "z_base_m": 0.0,
-      "footprint_along_m": 2.072,
-      "footprint_across_m": 0.765,
-      "accuracy_class": "locked",
-      "lock_status": "accepted",
-      "colour_class": "green_locked",
-      "source_file": "data/stone56_locked.json",
-      "height_source": "cleal_app5_or_scene",
-      "notes": "Johnson 2008 solid ink OBB seed; scene/locked soft start",
+      "footprint_along_m": 1.095,
+      "footprint_across_m": 0.746,
+      "footprint_shape": "box",
+      "accuracy_class": "seed_only",
+      "lock_status": "seed",
+      "colour_class": "grey_seed",
+      "source_file": "data/scene.json",
+      "height_source": "scene.json (AGL placeholder — no OD seating yet)",
+      "notes": "Station stone 93 from scene.json (fig1). Seed for eyeball.",
       "lock": {
-        "status": "accepted",
-        "by": "Tim Daw",
-        "at": "2026-09-19T10:32+01:00",
-        "accept": [
+        "status": "seed",
+        "by": "Grok Build / Taskmaster",
+        "at": "2026-09-19T11:40+01:00",
+        "accept": [],
+        "provisional": [
           "e_m",
           "n_m",
           "yaw_deg",
@@ -5732,37 +5650,36 @@
           "thickness_m",
           "height_m"
         ],
-        "provisional": [],
-        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
-        "export": "exports/trilithons_centre_export_2026-09-19.json",
-        "underlay": "Johnson 2008"
+        "note": "Seed for Tim eyeball on fig1; not PPC-locked. No height OD work yet."
       }
     },
-    "57": {
-      "id": "57",
-      "role": "trilithon_upright",
+    "94": {
+      "id": "94",
+      "role": "station_stone",
       "status": "standing",
-      "e_m": 412237.433,
-      "n_m": 142194.835,
-      "yaw_deg": 58.94,
-      "width_m": 2.468,
-      "thickness_m": 0.947,
+      "e_m": 412233.604,
+      "n_m": 142234.974,
+      "yaw_deg": 0.0,
+      "width_m": 1.2,
+      "thickness_m": 1.2,
       "length_m": null,
-      "height_m": 5.18,
+      "height_m": 1.0,
       "z_base_m": 0.0,
-      "footprint_along_m": 2.468,
-      "footprint_across_m": 0.947,
-      "accuracy_class": "locked",
-      "lock_status": "accepted",
-      "colour_class": "green_locked",
-      "source_file": "data/stone57_locked.json",
-      "height_source": "cleal_app5_or_scene",
-      "notes": "Johnson 2008 solid ink OBB seed; scene/locked soft start",
+      "footprint_along_m": 1.2,
+      "footprint_across_m": 1.2,
+      "footprint_shape": "triangle",
+      "accuracy_class": "seed_only",
+      "lock_status": "seed",
+      "colour_class": "gold_medium",
+      "source_file": "fig1 diamond centre (ink detection) + scene91/93 offset",
+      "height_source": "placeholder 1.0 m AGL — no OD seating",
+      "notes": "Station stone 94 triangular placeholder (missing from scene). Fig1 label + 91/93 offset. | 2026-09-19: re-seeded to fig1 diamond centre (px 449.4,203.4), not label centroid. Was 412233.283/142236.221. | 2026-09-19: Tim eyeball +1.2 m east (N unchanged). Was 412232.104/142235.274. | 2026-09-19: Tim +0.5 m east (N unchanged). Was 412233.304/142235.274. | 2026-09-19: Tim nudge dE -0.2 dN -0.3. Was 412233.804/142235.274.",
       "lock": {
-        "status": "accepted",
-        "by": "Tim Daw",
-        "at": "2026-09-19T10:32+01:00",
-        "accept": [
+        "status": "seed",
+        "by": "Grok Build / Taskmaster",
+        "at": "2026-09-19T11:54+01:00",
+        "accept": [],
+        "provisional": [
           "e_m",
           "n_m",
           "yaw_deg",
@@ -5770,37 +5687,36 @@
           "thickness_m",
           "height_m"
         ],
-        "provisional": [],
-        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
-        "export": "exports/trilithons_centre_export_2026-09-19.json",
-        "underlay": "Johnson 2008"
+        "note": "Triangular pillar placeholder; not in scene.json. | 2026-09-19: re-seeded to fig1 diamond centre (px 449.4,203.4), not label centroid. Was 412233.283/142236.221. | 2026-09-19: Tim eyeball +1.2 m east (N unchanged). Was 412232.104/142235.274. | 2026-09-19: Tim +0.5 m east (N unchanged). Was 412233.304/142235.274. | 2026-09-19: Tim nudge dE -0.2 dN -0.3. Was 412233.804/142235.274."
       }
     },
-    "58": {
-      "id": "58",
-      "role": "trilithon_upright",
+    "95": {
+      "id": "95",
+      "role": "slaughter_stone",
       "status": "standing",
-      "e_m": 412238.835,
-      "n_m": 142197.292,
-      "yaw_deg": 59.91,
-      "width_m": 2.521,
-      "thickness_m": 1.043,
+      "e_m": 412280.421,
+      "n_m": 142221.26,
+      "yaw_deg": 50.0,
+      "width_m": 6.447,
+      "thickness_m": 2.066,
       "length_m": null,
-      "height_m": 5.18,
+      "height_m": 1.0,
       "z_base_m": 0.0,
-      "footprint_along_m": 2.521,
-      "footprint_across_m": 1.043,
-      "accuracy_class": "locked",
-      "lock_status": "accepted",
-      "colour_class": "green_locked",
-      "source_file": "data/stone58_locked.json",
-      "height_source": "cleal_app5_or_scene",
-      "notes": "Johnson 2008 solid ink OBB seed; scene/locked soft start",
+      "footprint_along_m": 6.447,
+      "footprint_across_m": 2.066,
+      "footprint_shape": "box",
+      "accuracy_class": "seed_only",
+      "lock_status": "seed",
+      "colour_class": "gold_medium",
+      "source_file": "data/scene.json",
+      "height_source": "scene.json (AGL placeholder — no OD seating yet)",
+      "notes": "Slaughter Stone (95) from scene.json. Seed for eyeball. | 2026-09-19: Tim nudge +0.25 m along long axis (yaw 50 deg, NE-ish).",
       "lock": {
-        "status": "accepted",
-        "by": "Tim Daw",
-        "at": "2026-09-19T10:32+01:00",
-        "accept": [
+        "status": "seed",
+        "by": "Grok Build / Taskmaster",
+        "at": "2026-09-19T11:43+01:00",
+        "accept": [],
+        "provisional": [
           "e_m",
           "n_m",
           "yaw_deg",
@@ -5808,151 +5724,36 @@
           "thickness_m",
           "height_m"
         ],
-        "provisional": [],
-        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
-        "export": "exports/trilithons_centre_export_2026-09-19.json",
-        "underlay": "Johnson 2008"
+        "note": "Seed for Tim eyeball on fig1; not PPC-locked. No height OD work yet. | 2026-09-19: Tim nudge +0.25 m along long axis (yaw 50 deg, NE-ish)."
       }
     },
-    "59a": {
-      "id": "59a",
-      "role": "trilithon_upright",
-      "status": "fallen_fragment",
-      "e_m": 412243.198,
-      "n_m": 142199.908,
-      "yaw_deg": -39.36,
-      "width_m": 3.993,
-      "thickness_m": 2.15,
-      "length_m": null,
-      "height_m": 1,
-      "z_base_m": 0.0,
-      "footprint_along_m": 3.993,
-      "footprint_across_m": 2.15,
-      "accuracy_class": "locked",
-      "lock_status": "accepted",
-      "colour_class": "green_locked",
-      "source_file": "data/stone59a_locked.json",
-      "height_source": "placeholder_fallen_agl",
-      "notes": "Johnson 2008 lean hatch-bound seed (constrained soft prior); Tim: south=55a on-80=55b",
-      "lock": {
-        "status": "accepted",
-        "by": "Tim Daw",
-        "at": "2026-09-19T10:32+01:00",
-        "accept": [
-          "e_m",
-          "n_m",
-          "yaw_deg",
-          "width_m",
-          "thickness_m",
-          "height_m"
-        ],
-        "provisional": [],
-        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
-        "export": "exports/trilithons_centre_export_2026-09-19.json",
-        "underlay": "Johnson 2008"
-      }
-    },
-    "59b": {
-      "id": "59b",
-      "role": "trilithon_upright",
-      "status": "fallen_fragment",
-      "e_m": 412245.161,
-      "n_m": 142197.898,
-      "yaw_deg": 22.56,
-      "width_m": 2.045,
-      "thickness_m": 1.041,
-      "length_m": null,
-      "height_m": 1,
-      "z_base_m": 0.0,
-      "footprint_along_m": 2.045,
-      "footprint_across_m": 1.041,
-      "accuracy_class": "locked",
-      "lock_status": "accepted",
-      "colour_class": "green_locked",
-      "source_file": "data/stone59b_locked.json",
-      "height_source": "placeholder_fallen_agl",
-      "notes": "Johnson 2008 lean hatch-bound seed (constrained soft prior); Tim: south=55a on-80=55b",
-      "lock": {
-        "status": "accepted",
-        "by": "Tim Daw",
-        "at": "2026-09-19T10:32+01:00",
-        "accept": [
-          "e_m",
-          "n_m",
-          "yaw_deg",
-          "width_m",
-          "thickness_m",
-          "height_m"
-        ],
-        "provisional": [],
-        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
-        "export": "exports/trilithons_centre_export_2026-09-19.json",
-        "underlay": "Johnson 2008"
-      }
-    },
-    "59c": {
-      "id": "59c",
-      "role": "trilithon_upright",
-      "status": "fallen_fragment",
-      "e_m": 412245.826,
-      "n_m": 142196.627,
-      "yaw_deg": 32.96,
-      "width_m": 2.093,
-      "thickness_m": 1.055,
-      "length_m": null,
-      "height_m": 1,
-      "z_base_m": 0.0,
-      "footprint_along_m": 2.093,
-      "footprint_across_m": 1.055,
-      "accuracy_class": "locked",
-      "lock_status": "accepted",
-      "colour_class": "green_locked",
-      "source_file": "data/stone59c_locked.json",
-      "height_source": "placeholder_fallen_agl",
-      "notes": "Johnson 2008 lean hatch-bound seed (constrained soft prior); Tim: south=55a on-80=55b",
-      "lock": {
-        "status": "accepted",
-        "by": "Tim Daw",
-        "at": "2026-09-19T10:32+01:00",
-        "accept": [
-          "e_m",
-          "n_m",
-          "yaw_deg",
-          "width_m",
-          "thickness_m",
-          "height_m"
-        ],
-        "provisional": [],
-        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
-        "export": "exports/trilithons_centre_export_2026-09-19.json",
-        "underlay": "Johnson 2008"
-      }
-    },
-    "60": {
-      "id": "60",
-      "role": "trilithon_upright",
+    "96": {
+      "id": "96",
+      "role": "heelstone",
       "status": "standing",
-      "e_m": 412244.587,
-      "n_m": 142202.564,
-      "yaw_deg": 29.07,
-      "width_m": 2.327,
-      "thickness_m": 1.088,
+      "e_m": 412306.629,
+      "n_m": 142243.653,
+      "yaw_deg": -34.33,
+      "width_m": 2.351,
+      "thickness_m": 2.021,
       "length_m": null,
-      "height_m": 5.03,
+      "height_m": 4.57,
       "z_base_m": 0.0,
-      "footprint_along_m": 2.327,
-      "footprint_across_m": 1.088,
-      "accuracy_class": "locked",
-      "lock_status": "accepted",
-      "colour_class": "green_locked",
-      "source_file": "data/stone60_locked.json",
-      "height_source": "cleal_app5_or_scene",
-      "notes": "Johnson 2008 solid ink OBB seed; scene/locked soft start",
+      "footprint_along_m": 2.351,
+      "footprint_across_m": 2.021,
+      "footprint_shape": "box",
+      "accuracy_class": "seed_only",
+      "lock_status": "seed",
+      "colour_class": "gold_medium",
+      "source_file": "data/scene.json",
+      "height_source": "scene.json (AGL placeholder — no OD seating yet)",
+      "notes": "Heelstone (96) from scene.json. Seed for eyeball.",
       "lock": {
-        "status": "accepted",
-        "by": "Tim Daw",
-        "at": "2026-09-19T10:32+01:00",
-        "accept": [
+        "status": "seed",
+        "by": "Grok Build / Taskmaster",
+        "at": "2026-09-19T11:40+01:00",
+        "accept": [],
+        "provisional": [
           "e_m",
           "n_m",
           "yaw_deg",
@@ -5960,162 +5761,7 @@
           "thickness_m",
           "height_m"
         ],
-        "provisional": [],
-        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
-        "export": "exports/trilithons_centre_export_2026-09-19.json",
-        "underlay": "Johnson 2008"
-      }
-    },
-    "152": {
-      "id": "152",
-      "role": "trilithon_lintel",
-      "status": "present",
-      "e_m": 412253.295,
-      "n_m": 142190.539,
-      "yaw_deg": 47.74,
-      "width_m": 5.402,
-      "thickness_m": 1.515,
-      "length_m": null,
-      "height_m": 0.8,
-      "z_base_m": 0.0,
-      "footprint_along_m": 5.402,
-      "footprint_across_m": 1.515,
-      "accuracy_class": "locked",
-      "lock_status": "accepted",
-      "colour_class": "green_locked",
-      "source_file": "data/stone152_locked.json",
-      "height_source": "placeholder_fallen_agl",
-      "notes": "Scene/CSV present lintel \u2014 nudge on Johnson",
-      "lock": {
-        "status": "accepted",
-        "by": "Tim Daw",
-        "at": "2026-09-19T10:32+01:00",
-        "accept": [
-          "e_m",
-          "n_m",
-          "yaw_deg",
-          "width_m",
-          "thickness_m",
-          "height_m"
-        ],
-        "provisional": [],
-        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
-        "export": "exports/trilithons_centre_export_2026-09-19.json",
-        "underlay": "Johnson 2008"
-      }
-    },
-    "158": {
-      "id": "158",
-      "role": "trilithon_lintel",
-      "status": "present",
-      "e_m": 412238.118,
-      "n_m": 142196.097,
-      "yaw_deg": 58.84,
-      "width_m": 5.375,
-      "thickness_m": 1.55,
-      "length_m": null,
-      "height_m": 0.8,
-      "z_base_m": 0.0,
-      "footprint_along_m": 5.375,
-      "footprint_across_m": 1.55,
-      "accuracy_class": "locked",
-      "lock_status": "accepted",
-      "colour_class": "green_locked",
-      "source_file": "data/stone158_locked.json",
-      "height_source": "placeholder_fallen_agl",
-      "notes": "Scene/CSV present lintel \u2014 nudge on Johnson",
-      "lock": {
-        "status": "accepted",
-        "by": "Tim Daw",
-        "at": "2026-09-19T10:32+01:00",
-        "accept": [
-          "e_m",
-          "n_m",
-          "yaw_deg",
-          "width_m",
-          "thickness_m",
-          "height_m"
-        ],
-        "provisional": [],
-        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
-        "export": "exports/trilithons_centre_export_2026-09-19.json",
-        "underlay": "Johnson 2008"
-      }
-    },
-    "160b": {
-      "id": "160b",
-      "role": "trilithon_lintel",
-      "status": "fallen_fragment",
-      "e_m": 412248.146,
-      "n_m": 142197.623,
-      "yaw_deg": -173.47,
-      "width_m": 1.169,
-      "thickness_m": 1.542,
-      "length_m": null,
-      "height_m": 0.8,
-      "z_base_m": 0.0,
-      "footprint_along_m": 1.169,
-      "footprint_across_m": 1.542,
-      "accuracy_class": "locked",
-      "lock_status": "accepted",
-      "colour_class": "green_locked",
-      "source_file": "data/stone160b_locked.json",
-      "height_source": "placeholder_fallen_agl",
-      "notes": "Johnson 2008 lean hatch-bound seed (constrained soft prior); Tim: south=55a on-80=55b",
-      "lock": {
-        "status": "accepted",
-        "by": "Tim Daw",
-        "at": "2026-09-19T10:32+01:00",
-        "accept": [
-          "e_m",
-          "n_m",
-          "yaw_deg",
-          "width_m",
-          "thickness_m",
-          "height_m"
-        ],
-        "provisional": [],
-        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
-        "export": "exports/trilithons_centre_export_2026-09-19.json",
-        "underlay": "Johnson 2008"
-      }
-    },
-    "160c": {
-      "id": "160c",
-      "role": "trilithon_lintel",
-      "status": "fallen_fragment",
-      "e_m": 412249.405,
-      "n_m": 142195.54,
-      "yaw_deg": 15.32,
-      "width_m": 1.447,
-      "thickness_m": 1.343,
-      "length_m": null,
-      "height_m": 0.8,
-      "z_base_m": 0.0,
-      "footprint_along_m": 1.447,
-      "footprint_across_m": 1.343,
-      "accuracy_class": "locked",
-      "lock_status": "accepted",
-      "colour_class": "green_locked",
-      "source_file": "data/stone160c_locked.json",
-      "height_source": "placeholder_fallen_agl",
-      "notes": "Johnson 2008 lean hatch-bound seed (constrained soft prior); Tim: south=55a on-80=55b",
-      "lock": {
-        "status": "accepted",
-        "by": "Tim Daw",
-        "at": "2026-09-19T10:32+01:00",
-        "accept": [
-          "e_m",
-          "n_m",
-          "yaw_deg",
-          "width_m",
-          "thickness_m",
-          "height_m"
-        ],
-        "provisional": [],
-        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
-        "export": "exports/trilithons_centre_export_2026-09-19.json",
-        "underlay": "Johnson 2008"
+        "note": "Seed for Tim eyeball on fig1; not PPC-locked. No height OD work yet."
       }
     },
     "101": {
@@ -6158,7 +5804,7 @@
         ],
         "note": "Present outer lintel; XY/yaw from laptop support midpoints/mean yaw (provisional). height_m set so top OD matches 101. Centre trilithon locks preserved."
       },
-      "notes": "Outer lintel thickness norm to 101 on 2026-09-19: old scene.thickness_m=0.8 \u2192 height_m/scene.thickness_m=0.8. target_top_od=107.144."
+      "notes": "Outer lintel thickness norm to 101 on 2026-09-19: old scene.thickness_m=0.8 → height_m/scene.thickness_m=0.8. target_top_od=107.144."
     },
     "102": {
       "id": "102",
@@ -6200,7 +5846,7 @@
         ],
         "note": "Present outer lintel; XY/yaw from laptop support midpoints/mean yaw (provisional). height_m set so top OD matches 101. Centre trilithon locks preserved. | 2026-09-19: recentred to support midpoint; yaw=chord bearing mid-upright to mid-upright. height_m kept (norm to 101 OD)."
       },
-      "notes": "Outer lintel thickness norm to 101 on 2026-09-19: old scene.thickness_m=0.8 \u2192 height_m/scene.thickness_m=0.728. target_top_od=107.144. | 2026-09-19: recentred to support midpoint; yaw=chord bearing mid-upright to mid-upright. height_m kept (norm to 101 OD)."
+      "notes": "Outer lintel thickness norm to 101 on 2026-09-19: old scene.thickness_m=0.8 → height_m/scene.thickness_m=0.728. target_top_od=107.144. | 2026-09-19: recentred to support midpoint; yaw=chord bearing mid-upright to mid-upright. height_m kept (norm to 101 OD)."
     },
     "105": {
       "id": "105",
@@ -6242,7 +5888,7 @@
         ],
         "note": "Present outer lintel; XY/yaw from laptop support midpoints/mean yaw (provisional). height_m set so top OD matches 101. Centre trilithon locks preserved. | 2026-09-19: recentred to support midpoint; yaw=chord bearing mid-upright to mid-upright. height_m kept (norm to 101 OD)."
       },
-      "notes": "Outer lintel thickness norm to 101 on 2026-09-19: old scene.thickness_m=0.8 \u2192 height_m/scene.thickness_m=0.6175. target_top_od=107.144. | 2026-09-19: recentred to support midpoint; yaw=chord bearing mid-upright to mid-upright. height_m kept (norm to 101 OD)."
+      "notes": "Outer lintel thickness norm to 101 on 2026-09-19: old scene.thickness_m=0.8 → height_m/scene.thickness_m=0.6175. target_top_od=107.144. | 2026-09-19: recentred to support midpoint; yaw=chord bearing mid-upright to mid-upright. height_m kept (norm to 101 OD)."
     },
     "107": {
       "id": "107",
@@ -6284,7 +5930,43 @@
         ],
         "note": "Present outer lintel; XY/yaw from laptop support midpoints/mean yaw (provisional). height_m set so top OD matches 101. Centre trilithon locks preserved."
       },
-      "notes": "Outer lintel thickness norm to 101 on 2026-09-19: old scene.thickness_m=0.8 \u2192 height_m/scene.thickness_m=0.7065. target_top_od=107.144."
+      "notes": "Outer lintel thickness norm to 101 on 2026-09-19: old scene.thickness_m=0.8 → height_m/scene.thickness_m=0.7065. target_top_od=107.144."
+    },
+    "120": {
+      "id": "120",
+      "role": "sarsen_lintel",
+      "status": "fallen",
+      "e_m": 412227.842,
+      "n_m": 142196.34,
+      "yaw_deg": 0.93,
+      "width_m": 1.607,
+      "thickness_m": 0.99,
+      "length_m": null,
+      "height_m": 0.8,
+      "z_base_m": 0.0,
+      "footprint_along_m": 1.607,
+      "footprint_across_m": 0.99,
+      "accuracy_class": "locked",
+      "lock_status": "accepted",
+      "colour_class": "green_locked",
+      "source_file": "data/stone120_locked.json",
+      "height_source": "default fallen lintel vertical 0.80 m",
+      "lock": {
+        "status": "accepted",
+        "by": "Tim Daw",
+        "at": "2026-09-15T12:59+01:00",
+        "accept": [
+          "e_m",
+          "n_m",
+          "yaw_deg",
+          "width_m",
+          "thickness_m",
+          "height_m"
+        ],
+        "provisional": [],
+        "note": "Tim eyeball export approved 2026-09-15T11:59Z (outers_27_lintels_nudge.html); fallen outer"
+      },
+      "notes": "Tim lock 120 fallen lintel. Δyaw=−7.00° (7.93→0.93); e/n/W×T×H unchanged vs fig1 ink seed. Originally ~20–21 span; fabric N of 19."
     },
     "122": {
       "id": "122",
@@ -6326,7 +6008,43 @@
         ],
         "note": "Present outer lintel; XY/yaw from laptop support midpoints/mean yaw (provisional). height_m set so top OD matches 101. Centre trilithon locks preserved. | 2026-09-19: recentred to support midpoint; yaw=chord bearing mid-upright to mid-upright. height_m kept (norm to 101 OD)."
       },
-      "notes": "Outer lintel thickness norm to 101 on 2026-09-19: old scene.thickness_m=0.8 \u2192 height_m/scene.thickness_m=0.682. target_top_od=107.144. | 2026-09-19: recentred to support midpoint; yaw=chord bearing mid-upright to mid-upright. height_m kept (norm to 101 OD)."
+      "notes": "Outer lintel thickness norm to 101 on 2026-09-19: old scene.thickness_m=0.8 → height_m/scene.thickness_m=0.682. target_top_od=107.144. | 2026-09-19: recentred to support midpoint; yaw=chord bearing mid-upright to mid-upright. height_m kept (norm to 101 OD)."
+    },
+    "127": {
+      "id": "127",
+      "role": "sarsen_lintel",
+      "status": "fallen",
+      "e_m": 412245.672,
+      "n_m": 142209.732,
+      "yaw_deg": 81.38,
+      "width_m": 2.342,
+      "thickness_m": 0.793,
+      "length_m": null,
+      "height_m": 0.8,
+      "z_base_m": 0.0,
+      "footprint_along_m": 2.342,
+      "footprint_across_m": 0.793,
+      "accuracy_class": "locked",
+      "lock_status": "accepted",
+      "colour_class": "green_locked",
+      "source_file": "data/stone127_locked.json",
+      "height_source": "default fallen lintel vertical 0.80 m",
+      "lock": {
+        "status": "accepted",
+        "by": "Tim Daw",
+        "at": "2026-09-15T12:59+01:00",
+        "accept": [
+          "e_m",
+          "n_m",
+          "yaw_deg",
+          "width_m",
+          "thickness_m",
+          "height_m"
+        ],
+        "provisional": [],
+        "note": "Tim eyeball export approved 2026-09-15T11:59Z (outers_27_lintels_nudge.html); fallen outer"
+      },
+      "notes": "Tim lock 127 fallen lintel. Δe=+0.100 m vs fig1 ink seed; n/yaw/W×T×H unchanged. Was lintel bleed on 26 seed."
     },
     "130": {
       "id": "130",
@@ -6368,7 +6086,220 @@
         ],
         "note": "Present outer lintel; XY/yaw from laptop support midpoints/mean yaw (provisional). height_m set so top OD matches 101. Centre trilithon locks preserved."
       },
-      "notes": "Outer lintel thickness norm to 101 on 2026-09-19: old scene.thickness_m=0.8 \u2192 height_m/scene.thickness_m=0.718. target_top_od=107.144."
+      "notes": "Outer lintel thickness norm to 101 on 2026-09-19: old scene.thickness_m=0.8 → height_m/scene.thickness_m=0.718. target_top_od=107.144."
+    },
+    "150": {
+      "id": "150",
+      "role": "bluestone_lintel",
+      "status": "fallen",
+      "e_m": 412256.833,
+      "n_m": 142196.463,
+      "yaw_deg": 52.91,
+      "width_m": 2.49,
+      "thickness_m": 0.609,
+      "length_m": null,
+      "height_m": 0.5,
+      "z_base_m": 0.0,
+      "footprint_along_m": 2.49,
+      "footprint_across_m": 0.609,
+      "accuracy_class": "plan_locked",
+      "lock_status": "accepted",
+      "colour_class": "blue",
+      "source_file": "data/stone150_locked.json",
+      "height_source": "placeholder_fallen_bluestone_lintel",
+      "lock": {
+        "status": "accepted",
+        "by": "Tim Daw",
+        "at": "2026-09-19T23:08+01:00",
+        "accept": [
+          "e_m",
+          "n_m",
+          "yaw_deg",
+          "width_m",
+          "thickness_m",
+          "height_m"
+        ],
+        "provisional": [],
+        "note": "Outer bluestone Johnson underlay nudge export publish"
+      },
+      "notes": "NEW: split from 32 merged hatch. fig1 ink long≈1.685m; W set to laser c.2.44m (StonehengeLaserScan p.50). labels pin (775.8,742.1). Fallen bluestone lintel with mortises. | 2026-09-19: outer blue Johnson nudge publish"
+    },
+    "152": {
+      "id": "152",
+      "role": "trilithon_lintel",
+      "status": "present",
+      "e_m": 412253.295,
+      "n_m": 142190.539,
+      "yaw_deg": 47.74,
+      "width_m": 5.402,
+      "thickness_m": 1.515,
+      "length_m": null,
+      "height_m": 0.8,
+      "z_base_m": 0.0,
+      "footprint_along_m": 5.402,
+      "footprint_across_m": 1.515,
+      "accuracy_class": "locked",
+      "lock_status": "accepted",
+      "colour_class": "green_locked",
+      "source_file": "data/stone152_locked.json",
+      "height_source": "placeholder_fallen_agl",
+      "notes": "Scene/CSV present lintel — nudge on Johnson",
+      "lock": {
+        "status": "accepted",
+        "by": "Tim Daw",
+        "at": "2026-09-19T10:32+01:00",
+        "accept": [
+          "e_m",
+          "n_m",
+          "yaw_deg",
+          "width_m",
+          "thickness_m",
+          "height_m"
+        ],
+        "provisional": [],
+        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
+        "export": "exports/trilithons_centre_export_2026-09-19.json",
+        "underlay": "Johnson 2008"
+      }
+    },
+    "154": {
+      "id": "154",
+      "role": "trilithon_lintel",
+      "status": "present",
+      "e_m": 412246.376,
+      "n_m": 142186.059,
+      "yaw_deg": 24.17,
+      "width_m": 4.857,
+      "thickness_m": 1.361,
+      "length_m": null,
+      "height_m": 0.8,
+      "z_base_m": 0.0,
+      "footprint_along_m": 4.857,
+      "footprint_across_m": 1.361,
+      "accuracy_class": "locked",
+      "lock_status": "accepted",
+      "colour_class": "green_locked",
+      "source_file": "data/stone154_locked.json",
+      "height_source": "placeholder_fallen_agl",
+      "notes": "Scene/CSV present lintel — nudge on Johnson",
+      "lock": {
+        "status": "accepted",
+        "by": "Tim Daw",
+        "at": "2026-09-19T10:32+01:00",
+        "accept": [
+          "e_m",
+          "n_m",
+          "yaw_deg",
+          "width_m",
+          "thickness_m",
+          "height_m"
+        ],
+        "provisional": [],
+        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
+        "export": "exports/trilithons_centre_export_2026-09-19.json",
+        "underlay": "Johnson 2008"
+      }
+    },
+    "156": {
+      "id": "156",
+      "role": "trilithon_lintel",
+      "status": "fallen",
+      "e_m": 412241.936,
+      "n_m": 142192.951,
+      "yaw_deg": 67.05,
+      "width_m": 4.68,
+      "thickness_m": 0.95,
+      "length_m": null,
+      "height_m": 1.05,
+      "z_base_m": 0.1,
+      "footprint_along_m": 4.68,
+      "footprint_across_m": 0.95,
+      "accuracy_class": "locked",
+      "lock_status": "accepted",
+      "colour_class": "cream_156",
+      "source_file": "data/stone156_locked.json",
+      "height_source": "pink",
+      "notes": "Pink L×W×H kept; place/yaw nudged toward Johnson hatch",
+      "lock": {
+        "status": "accepted",
+        "by": "Tim Daw",
+        "at": "2026-09-19T10:32+01:00",
+        "accept": [
+          "e_m",
+          "n_m",
+          "yaw_deg",
+          "width_m",
+          "thickness_m",
+          "height_m"
+        ],
+        "provisional": [],
+        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
+        "export": "exports/trilithons_centre_export_2026-09-19.json",
+        "underlay": "Johnson 2008"
+      },
+      "tim_pink_archive": {
+        "e_m": 412243.026,
+        "n_m": 142188.059,
+        "yaw_deg": 71.6,
+        "file": "data/stone156_from_pink.json"
+      },
+      "fig1_pixel": {
+        "tim_pink_ring": {
+          "score": -0.1652,
+          "pass": false
+        },
+        "scene_ring": {
+          "score": -0.028,
+          "pass": false,
+          "density_inside": 0.4735,
+          "density_outside": 0.5016
+        },
+        "pink_ring_at_scene": {
+          "score": 0.0152,
+          "pass": false
+        },
+        "chosen": "scene_ring",
+        "fails_fig1": true
+      },
+      "overview_pose_source": "Tim centre nudge lock 2026-09-19 (Johnson underlay)"
+    },
+    "158": {
+      "id": "158",
+      "role": "trilithon_lintel",
+      "status": "present",
+      "e_m": 412238.118,
+      "n_m": 142196.097,
+      "yaw_deg": 58.84,
+      "width_m": 5.375,
+      "thickness_m": 1.55,
+      "length_m": null,
+      "height_m": 0.8,
+      "z_base_m": 0.0,
+      "footprint_along_m": 5.375,
+      "footprint_across_m": 1.55,
+      "accuracy_class": "locked",
+      "lock_status": "accepted",
+      "colour_class": "green_locked",
+      "source_file": "data/stone158_locked.json",
+      "height_source": "placeholder_fallen_agl",
+      "notes": "Scene/CSV present lintel — nudge on Johnson",
+      "lock": {
+        "status": "accepted",
+        "by": "Tim Daw",
+        "at": "2026-09-19T10:32+01:00",
+        "accept": [
+          "e_m",
+          "n_m",
+          "yaw_deg",
+          "width_m",
+          "thickness_m",
+          "height_m"
+        ],
+        "provisional": [],
+        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
+        "export": "exports/trilithons_centre_export_2026-09-19.json",
+        "underlay": "Johnson 2008"
+      }
     },
     "160a": {
       "id": "160a",
@@ -6390,7 +6321,7 @@
       "colour_class": "grey_seed",
       "source_file": "data/labels.json + locked 160b vector on fig1 affine",
       "height_source": "placeholder_fallen_agl",
-      "notes": "Centre lintel fragment 160a seeded 2026-09-19: fig1 label px\u2192EN vector from locked 160b. Tim eyeball.",
+      "notes": "Centre lintel fragment 160a seeded 2026-09-19: fig1 label px→EN vector from locked 160b. Tim eyeball.",
       "lock": {
         "status": "seed",
         "by": "Grok Build / Taskmaster",
@@ -6407,33 +6338,469 @@
         "note": "Was missing from seeds; 160b/160c already locked."
       }
     },
-    "91": {
-      "id": "91",
-      "role": "station_stone",
+    "160b": {
+      "id": "160b",
+      "role": "trilithon_lintel",
+      "status": "fallen_fragment",
+      "e_m": 412248.146,
+      "n_m": 142197.623,
+      "yaw_deg": -173.47,
+      "width_m": 1.169,
+      "thickness_m": 1.542,
+      "length_m": null,
+      "height_m": 0.8,
+      "z_base_m": 0.0,
+      "footprint_along_m": 1.169,
+      "footprint_across_m": 1.542,
+      "accuracy_class": "locked",
+      "lock_status": "accepted",
+      "colour_class": "green_locked",
+      "source_file": "data/stone160b_locked.json",
+      "height_source": "placeholder_fallen_agl",
+      "notes": "Johnson 2008 lean hatch-bound seed (constrained soft prior); Tim: south=55a on-80=55b",
+      "lock": {
+        "status": "accepted",
+        "by": "Tim Daw",
+        "at": "2026-09-19T10:32+01:00",
+        "accept": [
+          "e_m",
+          "n_m",
+          "yaw_deg",
+          "width_m",
+          "thickness_m",
+          "height_m"
+        ],
+        "provisional": [],
+        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
+        "export": "exports/trilithons_centre_export_2026-09-19.json",
+        "underlay": "Johnson 2008"
+      }
+    },
+    "160c": {
+      "id": "160c",
+      "role": "trilithon_lintel",
+      "status": "fallen_fragment",
+      "e_m": 412249.405,
+      "n_m": 142195.54,
+      "yaw_deg": 15.32,
+      "width_m": 1.447,
+      "thickness_m": 1.343,
+      "length_m": null,
+      "height_m": 0.8,
+      "z_base_m": 0.0,
+      "footprint_along_m": 1.447,
+      "footprint_across_m": 1.343,
+      "accuracy_class": "locked",
+      "lock_status": "accepted",
+      "colour_class": "green_locked",
+      "source_file": "data/stone160c_locked.json",
+      "height_source": "placeholder_fallen_agl",
+      "notes": "Johnson 2008 lean hatch-bound seed (constrained soft prior); Tim: south=55a on-80=55b",
+      "lock": {
+        "status": "accepted",
+        "by": "Tim Daw",
+        "at": "2026-09-19T10:32+01:00",
+        "accept": [
+          "e_m",
+          "n_m",
+          "yaw_deg",
+          "width_m",
+          "thickness_m",
+          "height_m"
+        ],
+        "provisional": [],
+        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
+        "export": "exports/trilithons_centre_export_2026-09-19.json",
+        "underlay": "Johnson 2008"
+      }
+    },
+    "55a": {
+      "id": "55a",
+      "role": "trilithon_upright",
+      "status": "fallen",
+      "e_m": 412240.017,
+      "n_m": 142187.533,
+      "yaw_deg": 49.18,
+      "width_m": 4.327,
+      "thickness_m": 2.343,
+      "length_m": null,
+      "height_m": 1,
+      "z_base_m": 0.0,
+      "footprint_along_m": 4.327,
+      "footprint_across_m": 2.343,
+      "accuracy_class": "locked",
+      "lock_status": "accepted",
+      "colour_class": "green_locked",
+      "source_file": "data/stone55a_locked.json",
+      "height_source": "placeholder_fallen_agl",
+      "notes": "Johnson 2008 lean hatch-bound seed (constrained soft prior); Tim: south=55a on-80=55b",
+      "lock": {
+        "status": "accepted",
+        "by": "Tim Daw",
+        "at": "2026-09-19T10:32+01:00",
+        "accept": [
+          "e_m",
+          "n_m",
+          "yaw_deg",
+          "width_m",
+          "thickness_m",
+          "height_m"
+        ],
+        "provisional": [],
+        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
+        "export": "exports/trilithons_centre_export_2026-09-19.json",
+        "underlay": "Johnson 2008"
+      },
+      "fig1_pixel": {
+        "tim_box": {
+          "score": 0.438,
+          "pass": true,
+          "density_inside": 0.8845,
+          "density_outside": 0.4465
+        },
+        "scene_ring_at_tim": {
+          "score": 0.3818,
+          "pass": true,
+          "density_inside": 0.7786,
+          "density_outside": 0.3967
+        },
+        "chosen": "tim_lock + scene_ring@tim"
+      }
+    },
+    "55b": {
+      "id": "55b",
+      "role": "trilithon_upright",
+      "status": "fallen",
+      "e_m": 412242.776,
+      "n_m": 142190.677,
+      "yaw_deg": 47.8,
+      "width_m": 3.831,
+      "thickness_m": 2.162,
+      "length_m": null,
+      "height_m": 1,
+      "z_base_m": 0.0,
+      "footprint_along_m": 3.831,
+      "footprint_across_m": 2.162,
+      "accuracy_class": "locked",
+      "lock_status": "accepted",
+      "colour_class": "green_locked",
+      "source_file": "data/stone55b_locked.json",
+      "height_source": "placeholder_fallen_agl",
+      "notes": "Johnson 2008 lean hatch-bound seed (constrained soft prior); Tim: south=55a on-80=55b",
+      "lock": {
+        "status": "accepted",
+        "by": "Tim Daw",
+        "at": "2026-09-19T10:32+01:00",
+        "accept": [
+          "e_m",
+          "n_m",
+          "yaw_deg",
+          "width_m",
+          "thickness_m",
+          "height_m"
+        ],
+        "provisional": [],
+        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
+        "export": "exports/trilithons_centre_export_2026-09-19.json",
+        "underlay": "Johnson 2008"
+      },
+      "fig1_pixel": {
+        "tim_box": {
+          "score": 0.2108,
+          "pass": true,
+          "density_inside": 0.9538,
+          "density_outside": 0.743
+        },
+        "scene_ring_at_tim": {
+          "score": 0.1199,
+          "pass": true,
+          "density_inside": 0.994,
+          "density_outside": 0.8741
+        },
+        "chosen": "tim_lock + scene_ring@tim",
+        "note": "High outside density — overlaps Altar ink on fig1 (expected)."
+      }
+    },
+    "59a": {
+      "id": "59a",
+      "role": "trilithon_upright",
+      "status": "fallen_fragment",
+      "e_m": 412243.198,
+      "n_m": 142199.908,
+      "yaw_deg": -39.36,
+      "width_m": 3.993,
+      "thickness_m": 2.15,
+      "length_m": null,
+      "height_m": 1,
+      "z_base_m": 0.0,
+      "footprint_along_m": 3.993,
+      "footprint_across_m": 2.15,
+      "accuracy_class": "locked",
+      "lock_status": "accepted",
+      "colour_class": "green_locked",
+      "source_file": "data/stone59a_locked.json",
+      "height_source": "placeholder_fallen_agl",
+      "notes": "Johnson 2008 lean hatch-bound seed (constrained soft prior); Tim: south=55a on-80=55b",
+      "lock": {
+        "status": "accepted",
+        "by": "Tim Daw",
+        "at": "2026-09-19T10:32+01:00",
+        "accept": [
+          "e_m",
+          "n_m",
+          "yaw_deg",
+          "width_m",
+          "thickness_m",
+          "height_m"
+        ],
+        "provisional": [],
+        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
+        "export": "exports/trilithons_centre_export_2026-09-19.json",
+        "underlay": "Johnson 2008"
+      }
+    },
+    "59b": {
+      "id": "59b",
+      "role": "trilithon_upright",
+      "status": "fallen_fragment",
+      "e_m": 412245.161,
+      "n_m": 142197.898,
+      "yaw_deg": 22.56,
+      "width_m": 2.045,
+      "thickness_m": 1.041,
+      "length_m": null,
+      "height_m": 1,
+      "z_base_m": 0.0,
+      "footprint_along_m": 2.045,
+      "footprint_across_m": 1.041,
+      "accuracy_class": "locked",
+      "lock_status": "accepted",
+      "colour_class": "green_locked",
+      "source_file": "data/stone59b_locked.json",
+      "height_source": "placeholder_fallen_agl",
+      "notes": "Johnson 2008 lean hatch-bound seed (constrained soft prior); Tim: south=55a on-80=55b",
+      "lock": {
+        "status": "accepted",
+        "by": "Tim Daw",
+        "at": "2026-09-19T10:32+01:00",
+        "accept": [
+          "e_m",
+          "n_m",
+          "yaw_deg",
+          "width_m",
+          "thickness_m",
+          "height_m"
+        ],
+        "provisional": [],
+        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
+        "export": "exports/trilithons_centre_export_2026-09-19.json",
+        "underlay": "Johnson 2008"
+      }
+    },
+    "59c": {
+      "id": "59c",
+      "role": "trilithon_upright",
+      "status": "fallen_fragment",
+      "e_m": 412245.826,
+      "n_m": 142196.627,
+      "yaw_deg": 32.96,
+      "width_m": 2.093,
+      "thickness_m": 1.055,
+      "length_m": null,
+      "height_m": 1,
+      "z_base_m": 0.0,
+      "footprint_along_m": 2.093,
+      "footprint_across_m": 1.055,
+      "accuracy_class": "locked",
+      "lock_status": "accepted",
+      "colour_class": "green_locked",
+      "source_file": "data/stone59c_locked.json",
+      "height_source": "placeholder_fallen_agl",
+      "notes": "Johnson 2008 lean hatch-bound seed (constrained soft prior); Tim: south=55a on-80=55b",
+      "lock": {
+        "status": "accepted",
+        "by": "Tim Daw",
+        "at": "2026-09-19T10:32+01:00",
+        "accept": [
+          "e_m",
+          "n_m",
+          "yaw_deg",
+          "width_m",
+          "thickness_m",
+          "height_m"
+        ],
+        "provisional": [],
+        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
+        "export": "exports/trilithons_centre_export_2026-09-19.json",
+        "underlay": "Johnson 2008"
+      }
+    },
+    "61a": {
+      "id": "61a",
+      "role": "bluestone",
       "status": "standing",
-      "e_m": 412285.696,
-      "n_m": 142173.451,
-      "yaw_deg": -37.04,
-      "width_m": 2.466,
-      "thickness_m": 1.389,
+      "e_m": 412251.79,
+      "n_m": 142191.754,
+      "yaw_deg": -90.99,
+      "width_m": 0.419,
+      "thickness_m": 0.2,
+      "length_m": null,
+      "height_m": 0.5,
+      "z_base_m": 0.0,
+      "footprint_along_m": 0.419,
+      "footprint_across_m": 0.2,
+      "accuracy_class": "locked",
+      "lock_status": "accepted",
+      "colour_class": "blue_bluestone",
+      "source_file": "data/stone61a_locked.json",
+      "height_source": "placeholder_stump",
+      "lock": {
+        "status": "accepted",
+        "by": "Tim Daw",
+        "at": "2026-09-15T15:20+01:00",
+        "accept": [
+          "e_m",
+          "n_m",
+          "yaw_deg",
+          "width_m",
+          "thickness_m",
+          "height_m"
+        ],
+        "provisional": [],
+        "note": "Tim eyeball export approved 2026-09-15T14:18Z (bluestones_horseshoe_nudge.html); horseshoe bluestone"
+      },
+      "notes": "Tim lock horseshoe 61a; status=standing; johnson_plan_ink_seed"
+    },
+    "9a": {
+      "id": "9a",
+      "role": "sarsen_upright",
+      "status": "fallen_fragment",
+      "e_m": 412253.516,
+      "n_m": 142179.51,
+      "yaw_deg": 32.41,
+      "width_m": 1.893,
+      "thickness_m": 1.506,
+      "length_m": null,
+      "height_m": 0.76,
+      "z_base_m": 0.0,
+      "footprint_along_m": 1.893,
+      "footprint_across_m": 1.506,
+      "accuracy_class": "locked",
+      "lock_status": "accepted",
+      "colour_class": "highlight_9a",
+      "source_file": "data/stone9a_locked.json",
+      "height_source": "Cleal App.5 AGL",
+      "lock": {
+        "status": "accepted",
+        "by": "Tim Daw",
+        "at": "2026-09-15T09:40+01:00",
+        "accept": [
+          "e_m",
+          "n_m",
+          "yaw_deg",
+          "width_m",
+          "thickness_m",
+          "height_m"
+        ],
+        "provisional": [],
+        "note": "Tim eyeball nudge approved 2026-09-15"
+      },
+      "notes": "Tim eyeball lock 9a. H=Cleal App.5 AGL."
+    },
+    "9b": {
+      "id": "9b",
+      "role": "sarsen_upright",
+      "status": "fallen_fragment",
+      "e_m": 412254.621,
+      "n_m": 142177.54,
+      "yaw_deg": -39.66,
+      "width_m": 2.294,
+      "thickness_m": 1.731,
+      "length_m": null,
+      "height_m": 0.76,
+      "z_base_m": 0.0,
+      "footprint_along_m": 2.294,
+      "footprint_across_m": 1.731,
+      "accuracy_class": "locked",
+      "lock_status": "accepted",
+      "colour_class": "highlight_9b",
+      "source_file": "data/stone9b_locked.json",
+      "height_source": "Cleal App.5 AGL",
+      "lock": {
+        "status": "accepted",
+        "by": "Tim Daw",
+        "at": "2026-09-15T09:40+01:00",
+        "accept": [
+          "e_m",
+          "n_m",
+          "yaw_deg",
+          "width_m",
+          "thickness_m",
+          "height_m"
+        ],
+        "provisional": [],
+        "note": "Tim eyeball nudge approved 2026-09-15"
+      },
+      "notes": "Tim eyeball lock 9b. H=Cleal App.5 AGL."
+    },
+    "33": {
+      "id": "33",
+      "role": "bluestone",
+      "status": "empty_socket_placeholder",
+      "e_m": 412256.803,
+      "n_m": 142188.478,
+      "yaw_deg": 69.73,
+      "width_m": 0.5,
+      "thickness_m": 0.35,
+      "length_m": null,
+      "height_m": 1.68,
+      "z_base_m": 0.0,
+      "footprint_along_m": 0.5,
+      "footprint_across_m": 0.35,
+      "accuracy_class": "plan_locked",
+      "lock_status": "accepted",
+      "colour_class": "blue",
+      "source_file": "data/stone33_locked.json",
+      "lock": {
+        "status": "accepted",
+        "by": "Tim Daw",
+        "at": "2026-09-19T23:08+01:00",
+        "accept": [
+          "e_m",
+          "n_m",
+          "yaw_deg",
+          "width_m",
+          "thickness_m",
+          "height_m"
+        ],
+        "provisional": [],
+        "note": "Outer bluestone Johnson underlay nudge export publish"
+      },
+      "notes": "PROVISIONAL empty-socket / missing-fabric placeholder 2026-09-19. XY: labels.json pin 33 @ (792.7,845.6) via fig1 Cleal OSGB affine. Alt: ring mid 32–34 → 412255.978,142188.535 (Δ=2.15m); mid(33e,33f)→412253.584,142185.414. Modest W×T 1.00×0.60. Awaiting Tim eyeball on Johnson underlay — DO NOT merge to locked_poses / public Pages. | 2026-09-19 Johnson outer bluestone publish (new)"
+    },
+    "35": {
+      "id": "35",
+      "role": "bluestone",
+      "status": "empty_socket_placeholder",
+      "e_m": 412249.901,
+      "n_m": 142182.547,
+      "yaw_deg": 125.66,
+      "width_m": 0.5,
+      "thickness_m": 0.35,
       "length_m": null,
       "height_m": 1.0,
       "z_base_m": 0.0,
-      "footprint_along_m": 2.466,
-      "footprint_across_m": 1.389,
-      "footprint_shape": "box",
-      "accuracy_class": "seed_only",
-      "lock_status": "seed",
-      "colour_class": "grey_seed",
-      "source_file": "data/scene.json",
-      "height_source": "scene.json (AGL placeholder \u2014 no OD seating yet)",
-      "notes": "Station stone 91 from scene.json (fig1). Seed for eyeball.",
+      "footprint_along_m": 0.5,
+      "footprint_across_m": 0.35,
+      "accuracy_class": "plan_locked",
+      "lock_status": "accepted",
+      "colour_class": "blue",
+      "source_file": "data/stone35_locked.json",
       "lock": {
-        "status": "seed",
-        "by": "Grok Build / Taskmaster",
-        "at": "2026-09-19T11:40+01:00",
-        "accept": [],
-        "provisional": [
+        "status": "accepted",
+        "by": "Tim Daw",
+        "at": "2026-09-19T23:08+01:00",
+        "accept": [
           "e_m",
           "n_m",
           "yaw_deg",
@@ -6441,73 +6808,36 @@
           "thickness_m",
           "height_m"
         ],
-        "note": "Seed for Tim eyeball on fig1; not PPC-locked. No height OD work yet."
-      }
-    },
-    "93": {
-      "id": "93",
-      "role": "station_stone",
-      "status": "standing",
-      "e_m": 412207.09,
-      "n_m": 142212.978,
-      "yaw_deg": 66.01,
-      "width_m": 1.095,
-      "thickness_m": 0.746,
-      "length_m": null,
-      "height_m": 1.22,
-      "z_base_m": 0.0,
-      "footprint_along_m": 1.095,
-      "footprint_across_m": 0.746,
-      "footprint_shape": "box",
-      "accuracy_class": "seed_only",
-      "lock_status": "seed",
-      "colour_class": "grey_seed",
-      "source_file": "data/scene.json",
-      "height_source": "scene.json (AGL placeholder \u2014 no OD seating yet)",
-      "notes": "Station stone 93 from scene.json (fig1). Seed for eyeball.",
-      "lock": {
-        "status": "seed",
-        "by": "Grok Build / Taskmaster",
-        "at": "2026-09-19T11:40+01:00",
-        "accept": [],
         "provisional": [
-          "e_m",
-          "n_m",
-          "yaw_deg",
-          "width_m",
-          "thickness_m",
           "height_m"
         ],
-        "note": "Seed for Tim eyeball on fig1; not PPC-locked. No height OD work yet."
-      }
+        "note": "Outer bluestone Johnson underlay nudge export publish"
+      },
+      "notes": "PROVISIONAL empty-socket / missing-fabric placeholder 2026-09-19. XY: ring angular mid between locked 34 and 36 about CE/CN. Alt: mid(35a,35b)→412250.670,142182.198 (Δ=2.93m). Modest W×T 1.00×0.60. Awaiting Tim eyeball on Johnson underlay — DO NOT merge to locked_poses / public Pages. | 2026-09-19 Johnson outer bluestone publish (new)"
     },
-    "92": {
-      "id": "92",
-      "role": "station_stone",
-      "status": "standing",
-      "e_m": 412257.781,
-      "n_m": 142153.369,
-      "yaw_deg": 0.0,
-      "width_m": 1.2,
-      "thickness_m": 1.2,
+    "40": {
+      "id": "40",
+      "role": "bluestone",
+      "status": "empty_socket_placeholder",
+      "e_m": 412233.688,
+      "n_m": 142190.501,
+      "yaw_deg": 84.38,
+      "width_m": 0.55,
+      "thickness_m": 0.5,
       "length_m": null,
       "height_m": 1.0,
       "z_base_m": 0.0,
-      "footprint_along_m": 1.2,
-      "footprint_across_m": 1.2,
-      "footprint_shape": "triangle",
-      "accuracy_class": "seed_only",
-      "lock_status": "seed",
-      "colour_class": "gold_medium",
-      "source_file": "fig1 diamond centre (ink detection) + scene91/93 offset",
-      "height_source": "placeholder 1.0 m AGL \u2014 no OD seating",
-      "notes": "Station stone 92 triangular placeholder (missing from scene). Fig1 label + 91/93 offset. | 2026-09-19: re-seeded to fig1 diamond centre (px 790.0,1354.0), not label centroid. Was 412257.559/142154.52. | 2026-09-19: Tim eyeball +1.2 m east (N unchanged). Was 412256.281/142153.669. | 2026-09-19: Tim +0.5 m east (N unchanged). Was 412257.481/142153.669. | 2026-09-19: Tim nudge dE -0.2 dN -0.3. Was 412257.981/142153.669.",
+      "footprint_along_m": 0.55,
+      "footprint_across_m": 0.5,
+      "accuracy_class": "plan_locked",
+      "lock_status": "accepted",
+      "colour_class": "blue",
+      "source_file": "data/stone40_locked.json",
       "lock": {
-        "status": "seed",
-        "by": "Grok Build / Taskmaster",
-        "at": "2026-09-19T11:54+01:00",
-        "accept": [],
-        "provisional": [
+        "status": "accepted",
+        "by": "Tim Daw",
+        "at": "2026-09-19T23:08+01:00",
+        "accept": [
           "e_m",
           "n_m",
           "yaw_deg",
@@ -6515,119 +6845,12 @@
           "thickness_m",
           "height_m"
         ],
-        "note": "Triangular pillar placeholder; not in scene.json. | 2026-09-19: re-seeded to fig1 diamond centre (px 790.0,1354.0), not label centroid. Was 412257.559/142154.52. | 2026-09-19: Tim eyeball +1.2 m east (N unchanged). Was 412256.281/142153.669. | 2026-09-19: Tim +0.5 m east (N unchanged). Was 412257.481/142153.669. | 2026-09-19: Tim nudge dE -0.2 dN -0.3. Was 412257.981/142153.669."
-      }
-    },
-    "94": {
-      "id": "94",
-      "role": "station_stone",
-      "status": "standing",
-      "e_m": 412233.604,
-      "n_m": 142234.974,
-      "yaw_deg": 0.0,
-      "width_m": 1.2,
-      "thickness_m": 1.2,
-      "length_m": null,
-      "height_m": 1.0,
-      "z_base_m": 0.0,
-      "footprint_along_m": 1.2,
-      "footprint_across_m": 1.2,
-      "footprint_shape": "triangle",
-      "accuracy_class": "seed_only",
-      "lock_status": "seed",
-      "colour_class": "gold_medium",
-      "source_file": "fig1 diamond centre (ink detection) + scene91/93 offset",
-      "height_source": "placeholder 1.0 m AGL \u2014 no OD seating",
-      "notes": "Station stone 94 triangular placeholder (missing from scene). Fig1 label + 91/93 offset. | 2026-09-19: re-seeded to fig1 diamond centre (px 449.4,203.4), not label centroid. Was 412233.283/142236.221. | 2026-09-19: Tim eyeball +1.2 m east (N unchanged). Was 412232.104/142235.274. | 2026-09-19: Tim +0.5 m east (N unchanged). Was 412233.304/142235.274. | 2026-09-19: Tim nudge dE -0.2 dN -0.3. Was 412233.804/142235.274.",
-      "lock": {
-        "status": "seed",
-        "by": "Grok Build / Taskmaster",
-        "at": "2026-09-19T11:54+01:00",
-        "accept": [],
         "provisional": [
-          "e_m",
-          "n_m",
-          "yaw_deg",
-          "width_m",
-          "thickness_m",
           "height_m"
         ],
-        "note": "Triangular pillar placeholder; not in scene.json. | 2026-09-19: re-seeded to fig1 diamond centre (px 449.4,203.4), not label centroid. Was 412233.283/142236.221. | 2026-09-19: Tim eyeball +1.2 m east (N unchanged). Was 412232.104/142235.274. | 2026-09-19: Tim +0.5 m east (N unchanged). Was 412233.304/142235.274. | 2026-09-19: Tim nudge dE -0.2 dN -0.3. Was 412233.804/142235.274."
-      }
-    },
-    "95": {
-      "id": "95",
-      "role": "slaughter_stone",
-      "status": "standing",
-      "e_m": 412280.421,
-      "n_m": 142221.26,
-      "yaw_deg": 50.0,
-      "width_m": 6.447,
-      "thickness_m": 2.066,
-      "length_m": null,
-      "height_m": 1.0,
-      "z_base_m": 0.0,
-      "footprint_along_m": 6.447,
-      "footprint_across_m": 2.066,
-      "footprint_shape": "box",
-      "accuracy_class": "seed_only",
-      "lock_status": "seed",
-      "colour_class": "gold_medium",
-      "source_file": "data/scene.json",
-      "height_source": "scene.json (AGL placeholder \u2014 no OD seating yet)",
-      "notes": "Slaughter Stone (95) from scene.json. Seed for eyeball. | 2026-09-19: Tim nudge +0.25 m along long axis (yaw 50 deg, NE-ish).",
-      "lock": {
-        "status": "seed",
-        "by": "Grok Build / Taskmaster",
-        "at": "2026-09-19T11:43+01:00",
-        "accept": [],
-        "provisional": [
-          "e_m",
-          "n_m",
-          "yaw_deg",
-          "width_m",
-          "thickness_m",
-          "height_m"
-        ],
-        "note": "Seed for Tim eyeball on fig1; not PPC-locked. No height OD work yet. | 2026-09-19: Tim nudge +0.25 m along long axis (yaw 50 deg, NE-ish)."
-      }
-    },
-    "96": {
-      "id": "96",
-      "role": "heelstone",
-      "status": "standing",
-      "e_m": 412306.629,
-      "n_m": 142243.653,
-      "yaw_deg": -34.33,
-      "width_m": 2.351,
-      "thickness_m": 2.021,
-      "length_m": null,
-      "height_m": 4.57,
-      "z_base_m": 0.0,
-      "footprint_along_m": 2.351,
-      "footprint_across_m": 2.021,
-      "footprint_shape": "box",
-      "accuracy_class": "seed_only",
-      "lock_status": "seed",
-      "colour_class": "gold_medium",
-      "source_file": "data/scene.json",
-      "height_source": "scene.json (AGL placeholder \u2014 no OD seating yet)",
-      "notes": "Heelstone (96) from scene.json. Seed for eyeball.",
-      "lock": {
-        "status": "seed",
-        "by": "Grok Build / Taskmaster",
-        "at": "2026-09-19T11:40+01:00",
-        "accept": [],
-        "provisional": [
-          "e_m",
-          "n_m",
-          "yaw_deg",
-          "width_m",
-          "thickness_m",
-          "height_m"
-        ],
-        "note": "Seed for Tim eyeball on fig1; not PPC-locked. No height OD work yet."
-      }
+        "note": "Outer bluestone Johnson underlay nudge export publish"
+      },
+      "notes": "PROVISIONAL empty-socket / missing-fabric placeholder 2026-09-19. XY: labels.json pin 40 @ (505.1,903.8) via fig1 Cleal OSGB affine. Alt: ring mid 39–41 → 412235.205,142187.631 (Δ=3.33m); mid(40c,40g)→412234.312,142189.137. Modest W×T 1.00×0.60. Awaiting Tim eyeball on Johnson underlay — DO NOT merge to locked_poses / public Pages. | 2026-09-19 Johnson outer bluestone publish (new)"
     }
   },
   "colour_legend": {
@@ -6645,14 +6868,14 @@
   "overview_notes": {
     "plan": "fig1 Cleal OSGB underlay (fig1_plan_embed.js) for whole-plan overview",
     "placement_rule": "All stones = clean BoxGeometry at Tim/lock e_m n_m yaw. NO ring_osgb splatters.",
-    "80": "Tim pink box 4.88\u00d71.053 yaw \u221240.82 @ 412244.268/142187.177. Pink JSON untouched.",
-    "156": "Tim pink box 5.13\u00d70.90 yaw 71.6 @ 412243.026/142188.059. Pink JSON untouched.",
-    "55a": "Tim lock box W\u00d7T 3.599\u00d72.294 yaw 58.7 \u2014 no ring.",
-    "55b": "Tim lock box W\u00d7T 2.8\u00d72.338 yaw \u221216.03 \u2014 no ring.",
+    "80": "Tim pink box 4.88×1.053 yaw −40.82 @ 412244.268/142187.177. Pink JSON untouched.",
+    "156": "Tim pink box 5.13×0.90 yaw 71.6 @ 412243.026/142188.059. Pink JSON untouched.",
+    "55a": "Tim lock box W×T 3.599×2.294 yaw 58.7 — no ring.",
+    "55b": "Tim lock box W×T 2.8×2.338 yaw −16.03 — no ring.",
     "fig1_note": "Cluster Tim-locks fail fig1 pixel match (~4.5 m N offset vs fig1 fabric); pink plan is authoritative for cluster eyeball.",
-    "8": "Tim eyeball lock e=412257.4 n=142180.255 yaw \u221258.74\u00b0 W\u00d7T 2.024\u00d71.635 H=0.66 Cleal AGL",
-    "9a": "Tim eyeball lock e=412253.516 n=142179.51 yaw 32.41\u00b0 W\u00d7T 1.893\u00d71.506 H=0.76 Cleal AGL",
-    "9b": "Tim eyeball lock e=412254.621 n=142177.54 yaw \u221239.66\u00b0 W\u00d7T 2.294\u00d71.731 H=0.76 Cleal AGL",
+    "8": "Tim eyeball lock e=412257.4 n=142180.255 yaw −58.74° W×T 2.024×1.635 H=0.66 Cleal AGL",
+    "9a": "Tim eyeball lock e=412253.516 n=142179.51 yaw 32.41° W×T 1.893×1.506 H=0.76 Cleal AGL",
+    "9b": "Tim eyeball lock e=412254.621 n=142177.54 yaw −39.66° W×T 2.294×1.731 H=0.76 Cleal AGL",
     "ground": "flat ground for now; site slope / lintel OD later",
     "11": "Tim stretch lock e=412247.017 n=142178.247 yaw 6.63 deg WxT 1.12x0.901 H=2.74 Cleal AGL",
     "12": "Tim stretch lock e=412243.784 n=142177.022 yaw -79.39 deg WxT 5.23x1.963 H=0.53 Cleal AGL",
@@ -6662,15 +6885,16 @@
     "25": "Tim stretch lock e=412239.153 n=142209.126 yaw 7.99 deg WxT 4.387x2.046 H=0.81 Cleal AGL",
     "26": "Tim stretch lock e=412243.944 n=142209.07 yaw 5.46 deg WxT 2.046x1.671 (was 3.696x2.171 lintel bleed) H=0.41 Cleal AGL",
     "outers_stretch_2026-09-15": "Ring lintels confused 14 blob and 26 lintel bleed; Tim eyeball-trimmed WxT. Centre (80/156/55*) parked. No PPC.",
-    "27": "Tim lock e=412247.57 n=142208.888 yaw \u221211.92\u00b0 W\u00d7T 1.981\u00d71.062 H=3.96 Cleal standing; \u0394e=+0.20 \u0394n=\u22120.05 vs seed",
-    "120": "Tim lock fallen lintel e=412227.842 n=142196.34 yaw 0.93\u00b0 W\u00d7T 1.607\u00d70.99 H=0.8; \u0394yaw=\u22127\u00b0 vs ink seed; N of 19",
-    "127": "Tim lock fallen lintel e=412245.672 n=142209.732 yaw 81.38\u00b0 W\u00d7T 2.342\u00d70.793 H=0.8; \u0394e=+0.10 vs ink seed; between 26\u201327",
+    "27": "Tim lock e=412247.57 n=142208.888 yaw −11.92° W×T 1.981×1.062 H=3.96 Cleal standing; Δe=+0.20 Δn=−0.05 vs seed",
+    "120": "Tim lock fallen lintel e=412227.842 n=142196.34 yaw 0.93° W×T 1.607×0.99 H=0.8; Δyaw=−7° vs ink seed; N of 19",
+    "127": "Tim lock fallen lintel e=412245.672 n=142209.732 yaw 81.38° W×T 2.342×0.793 H=0.8; Δe=+0.10 vs ink seed; between 26–27",
     "outers_27_lintels_2026-09-15": "27+120+127 Tim-locked. Outer upright circle complete (sockets 13/17/18/20/24 unmodelled). Centre parked. No PPC.",
     "outer_bluestones_2026-09-15": "Tim-locked outer blues 31, 32, 34, 36, 37, 38, 39, 41, 42, 43, 44, 45, 46, 47, 48, 49, 150 from export 2026-09-15T12:21Z. colour_class=blue_bluestone (distinct from sarsen green). Empty sockets 33/35/40 unmodelled. 32/150 split retained.",
-    "blue_bluestone": "Outer circle + inner horseshoe bluestone boxes \u2014 blue-grey; not sarsen green_locked",
+    "blue_bluestone": "Outer circle + inner horseshoe bluestone boxes — blue-grey; not sarsen green_locked",
     "horseshoe_bluestones_2026-09-15": "Tim-locked horseshoe blues 61, 61a, 62, 63, 64, 65, 67, 68, 69, 70, 71, 72 from export 2026-09-15T14:18Z. colour_class=blue_bluestone. 66 ghost omitted. 68+72 status=fallen preserved. Centre trilithons/Altar still parked.",
     "centre_trilithons_2026_09_19": "Tim locked centre trilithons + Altar from trilithons_centre_nudge.html export 2026-09-19T09:31Z (Johnson 2008). Label: south=55A, on-80=55B. Outers/blues unchanged. Site slope / lintel OD still pending. No PPC.",
     "outer_lintel_thickness_norm_2026_09_19": "2026-09-19: present outer lintels 101/102/105/107/122/130 added with height_m normed to 101 top OD; trilithons untouched.",
-    "outliers_seed_2026_09_19": "2026-09-19: seeded 160a + stations 91-94 + Slaughter 95 + Heel 96 (no height OD)."
+    "outliers_seed_2026_09_19": "2026-09-19: seeded 160a + stations 91-94 + Slaughter 95 + Heel 96 (no height OD).",
+    "outer_blues_2026_09_19": "Johnson-nudged 31–49+150; added 33/35/40"
   }
 }

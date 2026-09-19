@@ -50,3 +50,7 @@ Exit 0 = twins match; exit 1 = drift (do not commit until fixed). Also runs in C
 ## Mobile HUD
 
 On viewports ≤700px the control panel (`#hud`) defaults collapsed; `#hudToggle` expands/collapses it. Preference persists in `sessionStorage` key `sh_hud_open`. Desktop always shows the panel (toggle hidden).
+
+## Cursor georeference
+
+Pointer readout (`#geoReadout`) raycasts the y=0 origin-OD plane → OSGB36 E/N (via `CE`/`CN` + `localXZ` inverse) and WGS84 lat/lon (inline Airy TM + Helmert); no npm deps.

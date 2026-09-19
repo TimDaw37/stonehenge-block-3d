@@ -18,7 +18,7 @@
  @media (min-width:701px){
   #hud{top:10px}
   #hudToggle{display:none}
-  #hud.collapsed{display:block} /* desktop always shows panel; toggle hidden */
+  #hud.collapsed{display:block}
  }
  .sw{display:inline-block;width:12px;height:12px;border-radius:2px;margin-right:6px;vertical-align:-1px;border:1px solid #333}
  button{margin:3px 3px 0 0;padding:4px 8px;border:0;border-radius:4px;background:#3d4a3a;color:#eee;cursor:pointer}
@@ -50,7 +50,12 @@
 <div id="hud">
   <div><b>Stonehenge</b></div>
   <div style="opacity:.85;font-size:12px;margin-top:2px">Sarsen grey | bluestones blue | Altar pink | stations 92/94 bright silver (markers only)</div>
-  <div style="opacity:.7;font-size:11px;margin-top:4px;line-height:1.35">Not GNSS. OSGB is the scene/plan grid (Rees frame); WGS84 converted from that. GE can sit ~1.5&nbsp;m east — we do not warp to GE. Hover for coords; short click to pin.</div>
+  <div style="opacity:.75;font-size:11px;margin-top:4px;line-height:1.4">
+    <b>Coords</b> (bottom): OSGB E/N, SU grid, WGS84 — same framing as stonehenge-plan.<br/>
+    Hover = live; short click = pin; Clear pin / Esc clears.<br/>
+    Not GNSS. OSGB is the scene/Rees plan grid; WGS84 from that OSGB. GE may sit ~1.5&nbsp;m east — we do not warp to GE.<br/>
+    Uncheck <b>Georef</b> to hide the bottom box (handy on mobile).
+  </div>
   <div id="counts" class="row" style="opacity:.85"></div>
   <div class="row">
     <button type="button" id="btnTop" class="active">Top-down</button>
@@ -85,6 +90,7 @@
       <button type="button" id="btnMoonAzS">Most S</button>
     </div>
   </div>
+  <div class="check"><label style="display:inline;text-transform:none;letter-spacing:0;opacity:1"><input type="checkbox" id="geoOn" checked/> Georef / Coords</label></div>
   <div class="check"><label style="display:inline;text-transform:none;letter-spacing:0;opacity:1"><input type="checkbox" id="showRay"/> Ray to centre</label></div>
   <div id="msg"></div>
   <div id="sunReadout" class="row" style="font-size:11px;opacity:.9"></div>

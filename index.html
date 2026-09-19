@@ -77,6 +77,10 @@
     <button type="button" id="btnMoonrise">Moonrise</button>
     <button type="button" id="btnMoonset">Moonset</button>
   </div>
+  <div id="skyCaveat" style="opacity:.75;font-size:10px;line-height:1.35;margin:4px 0 6px">
+    Schematic sky only: flat horizon, no refraction or lunar parallax. Azimuths are for illustration — not survey-grade.
+    A later build will use the LiDAR horizon plus refraction/parallax.
+  </div>
   <label>Epoch</label>
   <div class="row">
     <button type="button" id="btnEpochModern" class="active">Modern</button>
@@ -84,7 +88,7 @@
   </div>
   <div class="row" style="align-items:center;gap:6px;margin:2px 0 4px 0">
     <input type="number" id="epochYear" value="2026" step="1" style="width:5.5em;font:inherit;padding:2px 4px"/>
-    <span id="epochHelp" style="opacity:.7;font-size:10px">−2499 = 2500 BC</span>
+    <span id="epochHelp" style="opacity:.7;font-size:10px">−2499 = 2500 BC · schematic ε only</span>
   </div>
   <div id="sunDatePanel">
     <label>Date <span id="doyLbl">21 Jun</span></label>

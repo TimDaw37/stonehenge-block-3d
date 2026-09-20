@@ -68,6 +68,7 @@
     <button type="button" id="btnOrbit">Orbit</button>
     <button type="button" id="btnTerrain">Terrain</button>
     <button type="button" id="btnLabels">Labels</button>
+    <button type="button" id="btnStations" class="active">Station stones</button>
   </div>
   <label>Sky</label>
   <div class="row">
@@ -113,7 +114,7 @@
   <button type="button" id="geoClear" hidden title="Clear pinned coordinate">Clear pin</button>
 </div>
 <canvas id="c"></canvas>
-<script src="./data/locked_poses.js?v=stations-sightline-a-20260920"></script>
+<script src="./data/locked_poses.js?v=stations-sightline-b-20260920"></script>
 <script>
 /* lintel seat 2026-09-19: lengthen shorter uprights so tops match partners */
 (function () {
@@ -237,7 +238,8 @@ scene.add(fill);
 const root = new THREE.Group();
 scene.add(root);
 
-let terrainHorizonMesh = null, terrainNearMesh = null, terrainOn = false, labelsOn = false;
+let terrainHorizonMesh = null, terrainNearMesh = null, terrainOn = false, labelsOn = false, stationsOn = true;
+let stationSidesGroup = null;
 let exaggeration = 1, bodyMode = 'off', doy = 172, showRay = false, stationAxisMode = false;
 const stoneBaseY = [];
 let planMesh = null;
@@ -349,6 +351,74 @@ function setLabels(on) {
   for (const s of stoneBaseY) {
     if (s.lab) s.lab.visible = labelsOn;
   }
+}
+
+/** Option B: static Newham rectangle sides (91–94), independent of sky ray. */
+function buildStationSightlines() {
+  if (stationSidesGroup) {
+    scene.remove(stationSidesGroup);
+    stationSidesGroup.traverse((o) => {
+      if (o.geometry) o.geometry.dispose();
+      if (o.material) o.material.dispose();
+    });
+    stationSidesGroup = null;
+  }
+  const p91 = stationPoseEN('91');
+  const p92 = stationPoseEN('92');
+  const p93 = stationPoseEN('93');
+  const p94 = stationPoseEN('94');
+  if (!p91 || !p92 || !p93 || !p94) return;
+  const y = 1.2; // just above ground plane
+  function xz(en) {
+    const p = localXZ(en.e, en.n);
+    return new THREE.Vector3(p.x, y, p.z);
+  }
+  // Extend a little past each stone so the line reads as a sightline, not a chord
+  function extend(a, b, padM) {
+    const d = b.clone().sub(a);
+    const len = d.length();
+    if (len < 1e-3) return [a, b];
+    d.multiplyScalar(padM / len);
+    return [a.clone().sub(d), b.clone().add(d)];
+  }
+  const sides = [
+    { a: p94, b: p91, color: 0xc8d0dc, dash: false, name: '94→91 moonrise' }, // long, moonrise most-S
+    { a: p92, b: p93, color: 0xc8d0dc, dash: false, name: '92→93 moonset' },  // long, moonset most-N
+    { a: p93, b: p94, color: 0xffcc66, dash: true, name: '93→94 sunrise' },   // short, summer SR
+    { a: p91, b: p92, color: 0xffcc66, dash: true, name: '91→92 sunset' },   // short, winter SS
+  ];
+  stationSidesGroup = new THREE.Group();
+  stationSidesGroup.name = 'stationSightlines';
+  for (const s of sides) {
+    let A = xz(s.a), B = xz(s.b);
+    [A, B] = extend(A, B, 8);
+    const geo = new THREE.BufferGeometry().setFromPoints([A, B]);
+    let mat;
+    if (s.dash) {
+      mat = new THREE.LineDashedMaterial({
+        color: s.color, dashSize: 2.5, gapSize: 1.5, linewidth: 2,
+        depthTest: false, transparent: true, opacity: 0.95,
+      });
+    } else {
+      mat = new THREE.LineBasicMaterial({
+        color: s.color, depthTest: false, transparent: true, opacity: 0.95,
+      });
+    }
+    const line = new THREE.Line(geo, mat);
+    if (s.dash) line.computeLineDistances();
+    line.renderOrder = 15;
+    line.userData.side = s.name;
+    stationSidesGroup.add(line);
+  }
+  stationSidesGroup.visible = stationsOn;
+  scene.add(stationSidesGroup);
+}
+function setStations(on) {
+  stationsOn = !!on;
+  const btn = document.getElementById('btnStations');
+  if (btn) btn.classList.toggle('active', stationsOn);
+  if (stationSidesGroup) stationSidesGroup.visible = stationsOn;
+  else if (stationsOn) buildStationSightlines();
 }
 
 const ortho = new THREE.OrthographicCamera(-20, 20, 20, -20, 0.1, 25000);
@@ -669,6 +739,7 @@ function rebuildStones() {
  if (msg && window.SITE_GROUND_OD) {
  msg.textContent = 'Z seating: ground OD - origin ' + ORIGIN_OD.toFixed(3) + ' | outer lintels on uprights | fallen on ground | n_lintel_seated=' + lintelSeatNotes;
  }
+ if (stationsOn || stationSidesGroup) buildStationSightlines();
 }
 function applyStoneExag() {
  for (const s of stoneBaseY) {
@@ -1012,6 +1083,9 @@ document.getElementById('btnTerrain').onclick = () => {
 document.getElementById('btnLabels').onclick = () => {
   setLabels(!labelsOn);
 };
+document.getElementById('btnStations').onclick = () => {
+  setStations(!stationsOn);
+};
 function setBodyMode(mode) {
  bodyMode = mode;
  const modes = [
@@ -1104,6 +1178,7 @@ addEventListener('resize', () => {
 function tick() { requestAnimationFrame(tick); controls.update(); renderer.render(scene, cam); }
 
 rebuildStones();
+buildStationSightlines();
 setOrbit();
 doy = 172;
 document.getElementById('doy').value = '172';

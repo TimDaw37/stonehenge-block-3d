@@ -6,7 +6,7 @@
 <meta http-equiv="Pragma" content="no-cache"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Stonehenge 3D Model</title>
-<!-- newham-bust newham-91x-412284.712-142174.194-20260920d -->
+<!-- newham-bust georef-copy-pin-20260920 -->
 <style>
  html,body{margin:0;height:100%;background:#1a2430;color:#eee;font:13px/1.35 system-ui,sans-serif;overflow:hidden}
  #c{position:fixed;inset:0;width:100%;height:100%;display:block}
@@ -42,9 +42,11 @@
 #geoReadout .muted{opacity:.65}
 #geoReadout #geoHover,#geoReadout #geoPinned{display:block;width:100%}
 #geoReadout #geoPinned{color:#f0a070;margin-top:4px}
-#geoReadout #geoClear{pointer-events:auto;margin:6px 0 0;padding:6px 12px;min-height:36px;
+#geoReadout .geoBtns{pointer-events:auto;margin:6px 0 0;display:flex;flex-wrap:wrap;gap:6px}
+#geoReadout .geoBtns button{padding:6px 12px;min-height:36px;
  font:12px system-ui,sans-serif;background:#3d4a3a;color:#eee;border:0;border-radius:6px;cursor:pointer}
-#geoReadout #geoClear[hidden]{display:none}
+#geoReadout .geoBtns button:hover{background:#5a6b55}
+#geoReadout .geoBtns[hidden]{display:none}
 @media (max-width:700px){
  #geoReadout{left:8px;right:8px;bottom:8px;font-size:11px;line-height:1.45;padding:10px 12px;
   max-height:45vh}
@@ -59,7 +61,7 @@
   <div style="opacity:.85;font-size:12px;margin-top:2px">Sarsen grey | bluestones blue | Altar pink | stations 92/94 bright silver (markers only)</div>
   <div style="opacity:.75;font-size:11px;margin-top:4px;line-height:1.4">
     <b>Coords</b> (bottom): OSGB E/N, SU grid, WGS84 — same framing as stonehenge-plan.<br/>
-    Hover = live; short click = pin; Clear pin / Esc clears.<br/>
+    Hover = live; short click = pin; Copy pin / Clear pin / Esc.<br/>
     Not GNSS. OSGB is the scene/Rees plan grid; WGS84 from that OSGB. GE may sit ~1.5&nbsp;m east — we do not warp to GE.<br/>
     Uncheck <b>Georef</b> to hide the bottom box (handy on mobile).
   </div>
@@ -99,7 +101,7 @@
     </div>
   </div>
   <div class="check"><label style="display:inline;text-transform:none;letter-spacing:0;opacity:1"><input type="checkbox" id="geoOn" checked/> Georef / Coords</label></div>
-  <div style="opacity:.7;font-size:10px;margin:2px 0 4px 0;line-height:1.35">Tap/click for coords; short tap pins. Drag to orbit (coords pause while dragging). Short tap = pin; Esc / Clear pin clears. Uncheck to hide the bottom box.</div>
+  <div style="opacity:.7;font-size:10px;margin:2px 0 4px 0;line-height:1.35">Tap/click for coords; short tap pins. Drag to orbit (coords pause while dragging). Copy pin / Clear pin / Esc. Uncheck to hide the bottom box.</div>
   <div class="check"><label style="display:inline;text-transform:none;letter-spacing:0;opacity:1"><input type="checkbox" id="showRay"/> <span id="showRayLabel">Ray to centre</span></label></div>
   <div style="opacity:.7;font-size:10px;margin:2px 0 4px 0;line-height:1.35"><b>Newham</b>: station-rectangle enquiry (91 = locked stonehole). Off = Heel Stone / centre.</div>
   <div id="msg"></div>
@@ -108,10 +110,13 @@
 <div id="geoReadout" aria-live="polite">
   <div id="geoHover"><span class="muted">Hover</span> —</div>
   <div id="geoPinned" hidden></div>
-  <button type="button" id="geoClear" hidden title="Clear pinned coordinate">Clear pin</button>
+  <div class="geoBtns" id="geoBtns" hidden>
+    <button type="button" id="geoCopy" title="Copy pinned coordinates">Copy pin</button>
+    <button type="button" id="geoClear" title="Clear pinned coordinate">Clear pin</button>
+  </div>
 </div>
 <canvas id="c"></canvas>
-<script src="./data/locked_poses.js?v=newham-91x-412284.712-142174.194-20260920d"></script>
+<script src="./data/locked_poses.js?v=georef-copy-pin-20260920"></script>
 <script>
 /* lintel seat 2026-09-19: lengthen shorter uprights so tops match partners */
 (function () {
@@ -460,7 +465,9 @@ controls.maxDistance = 20000;
 const geoEl = document.getElementById('geoReadout');
 const geoHoverEl = document.getElementById('geoHover');
 const geoPinnedEl = document.getElementById('geoPinned');
+const geoBtns = document.getElementById('geoBtns');
 const geoClearBtn = document.getElementById('geoClear');
+const geoCopyBtn = document.getElementById('geoCopy');
 const geoToggle = document.getElementById('geoOn');
 const groundPlane = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
 const _ptr = new THREE.Vector2();
@@ -538,13 +545,14 @@ function showPinned() {
   if (!pinnedGeo) {
     geoPinnedEl.hidden = true;
     geoPinnedEl.textContent = '';
-    if (geoClearBtn) geoClearBtn.hidden = true;
+    if (geoBtns) geoBtns.hidden = true;
     if (pinMesh) pinMesh.visible = false;
     return;
   }
   geoPinnedEl.hidden = false;
   geoPinnedEl.textContent = 'pinned  ' + pinnedGeo.text;
-  if (geoClearBtn) geoClearBtn.hidden = false;
+  if (geoBtns) geoBtns.hidden = false;
+  if (geoCopyBtn) geoCopyBtn.textContent = 'Copy pin';
   if (!geoOn) { if (pinMesh) pinMesh.visible = false; return; }
   const m = ensurePinMesh();
   m.visible = true;
@@ -611,6 +619,27 @@ canvas.addEventListener('pointerup', (ev) => {
   if (dt > 500) return;
   pinAt(hitGeo(ev.clientX, ev.clientY));
 });
+async function copyPin() {
+  if (!pinnedGeo) return;
+  const t = pinnedGeo.text;
+  try {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      await navigator.clipboard.writeText(t);
+    } else {
+      const ta = document.createElement('textarea');
+      ta.value = t; document.body.appendChild(ta); ta.select();
+      document.execCommand('copy'); document.body.removeChild(ta);
+    }
+    if (geoCopyBtn) {
+      geoCopyBtn.textContent = 'Copied';
+      setTimeout(() => { if (geoCopyBtn) geoCopyBtn.textContent = 'Copy pin'; }, 1200);
+    }
+  } catch (err) {
+    if (geoCopyBtn) geoCopyBtn.textContent = 'Copy failed';
+    console.warn(err);
+  }
+}
+if (geoCopyBtn) geoCopyBtn.addEventListener('click', (ev) => { ev.preventDefault(); copyPin(); });
 if (geoClearBtn) geoClearBtn.addEventListener('click', (ev) => { ev.preventDefault(); clearPin(); });
 window.addEventListener('keydown', (ev) => { if (ev.key === 'Escape') clearPin(); });
 

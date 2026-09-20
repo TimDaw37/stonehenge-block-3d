@@ -6,6 +6,7 @@
 <meta http-equiv="Pragma" content="no-cache"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Stonehenge 3D Model</title>
+<!-- newham-bust newham-91x-412284.712-142174.194-20260920d -->
 <style>
  html,body{margin:0;height:100%;background:#1a2430;color:#eee;font:13px/1.35 system-ui,sans-serif;overflow:hidden}
  #c{position:fixed;inset:0;width:100%;height:100%;display:block}
@@ -110,7 +111,7 @@
   <button type="button" id="geoClear" hidden title="Clear pinned coordinate">Clear pin</button>
 </div>
 <canvas id="c"></canvas>
-<script src="./data/locked_poses.js?v=newham-91hole-tim-x-20260920"></script>
+<script src="./data/locked_poses.js?v=newham-91x-412284.712-142174.194-20260920d"></script>
 <script>
 /* lintel seat 2026-09-19: lengthen shorter uprights so tops match partners */
 (function () {
@@ -236,8 +237,8 @@ scene.add(root);
 
 let terrainHorizonMesh = null, terrainNearMesh = null, terrainOn = false, labelsOn = false, stationsOn = false;
 let stationSidesGroup = null;
-/** 91 Newham corner — Tim X: NW end of fallen box toward 94 (412284.883/142174.378). */
-const STATION_91_HOLE_FALLBACK = { e: 412284.883, n: 142174.378, id: '91hole' };
+/** 91 Newham corner — Tim X box end (412284.712/142174.194). */
+const STATION_91_HOLE_FALLBACK = { e: 412284.712, n: 142174.194, id: '91hole' };
 function station91HoleEN() {
   for (const e of LP.array) {
     if (String(e.id) !== '91') continue;
@@ -423,7 +424,7 @@ function buildStationSightlines() {
   {
     const c = xz(p91);
     const ring = new THREE.Mesh(
-      new THREE.RingGeometry(0.55, 0.85, 32),
+      new THREE.RingGeometry(0.7, 1.15, 32),
       new THREE.MeshBasicMaterial({ color: 0xff6688, side: THREE.DoubleSide, depthTest: false, transparent: true, opacity: 0.9 })
     );
     ring.rotation.x = -Math.PI / 2;

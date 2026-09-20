@@ -2144,7 +2144,7 @@ window.LOCKED_POSES = {
       "colour_class": "grey_seed",
       "source_file": "data/scene.json",
       "height_source": "scene.json (AGL placeholder \u2014 no OD seating yet)",
-      "notes": "Station stone 91 from scene.json (fig1). Seed for eyeball. | Newham hole Tim-X NW end 412284.883/142174.378",
+      "notes": "Station stone 91 from scene.json (fig1). Seed for eyeball. | Newham hole Tim-X box end 412284.712/142174.194",
       "lock": {
         "status": "seed",
         "by": "Grok Build / Taskmaster",
@@ -2160,9 +2160,9 @@ window.LOCKED_POSES = {
         ],
         "note": "Seed for Tim eyeball on fig1; not PPC-locked. No height OD work yet."
       },
-      "hole_e_m": 412284.883,
-      "hole_n_m": 142174.378,
-      "hole_source": "Tim X on screenshot 2026-09-20: NW end of fallen box toward 94 (half width along long side)."
+      "hole_e_m": 412284.712,
+      "hole_n_m": 142174.194,
+      "hole_source": "Tim X: geometric NW/toward-94 end of fallen box (yaw \u00b1 half width)"
     },
     {
       "id": "92",

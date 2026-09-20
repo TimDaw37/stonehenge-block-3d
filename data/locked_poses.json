@@ -1,6 +1,6 @@
 {
   "title": "Stonehenge locked poses overview",
-  "generated_at": "2026-09-19T22:09:14Z",
+  "generated_at": "2026-09-20T06:10:20Z",
   "frame": "OSGB",
   "count": 93,
   "array": [
@@ -34,9 +34,10 @@
           "thickness_m",
           "height_m"
         ],
-        "provisional": []
+        "provisional": [],
+        "height_note": "height lengthened 2026-09-19 to meet lintel seat (pair with 2; lintel 102; also levels 101 with 30)."
       },
-      "notes": " | 2026-09-19: height lengthened to meet lintel seat (was 3.96)."
+      "notes": "height lengthened 2026-09-19 to meet lintel seat (pair with 2; lintel 102; also levels 101 with 30)."
     },
     {
       "id": "2",
@@ -218,9 +219,10 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "AUTO dens_in=0.844 lock=0.922 nn=3.30m W/T=1.85"
+        "note": "AUTO dens_in=0.844 lock=0.922 nn=3.30m W/T=1.85",
+        "height_note": "height lengthened 2026-09-19 to meet lintel seat (pair with 6; lintel 107)."
       },
-      "notes": " | 2026-09-19: height lengthened to meet lintel seat (was 3.96)."
+      "notes": "height lengthened 2026-09-19 to meet lintel seat (pair with 6; lintel 107)."
     },
     {
       "id": "8",
@@ -510,7 +512,7 @@
         "status": "medium",
         "by": "Plan Pose Checker",
         "at": "2026-09-14T14:17+01:00",
-        "note": "MEDIUM conf Δyaw−26.4°; prefer ink over seed"
+        "note": "MEDIUM conf \u0394yaw\u221226.4\u00b0; prefer ink over seed"
       }
     },
     {
@@ -535,9 +537,10 @@
         "status": "accepted",
         "by": "Plan Pose Checker",
         "at": "2026-09-14T14:17+01:00",
-        "note": "visual clean; dens soft"
+        "note": "visual clean; dens soft",
+        "height_note": "height lengthened 2026-09-19 to meet lintel seat (pair with 21; lintel 122)."
       },
-      "notes": " | 2026-09-19: height lengthened to meet lintel seat (was 3.81)."
+      "notes": "height lengthened 2026-09-19 to meet lintel seat (pair with 21; lintel 122)."
     },
     {
       "id": "23",
@@ -679,7 +682,7 @@
         "note": "Tim eyeball export approved 2026-09-15T11:59Z (outers_27_lintels_nudge.html); outer uprigh"
       },
       "height_source": "Cleal App.5 standing",
-      "notes": "Tim lock 27. Δe=+0.200 m, Δn=−0.050 m vs scene_seed_kept; yaw/W×T×H unchanged. Completes outer upright circle (missing sockets 13/17/18/20/24 unmodelled)."
+      "notes": "Tim lock 27. \u0394e=+0.200 m, \u0394n=\u22120.050 m vs scene_seed_kept; yaw/W\u00d7T\u00d7H unchanged. Completes outer upright circle (missing sockets 13/17/18/20/24 unmodelled)."
     },
     {
       "id": "28",
@@ -745,9 +748,10 @@
           "thickness_m",
           "height_m"
         ],
-        "note": "lock 0.914 dens 0.903"
+        "note": "lock 0.914 dens 0.903",
+        "height_note": "height lengthened 2026-09-19 to meet lintel seat (pair with 30; lintel 130; cascade after 101/102 seat)."
       },
-      "notes": " | 2026-09-19: height lengthened to meet lintel seat (was 3.96)."
+      "notes": "height lengthened 2026-09-19 to meet lintel seat (pair with 30; lintel 130; cascade after 101/102 seat)."
     },
     {
       "id": "30",
@@ -779,9 +783,10 @@
           "thickness_m",
           "height_m"
         ],
-        "provisional": []
+        "provisional": [],
+        "height_note": "height lengthened 2026-09-19 to meet lintel seat (pair with 1; lintel 101; cascades to 130 with 29)."
       },
-      "notes": " | 2026-09-19: height lengthened to meet lintel seat (was 3.96)."
+      "notes": "height lengthened 2026-09-19 to meet lintel seat (pair with 1; lintel 101; cascades to 130 with 29)."
     },
     {
       "id": "31",
@@ -853,7 +858,7 @@
         "provisional": [],
         "note": "Outer bluestone Johnson underlay nudge export publish"
       },
-      "notes": "SPLIT from merged seed 2.145×1.566; upright-only fig1 ink (Voronoi vs 150). ink W×T 1.369×0.851. | 2026-09-19: outer blue Johnson nudge publish"
+      "notes": "SPLIT from merged seed 2.145\u00d71.566; upright-only fig1 ink (Voronoi vs 150). ink W\u00d7T 1.369\u00d70.851. | 2026-09-19: outer blue Johnson nudge publish"
     },
     {
       "id": "34",
@@ -1378,7 +1383,7 @@
       "colour_class": "green_locked",
       "source_file": "data/stone51_locked.json",
       "height_source": "cleal_app5_or_scene",
-      "notes": "Johnson 2008 solid ink OBB seed; scene/locked soft start | 2026-09-19: height lengthened to meet lintel seat (was 4.98).",
+      "notes": "Johnson 2008 solid ink OBB seed; scene/locked soft start; height lengthened 2026-09-19 to meet lintel seat (pair with 52; lintel 152).",
       "lock": {
         "status": "accepted",
         "by": "Tim Daw",
@@ -1392,9 +1397,10 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
+        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
         "export": "exports/trilithons_centre_export_2026-09-19.json",
-        "underlay": "Johnson 2008"
+        "underlay": "Johnson 2008",
+        "height_note": "Johnson 2008 solid ink OBB seed; scene/locked soft start; height lengthened 2026-09-19 to meet lintel seat (pair with 52; lintel 152)."
       }
     },
     {
@@ -1430,7 +1436,7 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
+        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
         "export": "exports/trilithons_centre_export_2026-09-19.json",
         "underlay": "Johnson 2008"
       }
@@ -1468,7 +1474,7 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
+        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
         "export": "exports/trilithons_centre_export_2026-09-19.json",
         "underlay": "Johnson 2008"
       }
@@ -1506,7 +1512,7 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
+        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
         "export": "exports/trilithons_centre_export_2026-09-19.json",
         "underlay": "Johnson 2008"
       }
@@ -1544,7 +1550,7 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
+        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
         "export": "exports/trilithons_centre_export_2026-09-19.json",
         "underlay": "Johnson 2008"
       }
@@ -1582,7 +1588,7 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
+        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
         "export": "exports/trilithons_centre_export_2026-09-19.json",
         "underlay": "Johnson 2008"
       }
@@ -1606,7 +1612,7 @@
       "colour_class": "green_locked",
       "source_file": "data/stone58_locked.json",
       "height_source": "cleal_app5_or_scene",
-      "notes": "Johnson 2008 solid ink OBB seed; scene/locked soft start | 2026-09-19: height lengthened to meet lintel seat (was 5.18).",
+      "notes": "Johnson 2008 solid ink OBB seed; scene/locked soft start; height lengthened 2026-09-19 to meet lintel seat (pair with 57; lintel 158).",
       "lock": {
         "status": "accepted",
         "by": "Tim Daw",
@@ -1620,9 +1626,10 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
+        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
         "export": "exports/trilithons_centre_export_2026-09-19.json",
-        "underlay": "Johnson 2008"
+        "underlay": "Johnson 2008",
+        "height_note": "Johnson 2008 solid ink OBB seed; scene/locked soft start; height lengthened 2026-09-19 to meet lintel seat (pair with 57; lintel 158)."
       }
     },
     {
@@ -1658,7 +1665,7 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
+        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
         "export": "exports/trilithons_centre_export_2026-09-19.json",
         "underlay": "Johnson 2008"
       }
@@ -2078,7 +2085,7 @@
       "colour_class": "altar_pink",
       "source_file": "data/altar80_locked.json",
       "height_source": "pink",
-      "notes": "Tim pink start — place may need nudge on Johnson",
+      "notes": "Tim pink start \u2014 place may need nudge on Johnson",
       "lock": {
         "status": "accepted",
         "by": "Tim Daw",
@@ -2092,7 +2099,7 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
+        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
         "export": "exports/trilithons_centre_export_2026-09-19.json",
         "underlay": "Johnson 2008"
       },
@@ -2136,7 +2143,7 @@
       "lock_status": "seed",
       "colour_class": "grey_seed",
       "source_file": "data/scene.json",
-      "height_source": "scene.json (AGL placeholder — no OD seating yet)",
+      "height_source": "scene.json (AGL placeholder \u2014 no OD seating yet)",
       "notes": "Station stone 91 from scene.json (fig1). Seed for eyeball.",
       "lock": {
         "status": "seed",
@@ -2158,8 +2165,8 @@
       "id": "92",
       "role": "station_stone",
       "status": "standing",
-      "e_m": 412257.781,
-      "n_m": 142153.369,
+      "e_m": 412258.835,
+      "n_m": 142151.708,
       "yaw_deg": 0.0,
       "width_m": 1.2,
       "thickness_m": 1.2,
@@ -2169,12 +2176,12 @@
       "footprint_along_m": 1.2,
       "footprint_across_m": 1.2,
       "footprint_shape": "triangle",
-      "accuracy_class": "seed_only",
+      "accuracy_class": "plan_digitised",
       "lock_status": "seed",
       "colour_class": "gold_medium",
-      "source_file": "fig1 diamond centre (ink detection) + scene91/93 offset",
-      "height_source": "placeholder 1.0 m AGL — no OD seating",
-      "notes": "Station stone 92 triangular placeholder (missing from scene). Fig1 label + 91/93 offset. | 2026-09-19: re-seeded to fig1 diamond centre (px 790.0,1354.0), not label centroid. Was 412257.559/142154.52. | 2026-09-19: Tim eyeball +1.2 m east (N unchanged). Was 412256.281/142153.669. | 2026-09-19: Tim +0.5 m east (N unchanged). Was 412257.481/142153.669. | 2026-09-19: Tim nudge dE -0.2 dN -0.3. Was 412257.981/142153.669.",
+      "source_file": "Banton et al. 2014 Fig. 4 (Antiquity 88; Soutar \u00a9 EH) \u2014 Tim physical/parch reference",
+      "height_source": "placeholder 1.0 m AGL \u2014 no OD seating",
+      "notes": "Station stone 92 triangular placeholder (missing from scene). Fig1 label + 91/93 offset. | 2026-09-19: re-seeded to fig1 diamond centre (px 790.0,1354.0), not label centroid. Was 412257.559/142154.52. | 2026-09-19: Tim eyeball +1.2 m east (N unchanged). Was 412256.281/142153.669. | 2026-09-19: Tim +0.5 m east (N unchanged). Was 412257.481/142153.669. | 2026-09-19: Tim nudge dE -0.2 dN -0.3. Was 412257.981/142153.669. | 2026-09-20: Tim \u2014 move south to white open-hole outline on Banton et al. 2014 Fig. 4 (georef on 91/93 ink). Was 412257.781/142153.369.",
       "lock": {
         "status": "seed",
         "by": "Grok Build / Taskmaster",
@@ -2210,7 +2217,7 @@
       "lock_status": "seed",
       "colour_class": "grey_seed",
       "source_file": "data/scene.json",
-      "height_source": "scene.json (AGL placeholder — no OD seating yet)",
+      "height_source": "scene.json (AGL placeholder \u2014 no OD seating yet)",
       "notes": "Station stone 93 from scene.json (fig1). Seed for eyeball.",
       "lock": {
         "status": "seed",
@@ -2232,8 +2239,8 @@
       "id": "94",
       "role": "station_stone",
       "status": "standing",
-      "e_m": 412233.604,
-      "n_m": 142234.974,
+      "e_m": 412232.264,
+      "n_m": 142234.366,
       "yaw_deg": 0.0,
       "width_m": 1.2,
       "thickness_m": 1.2,
@@ -2243,12 +2250,12 @@
       "footprint_along_m": 1.2,
       "footprint_across_m": 1.2,
       "footprint_shape": "triangle",
-      "accuracy_class": "seed_only",
+      "accuracy_class": "plan_digitised",
       "lock_status": "seed",
       "colour_class": "gold_medium",
-      "source_file": "fig1 diamond centre (ink detection) + scene91/93 offset",
-      "height_source": "placeholder 1.0 m AGL — no OD seating",
-      "notes": "Station stone 94 triangular placeholder (missing from scene). Fig1 label + 91/93 offset. | 2026-09-19: re-seeded to fig1 diamond centre (px 449.4,203.4), not label centroid. Was 412233.283/142236.221. | 2026-09-19: Tim eyeball +1.2 m east (N unchanged). Was 412232.104/142235.274. | 2026-09-19: Tim +0.5 m east (N unchanged). Was 412233.304/142235.274. | 2026-09-19: Tim nudge dE -0.2 dN -0.3. Was 412233.804/142235.274.",
+      "source_file": "Banton et al. 2014 Fig. 4 (Antiquity 88; Soutar \u00a9 EH) \u2014 Tim physical/parch reference",
+      "height_source": "placeholder 1.0 m AGL \u2014 no OD seating",
+      "notes": "Station stone 94 triangular placeholder (missing from scene). Fig1 label + 91/93 offset. | 2026-09-19: re-seeded to fig1 diamond centre (px 449.4,203.4), not label centroid. Was 412233.283/142236.221. | 2026-09-19: Tim eyeball +1.2 m east (N unchanged). Was 412232.104/142235.274. | 2026-09-19: Tim +0.5 m east (N unchanged). Was 412233.304/142235.274. | 2026-09-19: Tim nudge dE -0.2 dN -0.3. Was 412233.804/142235.274. | 2026-09-20: Tim \u2014 move to orange parch on Banton et al. 2014 Fig. 4 (georef on 91/93 ink). Was 412233.604/142234.974.",
       "lock": {
         "status": "seed",
         "by": "Grok Build / Taskmaster",
@@ -2284,7 +2291,7 @@
       "lock_status": "seed",
       "colour_class": "gold_medium",
       "source_file": "data/scene.json",
-      "height_source": "scene.json (AGL placeholder — no OD seating yet)",
+      "height_source": "scene.json (AGL placeholder \u2014 no OD seating yet)",
       "notes": "Slaughter Stone (95) from scene.json. Seed for eyeball. | 2026-09-19: Tim nudge +0.25 m along long axis (yaw 50 deg, NE-ish).",
       "lock": {
         "status": "seed",
@@ -2321,7 +2328,7 @@
       "lock_status": "seed",
       "colour_class": "gold_medium",
       "source_file": "data/scene.json",
-      "height_source": "scene.json (AGL placeholder — no OD seating yet)",
+      "height_source": "scene.json (AGL placeholder \u2014 no OD seating yet)",
       "notes": "Heelstone (96) from scene.json. Seed for eyeball.",
       "lock": {
         "status": "seed",
@@ -2379,7 +2386,7 @@
         ],
         "note": "Present outer lintel; XY/yaw from laptop support midpoints/mean yaw (provisional). height_m set so top OD matches 101. Centre trilithon locks preserved."
       },
-      "notes": "Outer lintel thickness norm to 101 on 2026-09-19: old scene.thickness_m=0.8 → height_m/scene.thickness_m=0.8. target_top_od=107.144."
+      "notes": "Outer lintel thickness norm to 101 on 2026-09-19: old scene.thickness_m=0.8 \u2192 height_m/scene.thickness_m=0.8. target_top_od=107.144."
     },
     {
       "id": "102",
@@ -2421,7 +2428,7 @@
         ],
         "note": "Present outer lintel; XY/yaw from laptop support midpoints/mean yaw (provisional). height_m set so top OD matches 101. Centre trilithon locks preserved. | 2026-09-19: recentred to support midpoint; yaw=chord bearing mid-upright to mid-upright. height_m kept (norm to 101 OD)."
       },
-      "notes": "Outer lintel thickness norm to 101 on 2026-09-19: old scene.thickness_m=0.8 → height_m/scene.thickness_m=0.728. target_top_od=107.144. | 2026-09-19: recentred to support midpoint; yaw=chord bearing mid-upright to mid-upright. height_m kept (norm to 101 OD)."
+      "notes": "Outer lintel thickness norm to 101 on 2026-09-19: old scene.thickness_m=0.8 \u2192 height_m/scene.thickness_m=0.728. target_top_od=107.144. | 2026-09-19: recentred to support midpoint; yaw=chord bearing mid-upright to mid-upright. height_m kept (norm to 101 OD)."
     },
     {
       "id": "105",
@@ -2463,7 +2470,7 @@
         ],
         "note": "Present outer lintel; XY/yaw from laptop support midpoints/mean yaw (provisional). height_m set so top OD matches 101. Centre trilithon locks preserved. | 2026-09-19: recentred to support midpoint; yaw=chord bearing mid-upright to mid-upright. height_m kept (norm to 101 OD)."
       },
-      "notes": "Outer lintel thickness norm to 101 on 2026-09-19: old scene.thickness_m=0.8 → height_m/scene.thickness_m=0.6175. target_top_od=107.144. | 2026-09-19: recentred to support midpoint; yaw=chord bearing mid-upright to mid-upright. height_m kept (norm to 101 OD)."
+      "notes": "Outer lintel thickness norm to 101 on 2026-09-19: old scene.thickness_m=0.8 \u2192 height_m/scene.thickness_m=0.6175. target_top_od=107.144. | 2026-09-19: recentred to support midpoint; yaw=chord bearing mid-upright to mid-upright. height_m kept (norm to 101 OD)."
     },
     {
       "id": "107",
@@ -2505,7 +2512,7 @@
         ],
         "note": "Present outer lintel; XY/yaw from laptop support midpoints/mean yaw (provisional). height_m set so top OD matches 101. Centre trilithon locks preserved."
       },
-      "notes": "Outer lintel thickness norm to 101 on 2026-09-19: old scene.thickness_m=0.8 → height_m/scene.thickness_m=0.7065. target_top_od=107.144."
+      "notes": "Outer lintel thickness norm to 101 on 2026-09-19: old scene.thickness_m=0.8 \u2192 height_m/scene.thickness_m=0.7065. target_top_od=107.144."
     },
     {
       "id": "120",
@@ -2541,7 +2548,7 @@
         "provisional": [],
         "note": "Tim eyeball export approved 2026-09-15T11:59Z (outers_27_lintels_nudge.html); fallen outer"
       },
-      "notes": "Tim lock 120 fallen lintel. Δyaw=−7.00° (7.93→0.93); e/n/W×T×H unchanged vs fig1 ink seed. Originally ~20–21 span; fabric N of 19."
+      "notes": "Tim lock 120 fallen lintel. \u0394yaw=\u22127.00\u00b0 (7.93\u21920.93); e/n/W\u00d7T\u00d7H unchanged vs fig1 ink seed. Originally ~20\u201321 span; fabric N of 19."
     },
     {
       "id": "122",
@@ -2583,7 +2590,7 @@
         ],
         "note": "Present outer lintel; XY/yaw from laptop support midpoints/mean yaw (provisional). height_m set so top OD matches 101. Centre trilithon locks preserved. | 2026-09-19: recentred to support midpoint; yaw=chord bearing mid-upright to mid-upright. height_m kept (norm to 101 OD)."
       },
-      "notes": "Outer lintel thickness norm to 101 on 2026-09-19: old scene.thickness_m=0.8 → height_m/scene.thickness_m=0.682. target_top_od=107.144. | 2026-09-19: recentred to support midpoint; yaw=chord bearing mid-upright to mid-upright. height_m kept (norm to 101 OD)."
+      "notes": "Outer lintel thickness norm to 101 on 2026-09-19: old scene.thickness_m=0.8 \u2192 height_m/scene.thickness_m=0.682. target_top_od=107.144. | 2026-09-19: recentred to support midpoint; yaw=chord bearing mid-upright to mid-upright. height_m kept (norm to 101 OD)."
     },
     {
       "id": "127",
@@ -2619,7 +2626,7 @@
         "provisional": [],
         "note": "Tim eyeball export approved 2026-09-15T11:59Z (outers_27_lintels_nudge.html); fallen outer"
       },
-      "notes": "Tim lock 127 fallen lintel. Δe=+0.100 m vs fig1 ink seed; n/yaw/W×T×H unchanged. Was lintel bleed on 26 seed."
+      "notes": "Tim lock 127 fallen lintel. \u0394e=+0.100 m vs fig1 ink seed; n/yaw/W\u00d7T\u00d7H unchanged. Was lintel bleed on 26 seed."
     },
     {
       "id": "130",
@@ -2661,7 +2668,7 @@
         ],
         "note": "Present outer lintel; XY/yaw from laptop support midpoints/mean yaw (provisional). height_m set so top OD matches 101. Centre trilithon locks preserved."
       },
-      "notes": "Outer lintel thickness norm to 101 on 2026-09-19: old scene.thickness_m=0.8 → height_m/scene.thickness_m=0.718. target_top_od=107.144."
+      "notes": "Outer lintel thickness norm to 101 on 2026-09-19: old scene.thickness_m=0.8 \u2192 height_m/scene.thickness_m=0.718. target_top_od=107.144."
     },
     {
       "id": "150",
@@ -2697,7 +2704,7 @@
         "provisional": [],
         "note": "Outer bluestone Johnson underlay nudge export publish"
       },
-      "notes": "NEW: split from 32 merged hatch. fig1 ink long≈1.685m; W set to laser c.2.44m (StonehengeLaserScan p.50). labels pin (775.8,742.1). Fallen bluestone lintel with mortises. | 2026-09-19: outer blue Johnson nudge publish"
+      "notes": "NEW: split from 32 merged hatch. fig1 ink long\u22481.685m; W set to laser c.2.44m (StonehengeLaserScan p.50). labels pin (775.8,742.1). Fallen bluestone lintel with mortises. | 2026-09-19: outer blue Johnson nudge publish"
     },
     {
       "id": "152",
@@ -2718,7 +2725,7 @@
       "colour_class": "green_locked",
       "source_file": "data/stone152_locked.json",
       "height_source": "placeholder_fallen_agl",
-      "notes": "Scene/CSV present lintel — nudge on Johnson",
+      "notes": "Scene/CSV present lintel \u2014 nudge on Johnson",
       "lock": {
         "status": "accepted",
         "by": "Tim Daw",
@@ -2732,7 +2739,7 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
+        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
         "export": "exports/trilithons_centre_export_2026-09-19.json",
         "underlay": "Johnson 2008"
       }
@@ -2756,7 +2763,7 @@
       "colour_class": "green_locked",
       "source_file": "data/stone154_locked.json",
       "height_source": "placeholder_fallen_agl",
-      "notes": "Scene/CSV present lintel — nudge on Johnson",
+      "notes": "Scene/CSV present lintel \u2014 nudge on Johnson",
       "lock": {
         "status": "accepted",
         "by": "Tim Daw",
@@ -2770,7 +2777,7 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
+        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
         "export": "exports/trilithons_centre_export_2026-09-19.json",
         "underlay": "Johnson 2008"
       }
@@ -2794,7 +2801,7 @@
       "colour_class": "cream_156",
       "source_file": "data/stone156_locked.json",
       "height_source": "pink",
-      "notes": "Pink L×W×H kept; place/yaw nudged toward Johnson hatch",
+      "notes": "Pink L\u00d7W\u00d7H kept; place/yaw nudged toward Johnson hatch",
       "lock": {
         "status": "accepted",
         "by": "Tim Daw",
@@ -2808,7 +2815,7 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
+        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
         "export": "exports/trilithons_centre_export_2026-09-19.json",
         "underlay": "Johnson 2008"
       },
@@ -2857,7 +2864,7 @@
       "colour_class": "green_locked",
       "source_file": "data/stone158_locked.json",
       "height_source": "placeholder_fallen_agl",
-      "notes": "Scene/CSV present lintel — nudge on Johnson",
+      "notes": "Scene/CSV present lintel \u2014 nudge on Johnson",
       "lock": {
         "status": "accepted",
         "by": "Tim Daw",
@@ -2871,7 +2878,7 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
+        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
         "export": "exports/trilithons_centre_export_2026-09-19.json",
         "underlay": "Johnson 2008"
       }
@@ -2896,7 +2903,7 @@
       "colour_class": "grey_seed",
       "source_file": "data/labels.json + locked 160b vector on fig1 affine",
       "height_source": "placeholder_fallen_agl",
-      "notes": "Centre lintel fragment 160a seeded 2026-09-19: fig1 label px→EN vector from locked 160b. Tim eyeball.",
+      "notes": "Centre lintel fragment 160a seeded 2026-09-19: fig1 label px\u2192EN vector from locked 160b. Tim eyeball.",
       "lock": {
         "status": "seed",
         "by": "Grok Build / Taskmaster",
@@ -2946,7 +2953,7 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
+        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
         "export": "exports/trilithons_centre_export_2026-09-19.json",
         "underlay": "Johnson 2008"
       }
@@ -2984,7 +2991,7 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
+        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
         "export": "exports/trilithons_centre_export_2026-09-19.json",
         "underlay": "Johnson 2008"
       }
@@ -3022,7 +3029,7 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
+        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
         "export": "exports/trilithons_centre_export_2026-09-19.json",
         "underlay": "Johnson 2008"
       },
@@ -3075,7 +3082,7 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
+        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
         "export": "exports/trilithons_centre_export_2026-09-19.json",
         "underlay": "Johnson 2008"
       },
@@ -3093,7 +3100,7 @@
           "density_outside": 0.8741
         },
         "chosen": "tim_lock + scene_ring@tim",
-        "note": "High outside density — overlaps Altar ink on fig1 (expected)."
+        "note": "High outside density \u2014 overlaps Altar ink on fig1 (expected)."
       }
     },
     {
@@ -3129,7 +3136,7 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
+        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
         "export": "exports/trilithons_centre_export_2026-09-19.json",
         "underlay": "Johnson 2008"
       }
@@ -3167,7 +3174,7 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
+        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
         "export": "exports/trilithons_centre_export_2026-09-19.json",
         "underlay": "Johnson 2008"
       }
@@ -3205,7 +3212,7 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
+        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
         "export": "exports/trilithons_centre_export_2026-09-19.json",
         "underlay": "Johnson 2008"
       }
@@ -3351,7 +3358,7 @@
         "provisional": [],
         "note": "Outer bluestone Johnson underlay nudge export publish"
       },
-      "notes": "PROVISIONAL empty-socket / missing-fabric placeholder 2026-09-19. XY: labels.json pin 33 @ (792.7,845.6) via fig1 Cleal OSGB affine. Alt: ring mid 32–34 → 412255.978,142188.535 (Δ=2.15m); mid(33e,33f)→412253.584,142185.414. Modest W×T 1.00×0.60. Awaiting Tim eyeball on Johnson underlay — DO NOT merge to locked_poses / public Pages. | 2026-09-19 Johnson outer bluestone publish (new)"
+      "notes": "PROVISIONAL empty-socket / missing-fabric placeholder 2026-09-19. XY: labels.json pin 33 @ (792.7,845.6) via fig1 Cleal OSGB affine. Alt: ring mid 32\u201334 \u2192 412255.978,142188.535 (\u0394=2.15m); mid(33e,33f)\u2192412253.584,142185.414. Modest W\u00d7T 1.00\u00d70.60. Awaiting Tim eyeball on Johnson underlay \u2014 DO NOT merge to locked_poses / public Pages. | 2026-09-19 Johnson outer bluestone publish (new)"
     },
     {
       "id": "35",
@@ -3388,7 +3395,7 @@
         ],
         "note": "Outer bluestone Johnson underlay nudge export publish"
       },
-      "notes": "PROVISIONAL empty-socket / missing-fabric placeholder 2026-09-19. XY: ring angular mid between locked 34 and 36 about CE/CN. Alt: mid(35a,35b)→412250.670,142182.198 (Δ=2.93m). Modest W×T 1.00×0.60. Awaiting Tim eyeball on Johnson underlay — DO NOT merge to locked_poses / public Pages. | 2026-09-19 Johnson outer bluestone publish (new)"
+      "notes": "PROVISIONAL empty-socket / missing-fabric placeholder 2026-09-19. XY: ring angular mid between locked 34 and 36 about CE/CN. Alt: mid(35a,35b)\u2192412250.670,142182.198 (\u0394=2.93m). Modest W\u00d7T 1.00\u00d70.60. Awaiting Tim eyeball on Johnson underlay \u2014 DO NOT merge to locked_poses / public Pages. | 2026-09-19 Johnson outer bluestone publish (new)"
     },
     {
       "id": "40",
@@ -3425,7 +3432,7 @@
         ],
         "note": "Outer bluestone Johnson underlay nudge export publish"
       },
-      "notes": "PROVISIONAL empty-socket / missing-fabric placeholder 2026-09-19. XY: labels.json pin 40 @ (505.1,903.8) via fig1 Cleal OSGB affine. Alt: ring mid 39–41 → 412235.205,142187.631 (Δ=3.33m); mid(40c,40g)→412234.312,142189.137. Modest W×T 1.00×0.60. Awaiting Tim eyeball on Johnson underlay — DO NOT merge to locked_poses / public Pages. | 2026-09-19 Johnson outer bluestone publish (new)"
+      "notes": "PROVISIONAL empty-socket / missing-fabric placeholder 2026-09-19. XY: labels.json pin 40 @ (505.1,903.8) via fig1 Cleal OSGB affine. Alt: ring mid 39\u201341 \u2192 412235.205,142187.631 (\u0394=3.33m); mid(40c,40g)\u2192412234.312,142189.137. Modest W\u00d7T 1.00\u00d70.60. Awaiting Tim eyeball on Johnson underlay \u2014 DO NOT merge to locked_poses / public Pages. | 2026-09-19 Johnson outer bluestone publish (new)"
     }
   ],
   "by_id": {
@@ -3459,9 +3466,10 @@
           "thickness_m",
           "height_m"
         ],
-        "provisional": []
+        "provisional": [],
+        "height_note": "height lengthened 2026-09-19 to meet lintel seat (pair with 2; lintel 102; also levels 101 with 30)."
       },
-      "notes": " | 2026-09-19: height lengthened to meet lintel seat (was 3.96)."
+      "notes": "height lengthened 2026-09-19 to meet lintel seat (pair with 2; lintel 102; also levels 101 with 30)."
     },
     "2": {
       "id": "2",
@@ -3643,9 +3651,10 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "AUTO dens_in=0.844 lock=0.922 nn=3.30m W/T=1.85"
+        "note": "AUTO dens_in=0.844 lock=0.922 nn=3.30m W/T=1.85",
+        "height_note": "height lengthened 2026-09-19 to meet lintel seat (pair with 6; lintel 107)."
       },
-      "notes": " | 2026-09-19: height lengthened to meet lintel seat (was 3.96)."
+      "notes": "height lengthened 2026-09-19 to meet lintel seat (pair with 6; lintel 107)."
     },
     "8": {
       "id": "8",
@@ -3935,7 +3944,7 @@
         "status": "medium",
         "by": "Plan Pose Checker",
         "at": "2026-09-14T14:17+01:00",
-        "note": "MEDIUM conf Δyaw−26.4°; prefer ink over seed"
+        "note": "MEDIUM conf \u0394yaw\u221226.4\u00b0; prefer ink over seed"
       }
     },
     "22": {
@@ -3960,9 +3969,10 @@
         "status": "accepted",
         "by": "Plan Pose Checker",
         "at": "2026-09-14T14:17+01:00",
-        "note": "visual clean; dens soft"
+        "note": "visual clean; dens soft",
+        "height_note": "height lengthened 2026-09-19 to meet lintel seat (pair with 21; lintel 122)."
       },
-      "notes": " | 2026-09-19: height lengthened to meet lintel seat (was 3.81)."
+      "notes": "height lengthened 2026-09-19 to meet lintel seat (pair with 21; lintel 122)."
     },
     "23": {
       "id": "23",
@@ -4104,7 +4114,7 @@
         "note": "Tim eyeball export approved 2026-09-15T11:59Z (outers_27_lintels_nudge.html); outer uprigh"
       },
       "height_source": "Cleal App.5 standing",
-      "notes": "Tim lock 27. Δe=+0.200 m, Δn=−0.050 m vs scene_seed_kept; yaw/W×T×H unchanged. Completes outer upright circle (missing sockets 13/17/18/20/24 unmodelled)."
+      "notes": "Tim lock 27. \u0394e=+0.200 m, \u0394n=\u22120.050 m vs scene_seed_kept; yaw/W\u00d7T\u00d7H unchanged. Completes outer upright circle (missing sockets 13/17/18/20/24 unmodelled)."
     },
     "28": {
       "id": "28",
@@ -4170,9 +4180,10 @@
           "thickness_m",
           "height_m"
         ],
-        "note": "lock 0.914 dens 0.903"
+        "note": "lock 0.914 dens 0.903",
+        "height_note": "height lengthened 2026-09-19 to meet lintel seat (pair with 30; lintel 130; cascade after 101/102 seat)."
       },
-      "notes": " | 2026-09-19: height lengthened to meet lintel seat (was 3.96)."
+      "notes": "height lengthened 2026-09-19 to meet lintel seat (pair with 30; lintel 130; cascade after 101/102 seat)."
     },
     "30": {
       "id": "30",
@@ -4204,9 +4215,10 @@
           "thickness_m",
           "height_m"
         ],
-        "provisional": []
+        "provisional": [],
+        "height_note": "height lengthened 2026-09-19 to meet lintel seat (pair with 1; lintel 101; cascades to 130 with 29)."
       },
-      "notes": " | 2026-09-19: height lengthened to meet lintel seat (was 3.96)."
+      "notes": "height lengthened 2026-09-19 to meet lintel seat (pair with 1; lintel 101; cascades to 130 with 29)."
     },
     "31": {
       "id": "31",
@@ -4278,7 +4290,7 @@
         "provisional": [],
         "note": "Outer bluestone Johnson underlay nudge export publish"
       },
-      "notes": "SPLIT from merged seed 2.145×1.566; upright-only fig1 ink (Voronoi vs 150). ink W×T 1.369×0.851. | 2026-09-19: outer blue Johnson nudge publish"
+      "notes": "SPLIT from merged seed 2.145\u00d71.566; upright-only fig1 ink (Voronoi vs 150). ink W\u00d7T 1.369\u00d70.851. | 2026-09-19: outer blue Johnson nudge publish"
     },
     "34": {
       "id": "34",
@@ -4803,7 +4815,7 @@
       "colour_class": "green_locked",
       "source_file": "data/stone51_locked.json",
       "height_source": "cleal_app5_or_scene",
-      "notes": "Johnson 2008 solid ink OBB seed; scene/locked soft start | 2026-09-19: height lengthened to meet lintel seat (was 4.98).",
+      "notes": "Johnson 2008 solid ink OBB seed; scene/locked soft start; height lengthened 2026-09-19 to meet lintel seat (pair with 52; lintel 152).",
       "lock": {
         "status": "accepted",
         "by": "Tim Daw",
@@ -4817,9 +4829,10 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
+        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
         "export": "exports/trilithons_centre_export_2026-09-19.json",
-        "underlay": "Johnson 2008"
+        "underlay": "Johnson 2008",
+        "height_note": "Johnson 2008 solid ink OBB seed; scene/locked soft start; height lengthened 2026-09-19 to meet lintel seat (pair with 52; lintel 152)."
       }
     },
     "52": {
@@ -4855,7 +4868,7 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
+        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
         "export": "exports/trilithons_centre_export_2026-09-19.json",
         "underlay": "Johnson 2008"
       }
@@ -4893,7 +4906,7 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
+        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
         "export": "exports/trilithons_centre_export_2026-09-19.json",
         "underlay": "Johnson 2008"
       }
@@ -4931,7 +4944,7 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
+        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
         "export": "exports/trilithons_centre_export_2026-09-19.json",
         "underlay": "Johnson 2008"
       }
@@ -4969,7 +4982,7 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
+        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
         "export": "exports/trilithons_centre_export_2026-09-19.json",
         "underlay": "Johnson 2008"
       }
@@ -5007,7 +5020,7 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
+        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
         "export": "exports/trilithons_centre_export_2026-09-19.json",
         "underlay": "Johnson 2008"
       }
@@ -5031,7 +5044,7 @@
       "colour_class": "green_locked",
       "source_file": "data/stone58_locked.json",
       "height_source": "cleal_app5_or_scene",
-      "notes": "Johnson 2008 solid ink OBB seed; scene/locked soft start | 2026-09-19: height lengthened to meet lintel seat (was 5.18).",
+      "notes": "Johnson 2008 solid ink OBB seed; scene/locked soft start; height lengthened 2026-09-19 to meet lintel seat (pair with 57; lintel 158).",
       "lock": {
         "status": "accepted",
         "by": "Tim Daw",
@@ -5045,9 +5058,10 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
+        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
         "export": "exports/trilithons_centre_export_2026-09-19.json",
-        "underlay": "Johnson 2008"
+        "underlay": "Johnson 2008",
+        "height_note": "Johnson 2008 solid ink OBB seed; scene/locked soft start; height lengthened 2026-09-19 to meet lintel seat (pair with 57; lintel 158)."
       }
     },
     "60": {
@@ -5083,7 +5097,7 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
+        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
         "export": "exports/trilithons_centre_export_2026-09-19.json",
         "underlay": "Johnson 2008"
       }
@@ -5503,7 +5517,7 @@
       "colour_class": "altar_pink",
       "source_file": "data/altar80_locked.json",
       "height_source": "pink",
-      "notes": "Tim pink start — place may need nudge on Johnson",
+      "notes": "Tim pink start \u2014 place may need nudge on Johnson",
       "lock": {
         "status": "accepted",
         "by": "Tim Daw",
@@ -5517,7 +5531,7 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
+        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
         "export": "exports/trilithons_centre_export_2026-09-19.json",
         "underlay": "Johnson 2008"
       },
@@ -5561,7 +5575,7 @@
       "lock_status": "seed",
       "colour_class": "grey_seed",
       "source_file": "data/scene.json",
-      "height_source": "scene.json (AGL placeholder — no OD seating yet)",
+      "height_source": "scene.json (AGL placeholder \u2014 no OD seating yet)",
       "notes": "Station stone 91 from scene.json (fig1). Seed for eyeball.",
       "lock": {
         "status": "seed",
@@ -5598,7 +5612,7 @@
       "lock_status": "seed",
       "colour_class": "gold_medium",
       "source_file": "fig1 diamond centre (ink detection) + scene91/93 offset",
-      "height_source": "placeholder 1.0 m AGL — no OD seating",
+      "height_source": "placeholder 1.0 m AGL \u2014 no OD seating",
       "notes": "Station stone 92 triangular placeholder (missing from scene). Fig1 label + 91/93 offset. | 2026-09-19: re-seeded to fig1 diamond centre (px 790.0,1354.0), not label centroid. Was 412257.559/142154.52. | 2026-09-19: Tim eyeball +1.2 m east (N unchanged). Was 412256.281/142153.669. | 2026-09-19: Tim +0.5 m east (N unchanged). Was 412257.481/142153.669. | 2026-09-19: Tim nudge dE -0.2 dN -0.3. Was 412257.981/142153.669.",
       "lock": {
         "status": "seed",
@@ -5635,7 +5649,7 @@
       "lock_status": "seed",
       "colour_class": "grey_seed",
       "source_file": "data/scene.json",
-      "height_source": "scene.json (AGL placeholder — no OD seating yet)",
+      "height_source": "scene.json (AGL placeholder \u2014 no OD seating yet)",
       "notes": "Station stone 93 from scene.json (fig1). Seed for eyeball.",
       "lock": {
         "status": "seed",
@@ -5672,7 +5686,7 @@
       "lock_status": "seed",
       "colour_class": "gold_medium",
       "source_file": "fig1 diamond centre (ink detection) + scene91/93 offset",
-      "height_source": "placeholder 1.0 m AGL — no OD seating",
+      "height_source": "placeholder 1.0 m AGL \u2014 no OD seating",
       "notes": "Station stone 94 triangular placeholder (missing from scene). Fig1 label + 91/93 offset. | 2026-09-19: re-seeded to fig1 diamond centre (px 449.4,203.4), not label centroid. Was 412233.283/142236.221. | 2026-09-19: Tim eyeball +1.2 m east (N unchanged). Was 412232.104/142235.274. | 2026-09-19: Tim +0.5 m east (N unchanged). Was 412233.304/142235.274. | 2026-09-19: Tim nudge dE -0.2 dN -0.3. Was 412233.804/142235.274.",
       "lock": {
         "status": "seed",
@@ -5709,7 +5723,7 @@
       "lock_status": "seed",
       "colour_class": "gold_medium",
       "source_file": "data/scene.json",
-      "height_source": "scene.json (AGL placeholder — no OD seating yet)",
+      "height_source": "scene.json (AGL placeholder \u2014 no OD seating yet)",
       "notes": "Slaughter Stone (95) from scene.json. Seed for eyeball. | 2026-09-19: Tim nudge +0.25 m along long axis (yaw 50 deg, NE-ish).",
       "lock": {
         "status": "seed",
@@ -5746,7 +5760,7 @@
       "lock_status": "seed",
       "colour_class": "gold_medium",
       "source_file": "data/scene.json",
-      "height_source": "scene.json (AGL placeholder — no OD seating yet)",
+      "height_source": "scene.json (AGL placeholder \u2014 no OD seating yet)",
       "notes": "Heelstone (96) from scene.json. Seed for eyeball.",
       "lock": {
         "status": "seed",
@@ -5804,7 +5818,7 @@
         ],
         "note": "Present outer lintel; XY/yaw from laptop support midpoints/mean yaw (provisional). height_m set so top OD matches 101. Centre trilithon locks preserved."
       },
-      "notes": "Outer lintel thickness norm to 101 on 2026-09-19: old scene.thickness_m=0.8 → height_m/scene.thickness_m=0.8. target_top_od=107.144."
+      "notes": "Outer lintel thickness norm to 101 on 2026-09-19: old scene.thickness_m=0.8 \u2192 height_m/scene.thickness_m=0.8. target_top_od=107.144."
     },
     "102": {
       "id": "102",
@@ -5846,7 +5860,7 @@
         ],
         "note": "Present outer lintel; XY/yaw from laptop support midpoints/mean yaw (provisional). height_m set so top OD matches 101. Centre trilithon locks preserved. | 2026-09-19: recentred to support midpoint; yaw=chord bearing mid-upright to mid-upright. height_m kept (norm to 101 OD)."
       },
-      "notes": "Outer lintel thickness norm to 101 on 2026-09-19: old scene.thickness_m=0.8 → height_m/scene.thickness_m=0.728. target_top_od=107.144. | 2026-09-19: recentred to support midpoint; yaw=chord bearing mid-upright to mid-upright. height_m kept (norm to 101 OD)."
+      "notes": "Outer lintel thickness norm to 101 on 2026-09-19: old scene.thickness_m=0.8 \u2192 height_m/scene.thickness_m=0.728. target_top_od=107.144. | 2026-09-19: recentred to support midpoint; yaw=chord bearing mid-upright to mid-upright. height_m kept (norm to 101 OD)."
     },
     "105": {
       "id": "105",
@@ -5888,7 +5902,7 @@
         ],
         "note": "Present outer lintel; XY/yaw from laptop support midpoints/mean yaw (provisional). height_m set so top OD matches 101. Centre trilithon locks preserved. | 2026-09-19: recentred to support midpoint; yaw=chord bearing mid-upright to mid-upright. height_m kept (norm to 101 OD)."
       },
-      "notes": "Outer lintel thickness norm to 101 on 2026-09-19: old scene.thickness_m=0.8 → height_m/scene.thickness_m=0.6175. target_top_od=107.144. | 2026-09-19: recentred to support midpoint; yaw=chord bearing mid-upright to mid-upright. height_m kept (norm to 101 OD)."
+      "notes": "Outer lintel thickness norm to 101 on 2026-09-19: old scene.thickness_m=0.8 \u2192 height_m/scene.thickness_m=0.6175. target_top_od=107.144. | 2026-09-19: recentred to support midpoint; yaw=chord bearing mid-upright to mid-upright. height_m kept (norm to 101 OD)."
     },
     "107": {
       "id": "107",
@@ -5930,7 +5944,7 @@
         ],
         "note": "Present outer lintel; XY/yaw from laptop support midpoints/mean yaw (provisional). height_m set so top OD matches 101. Centre trilithon locks preserved."
       },
-      "notes": "Outer lintel thickness norm to 101 on 2026-09-19: old scene.thickness_m=0.8 → height_m/scene.thickness_m=0.7065. target_top_od=107.144."
+      "notes": "Outer lintel thickness norm to 101 on 2026-09-19: old scene.thickness_m=0.8 \u2192 height_m/scene.thickness_m=0.7065. target_top_od=107.144."
     },
     "120": {
       "id": "120",
@@ -5966,7 +5980,7 @@
         "provisional": [],
         "note": "Tim eyeball export approved 2026-09-15T11:59Z (outers_27_lintels_nudge.html); fallen outer"
       },
-      "notes": "Tim lock 120 fallen lintel. Δyaw=−7.00° (7.93→0.93); e/n/W×T×H unchanged vs fig1 ink seed. Originally ~20–21 span; fabric N of 19."
+      "notes": "Tim lock 120 fallen lintel. \u0394yaw=\u22127.00\u00b0 (7.93\u21920.93); e/n/W\u00d7T\u00d7H unchanged vs fig1 ink seed. Originally ~20\u201321 span; fabric N of 19."
     },
     "122": {
       "id": "122",
@@ -6008,7 +6022,7 @@
         ],
         "note": "Present outer lintel; XY/yaw from laptop support midpoints/mean yaw (provisional). height_m set so top OD matches 101. Centre trilithon locks preserved. | 2026-09-19: recentred to support midpoint; yaw=chord bearing mid-upright to mid-upright. height_m kept (norm to 101 OD)."
       },
-      "notes": "Outer lintel thickness norm to 101 on 2026-09-19: old scene.thickness_m=0.8 → height_m/scene.thickness_m=0.682. target_top_od=107.144. | 2026-09-19: recentred to support midpoint; yaw=chord bearing mid-upright to mid-upright. height_m kept (norm to 101 OD)."
+      "notes": "Outer lintel thickness norm to 101 on 2026-09-19: old scene.thickness_m=0.8 \u2192 height_m/scene.thickness_m=0.682. target_top_od=107.144. | 2026-09-19: recentred to support midpoint; yaw=chord bearing mid-upright to mid-upright. height_m kept (norm to 101 OD)."
     },
     "127": {
       "id": "127",
@@ -6044,7 +6058,7 @@
         "provisional": [],
         "note": "Tim eyeball export approved 2026-09-15T11:59Z (outers_27_lintels_nudge.html); fallen outer"
       },
-      "notes": "Tim lock 127 fallen lintel. Δe=+0.100 m vs fig1 ink seed; n/yaw/W×T×H unchanged. Was lintel bleed on 26 seed."
+      "notes": "Tim lock 127 fallen lintel. \u0394e=+0.100 m vs fig1 ink seed; n/yaw/W\u00d7T\u00d7H unchanged. Was lintel bleed on 26 seed."
     },
     "130": {
       "id": "130",
@@ -6086,7 +6100,7 @@
         ],
         "note": "Present outer lintel; XY/yaw from laptop support midpoints/mean yaw (provisional). height_m set so top OD matches 101. Centre trilithon locks preserved."
       },
-      "notes": "Outer lintel thickness norm to 101 on 2026-09-19: old scene.thickness_m=0.8 → height_m/scene.thickness_m=0.718. target_top_od=107.144."
+      "notes": "Outer lintel thickness norm to 101 on 2026-09-19: old scene.thickness_m=0.8 \u2192 height_m/scene.thickness_m=0.718. target_top_od=107.144."
     },
     "150": {
       "id": "150",
@@ -6122,7 +6136,7 @@
         "provisional": [],
         "note": "Outer bluestone Johnson underlay nudge export publish"
       },
-      "notes": "NEW: split from 32 merged hatch. fig1 ink long≈1.685m; W set to laser c.2.44m (StonehengeLaserScan p.50). labels pin (775.8,742.1). Fallen bluestone lintel with mortises. | 2026-09-19: outer blue Johnson nudge publish"
+      "notes": "NEW: split from 32 merged hatch. fig1 ink long\u22481.685m; W set to laser c.2.44m (StonehengeLaserScan p.50). labels pin (775.8,742.1). Fallen bluestone lintel with mortises. | 2026-09-19: outer blue Johnson nudge publish"
     },
     "152": {
       "id": "152",
@@ -6143,7 +6157,7 @@
       "colour_class": "green_locked",
       "source_file": "data/stone152_locked.json",
       "height_source": "placeholder_fallen_agl",
-      "notes": "Scene/CSV present lintel — nudge on Johnson",
+      "notes": "Scene/CSV present lintel \u2014 nudge on Johnson",
       "lock": {
         "status": "accepted",
         "by": "Tim Daw",
@@ -6157,7 +6171,7 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
+        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
         "export": "exports/trilithons_centre_export_2026-09-19.json",
         "underlay": "Johnson 2008"
       }
@@ -6181,7 +6195,7 @@
       "colour_class": "green_locked",
       "source_file": "data/stone154_locked.json",
       "height_source": "placeholder_fallen_agl",
-      "notes": "Scene/CSV present lintel — nudge on Johnson",
+      "notes": "Scene/CSV present lintel \u2014 nudge on Johnson",
       "lock": {
         "status": "accepted",
         "by": "Tim Daw",
@@ -6195,7 +6209,7 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
+        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
         "export": "exports/trilithons_centre_export_2026-09-19.json",
         "underlay": "Johnson 2008"
       }
@@ -6219,7 +6233,7 @@
       "colour_class": "cream_156",
       "source_file": "data/stone156_locked.json",
       "height_source": "pink",
-      "notes": "Pink L×W×H kept; place/yaw nudged toward Johnson hatch",
+      "notes": "Pink L\u00d7W\u00d7H kept; place/yaw nudged toward Johnson hatch",
       "lock": {
         "status": "accepted",
         "by": "Tim Daw",
@@ -6233,7 +6247,7 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
+        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
         "export": "exports/trilithons_centre_export_2026-09-19.json",
         "underlay": "Johnson 2008"
       },
@@ -6282,7 +6296,7 @@
       "colour_class": "green_locked",
       "source_file": "data/stone158_locked.json",
       "height_source": "placeholder_fallen_agl",
-      "notes": "Scene/CSV present lintel — nudge on Johnson",
+      "notes": "Scene/CSV present lintel \u2014 nudge on Johnson",
       "lock": {
         "status": "accepted",
         "by": "Tim Daw",
@@ -6296,7 +6310,7 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
+        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
         "export": "exports/trilithons_centre_export_2026-09-19.json",
         "underlay": "Johnson 2008"
       }
@@ -6321,7 +6335,7 @@
       "colour_class": "grey_seed",
       "source_file": "data/labels.json + locked 160b vector on fig1 affine",
       "height_source": "placeholder_fallen_agl",
-      "notes": "Centre lintel fragment 160a seeded 2026-09-19: fig1 label px→EN vector from locked 160b. Tim eyeball.",
+      "notes": "Centre lintel fragment 160a seeded 2026-09-19: fig1 label px\u2192EN vector from locked 160b. Tim eyeball.",
       "lock": {
         "status": "seed",
         "by": "Grok Build / Taskmaster",
@@ -6371,7 +6385,7 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
+        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
         "export": "exports/trilithons_centre_export_2026-09-19.json",
         "underlay": "Johnson 2008"
       }
@@ -6409,7 +6423,7 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
+        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
         "export": "exports/trilithons_centre_export_2026-09-19.json",
         "underlay": "Johnson 2008"
       }
@@ -6447,7 +6461,7 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
+        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
         "export": "exports/trilithons_centre_export_2026-09-19.json",
         "underlay": "Johnson 2008"
       },
@@ -6500,7 +6514,7 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
+        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
         "export": "exports/trilithons_centre_export_2026-09-19.json",
         "underlay": "Johnson 2008"
       },
@@ -6518,7 +6532,7 @@
           "density_outside": 0.8741
         },
         "chosen": "tim_lock + scene_ring@tim",
-        "note": "High outside density — overlaps Altar ink on fig1 (expected)."
+        "note": "High outside density \u2014 overlaps Altar ink on fig1 (expected)."
       }
     },
     "59a": {
@@ -6554,7 +6568,7 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
+        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
         "export": "exports/trilithons_centre_export_2026-09-19.json",
         "underlay": "Johnson 2008"
       }
@@ -6592,7 +6606,7 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
+        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
         "export": "exports/trilithons_centre_export_2026-09-19.json",
         "underlay": "Johnson 2008"
       }
@@ -6630,7 +6644,7 @@
           "height_m"
         ],
         "provisional": [],
-        "note": "Tim: south=55A, on-80=55B — do NOT swap IDs",
+        "note": "Tim: south=55A, on-80=55B \u2014 do NOT swap IDs",
         "export": "exports/trilithons_centre_export_2026-09-19.json",
         "underlay": "Johnson 2008"
       }
@@ -6776,7 +6790,7 @@
         "provisional": [],
         "note": "Outer bluestone Johnson underlay nudge export publish"
       },
-      "notes": "PROVISIONAL empty-socket / missing-fabric placeholder 2026-09-19. XY: labels.json pin 33 @ (792.7,845.6) via fig1 Cleal OSGB affine. Alt: ring mid 32–34 → 412255.978,142188.535 (Δ=2.15m); mid(33e,33f)→412253.584,142185.414. Modest W×T 1.00×0.60. Awaiting Tim eyeball on Johnson underlay — DO NOT merge to locked_poses / public Pages. | 2026-09-19 Johnson outer bluestone publish (new)"
+      "notes": "PROVISIONAL empty-socket / missing-fabric placeholder 2026-09-19. XY: labels.json pin 33 @ (792.7,845.6) via fig1 Cleal OSGB affine. Alt: ring mid 32\u201334 \u2192 412255.978,142188.535 (\u0394=2.15m); mid(33e,33f)\u2192412253.584,142185.414. Modest W\u00d7T 1.00\u00d70.60. Awaiting Tim eyeball on Johnson underlay \u2014 DO NOT merge to locked_poses / public Pages. | 2026-09-19 Johnson outer bluestone publish (new)"
     },
     "35": {
       "id": "35",
@@ -6813,7 +6827,7 @@
         ],
         "note": "Outer bluestone Johnson underlay nudge export publish"
       },
-      "notes": "PROVISIONAL empty-socket / missing-fabric placeholder 2026-09-19. XY: ring angular mid between locked 34 and 36 about CE/CN. Alt: mid(35a,35b)→412250.670,142182.198 (Δ=2.93m). Modest W×T 1.00×0.60. Awaiting Tim eyeball on Johnson underlay — DO NOT merge to locked_poses / public Pages. | 2026-09-19 Johnson outer bluestone publish (new)"
+      "notes": "PROVISIONAL empty-socket / missing-fabric placeholder 2026-09-19. XY: ring angular mid between locked 34 and 36 about CE/CN. Alt: mid(35a,35b)\u2192412250.670,142182.198 (\u0394=2.93m). Modest W\u00d7T 1.00\u00d70.60. Awaiting Tim eyeball on Johnson underlay \u2014 DO NOT merge to locked_poses / public Pages. | 2026-09-19 Johnson outer bluestone publish (new)"
     },
     "40": {
       "id": "40",
@@ -6850,7 +6864,7 @@
         ],
         "note": "Outer bluestone Johnson underlay nudge export publish"
       },
-      "notes": "PROVISIONAL empty-socket / missing-fabric placeholder 2026-09-19. XY: labels.json pin 40 @ (505.1,903.8) via fig1 Cleal OSGB affine. Alt: ring mid 39–41 → 412235.205,142187.631 (Δ=3.33m); mid(40c,40g)→412234.312,142189.137. Modest W×T 1.00×0.60. Awaiting Tim eyeball on Johnson underlay — DO NOT merge to locked_poses / public Pages. | 2026-09-19 Johnson outer bluestone publish (new)"
+      "notes": "PROVISIONAL empty-socket / missing-fabric placeholder 2026-09-19. XY: labels.json pin 40 @ (505.1,903.8) via fig1 Cleal OSGB affine. Alt: ring mid 39\u201341 \u2192 412235.205,142187.631 (\u0394=3.33m); mid(40c,40g)\u2192412234.312,142189.137. Modest W\u00d7T 1.00\u00d70.60. Awaiting Tim eyeball on Johnson underlay \u2014 DO NOT merge to locked_poses / public Pages. | 2026-09-19 Johnson outer bluestone publish (new)"
     }
   },
   "colour_legend": {
@@ -6868,14 +6882,14 @@
   "overview_notes": {
     "plan": "fig1 Cleal OSGB underlay (fig1_plan_embed.js) for whole-plan overview",
     "placement_rule": "All stones = clean BoxGeometry at Tim/lock e_m n_m yaw. NO ring_osgb splatters.",
-    "80": "Tim pink box 4.88×1.053 yaw −40.82 @ 412244.268/142187.177. Pink JSON untouched.",
-    "156": "Tim pink box 5.13×0.90 yaw 71.6 @ 412243.026/142188.059. Pink JSON untouched.",
-    "55a": "Tim lock box W×T 3.599×2.294 yaw 58.7 — no ring.",
-    "55b": "Tim lock box W×T 2.8×2.338 yaw −16.03 — no ring.",
+    "80": "Tim pink box 4.88\u00d71.053 yaw \u221240.82 @ 412244.268/142187.177. Pink JSON untouched.",
+    "156": "Tim pink box 5.13\u00d70.90 yaw 71.6 @ 412243.026/142188.059. Pink JSON untouched.",
+    "55a": "Tim lock box W\u00d7T 3.599\u00d72.294 yaw 58.7 \u2014 no ring.",
+    "55b": "Tim lock box W\u00d7T 2.8\u00d72.338 yaw \u221216.03 \u2014 no ring.",
     "fig1_note": "Cluster Tim-locks fail fig1 pixel match (~4.5 m N offset vs fig1 fabric); pink plan is authoritative for cluster eyeball.",
-    "8": "Tim eyeball lock e=412257.4 n=142180.255 yaw −58.74° W×T 2.024×1.635 H=0.66 Cleal AGL",
-    "9a": "Tim eyeball lock e=412253.516 n=142179.51 yaw 32.41° W×T 1.893×1.506 H=0.76 Cleal AGL",
-    "9b": "Tim eyeball lock e=412254.621 n=142177.54 yaw −39.66° W×T 2.294×1.731 H=0.76 Cleal AGL",
+    "8": "Tim eyeball lock e=412257.4 n=142180.255 yaw \u221258.74\u00b0 W\u00d7T 2.024\u00d71.635 H=0.66 Cleal AGL",
+    "9a": "Tim eyeball lock e=412253.516 n=142179.51 yaw 32.41\u00b0 W\u00d7T 1.893\u00d71.506 H=0.76 Cleal AGL",
+    "9b": "Tim eyeball lock e=412254.621 n=142177.54 yaw \u221239.66\u00b0 W\u00d7T 2.294\u00d71.731 H=0.76 Cleal AGL",
     "ground": "flat ground for now; site slope / lintel OD later",
     "11": "Tim stretch lock e=412247.017 n=142178.247 yaw 6.63 deg WxT 1.12x0.901 H=2.74 Cleal AGL",
     "12": "Tim stretch lock e=412243.784 n=142177.022 yaw -79.39 deg WxT 5.23x1.963 H=0.53 Cleal AGL",
@@ -6885,16 +6899,16 @@
     "25": "Tim stretch lock e=412239.153 n=142209.126 yaw 7.99 deg WxT 4.387x2.046 H=0.81 Cleal AGL",
     "26": "Tim stretch lock e=412243.944 n=142209.07 yaw 5.46 deg WxT 2.046x1.671 (was 3.696x2.171 lintel bleed) H=0.41 Cleal AGL",
     "outers_stretch_2026-09-15": "Ring lintels confused 14 blob and 26 lintel bleed; Tim eyeball-trimmed WxT. Centre (80/156/55*) parked. No PPC.",
-    "27": "Tim lock e=412247.57 n=142208.888 yaw −11.92° W×T 1.981×1.062 H=3.96 Cleal standing; Δe=+0.20 Δn=−0.05 vs seed",
-    "120": "Tim lock fallen lintel e=412227.842 n=142196.34 yaw 0.93° W×T 1.607×0.99 H=0.8; Δyaw=−7° vs ink seed; N of 19",
-    "127": "Tim lock fallen lintel e=412245.672 n=142209.732 yaw 81.38° W×T 2.342×0.793 H=0.8; Δe=+0.10 vs ink seed; between 26–27",
+    "27": "Tim lock e=412247.57 n=142208.888 yaw \u221211.92\u00b0 W\u00d7T 1.981\u00d71.062 H=3.96 Cleal standing; \u0394e=+0.20 \u0394n=\u22120.05 vs seed",
+    "120": "Tim lock fallen lintel e=412227.842 n=142196.34 yaw 0.93\u00b0 W\u00d7T 1.607\u00d70.99 H=0.8; \u0394yaw=\u22127\u00b0 vs ink seed; N of 19",
+    "127": "Tim lock fallen lintel e=412245.672 n=142209.732 yaw 81.38\u00b0 W\u00d7T 2.342\u00d70.793 H=0.8; \u0394e=+0.10 vs ink seed; between 26\u201327",
     "outers_27_lintels_2026-09-15": "27+120+127 Tim-locked. Outer upright circle complete (sockets 13/17/18/20/24 unmodelled). Centre parked. No PPC.",
     "outer_bluestones_2026-09-15": "Tim-locked outer blues 31, 32, 34, 36, 37, 38, 39, 41, 42, 43, 44, 45, 46, 47, 48, 49, 150 from export 2026-09-15T12:21Z. colour_class=blue_bluestone (distinct from sarsen green). Empty sockets 33/35/40 unmodelled. 32/150 split retained.",
-    "blue_bluestone": "Outer circle + inner horseshoe bluestone boxes — blue-grey; not sarsen green_locked",
+    "blue_bluestone": "Outer circle + inner horseshoe bluestone boxes \u2014 blue-grey; not sarsen green_locked",
     "horseshoe_bluestones_2026-09-15": "Tim-locked horseshoe blues 61, 61a, 62, 63, 64, 65, 67, 68, 69, 70, 71, 72 from export 2026-09-15T14:18Z. colour_class=blue_bluestone. 66 ghost omitted. 68+72 status=fallen preserved. Centre trilithons/Altar still parked.",
     "centre_trilithons_2026_09_19": "Tim locked centre trilithons + Altar from trilithons_centre_nudge.html export 2026-09-19T09:31Z (Johnson 2008). Label: south=55A, on-80=55B. Outers/blues unchanged. Site slope / lintel OD still pending. No PPC.",
     "outer_lintel_thickness_norm_2026_09_19": "2026-09-19: present outer lintels 101/102/105/107/122/130 added with height_m normed to 101 top OD; trilithons untouched.",
     "outliers_seed_2026_09_19": "2026-09-19: seeded 160a + stations 91-94 + Slaughter 95 + Heel 96 (no height OD).",
-    "outer_blues_2026_09_19": "Johnson-nudged 31–49+150; added 33/35/40"
+    "outer_blues_2026_09_19": "Johnson-nudged 31\u201349+150; added 33/35/40"
   }
 }

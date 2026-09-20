@@ -1,20 +1,20 @@
 {
   "id": "91",
   "kind": "stonehole",
-  "status": "APPROVED_REMAPPED_TO_FIG1",
-  "locked": "2026-09-20",
-  "e_m": 412284.615,
-  "n_m": 142174.239,
-  "method": "Plan1 green-mark relative to Plan1 fallen, applied to fig1 fallen pose",
-  "plan1_absolute_e_m": 412287.63,
-  "plan1_absolute_n_m": 142174.136,
-  "plan1_fallen_e_m": 412288.711,
-  "plan1_fallen_n_m": 142173.348,
-  "fig1_fallen_e_m": 412285.696,
-  "fig1_fallen_n_m": 142173.451,
-  "offset_from_plan1_fallen_m": {
-    "dE": -1.081,
-    "dN": 0.788
+  "status": "AT_STONE_END_NEWHAM_WARD",
+  "e_m": 412286.654,
+  "n_m": 142174.227,
+  "method": "Half footprint along short-side direction 92\u219291 past fallen centre",
+  "fallen_e_m": 412285.696,
+  "fallen_n_m": 142173.451,
+  "rejected_absolute_plan1": {
+    "e": 412287.63,
+    "n": 142174.136,
+    "why": "~2m past end (Plan1/fig1 disagree)"
   },
-  "note": "Fixes pink ring floating off stone end when absolute Plan1 EN mixed with fig1 stone"
+  "rejected_plan1_relative": {
+    "e": 412284.615,
+    "n": 142174.239,
+    "why": "wrong end of stone (WNW)"
+  }
 }

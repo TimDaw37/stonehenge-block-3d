@@ -2144,7 +2144,7 @@ window.LOCKED_POSES = {
       "colour_class": "grey_seed",
       "source_file": "data/scene.json",
       "height_source": "scene.json (AGL placeholder \u2014 no OD seating yet)",
-      "notes": "Station stone 91 from scene.json (fig1). Seed for eyeball. | Newham hole LOCKED fig1-relative 412284.615/142174.239 (Plan1 eyeball remapped; fallen pose unchanged)",
+      "notes": "Station stone 91 from scene.json (fig1). Seed for eyeball. | Newham hole at stone end 412286.654/142174.227 (Newham-ward; fallen pose unchanged)",
       "lock": {
         "status": "seed",
         "by": "Grok Build / Taskmaster",
@@ -2160,9 +2160,9 @@ window.LOCKED_POSES = {
         ],
         "note": "Seed for Tim eyeball on fig1; not PPC-locked. No height OD work yet."
       },
-      "hole_e_m": 412284.615,
-      "hole_n_m": 142174.239,
-      "hole_source": "Tim Plan1 green-mark APPROVED, remapped onto fig1 fallen pose (Plan1\u2212fig1 ~3m; relative offset from Plan1 fallen pick). Absolute Plan1 EN was 412287.630/142174.136; fig1-relative 412284.615/142174.239."
+      "hole_e_m": 412286.654,
+      "hole_n_m": 142174.227,
+      "hole_source": "At Newham-ward end of fig1 fallen box (half width along 92\u219291). Not absolute Plan1 EN; not Plan1\u2192fig1 relative (that hit the wrong end)."
     },
     {
       "id": "92",

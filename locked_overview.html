@@ -91,14 +91,12 @@
     Azimuths use a LiDAR horizon with refraction/parallax. Gleam / Half orb / Full orb match Banton’s limb stages.
   </div>
   <div id="sunDatePanel">
-    <label>Date <span id="doyLbl">21 Jun</span></label>
-    <input type="range" id="doy" min="1" max="365" value="172" style="width:100%"/>
+    <label>Sun date <span id="doyLbl">21 Jun · sunrise</span></label>
     <div class="row">
-      <button type="button" data-doy="80">21 Mar</button>
-      <button type="button" data-doy="172">21 Jun</button>
-      <button type="button" data-doy="266">23 Sep</button>
-      <button type="button" data-doy="355">21 Dec</button>
+      <button type="button" id="btnSunMidsummer" class="active" title="Midsummer sunrise (Newham short sides / Path A)">21 Jun sunrise</button>
+      <button type="button" id="btnSunMidwinter" title="Midwinter sunset (Newham short sides / Path A)">21 Dec sunset</button>
     </div>
+    <div style="opacity:.7;font-size:10px;margin:2px 0 4px 0;line-height:1.35">Path A samples only for these two. Equinox dates removed.</div>
   </div>
   <div id="moonAzPanel" style="display:none">
     <label>Azimuth <span id="moonAzLbl">most N</span></label>
@@ -125,7 +123,7 @@
   </div>
 </div>
 <canvas id="c"></canvas>
-<script src="./data/locked_poses.js?v=georef-copy-pin-limbs-20260920"></script>
+<script src="./data/locked_poses.js?v=sun-solstice-btns-20260920"></script>
 <script>
 /* lintel seat 2026-09-19: lengthen shorter uprights so tops match partners */
 (function () {
@@ -1351,6 +1349,9 @@ document.getElementById('btnNewham').onclick = () => {
 };
 function setBodyMode(mode) {
  bodyMode = mode;
+ // Sun Path A samples: sunrise ↔ midsummer, sunset ↔ midwinter
+ if (mode === 'sunrise') doy = 172;
+ if (mode === 'sunset') doy = 355;
  const modes = [
    ['btnSunOff','off'],
    ['btnSunrise','sunrise'],
@@ -1364,29 +1365,36 @@ function setBodyMode(mode) {
  }
  if (bodyMode !== 'off' && !terrainOn) setTerrain(true);
   updateMoonAzUi();
+  if (typeof syncSunDateButtons === 'function') syncSunDateButtons();
   placeSun();
-
 }
 document.getElementById('btnSunOff').onclick = () => setBodyMode('off');
 document.getElementById('btnSunrise').onclick = () => setBodyMode('sunrise');
 document.getElementById('btnSunset').onclick = () => setBodyMode('sunset');
 document.getElementById('btnMoonrise').onclick = () => setBodyMode('moonrise');
 document.getElementById('btnMoonset').onclick = () => setBodyMode('moonset');
-document.getElementById('doy').oninput = (ev) => {
- doy = +ev.target.value;
- document.getElementById('doyLbl').textContent = doyLabel(doy);
- placeSun();
-};
-document.querySelectorAll('[data-doy]').forEach((b) => {
- b.onclick = () => {
-   doy = +b.dataset.doy;
-   document.getElementById('doy').value = String(doy);
-   document.getElementById('doyLbl').textContent = doyLabel(doy);
-   if (doy === 172) setBodyMode('sunrise');
-   if (doy === 355) setBodyMode('sunset');
-   placeSun();
- };
-});
+function syncSunDateButtons() {
+  const mid = document.getElementById('btnSunMidsummer');
+  const win = document.getElementById('btnSunMidwinter');
+  const lb = document.getElementById('doyLbl');
+  const isJunRise = (doy === 172 && bodyMode === 'sunrise');
+  const isDecSet = (doy === 355 && bodyMode === 'sunset');
+  if (mid) mid.classList.toggle('active', isJunRise);
+  if (win) win.classList.toggle('active', isDecSet);
+  if (lb) {
+    if (isJunRise) lb.textContent = '21 Jun · sunrise';
+    else if (isDecSet) lb.textContent = '21 Dec · sunset';
+    else lb.textContent = doyLabel(doy) + ' · ' + bodyMode;
+  }
+}
+function setSunSolstice(which) {
+  if (which === 'midsummer') setBodyMode('sunrise');
+  else setBodyMode('sunset');
+}
+const btnSunMidsummer = document.getElementById('btnSunMidsummer');
+const btnSunMidwinter = document.getElementById('btnSunMidwinter');
+if (btnSunMidsummer) btnSunMidsummer.onclick = () => setSunSolstice('midsummer');
+if (btnSunMidwinter) btnSunMidwinter.onclick = () => setSunSolstice('midwinter');
 document.getElementById('showRay').onchange = (e) => { showRay = e.target.checked; placeSun(); };
 
 
@@ -1465,13 +1473,11 @@ rebuildStones();
 setNewham(false);
 setOrbit();
 doy = 172;
-document.getElementById('doy').value = '172';
-document.getElementById('doyLbl').textContent = doyLabel(172);
 showRay = true;
 const rayCb = document.getElementById('showRay');
 if (rayCb) rayCb.checked = true;
 initPathAUi();
-setBodyMode('sunrise'); // also turns Terrain on + placeSun after load
+setBodyMode('sunrise'); // midsummer sunrise + Terrain + placeSun
 tick();
 window.__LOCKED_OVERVIEW_READY = true;
 /* plan underlay removed */

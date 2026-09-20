@@ -98,7 +98,12 @@
   </div>
   <div class="check"><label style="display:inline;text-transform:none;letter-spacing:0;opacity:1"><input type="checkbox" id="geoOn" checked/> Georef / Coords</label></div>
   <div style="opacity:.7;font-size:10px;margin:2px 0 4px 0;line-height:1.35">Tap/click for coords; short tap pins. Drag to orbit (coords pause while dragging). Short tap = pin; Esc / Clear pin clears. Uncheck to hide the bottom box.</div>
-  <div class="check"><label style="display:inline;text-transform:none;letter-spacing:0;opacity:1"><input type="checkbox" id="showRay"/> Ray to centre</label></div>
+  <label>Sightline axis</label>
+  <div class="row">
+    <button type="button" id="btnAxisHeel" class="active">Heel Stone axis</button>
+    <button type="button" id="btnAxisStation">Station stone axis</button>
+  </div>
+  <div class="check"><label style="display:inline;text-transform:none;letter-spacing:0;opacity:1"><input type="checkbox" id="showRay"/> <span id="showRayLabel">Ray to centre</span></label></div>
   <div id="msg"></div>
   <div id="sunReadout" class="row" style="font-size:11px;opacity:.9"></div>
 </div>
@@ -108,7 +113,7 @@
   <button type="button" id="geoClear" hidden title="Clear pinned coordinate">Clear pin</button>
 </div>
 <canvas id="c"></canvas>
-<script src="./data/locked_poses.js?v=stations-banton-20260920"></script>
+<script src="./data/locked_poses.js?v=stations-sightline-a-20260920"></script>
 <script>
 /* lintel seat 2026-09-19: lengthen shorter uprights so tops match partners */
 (function () {
@@ -233,7 +238,7 @@ const root = new THREE.Group();
 scene.add(root);
 
 let terrainHorizonMesh = null, terrainNearMesh = null, terrainOn = false, labelsOn = false;
-let exaggeration = 1, bodyMode = 'off', doy = 172, showRay = false;
+let exaggeration = 1, bodyMode = 'off', doy = 172, showRay = false, stationAxisMode = false;
 const stoneBaseY = [];
 let planMesh = null;
 
@@ -697,7 +702,7 @@ const ASTRO_YEAR = 2026;
 // Moonrise: most N ~40.3 deg, most S ~140.2 deg. Moonset: most S ~219.8, most N ~319.7.
 const MOON_EXTREMES = {
   moonrise: { nAz: 40.30, sAz: 140.22 },
-  moonset:  { nAz: 319.74, sAz: 219.75 },
+  moonset: { nAz: 319.74, sAz: 219.75 },
 };
 let moonSpread = 0; // 0 = most northerly, 1 = most southerly
 
@@ -721,63 +726,63 @@ function approxSun(d, mode) {
  return { az: azSet, alt: 0.35 + Math.max(0, -decl) * 0.01 };
 }
 function doyToYMD(d, year) {
-  const md = [31, (year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0)) ? 29 : 28,
-    31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-  let n = Math.max(1, Math.min(md.reduce((a,b)=>a+b,0), Math.round(+d) || 1));
-  let m = 0;
-  while (m < 12 && n > md[m]) { n -= md[m]; m++; }
-  return { year, month: m + 1, day: n };
+ const md = [31, (year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0)) ? 29 : 28,
+   31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+ let n = Math.max(1, Math.min(md.reduce((a,b)=>a+b,0), Math.round(+d) || 1));
+ let m = 0;
+ while (m < 12 && n > md[m]) { n -= md[m]; m++; }
+ return { year, month: m + 1, day: n };
 }
 function localDateStartFromDoy(d) {
-  const ymd = doyToYMD(d, ASTRO_YEAR);
-  // Browser-local midnight for that calendar day (Tim: Europe/London).
-  return new Date(ymd.year, ymd.month - 1, ymd.day, 0, 0, 0, 0);
+ const ymd = doyToYMD(d, ASTRO_YEAR);
+ // Browser-local midnight for that calendar day (Tim: Europe/London).
+ return new Date(ymd.year, ymd.month - 1, ymd.day, 0, 0, 0, 0);
 }
 function moonAzFromSpread(mode, spread) {
-  const ex = MOON_EXTREMES[mode];
-  if (!ex) return null;
-  const t = Math.max(0, Math.min(1, +spread || 0));
-  // Interpolate north extreme -> south extreme (moonset nAz > sAz so this decreases)
-  const az = ex.nAz + (ex.sAz - ex.nAz) * t;
-  return { az, alt: 0.35, spread: t, nAz: ex.nAz, sAz: ex.sAz };
+ const ex = MOON_EXTREMES[mode];
+ if (!ex) return null;
+ const t = Math.max(0, Math.min(1, +spread || 0));
+ // Interpolate north extreme -> south extreme (moonset nAz > sAz so this decreases)
+ const az = ex.nAz + (ex.sAz - ex.nAz) * t;
+ return { az, alt: 0.35, spread: t, nAz: ex.nAz, sAz: ex.sAz };
 }
 function moonSpreadLabel(mode, spread) {
-  const ev = moonAzFromSpread(mode, spread);
-  if (!ev) return '';
-  const t = ev.spread;
-  let tag = 'mid';
-  if (t < 0.02) tag = 'most N';
-  else if (t > 0.98) tag = 'most S';
-  return tag + ' | ' + ev.az.toFixed(1) + ' deg';
+ const ev = moonAzFromSpread(mode, spread);
+ if (!ev) return '';
+ const t = ev.spread;
+ let tag = 'mid';
+ if (t < 0.02) tag = 'most N';
+ else if (t > 0.98) tag = 'most S';
+ return tag + ' | ' + ev.az.toFixed(1) + ' deg';
 }
 function updateMoonAzUi() {
-  const panel = document.getElementById('moonAzPanel');
-  const sunPanel = document.getElementById('sunDatePanel');
-  const moon = isMoonMode(bodyMode);
-  if (panel) panel.style.display = moon ? '' : 'none';
-  if (sunPanel) sunPanel.style.display = moon ? 'none' : '';
-  const sl = document.getElementById('moonAz');
-  if (sl) sl.value = String(Math.round(moonSpread * 1000));
-  const lb = document.getElementById('moonAzLbl');
-  if (lb && moon) lb.textContent = moonSpreadLabel(bodyMode, moonSpread);
+ const panel = document.getElementById('moonAzPanel');
+ const sunPanel = document.getElementById('sunDatePanel');
+ const moon = isMoonMode(bodyMode);
+ if (panel) panel.style.display = moon ? '' : 'none';
+ if (sunPanel) sunPanel.style.display = moon ? 'none' : '';
+ const sl = document.getElementById('moonAz');
+ if (sl) sl.value = String(Math.round(moonSpread * 1000));
+ const lb = document.getElementById('moonAzLbl');
+ if (lb && moon) lb.textContent = moonSpreadLabel(bodyMode, moonSpread);
 }
 function doyLabel(d) {
-  const names = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  const ymd = doyToYMD(d, ASTRO_YEAR);
-  return ymd.day + ' ' + names[ymd.month - 1];
+ const names = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+ const ymd = doyToYMD(d, ASTRO_YEAR);
+ return ymd.day + ' ' + names[ymd.month - 1];
 }
 function fmtLocalTime(dt) {
-  if (!dt) return '';
-  try {
-    return dt.toLocaleString('en-GB', {
-      timeZone: 'Europe/London',
-      hour: '2-digit', minute: '2-digit', second: '2-digit',
-      day: '2-digit', month: 'short', year: 'numeric',
-      hour12: false,
-    }) + ' BST/GMT';
-  } catch (e) {
-    return String(dt);
-  }
+ if (!dt) return '';
+ try {
+   return dt.toLocaleString('en-GB', {
+     timeZone: 'Europe/London',
+     hour: '2-digit', minute: '2-digit', second: '2-digit',
+     day: '2-digit', month: 'short', year: 'numeric',
+     hour12: false,
+   }) + ' BST/GMT';
+ } catch (e) {
+   return String(dt);
+ }
 }
 function sunDir(azTrue) {
  const r = THREE.MathUtils.degToRad(azTrue);
@@ -793,17 +798,17 @@ function makeBodyDisc(color, glowColor, outerGlow) {
  g.add(new THREE.Mesh(
  new THREE.SphereGeometry(sunR * 3.2, 16, 12),
  new THREE.MeshBasicMaterial({
- color: glowColor, transparent: true, opacity: 0.55, depthWrite: false,
- depthTest: false,
- blending: THREE.AdditiveBlending, toneMapped: false, fog: false,
+   color: glowColor, transparent: true, opacity: 0.55, depthWrite: false,
+   depthTest: false,
+   blending: THREE.AdditiveBlending, toneMapped: false, fog: false,
  })
  ));
  g.add(new THREE.Mesh(
  new THREE.SphereGeometry(sunR * 6.5, 16, 12),
  new THREE.MeshBasicMaterial({
- color: outerGlow, transparent: true, opacity: 0.18, depthWrite: false,
- depthTest: false,
- blending: THREE.AdditiveBlending, toneMapped: false, fog: false,
+   color: outerGlow, transparent: true, opacity: 0.18, depthWrite: false,
+   depthTest: false,
+   blending: THREE.AdditiveBlending, toneMapped: false, fog: false,
  })
  ));
  g.visible = false;
@@ -829,6 +834,39 @@ function ensureBodyRay(hexColor) {
   return bodyRay;
 }
 
+
+function stationPoseEN(id) {
+  for (const e of LP.array) {
+    if (String(e.id) === String(id)) return poseEN(e);
+  }
+  return null;
+}
+function bearingEN(a, b) {
+  const dE = b.e - a.e, dN = b.n - a.n;
+  return (Math.atan2(dE, dN) * 180 / Math.PI + 360) % 360;
+}
+/** Newham rectangle side for active sky mode — stone→stone, not centre. */
+function stationSightlineForMode(mode) {
+  const p91 = stationPoseEN('91');
+  const p92 = stationPoseEN('92');
+  const p93 = stationPoseEN('93');
+  const p94 = stationPoseEN('94');
+  if (!p91 || !p92 || !p93 || !p94) return null;
+  if (mode === 'moonrise') {
+    return { from: p94, to: p91, az: bearingEN(p94, p91), side: '94→91' };
+  }
+  if (mode === 'moonset') {
+    return { from: p92, to: p93, az: bearingEN(p92, p93), side: '92→93' };
+  }
+  if (mode === 'sunrise') {
+    return { from: p93, to: p94, az: bearingEN(p93, p94), side: '93→94' };
+  }
+  if (mode === 'sunset') {
+    return { from: p91, to: p92, az: bearingEN(p91, p92), side: '91→92' };
+  }
+  return null;
+}
+
 function isMoonMode(m) { return m === 'moonrise' || m === 'moonset'; }
 function isSunMode(m) { return m === 'sunrise' || m === 'sunset'; }
 
@@ -843,9 +881,9 @@ function placeSun() {
    return;
  }
  if (exaggeration > 1.01) setExaggeration(1, true);
- const origin = new THREE.Vector3(0, 1.6 * exaggeration, 0);
  let ev = null;
  let note = '';
+ let sight = null;
  if (isSunMode(bodyMode)) {
    ev = approxSun(doy, bodyMode);
    note = '';
@@ -860,7 +898,18 @@ function placeSun() {
    if (readout) readout.textContent = '';
    return;
  }
- const { x, z } = sunDir(ev.az);
+ let origin = new THREE.Vector3(0, 1.6 * exaggeration, 0);
+ let azUse = ev.az;
+ if (stationAxisMode) {
+   sight = stationSightlineForMode(bodyMode);
+   if (sight) {
+     const o = localXZ(sight.from.e, sight.from.n);
+     origin = new THREE.Vector3(o.x, 1.6 * exaggeration, o.z);
+     azUse = sight.az;
+     note = 'station ' + sight.side;
+   }
+ }
+ const { x, z } = sunDir(azUse);
  const dist = distPastTerrain(origin, x, z);
  const rise = Math.tan(ev.alt * Math.PI / 180) * exaggeration;
  const pos = new THREE.Vector3(origin.x + x * dist, origin.y + rise * dist, origin.z + z * dist);
@@ -901,7 +950,11 @@ function placeSun() {
    const title = isMoonMode(bodyMode)
      ? moonSpreadLabel(bodyMode, moonSpread)
      : doyLabel(doy);
-   readout.innerHTML = '<b>' + title + '</b> | ' + bodyMode + ' | az <b>' + ev.az.toFixed(1) + ' deg</b>';
+   const axis = stationAxisMode
+     ? ('station' + (sight ? ' ' + sight.side : ''))
+     : 'Heel Stone (centre)';
+   readout.innerHTML = '<b>' + title + '</b> | ' + bodyMode + ' | ' + axis +
+     ' | az <b>' + azUse.toFixed(1) + ' deg</b>';
  }
 }
 
@@ -989,15 +1042,30 @@ document.getElementById('doy').oninput = (ev) => {
 };
 document.querySelectorAll('[data-doy]').forEach((b) => {
  b.onclick = () => {
- doy = +b.dataset.doy;
- document.getElementById('doy').value = String(doy);
- document.getElementById('doyLbl').textContent = doyLabel(doy);
- if (doy === 172) setBodyMode('sunrise');
- if (doy === 355) setBodyMode('sunset');
- placeSun();
+   doy = +b.dataset.doy;
+   document.getElementById('doy').value = String(doy);
+   document.getElementById('doyLbl').textContent = doyLabel(doy);
+   if (doy === 172) setBodyMode('sunrise');
+   if (doy === 355) setBodyMode('sunset');
+   placeSun();
  };
 });
 document.getElementById('showRay').onchange = (e) => { showRay = e.target.checked; placeSun(); };
+function setAxisMode(station) {
+  stationAxisMode = !!station;
+  const heel = document.getElementById('btnAxisHeel');
+  const st = document.getElementById('btnAxisStation');
+  if (heel) heel.classList.toggle('active', !stationAxisMode);
+  if (st) st.classList.toggle('active', stationAxisMode);
+  const rayLab = document.getElementById('showRayLabel');
+  if (rayLab) rayLab.textContent = stationAxisMode ? 'Ray along station side' : 'Ray to centre';
+  placeSun();
+}
+const btnHeel = document.getElementById('btnAxisHeel');
+const btnStation = document.getElementById('btnAxisStation');
+if (btnHeel) btnHeel.onclick = () => setAxisMode(false);
+if (btnStation) btnStation.onclick = () => setAxisMode(true);
+
 
 document.getElementById('moonAz').oninput = (ev) => {
   moonSpread = (+ev.target.value) / 1000;

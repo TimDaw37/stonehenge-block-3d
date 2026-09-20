@@ -1,20 +1,10 @@
 {
   "id": "91",
   "kind": "stonehole",
-  "status": "AT_STONE_END_NEWHAM_WARD",
-  "e_m": 412286.654,
-  "n_m": 142174.227,
-  "method": "Half footprint along short-side direction 92\u219291 past fallen centre",
+  "status": "TIM_X_NW_END",
+  "e_m": 412284.883,
+  "n_m": 142174.378,
+  "method": "Half width along long side toward 94 (NW end of fallen box) \u2014 Tim X on locked_overview screenshot",
   "fallen_e_m": 412285.696,
-  "fallen_n_m": 142173.451,
-  "rejected_absolute_plan1": {
-    "e": 412287.63,
-    "n": 142174.136,
-    "why": "~2m past end (Plan1/fig1 disagree)"
-  },
-  "rejected_plan1_relative": {
-    "e": 412284.615,
-    "n": 142174.239,
-    "why": "wrong end of stone (WNW)"
-  }
+  "fallen_n_m": 142173.451
 }

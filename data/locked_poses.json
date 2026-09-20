@@ -2144,7 +2144,7 @@
       "colour_class": "grey_seed",
       "source_file": "data/scene.json",
       "height_source": "scene.json (AGL placeholder \u2014 no OD seating yet)",
-      "notes": "Station stone 91 from scene.json (fig1). Seed for eyeball. | Newham hole at stone end 412286.654/142174.227 (Newham-ward; fallen pose unchanged)",
+      "notes": "Station stone 91 from scene.json (fig1). Seed for eyeball. | Newham hole Tim-X NW end 412284.883/142174.378",
       "lock": {
         "status": "seed",
         "by": "Grok Build / Taskmaster",
@@ -2160,9 +2160,9 @@
         ],
         "note": "Seed for Tim eyeball on fig1; not PPC-locked. No height OD work yet."
       },
-      "hole_e_m": 412286.654,
-      "hole_n_m": 142174.227,
-      "hole_source": "At Newham-ward end of fig1 fallen box (half width along 92\u219291). Not absolute Plan1 EN; not Plan1\u2192fig1 relative (that hit the wrong end)."
+      "hole_e_m": 412284.883,
+      "hole_n_m": 142174.378,
+      "hole_source": "Tim X on screenshot 2026-09-20: NW end of fallen box toward 94 (half width along long side)."
     },
     {
       "id": "92",

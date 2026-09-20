@@ -110,7 +110,7 @@
   <button type="button" id="geoClear" hidden title="Clear pinned coordinate">Clear pin</button>
 </div>
 <canvas id="c"></canvas>
-<script src="./data/locked_poses.js?v=newham-91hole-stone-end-20260920"></script>
+<script src="./data/locked_poses.js?v=newham-91hole-tim-x-20260920"></script>
 <script>
 /* lintel seat 2026-09-19: lengthen shorter uprights so tops match partners */
 (function () {
@@ -236,9 +236,8 @@ scene.add(root);
 
 let terrainHorizonMesh = null, terrainNearMesh = null, terrainOn = false, labelsOn = false, stationsOn = false;
 let stationSidesGroup = null;
-/** 91 Newham corner — at Newham-ward end of fallen box (412286.654/142174.227).
- *  Not absolute Plan1; Plan1-relative hit wrong end. Prefer hole_* from poses. */
-const STATION_91_HOLE_FALLBACK = { e: 412286.654, n: 142174.227, id: '91hole' };
+/** 91 Newham corner — Tim X: NW end of fallen box toward 94 (412284.883/142174.378). */
+const STATION_91_HOLE_FALLBACK = { e: 412284.883, n: 142174.378, id: '91hole' };
 function station91HoleEN() {
   for (const e of LP.array) {
     if (String(e.id) !== '91') continue;

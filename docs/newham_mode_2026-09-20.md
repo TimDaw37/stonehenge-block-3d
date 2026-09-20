@@ -5,17 +5,16 @@ Station-stone / Newham rectangle alignments are a **separate enquiry** from gene
 
 ## HUD
 - **Newham** button: rectangle overlay + station-origin dual rays together.
-- Ray label: “Ray to centre” / “Ray along Newham sides”.
 
-## 91 = Plan1 west-oval +0.5 m WNW (provisional)
-Archivist / Tim eyeball 2026-09-20 (`docs/station91_hole_plan1_2026-09-20.md`):
-- **Live EN:** **412287.984 / 142173.782** (pink ring when Newham on).
-- Prior west-oval centre 412288.446/142173.591; old Plan1 fallen pick 412288.711/142173.348; model fallen 412285.696/142173.451; interim indicative diamond 412283.790/142174.081 **superseded**.
-- **Await Tim confirm on green mark before locking.**
+## 91 hole — LOCKED 2026-09-20
+Tim green-mark **APPROVED** (Archivist):
+- **EN:** **412287.630 / 142174.136** (OSGB)
+- Chain: Plan1 west-oval → +0.5 m WNW → +0.5 m NW
+- Fallen megalith pose remains **412285.696 / 142173.451** (separate)
+- Source: `docs/station91_hole_plan1_2026-09-20.md`, `data/station91_hole_approved.json`
 
 ## Both sets both ways
 Long sides moon ↔; short sides sun ↔. Dual rays per sky mode.
 
 ## Files
-- `locked_overview.html`
-- Cache-bust: `locked_poses.js?v=newham-91hole-plan1-wnw-20260920`
+- `locked_overview.html` — cache-bust `locked_poses.js?v=newham-91hole-locked-20260920`

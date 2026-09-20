@@ -1,15 +1,17 @@
-# Station 91 stonehole — Cleal Plan 1 (2026-09-20)
+# Station 91 stonehole — APPROVED (2026-09-20)
 
-**Tim:** oval under west end of fallen stone, then **+0.5 m WNW**.
+**Tim approved** green mark on Cleal Plan 1 (all-excavations).
 
 | | E | N |
 |---|---|---|
-| **91 HOLE (Plan1 +0.5 m WNW)** | **412287.984** | **142173.782** |
-| Prior west-oval centre | 412288.446 | 142173.591 |
-| Old fallen pick | 412288.711 | 142173.348 |
-| Model fallen pose | 412285.696 | 142173.451 |
-| Indicative diamond (interim) | 412283.790 | 142174.081 |
+| **91 HOLE (approved)** | **412287.630** | **142174.136** |
 
-Source: D:\Stonehenge\Plans & survey\plan 1 flat.jpg  
-Shot: C:\Users\timda\Documents\stonehenge-block-3d\shots\cleal_plan1_91_hole_wnw05.jpg  
-JSON: station91_hole_plan1_2026-09-20.json
+**Rule:** Newham rectangle uses this **stonehole**, not the fallen megalith pose (412285.696 / 142173.451).
+
+**Method:** Plan 1 oval under west end of fallen stone → +0.5 m WNW → +0.5 m NW (Tim eyeball).
+
+**Source:** D:\Stonehenge\Plans & survey\plan 1 flat.jpg  
+**Shot:** C:\Users\timda\Documents\stonehenge-block-3d\shots\cleal_plan1_91_hole_nw05.jpg  
+**Machine JSON:** C:\Users\timda\Documents\stonehenge-block-3d\data\station91_hole_approved.json
+
+Do not delete. Incorporate into Newham / locked inventory; keep fallen fabric pose separate unless Tim says otherwise.

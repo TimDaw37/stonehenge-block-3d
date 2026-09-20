@@ -110,7 +110,7 @@
   <button type="button" id="geoClear" hidden title="Clear pinned coordinate">Clear pin</button>
 </div>
 <canvas id="c"></canvas>
-<script src="./data/locked_poses.js?v=newham-91-by-stone-20260920"></script>
+<script src="./data/locked_poses.js?v=newham-91hole-diamond-20260920"></script>
 <script>
 /* lintel seat 2026-09-19: lengthen shorter uprights so tops match partners */
 (function () {
@@ -236,7 +236,10 @@ scene.add(root);
 
 let terrainHorizonMesh = null, terrainNearMesh = null, terrainOn = false, labelsOn = false, stationsOn = false;
 let stationSidesGroup = null;
-/* 91 Newham corner = fallen stone pose: Tim 2026-09-20 — stonehole is right by the fallen megalith; do not use Cleal Plan1 pick (~3 m E). */
+/** 91 Newham corner = Tim published indicative stonehole diamond (left of fallen fabric).
+ *  OSGB 412283.790 / 142174.081 — Archivist 2026-09-20 from stonehenge-plan HOLES.
+ *  Not Cleal Plan1 (that pick was the fallen megalith). Not fallen centroid. */
+const STATION_91_HOLE = { e: 412283.790, n: 142174.081, id: '91hole' };
 let exaggeration = 1, bodyMode = 'off', doy = 172, showRay = false, stationAxisMode = false;
 const stoneBaseY = [];
 let planMesh = null;
@@ -352,7 +355,7 @@ function setLabels(on) {
 
 /** Newham rectangle: long = moon both ways; short = sun both ways. Corner 91 = stonehole. */
 function stationCornerEN(id) {
-  // 91: hole right by fallen stone — use pose EN (not Cleal Plan1)
+  if (String(id) === '91') return { e: STATION_91_HOLE.e, n: STATION_91_HOLE.n };
   return stationPoseEN(id);
 }
 function buildStationSightlines() {
@@ -382,10 +385,10 @@ function buildStationSightlines() {
     return [a.clone().sub(d), b.clone().add(d)];
   }
   const sides = [
-    { a: p94, b: p91, color: 0xc8d0dc, dash: false, name: '94↔91 moon' },
+    { a: p94, b: p91, color: 0xc8d0dc, dash: false, name: '94↔91hole moon' },
     { a: p92, b: p93, color: 0xc8d0dc, dash: false, name: '92↔93 moon' },
     { a: p93, b: p94, color: 0xffcc66, dash: true, name: '93↔94 sun' },
-    { a: p91, b: p92, color: 0xffcc66, dash: true, name: '91↔92 sun' },
+    { a: p91, b: p92, color: 0xffcc66, dash: true, name: '91hole↔92 sun' },
   ];
   stationSidesGroup = new THREE.Group();
   stationSidesGroup.name = 'stationSightlines';
@@ -409,6 +412,18 @@ function buildStationSightlines() {
     line.renderOrder = 15;
     line.userData.side = s.name;
     stationSidesGroup.add(line);
+  }
+  {
+    const c = xz(p91);
+    const ring = new THREE.Mesh(
+      new THREE.RingGeometry(0.55, 0.85, 32),
+      new THREE.MeshBasicMaterial({ color: 0xff6688, side: THREE.DoubleSide, depthTest: false, transparent: true, opacity: 0.9 })
+    );
+    ring.rotation.x = -Math.PI / 2;
+    ring.position.copy(c);
+    ring.renderOrder = 16;
+    ring.userData.side = '91 stonehole';
+    stationSidesGroup.add(ring);
   }
   stationSidesGroup.visible = stationsOn;
   scene.add(stationSidesGroup);
@@ -939,26 +954,26 @@ function stationSightlinesForMode(mode) {
   // sunrise ≈ NE both short; sunset ≈ SW both short
   if (mode === 'moonrise') {
     return [
-      { from: p94, to: p91, az: bearingEN(p94, p91), side: '94→91' },
+      { from: p94, to: p91, az: bearingEN(p94, p91), side: '94→91hole' },
       { from: p93, to: p92, az: bearingEN(p93, p92), side: '93→92' },
     ];
   }
   if (mode === 'moonset') {
     return [
-      { from: p91, to: p94, az: bearingEN(p91, p94), side: '91→94' },
+      { from: p91, to: p94, az: bearingEN(p91, p94), side: '91hole→94' },
       { from: p92, to: p93, az: bearingEN(p92, p93), side: '92→93' },
     ];
   }
   if (mode === 'sunrise') {
     return [
       { from: p93, to: p94, az: bearingEN(p93, p94), side: '93→94' },
-      { from: p92, to: p91, az: bearingEN(p92, p91), side: '92→91' },
+      { from: p92, to: p91, az: bearingEN(p92, p91), side: '92→91hole' },
     ];
   }
   if (mode === 'sunset') {
     return [
       { from: p94, to: p93, az: bearingEN(p94, p93), side: '94→93' },
-      { from: p91, to: p92, az: bearingEN(p91, p92), side: '91→92' },
+      { from: p91, to: p92, az: bearingEN(p91, p92), side: '91hole→92' },
     ];
   }
   return null;

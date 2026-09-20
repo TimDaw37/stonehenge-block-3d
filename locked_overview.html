@@ -110,7 +110,7 @@
   <button type="button" id="geoClear" hidden title="Clear pinned coordinate">Clear pin</button>
 </div>
 <canvas id="c"></canvas>
-<script src="./data/locked_poses.js?v=newham-91hole-diamond-20260920"></script>
+<script src="./data/locked_poses.js?v=newham-91hole-plan1-wnw-20260920"></script>
 <script>
 /* lintel seat 2026-09-19: lengthen shorter uprights so tops match partners */
 (function () {
@@ -236,10 +236,10 @@ scene.add(root);
 
 let terrainHorizonMesh = null, terrainNearMesh = null, terrainOn = false, labelsOn = false, stationsOn = false;
 let stationSidesGroup = null;
-/** 91 Newham corner = Tim published indicative stonehole diamond (left of fallen fabric).
- *  OSGB 412283.790 / 142174.081 — Archivist 2026-09-20 from stonehenge-plan HOLES.
- *  Not Cleal Plan1 (that pick was the fallen megalith). Not fallen centroid. */
-const STATION_91_HOLE = { e: 412283.790, n: 142174.081, id: '91hole' };
+/** 91 Newham corner = Cleal Plan1 west-oval +0.5 m WNW (Tim eyeball 2026-09-20).
+ *  OSGB 412287.984 / 142173.782 — provisional until Tim confirms green mark.
+ *  Supersedes indicative diamond 412283.790/142174.081. */
+const STATION_91_HOLE = { e: 412287.984, n: 142173.782, id: '91hole' };
 let exaggeration = 1, bodyMode = 'off', doy = 172, showRay = false, stationAxisMode = false;
 const stoneBaseY = [];
 let planMesh = null;

@@ -20,3 +20,10 @@ Fixes:
 - Shadow frustum ±200 m, 4096 map, far 600
 - Opaque sarsens/bluestones for casting
 - Ground disc (r=180 m) under the site to receive long shadows (Heel → Altar)
+
+## Ambient wash + half-black fix
+
+- Ground lightened (`#b3c49a`); ambient fill floor so turf never goes black.
+- Ambient **100%** turns `castShadow` off → shadows disappear.
+- Shadow key light uses **true azimuth** but altitude ≥ 14° (dawn gleam was breaking the map into a half-black disc). Sky disc still at true altitude.
+- Other dates: `approxSun` schematic follows the date slider; key light + shadows track that az/alt.

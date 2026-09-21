@@ -12,13 +12,12 @@ This is a **platform for forks** (rounded stones, Skyfield bake, etc.), not a fi
 
 | URL | Role |
 |-----|------|
-| [index.html](index.html) / live root | Public viewer — 21 Sep 2026 AOK baseline |
-| [locked_overview.html](locked_overview.html) | Same baseline |
-| [skyscape.html](skyscape.html) | Travelling sun and moon for the chosen date and year |
+| [index.html](index.html) / live root | Public viewer — travelling sun and moon (`skyscape.html` is the same page) |
+| [locked_overview.html](locked_overview.html) | Backup of the previous front page (21 Sep 2026 AOK) |
 
 Live: https://timdaw37.github.io/stonehenge-block-3d/  
-Skyscape: https://timdaw37.github.io/stonehenge-block-3d/skyscape.html  
-Baseline tag: `live-2026-09-21-aok`
+Backup: https://timdaw37.github.io/stonehenge-block-3d/locked_overview.html  
+Baseline tag: `live-2026-09-21-aok` (also `index.html.lock-2026-09-21-aok`)
 
 Hover and pin both show OSGB and WGS84 (scene/plan grid, not GNSS; WGS84 converted from that grid). Same framing as [stonehenge-plan](https://timdaw37.github.io/stonehenge-plan/).
 

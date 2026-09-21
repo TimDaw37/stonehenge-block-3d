@@ -9,17 +9,19 @@
 <!-- marker-labels-untruncate-20260921 -->
 <style>
  html,body{margin:0;height:100%;background:#1a2430;color:#eee;font:13px/1.35 system-ui,sans-serif;overflow:hidden}
+ #workshopBanner{position:fixed;top:0;left:0;right:0;z-index:6;background:#6b2a12;color:#fff7ed;
+  font:600 12px/1.35 system-ui,sans-serif;padding:6px 12px;text-align:center}
  #c{position:fixed;inset:0;width:100%;height:100%;display:block}
- #hudToggle{position:fixed;left:10px;top:10px;z-index:4;min-width:44px;min-height:44px;
+ #hudToggle{position:fixed;left:10px;top:36px;z-index:4;min-width:44px;min-height:44px;
  padding:8px 12px;border:0;border-radius:8px;background:rgba(0,0,0,.88);color:#e8d9a8;
  font:600 13px system-ui,sans-serif;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,.4)}
  #hudToggle:hover{background:rgba(40,40,40,.95)}
- #hud{position:fixed;left:10px;top:58px;width:360px;max-width:calc(100% - 20px);max-height:calc(100% - 70px);overflow:auto;
+ #hud{position:fixed;left:10px;top:84px;width:360px;max-width:calc(100% - 20px);max-height:calc(100% - 96px);overflow:auto;
  background:rgba(0,0,0,.84);padding:10px 12px;border-radius:8px;z-index:2}
  #hud.collapsed{display:none}
  #hud b{color:#e8d9a8}
  @media (min-width:701px){
-  #hud{top:10px}
+  #hud{top:36px}
   #hudToggle{display:none}
   #hud.collapsed{display:block}
  }
@@ -54,6 +56,7 @@
 </style>
 </head>
 <body>
+<div id="workshopBanner">Sun and moon travel for the chosen date and year. Gleam, Half orb and Full orb are the bite on the Hoyle skyline.</div>
 <div id="scaleWarn">Exaggerated - silhouette not to scale</div>
 <button type="button" id="hudToggle" aria-expanded="true" aria-controls="hud" title="Show or hide controls">Controls ▾</button>
 <div id="hud">
@@ -87,13 +90,13 @@
     <button type="button" id="btnLimbHalf">Half orb</button>
     <button type="button" id="btnLimbFull">Full orb</button>
   </div>
-  <label>Ambient <span id="ambLbl">100%</span></label>
-  <input type="range" id="ambient" min="0" max="100" value="100" style="width:100%"/>
+  <label>Ambient <span id="ambLbl">40%</span></label>
+  <input type="range" id="ambient" min="0" max="100" value="40" style="width:100%"/>
   <div style="opacity:.7;font-size:10px;margin:2px 0 4px 0;line-height:1.35">
-    100% = no shadows (even light). Turn down for Meaden shadows. Date slider moves the sun and its shadow on any day.
+    Shadows aim with the disc, azimuth and altitude. 100% washes them out. A Gleam shadow is hundreds of metres long; the map keeps that direction out to about 700&nbsp;m.
   </div>
   <div id="skyCaveat" style="opacity:.75;font-size:10px;line-height:1.35;margin:4px 0 6px">
-    Azimuths use a LiDAR horizon with refraction/parallax. Gleam / Half orb / Full orb match Banton’s limb stages.
+    The disc is clipped from the monument eye against the Hoyle skyline, so Gleam is a sliver, Half is cut through the middle, and Full sits just clear. The public model draws the whole glow on top of the hills.
   </div>
   <label>Epoch</label>
   <div class="row">
@@ -114,6 +117,14 @@
         <button type="button" data-doy="266">23 Sep</button>
         <button type="button" data-doy="355">21 Dec</button>
       </div>
+      <label>Time <span id="utLbl">00:00 UT</span></label>
+      <input type="range" id="utMin" min="0" max="2160" step="1" value="237" style="width:100%"/>
+      <div class="row">
+        <button type="button" id="btnDaySun">Sun's day</button>
+        <button type="button" id="btnDayMoon">Moon's day</button>
+        <button type="button" id="btnSkyPlay">Pause</button>
+      </div>
+      <div style="opacity:.7;font-size:10px;margin:2px 0 4px 0;line-height:1.35">Sun's day and Moon's day play that body from rise to set on the date above. The clock stays put so you can pause or scrub. Moonrise and Moonset jump to that limb.</div>
     </div>
     <div id="sunDateNewham" hidden>
       <label>Sun date <span id="doyLblNewham">21 Jun · sunrise</span></label>
@@ -125,13 +136,14 @@
     </div>
   </div>
   <div id="moonAzPanel" style="display:none">
-    <label>Azimuth <span id="moonAzLbl">most N</span></label>
+    <label>Standstill <span id="moonAzLbl">most N</span></label>
     <input type="range" id="moonAz" min="0" max="1000" value="0" style="width:100%"/>
     <div class="row">
       <button type="button" id="btnMoonAzN">Most N</button>
       <button type="button" id="btnMoonAzMid">Mid</button>
       <button type="button" id="btnMoonAzS">Most S</button>
     </div>
+    <div style="opacity:.7;font-size:10px;margin:2px 0 4px 0;line-height:1.35">Most N to Most S is the standstill envelope, not the moon on this date. Moving it stops Moon's day.</div>
   </div>
   <div class="check"><label style="display:inline;text-transform:none;letter-spacing:0;opacity:1"><input type="checkbox" id="geoOn" checked/> Georef / Coords</label></div>
   <div style="opacity:.7;font-size:10px;margin:2px 0 4px 0;line-height:1.35">Tap/click for coords; short tap pins. Drag to orbit (coords pause while dragging). Copy pin / Clear pin / Esc. Uncheck to hide the bottom box.</div>
@@ -182,6 +194,7 @@
 </script>
 <script src="./data/site_ground_od.js?v=restore2"></script>
 <script src="./data/sky_events_path_a_hoyle_sample.js?v=ambient-shadow-20260921"></script>
+<script src="./data/horizon_profile_hoyle.js?v=skyscape-1"></script>
 <script type="importmap">
 {"imports":{"three":"./vendor/three.module.js","three/addons/":"./vendor/"}}
 </script>
@@ -196,6 +209,7 @@ setTimeout(function(){
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/OrbitControls.js';
 import { osgbFromLocal, osgbToWgs84 } from './vendor/osgb_wgs84.js';
+import * as Sky from './skyscape_sky.js';
 window.__THREE_OK = true;
 
 const msg = document.getElementById('msg');
@@ -260,7 +274,7 @@ renderer.setSize(innerWidth, innerHeight);
 renderer.outputColorSpace = THREE.SRGBColorSpace;
 
 const scene = new THREE.Scene();
-scene.background = new THREE.Color(0x2a3548);
+scene.background = new THREE.Color(0x071018);
 const HEMI_I0 = 0.72;
 const FILL_I0 = 0.35;
 const SUN_I0 = 1.35;
@@ -291,10 +305,10 @@ scene.add(fill);
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
-/** 1 = full ambient/fill (default); 0 = key light only → dominant sun/moon shadows (Meaden). */
-let ambientLevel = 1;
+/** Skyscape default is low enough that stone shadows show. Separate from the public page's sh_ambient. */
+let ambientLevel = 0.4;
 try {
-  const raw = sessionStorage.getItem('sh_ambient');
+  const raw = sessionStorage.getItem('sh_skyscape_ambient');
   if (raw != null && Number.isFinite(+raw)) ambientLevel = Math.max(0, Math.min(1, +raw));
 } catch (e) {}
 /** Soft fill so the ground stays mid-tone (shadows need contrast, not a black floor). */
@@ -303,18 +317,23 @@ scene.add(ambFill);
 const AMB_FILL_I0 = 0.55;
 const AMB_FILL_FLOOR = 0.22; // never pitch-black ground
 
+let shadowBodyUp = true;
+let skyDay = 0.12;
+function applySkyFill() {
+  const k = 0.18 + 0.82 * skyDay;
+  hemi.intensity = HEMI_I0 * ambientLevel * k;
+  fill.intensity = FILL_I0 * ambientLevel * (0.28 + 0.72 * skyDay);
+}
 function syncShadowPolicy() {
-  // Full ambient → no shadow maps (Meaden dial off). Low ambient → cast.
-  // bodyMode is declared later — guard TDZ on first setAmbient() call.
+  // Full ambient → no shadow maps. Direction and altitude stay on the disc.
   let mode;
   try { mode = bodyMode; } catch (e) { return; }
-  sunLight.castShadow = ambientLevel < 0.97 && mode !== 'off';
+  sunLight.castShadow = ambientLevel < 0.97 && mode !== 'off' && shadowBodyUp;
 }
 
 function setAmbient(level, fromUi) {
   ambientLevel = Math.max(0, Math.min(1, +level));
-  hemi.intensity = HEMI_I0 * ambientLevel;
-  fill.intensity = FILL_I0 * ambientLevel;
+  applySkyFill();
   // Keep a floor of ambient fill so unshadowed ground stays light enough to read shadows on
   ambFill.intensity = AMB_FILL_FLOOR + (AMB_FILL_I0 - AMB_FILL_FLOOR) * ambientLevel;
   syncShadowPolicy();
@@ -323,7 +342,7 @@ function setAmbient(level, fromUi) {
   if (lbl) lbl.textContent = pct + '%';
   const inp = document.getElementById('ambient');
   if (inp && (fromUi || document.activeElement !== inp)) inp.value = String(pct);
-  try { sessionStorage.setItem('sh_ambient', String(ambientLevel)); } catch (e) {}
+  try { sessionStorage.setItem('sh_skyscape_ambient', String(ambientLevel)); } catch (e) {}
 }
 setAmbient(ambientLevel, true);
 
@@ -953,8 +972,8 @@ function setExaggeration(v, fromSun) {
   placeSun();
 }
 
-/* ---- Hoyle sun + moon (Path A limbs) + schematic fallback; Newham dual rays kept in placeSun ---- */
-const SOLAR_SD = 0.2667, LUNAR_SD = 0.259, SUN_REF = 4000;
+/* Sun and moon travel from skyscape_sky.js. Path A tables are the limb check. */
+const SOLAR_SD = 0.2667, LUNAR_SD = 0.259;
 /** Bulford/Banton: disc centre alt so Gleam/Half/Full differ vs skyline.
  *  Gleam = upper limb on horizon (centre below); Half = centre on horizon;
  *  Full = lower limb on horizon (centre above). Do not clamp Gleam up to +0.05°. */
@@ -1118,26 +1137,6 @@ function pathASunFromSample(doy, mode) {
   };
 }
 
-function approxSunSchematic(d, mode) {
-  // Geometric flat-horizon rise/set az at Stonehenge lat; ε from epochYear.
-  // Used only for non-solstice DOY (HUD marks schematic).
-  const eps = obliquityDeg(epochYear);
-  const decl = eps * Math.sin(2 * Math.PI * (d - 81) / 365);
-  const lat = SITE_LAT_DEG * Math.PI / 180;
-  const x = Math.sin(decl * Math.PI / 180) / Math.cos(lat);
-  const c = Math.max(-1, Math.min(1, x));
-  const azRise = Math.acos(c) * 180 / Math.PI;
-  const azSet = 360 - azRise;
-  if (mode === 'sunrise') return { az: azRise, alt: 0.35 + Math.max(0, decl) * 0.01, decl, eps, pathA: false, schematic: true };
-  return { az: azSet, alt: 0.35 + Math.max(0, -decl) * 0.01, decl, eps, pathA: false, schematic: true };
-}
-
-function approxSun(d, mode) {
-  const pa = pathASunFromSample(d, mode);
-  if (pa) return pa;
-  return approxSunSchematic(d, mode);
-}
-
 function distPastTerrain(origin, dirx, dirz) {
   const hx = TERRAIN_HALF_M, hz = TERRAIN_HALF_M;
   let tx = Infinity, tz = Infinity;
@@ -1187,10 +1186,8 @@ function moonSpreadLabel(mode, spread) {
 }
 function updateMoonAzUi() {
  const panel = document.getElementById('moonAzPanel');
- const sunPanel = document.getElementById('sunDatePanel');
  const moon = isMoonMode(bodyMode);
  if (panel) panel.style.display = moon ? '' : 'none';
- if (sunPanel) sunPanel.style.display = moon ? 'none' : '';
  const sl = document.getElementById('moonAz');
  if (sl) sl.value = String(Math.round(moonSpread * 1000));
  const lb = document.getElementById('moonAzLbl');
@@ -1218,35 +1215,173 @@ function sunDir(azTrue) {
  const r = THREE.MathUtils.degToRad(azTrue);
  return { x: Math.sin(r), z: -Math.cos(r) };
 }
-const sunR = SUN_REF * Math.tan(SOLAR_SD * Math.PI / 180);
-function makeBodyDisc(color, glowColor, outerGlow) {
- const g = new THREE.Group();
- g.add(new THREE.Mesh(
- new THREE.SphereGeometry(sunR, 24, 16),
- new THREE.MeshBasicMaterial({ color, toneMapped: false, fog: false, depthTest: false })
- ));
- g.add(new THREE.Mesh(
- new THREE.SphereGeometry(sunR * 3.2, 16, 12),
- new THREE.MeshBasicMaterial({
-   color: glowColor, transparent: true, opacity: 0.55, depthWrite: false,
-   depthTest: false,
-   blending: THREE.AdditiveBlending, toneMapped: false, fog: false,
- })
- ));
- g.add(new THREE.Mesh(
- new THREE.SphereGeometry(sunR * 6.5, 16, 12),
- new THREE.MeshBasicMaterial({
-   color: outerGlow, transparent: true, opacity: 0.18, depthWrite: false,
-   depthTest: false,
-   blending: THREE.AdditiveBlending, toneMapped: false, fog: false,
- })
- ));
- g.visible = false;
- scene.add(g);
- return g;
+const HOYLE = window.HORIZON_PROFILE_HOYLE;
+const hoyleAlts = (HOYLE && HOYLE.alt_deg) ? HOYLE.alt_deg : [];
+const hoyleStep = (HOYLE && HOYLE.step_deg) ? HOYLE.step_deg : 0.25;
+const EYE_Y = 104 - ORIGIN_OD;
+let minuteUt = 237;
+let skyPlay = false;
+let playEnd = null;
+let pendingSeek = true;
+let aimAfterSeek = false;
+let moonEnvelope = false;
+
+function makeHorizonTexture(alts) {
+  const n = alts.length;
+  const data = new Uint8Array(n * 4);
+  for (let i = 0; i < n; i++) {
+    const v = Math.max(0, Math.min(65535, Math.round((alts[i] + 1) / 4 * 65535)));
+    data[i * 4] = (v >> 8) & 255;
+    data[i * 4 + 1] = v & 255;
+    data[i * 4 + 3] = 255;
+  }
+  const tex = new THREE.DataTexture(data, n, 1);
+  tex.format = THREE.RGBAFormat;
+  tex.type = THREE.UnsignedByteType;
+  tex.wrapS = THREE.RepeatWrapping;
+  tex.minFilter = THREE.NearestFilter;
+  tex.magFilter = THREE.NearestFilter;
+  tex.flipY = false;
+  tex.needsUpdate = true;
+  return tex;
 }
-const sunDisc = makeBodyDisc(0xfff6c2, 0xffc14d, 0xfff1c0);
-const moonDisc = makeBodyDisc(0xe8eef5, 0xb8c4d4, 0xd0d8e4);
+const horizonTex = makeHorizonTexture(hoyleAlts);
+const DISC_VERT = `
+  varying vec3 vWorld;
+  varying float vRad;
+  void main() {
+    vRad = length(position.xy);
+    vec4 w = modelMatrix * vec4(position, 1.0);
+    vWorld = w.xyz;
+    gl_Position = projectionMatrix * viewMatrix * w;
+  }
+`;
+const DISC_FRAG = `
+  precision highp float;
+  varying vec3 vWorld;
+  varying float vRad;
+  uniform vec3 eyePos;
+  uniform vec3 discCenter;
+  uniform vec3 color;
+  uniform sampler2D horizon;
+  uniform float horizonN;
+  uniform float glow;
+  uniform float moonMode;
+  uniform float phaseCos;
+  uniform vec3 sunInDisc;
+  uniform float discRadius;
+  float skyAlt(float az) {
+    float x = az / 360.0 * horizonN;
+    float i = floor(x);
+    float f = x - i;
+    float u0 = (mod(i, horizonN) + 0.5) / horizonN;
+    float u1 = (mod(i + 1.0, horizonN) + 0.5) / horizonN;
+    vec4 s0 = texture2D(horizon, vec2(u0, 0.5));
+    vec4 s1 = texture2D(horizon, vec2(u1, 0.5));
+    float h0 = (s0.r * 255.0 * 256.0 + s0.g * 255.0) / 65535.0 * 4.0 - 1.0;
+    float h1 = (s1.r * 255.0 * 256.0 + s1.g * 255.0) / 65535.0 * 4.0 - 1.0;
+    return mix(h0, h1, f);
+  }
+  void main() {
+    vec3 rel = vWorld - eyePos;
+    float alt = degrees(atan(rel.y, length(rel.xz)));
+    float az = degrees(atan(rel.x, -rel.z));
+    if (az < 0.0) az += 360.0;
+    if (alt < skyAlt(az)) discard;
+    vec3 col = color;
+    float alpha = 1.0;
+    if (moonMode > 0.5) {
+      float along = dot(vWorld - discCenter, sunInDisc) / max(discRadius, 0.001);
+      float lit = smoothstep(-0.04, 0.04, along + phaseCos);
+      col = mix(color * 0.07, color, lit);
+    }
+    if (glow > 0.5) {
+      alpha = (1.0 - smoothstep(0.55, 1.0, vRad)) * 0.42;
+      if (alpha < 0.02) discard;
+    }
+    gl_FragColor = vec4(col, alpha);
+  }
+`;
+function makeClippedDisc(hex, glow) {
+  const mat = new THREE.ShaderMaterial({
+    uniforms: {
+      eyePos: { value: new THREE.Vector3() },
+      discCenter: { value: new THREE.Vector3() },
+      color: { value: new THREE.Color(hex) },
+      horizon: { value: horizonTex },
+      horizonN: { value: hoyleAlts.length },
+      glow: { value: glow ? 1 : 0 },
+      moonMode: { value: 0 },
+      phaseCos: { value: 1 },
+      sunInDisc: { value: new THREE.Vector3(1, 0, 0) },
+      discRadius: { value: 1 },
+    },
+    vertexShader: DISC_VERT,
+    fragmentShader: DISC_FRAG,
+    transparent: true,
+    depthTest: false,
+    depthWrite: false,
+    toneMapped: false,
+    fog: false,
+    side: THREE.DoubleSide,
+    blending: glow ? THREE.AdditiveBlending : THREE.NormalBlending,
+  });
+  const mesh = new THREE.Mesh(new THREE.CircleGeometry(1, 96), mat);
+  mesh.frustumCulled = false;
+  mesh.renderOrder = glow ? 19 : 20;
+  mesh.visible = false;
+  scene.add(mesh);
+  return mesh;
+}
+const sunDisc = makeClippedDisc(0xfff6c8, false);
+const sunGlow = makeClippedDisc(0xffc14d, true);
+const moonDisc = makeClippedDisc(0xe8eef8, false);
+const skyDome = new THREE.Mesh(
+  new THREE.SphereGeometry(22000, 48, 24),
+  new THREE.ShaderMaterial({
+    side: THREE.BackSide,
+    depthWrite: false,
+    fog: false,
+    toneMapped: false,
+    uniforms: {
+      sunAlt: { value: -10 },
+      sunDir: { value: new THREE.Vector3(0, 0.2, -1) },
+      eyePos: { value: new THREE.Vector3(0, EYE_Y, 0) },
+    },
+    vertexShader: `
+      varying vec3 vWorld;
+      void main() {
+        vec4 w = modelMatrix * vec4(position, 1.0);
+        vWorld = w.xyz;
+        gl_Position = projectionMatrix * viewMatrix * w;
+      }
+    `,
+    fragmentShader: `
+      varying vec3 vWorld;
+      uniform float sunAlt;
+      uniform vec3 sunDir;
+      uniform vec3 eyePos;
+      void main() {
+        vec3 dir = normalize(vWorld - eyePos);
+        float alt = degrees(asin(clamp(dir.y, -1.0, 1.0)));
+        float day = smoothstep(2.0, 16.0, sunAlt);
+        float dawn = smoothstep(-3.5, 0.8, sunAlt) * (1.0 - smoothstep(3.0, 9.0, sunAlt));
+        vec3 zenith = mix(vec3(0.012, 0.016, 0.04), vec3(0.13, 0.32, 0.58), day);
+        vec3 horiz = mix(vec3(0.025, 0.032, 0.06), vec3(0.40, 0.52, 0.64), day);
+        horiz = mix(horiz, vec3(0.32, 0.14, 0.08), dawn * 0.7);
+        float h = smoothstep(22.0, -1.0, alt);
+        vec3 col = mix(zenith, horiz, h);
+        float glow = pow(max(dot(dir, normalize(sunDir)), 0.0), 48.0) * smoothstep(-2.0, 1.5, sunAlt);
+        col += vec3(1.0, 0.72, 0.38) * glow * 0.35;
+        gl_FragColor = vec4(col, 1.0);
+      }
+    `,
+  })
+);
+skyDome.position.set(0, EYE_Y, 0);
+skyDome.renderOrder = -2;
+skyDome.frustumCulled = false;
+scene.add(skyDome);
 let bodyRay = null, bodyRayB = null;
 function ensureBodyRay(hexColor, which) {
   const key = which === 'B' ? 'bodyRayB' : 'bodyRay';
@@ -1328,19 +1463,50 @@ function placeSun() {
  // Legacy name kept for call sites; places active sky body (sun or moon).
  const readout = document.getElementById('sunReadout');
  sunDisc.visible = false;
+ sunGlow.visible = false;
  moonDisc.visible = false;
  if (bodyRay) bodyRay.visible = false;
  if (bodyRayB) bodyRayB.visible = false;
  if (bodyMode === 'off' || !terrainOn) {
-   if (readout) readout.textContent = '';
+   if (skyDome) skyDome.material.uniforms.sunAlt.value = -12;
+   if (readout) readout.textContent = bodyMode === 'off' ? '' : 'Loading terrain…';
    return;
  }
  if (exaggeration > 1.01) setExaggeration(1, true);
  let ev = null;
  let note = '';
  let sight = null;
- if (isSunMode(bodyMode)) {
-   ev = approxSun(doy, bodyMode);
+ if (pendingSeek && !(isMoonMode(bodyMode) && moonEnvelope)) {
+   pendingSeek = false;
+   const hit = Sky.seekLimb({
+     body: isMoonMode(bodyMode) ? 'Moon' : 'Sun',
+     year: epochYear,
+     doy,
+     rising: bodyMode === 'sunrise' || bodyMode === 'moonrise',
+     limb: pathALimb,
+     alts: hoyleAlts,
+     step: hoyleStep,
+   });
+   if (hit) {
+     minuteUt = hit.minute;
+     syncUtUi();
+   }
+ }
+ if (isSunMode(bodyMode) || (isMoonMode(bodyMode) && !moonEnvelope)) {
+   const body = isMoonMode(bodyMode) ? 'Moon' : 'Sun';
+   const date = Sky.dateFromDoyMinute(epochYear, doy, minuteUt);
+   const geo = Sky.horizontal(body, date, false);
+   const app = Sky.horizontal(body, date, true);
+   const sd = Sky.sdFor(body);
+   const sky = Sky.sampleAlt(hoyleAlts, hoyleStep, app.az);
+   let phaseCos = 1;
+   if (body === 'Moon') {
+     try { phaseCos = Math.cos(Sky.moonPhase(date).phaseAngle * Math.PI / 180); } catch (e) { phaseCos = 1; }
+   }
+   ev = {
+     az: app.az, alt: app.alt, geoAlt: geo.alt, sky, sd, date, phaseCos,
+     pathA: false, travelled: true,
+   };
    note = '';
  } else if (isMoonMode(bodyMode)) {
    ev = moonAzFromSpread(bodyMode, moonSpread);
@@ -1348,6 +1514,10 @@ function placeSun() {
      if (readout) readout.textContent = 'No moon azimuth';
      return;
    }
+   ev.sd = Sky.LUNAR_SD;
+   ev.sky = Sky.sampleAlt(hoyleAlts, hoyleStep, ev.az);
+   ev.phaseCos = 1;
+   ev.travelled = false;
    note = '';
  } else {
    if (readout) readout.textContent = '';
@@ -1377,36 +1547,77 @@ function placeSun() {
  } else {
    primary = placeOne(null, ev.az, 'A');
  }
- const disc = isMoonMode(bodyMode) ? moonDisc : sunDisc;
- disc.visible = true;
- disc.traverse((o) => {
-   if (o.isMesh && o.material) {
-     o.material.depthTest = false;
-     o.material.depthWrite = false;
-     o.material.needsUpdate = true;
-   }
- });
- disc.renderOrder = 20;
- disc.position.copy(primary.pos);
- disc.scale.setScalar(Math.max(0.2, primary.dist / SUN_REF));
- // Key light nearby (not at sky disc). Azimuth = true body az; altitude clamped up a
- // little so dawn gleam does not break the shadow map into a half-black ground.
+ const moonNow = isMoonMode(bodyMode);
+ const disc = moonNow ? moonDisc : sunDisc;
+ const glow = moonNow ? null : sunGlow;
+ sunDisc.visible = false;
+ sunGlow.visible = false;
+ moonDisc.visible = false;
+ const sd = (ev && Number.isFinite(+ev.sd)) ? +ev.sd : (moonNow ? Sky.LUNAR_SD : Sky.SOLAR_SD);
+ const radius = Math.max(0.5, primary.dist * Math.tan(sd * Math.PI / 180));
+ const eye = new THREE.Vector3(primary.origin.x, EYE_Y, primary.origin.z);
+ function seatDisc(mesh, isGlow) {
+   mesh.visible = true;
+   mesh.position.copy(primary.pos);
+   mesh.scale.setScalar(radius * (isGlow ? 1.45 : 1));
+   mesh.lookAt(eye);
+   mesh.material.uniforms.eyePos.value.copy(eye);
+   mesh.material.uniforms.discCenter.value.copy(primary.pos);
+   mesh.material.uniforms.discRadius.value = radius;
+   mesh.material.uniforms.moonMode.value = moonNow ? 1 : 0;
+   mesh.material.uniforms.phaseCos.value = Number.isFinite(+ev.phaseCos) ? +ev.phaseCos : 1;
+ }
+ seatDisc(disc, false);
+ if (glow) seatDisc(glow, true);
+ if (moonNow) {
+   const sunDate = ev.date || Sky.dateFromDoyMinute(epochYear, doy, minuteUt);
+   const sunApp = Sky.horizontal('Sun', sunDate, true);
+   const sr = sunApp.az * Math.PI / 180;
+   const sa = sunApp.alt * Math.PI / 180;
+   const sunVec = new THREE.Vector3(Math.sin(sr) * Math.cos(sa), Math.sin(sa), -Math.cos(sr) * Math.cos(sa));
+   const moonVec = primary.pos.clone().sub(eye).normalize();
+   const axis = sunVec.sub(moonVec.clone().multiplyScalar(sunVec.dot(moonVec)));
+   if (axis.lengthSq() < 1e-8) axis.set(1, 0, 0);
+   axis.normalize();
+   disc.material.uniforms.sunInDisc.value.copy(axis);
+ }
+ // Shadow light uses the same azimuth and altitude as the disc. No 14° lift.
  {
    const az = primary.azUse;
    const trueAlt = (ev && Number.isFinite(+ev.alt)) ? +ev.alt : 5;
-   const SHADOW_MIN_ALT = 14; // deg — map stability; disc still uses true gleam alt
-   const altUse = Math.max(trueAlt, SHADOW_MIN_ALT);
    const r = THREE.MathUtils.degToRad(az);
-   const ar = THREE.MathUtils.degToRad(altUse);
+   const ar = THREE.MathUtils.degToRad(trueAlt);
    const dir = new THREE.Vector3(
      Math.sin(r) * Math.cos(ar),
      Math.sin(ar),
      -Math.cos(r) * Math.cos(ar),
    );
-   sunLight.position.copy(primary.origin).addScaledVector(dir, KEY_LIGHT_DIST);
+   const DIST = 480;
+   const tanA = Math.tan(Math.max(ar, 0.45 * Math.PI / 180));
+   const cover = Math.min(720, Math.max(150, 8 / tanA + 100));
+   sunLight.position.copy(primary.origin).addScaledVector(dir, DIST);
    sunLight.target.position.copy(primary.origin);
    sunLight.target.updateMatrixWorld();
-   sunLight.shadow.camera.updateProjectionMatrix();
+   const camL = sunLight.shadow.camera;
+   camL.left = -cover;
+   camL.right = cover;
+   camL.top = cover;
+   camL.bottom = -cover;
+   camL.near = Math.max(1, DIST - cover - 50);
+   camL.far = DIST + cover + 80;
+   sunLight.shadow.bias = -0.00018;
+   sunLight.shadow.normalBias = trueAlt < 5 ? 0.01 : 0.028;
+   camL.updateProjectionMatrix();
+   shadowBodyUp = trueAlt > -0.25;
+   sunLight.castShadow = shadowBodyUp && ambientLevel < 0.97 && bodyMode !== 'off';
+   skyDome.material.uniforms.sunAlt.value = moonNow ? -8 : trueAlt;
+   skyDome.material.uniforms.sunDir.value.copy(dir);
+   skyDay = Math.max(0, Math.min(1, ((moonNow ? -5 : trueAlt) + 0.4) / 12));
+   applySkyFill();
+ }
+ if (aimAfterSeek && ev && Number.isFinite(+ev.az) && !topMode) {
+   aimAfterSeek = false;
+   aimAlongAz(ev.az);
  }
  // Stronger key when ambient is low (shadows readable); washed when ambient high
  const keyScale = 0.35 + 0.65 * (1 - ambientLevel);
@@ -1420,6 +1631,7 @@ function placeSun() {
    sunLight.intensity = MOON_I0 * (0.55 + 0.45 * keyScale);
    scene.background.setRGB(0.08, 0.10, 0.16);
  }
+ if (ev && Number.isFinite(+ev.alt) && ev.alt < -0.3) sunLight.intensity *= 0.15;
  syncShadowPolicy();
  if (scene.fog) scene.fog.color.copy(scene.background);
  const rayColor = isMoonMode(bodyMode) ? 0xc8d0dc : 0xffcc66;
@@ -1443,7 +1655,7 @@ function placeSun() {
    bodyRayB.visible = false;
  }
  if (readout) {
-   const title = isMoonMode(bodyMode)
+   const title = (isMoonMode(bodyMode) && moonEnvelope)
      ? moonSpreadLabel(bodyMode, moonSpread)
      : doyLabel(doy);
    const limbTxt = LIMB_LABEL[pathALimb] || pathALimb;
@@ -1451,13 +1663,31 @@ function placeSun() {
    const axis = stationAxisMode
      ? ('Newham ' + (sights ? sights.map((s) => s.side).join(' + ') : ''))
      : 'Heel Stone (centre)';
-   let bits = '<b>' + title + '</b> | ' + bodyMode + ' | ' + limbTxt + ' | ' + epochTxt + ' | ' + axis +
+   const bodyWord = isMoonMode(bodyMode) ? 'moon' : 'sun';
+   let clear = null;
+   if (ev && ev.travelled && Number.isFinite(+ev.geoAlt)) {
+     const limbTrue = ev.geoAlt + Sky.limbTrueOffset(pathALimb, ev.sd || Sky.SOLAR_SD);
+     clear = limbTrue + Sky.refractionDeg(limbTrue) - ev.sky;
+   }
+   let when = bodyWord;
+   if (clear != null) {
+     if (Math.abs(clear) <= 0.05) when = primary.azUse >= 180 ? 'setting' : 'rising';
+     else if (clear < -0.08) when = 'below the skyline';
+     else if (clear < 0.25) when = 'on the skyline';
+     else if (ev.alt > 8) when = bodyWord + ' high';
+     else when = bodyWord + ' up';
+   }
+   let bits = '<b>' + title + '</b> | ' + when + ' | ' + formatClock(minuteUt) + ' | ' + limbTxt + ' | ' + epochTxt + ' | ' + axis +
      ' | az <b>' + primary.azUse.toFixed(1) + ' deg</b>';
    if (stationAxisMode && sights && sights[0] && Number.isFinite(+sights[0].az)) {
      bits += ' <span style="opacity:.75">(side ' + (+sights[0].az).toFixed(1) + '°)</span>';
    }
-   if (isSunMode(bodyMode) && ev && !ev.pathA) {
-     bits += ' <span style="color:#f0c674">(schematic)</span>';
+   if (clear != null) {
+     bits += ' | alt <b>' + ev.alt.toFixed(2) + '°</b> | skyline ' + ev.sky.toFixed(2) + '°';
+     const sample = isSunMode(bodyMode) ? pathASunFromSample(doy, bodyMode) : null;
+     if (sample && sample.pathA && Math.abs(clear) <= 0.06) {
+       bits += ' | Path A ' + sample.az.toFixed(2) + '° (Δ ' + (primary.azUse - sample.az).toFixed(2) + '°)';
+     }
    }
    readout.innerHTML = bits;
  }
@@ -1520,25 +1750,25 @@ document.getElementById('btnLabels').onclick = () => {
 document.getElementById('btnNewham').onclick = () => {
   setNewham(!stationsOn);
 };
+function paintBodyButtons() {
+  for (const [id, m] of [['btnSunOff','off'],['btnSunrise','sunrise'],['btnSunset','sunset'],['btnMoonrise','moonrise'],['btnMoonset','moonset']]) {
+    const el = document.getElementById(id);
+    if (el) el.classList.toggle('active', bodyMode === m);
+  }
+}
 function setBodyMode(mode) {
+ stopDayPlay();
  bodyMode = mode;
+ moonEnvelope = false;
+ pendingSeek = mode !== 'off';
+ aimAfterSeek = mode === 'sunrise' || mode === 'sunset' || mode === 'moonrise' || mode === 'moonset';
  if (typeof syncShadowPolicy === 'function') syncShadowPolicy();
  // In Newham mode, sun is locked to the solstice pair
  if (stationsOn) {
    if (mode === 'sunrise') doy = 172;
    if (mode === 'sunset') doy = 355;
  }
- const modes = [
-   ['btnSunOff','off'],
-   ['btnSunrise','sunrise'],
-   ['btnSunset','sunset'],
-   ['btnMoonrise','moonrise'],
-   ['btnMoonset','moonset'],
- ];
- for (const [id, m] of modes) {
-   const el = document.getElementById(id);
-   if (el) el.classList.toggle('active', bodyMode === m);
- }
+ paintBodyButtons();
  if (bodyMode !== 'off' && !terrainOn) setTerrain(true);
   updateMoonAzUi();
   if (typeof syncSunDateMode === 'function') syncSunDateMode();
@@ -1576,6 +1806,8 @@ document.getElementById('doy').oninput = (ev) => {
   doy = +ev.target.value;
   const lb = document.getElementById('doyLbl');
   if (lb) lb.textContent = doyLabel(doy);
+  pendingSeek = true;
+  moonEnvelope = false;
   placeSun();
 };
 document.querySelectorAll('[data-doy]').forEach((b) => {
@@ -1587,19 +1819,88 @@ document.querySelectorAll('[data-doy]').forEach((b) => {
     if (lb) lb.textContent = doyLabel(doy);
     if (doy === 172) setBodyMode('sunrise');
     else if (doy === 355) setBodyMode('sunset');
-    else placeSun();
+    else { pendingSeek = true; placeSun(); }
   };
 });
 document.getElementById('showRay').onchange = (e) => { showRay = e.target.checked; placeSun(); };
+const utSl = document.getElementById('utMin');
+if (utSl) utSl.oninput = () => {
+  minuteUt = +utSl.value;
+  stopDayPlay();
+  pendingSeek = false;
+  moonEnvelope = false;
+  syncUtUi();
+  placeSun();
+};
+function stopDayPlay() {
+  skyPlay = false;
+  playEnd = null;
+  const pause = document.getElementById('btnSkyPlay');
+  if (pause) pause.classList.remove('active');
+  const sunBtn = document.getElementById('btnDaySun');
+  const moonBtn = document.getElementById('btnDayMoon');
+  if (sunBtn) sunBtn.classList.remove('active');
+  if (moonBtn) moonBtn.classList.remove('active');
+}
+function startDay(kind) {
+  const body = kind === 'moon' ? 'Moon' : 'Sun';
+  stopDayPlay();
+  moonEnvelope = false;
+  pendingSeek = false;
+  aimAfterSeek = false;
+  bodyMode = kind === 'moon' ? 'moonrise' : 'sunrise';
+  paintBodyButtons();
+  if (bodyMode !== 'off' && !terrainOn) setTerrain(true);
+  const common = { body, year: epochYear, doy, alts: hoyleAlts, step: hoyleStep };
+  const rise = Sky.seekLimb(Object.assign({ rising: true, limb: 'first_gleam' }, common));
+  const set = Sky.seekLimb(Object.assign({ rising: false, limb: 'full_orb', notBefore: rise ? rise.minute + 15 : 0 }, common));
+  if (!rise) {
+    if (msg) msg.textContent = 'No ' + body.toLowerCase() + ' rise on this date.';
+    placeSun();
+    return;
+  }
+  minuteUt = Math.max(0, rise.minute - 20);
+  playEnd = set ? set.minute + 20 : rise.minute + 16 * 60;
+  skyPlay = true;
+  const sunBtn = document.getElementById('btnDaySun');
+  const moonBtn = document.getElementById('btnDayMoon');
+  if (sunBtn) sunBtn.classList.toggle('active', kind === 'sun');
+  if (moonBtn) moonBtn.classList.toggle('active', kind === 'moon');
+  const pause = document.getElementById('btnSkyPlay');
+  if (pause) pause.classList.add('active');
+  if (!topMode) aimAlongAz(rise.geoAz);
+  syncUtUi();
+  updateMoonAzUi();
+  if (typeof syncSunDateMode === 'function') syncSunDateMode();
+  placeSun();
+}
+const btnDaySun = document.getElementById('btnDaySun');
+const btnDayMoon = document.getElementById('btnDayMoon');
+const btnSkyPlay = document.getElementById('btnSkyPlay');
+if (btnDaySun) btnDaySun.onclick = () => startDay('sun');
+if (btnDayMoon) btnDayMoon.onclick = () => startDay('moon');
+if (btnSkyPlay) btnSkyPlay.onclick = () => { if (skyPlay) stopDayPlay(); };
+function aimAlongAz(azDeg) {
+  const p = localXZ(412244.458, 142191.758);
+  const r = azDeg * Math.PI / 180;
+  const east = Math.sin(r), north = Math.cos(r);
+  persp.position.set(p.x - east * 48, 3.2, p.z + north * 48);
+  controls.target.set(p.x + east * 90, 2.4, p.z - north * 90);
+  controls.update();
+}
 
 
 document.getElementById('moonAz').oninput = (ev) => {
+  stopDayPlay();
+  moonEnvelope = true;
   moonSpread = (+ev.target.value) / 1000;
   const lb = document.getElementById('moonAzLbl');
   if (lb && isMoonMode(bodyMode)) lb.textContent = moonSpreadLabel(bodyMode, moonSpread);
   if (isMoonMode(bodyMode)) placeSun();
 };
 document.getElementById('btnMoonAzN').onclick = () => {
+  stopDayPlay();
+  moonEnvelope = true;
   moonSpread = 0;
   document.getElementById('moonAz').value = '0';
   const lb = document.getElementById('moonAzLbl');
@@ -1607,6 +1908,8 @@ document.getElementById('btnMoonAzN').onclick = () => {
   if (isMoonMode(bodyMode)) placeSun();
 };
 document.getElementById('btnMoonAzMid').onclick = () => {
+  stopDayPlay();
+  moonEnvelope = true;
   moonSpread = 0.5;
   document.getElementById('moonAz').value = '500';
   const lb = document.getElementById('moonAzLbl');
@@ -1614,6 +1917,8 @@ document.getElementById('btnMoonAzMid').onclick = () => {
   if (isMoonMode(bodyMode)) placeSun();
 };
 document.getElementById('btnMoonAzS').onclick = () => {
+  stopDayPlay();
+  moonEnvelope = true;
   moonSpread = 1;
   document.getElementById('moonAz').value = '1000';
   const lb = document.getElementById('moonAzLbl');
@@ -1627,7 +1932,50 @@ addEventListener('resize', () => {
  persp.updateProjectionMatrix();
  if (topMode) focusTop();
 });
-function tick() { requestAnimationFrame(tick); controls.update(); renderer.render(scene, cam); }
+function formatUt(min) {
+  const dayOver = Math.floor(min / 1440);
+  let m = min - dayOver * 1440;
+  if (m < 0) m += 1440;
+  const h = Math.floor(m / 60);
+  const mm = Math.floor(m % 60);
+  const ut = String(h).padStart(2, '0') + ':' + String(mm).padStart(2, '0') + ' UT';
+  return dayOver > 0 ? ut + ' +' + dayOver + 'd' : ut;
+}
+function formatClock(min) {
+  const ut = formatUt(min);
+  if (!(epochYear >= 1970 && epochYear <= 2100)) return ut;
+  try {
+    const date = Sky.dateFromDoyMinute(epochYear, doy, min);
+    const uk = date.toLocaleTimeString('en-GB', {
+      timeZone: 'Europe/London', hour: '2-digit', minute: '2-digit', hour12: false,
+    });
+    return uk + ' UK · ' + ut;
+  } catch (e) {
+    return ut;
+  }
+}
+function syncUtUi() {
+  const sl = document.getElementById('utMin');
+  const lb = document.getElementById('utLbl');
+  if (sl && document.activeElement !== sl) sl.value = String(Math.round(Math.min(2160, Math.max(0, minuteUt))));
+  if (lb) lb.textContent = formatClock(minuteUt);
+}
+let skyClock = performance.now();
+function tick(now) {
+  requestAnimationFrame(tick);
+  if (skyPlay && bodyMode !== 'off' && terrainOn) {
+    const dt = Math.min(0.05, (now - skyClock) / 1000);
+    minuteUt += dt * 40;
+    const done = playEnd != null && minuteUt >= playEnd;
+    if (done) minuteUt = playEnd;
+    syncUtUi();
+    placeSun();
+    if (done) stopDayPlay();
+  }
+  skyClock = now;
+  controls.update();
+  renderer.render(scene, cam);
+}
 
 function syncLimbUi() {
   const map = [
@@ -1645,6 +1993,8 @@ function setLimb(limb) {
   pathALimb = limb;
   try { sessionStorage.setItem('sh_limb', pathALimb); } catch (e) {}
   refreshMoonExtremes();
+  moonEnvelope = false;
+  pendingSeek = true;
   syncLimbUi();
   updateMoonAzUi();
   placeSun();
@@ -1682,6 +2032,8 @@ function setEpochYear(year) {
   epochYear = y;
   try { sessionStorage.setItem('sh_epoch_year', String(epochYear)); } catch (e) {}
   refreshMoonExtremes();
+  pendingSeek = true;
+  moonEnvelope = false;
   syncEpochUi();
   updateMoonAzUi();
   placeSun();
@@ -1703,6 +2055,7 @@ function initEpochUi() {
 rebuildStones();
 setNewham(false);
 setOrbit();
+aimAlongAz(50);
 doy = 172;
 showRay = true;
 const rayCb = document.getElementById('showRay');
@@ -1729,7 +2082,7 @@ window.__LOCKED_OVERVIEW = {
  LP, scene, camera: () => cam, renderer, setTerrain,
  terrainOn: () => terrainOn, setExaggeration, exaggeration: () => exaggeration,
  pathALimb: () => pathALimb, setLimb, setPathALimb,
- getSkyEvents, approxSun,
+ getSkyEvents,
 };
 </script>
 </body>

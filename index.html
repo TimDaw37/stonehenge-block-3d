@@ -6,7 +6,7 @@
 <meta http-equiv="Pragma" content="no-cache"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Stonehenge 3D Model</title>
-<!-- ambient-shadow-dial-20260921 -->
+<!-- shadow-fix-heel-altar-20260921 -->
 <style>
  html,body{margin:0;height:100%;background:#1a2430;color:#eee;font:13px/1.35 system-ui,sans-serif;overflow:hidden}
  #c{position:fixed;inset:0;width:100%;height:100%;display:block}
@@ -90,7 +90,7 @@
   <label>Ambient <span id="ambLbl">100%</span></label>
   <input type="range" id="ambient" min="0" max="100" value="100" style="width:100%"/>
   <div style="opacity:.7;font-size:10px;margin:2px 0 4px 0;line-height:1.35">
-    Turn down so sun/moon shadows dominate (Meaden). 0% = key light only.
+    Turn down so sun/moon shadows dominate (Meaden). Try Ambient ~20%, Sunrise, Orbit — Heel (96) shadow toward Altar (80).
   </div>
   <div id="skyCaveat" style="opacity:.75;font-size:10px;line-height:1.35;margin:4px 0 6px">
     Azimuths use a LiDAR horizon with refraction/parallax. Gleam / Half orb / Full orb match Banton’s limb stages.
@@ -270,15 +270,18 @@ scene.add(hemi);
 const sunLight = new THREE.DirectionalLight(0xffe2a8, SUN_I0);
 sunLight.position.set(40, 60, 20);
 sunLight.castShadow = true;
-sunLight.shadow.mapSize.set(2048, 2048);
-sunLight.shadow.camera.near = 0.5;
-sunLight.shadow.camera.far = 1200;
-sunLight.shadow.camera.left = -140;
-sunLight.shadow.camera.right = 140;
-sunLight.shadow.camera.top = 140;
-sunLight.shadow.camera.bottom = -140;
-sunLight.shadow.bias = -0.0004;
-sunLight.shadow.normalBias = 0.02;
+sunLight.shadow.mapSize.set(4096, 4096);
+// Ortho frustum must cover Heel (~80 m NE) → Altar; light itself sits nearby (not at sky disc).
+sunLight.shadow.camera.near = 1;
+sunLight.shadow.camera.far = 600;
+sunLight.shadow.camera.left = -200;
+sunLight.shadow.camera.right = 200;
+sunLight.shadow.camera.top = 200;
+sunLight.shadow.camera.bottom = -200;
+sunLight.shadow.bias = -0.0002;
+sunLight.shadow.normalBias = 0.04;
+sunLight.shadow.camera.updateProjectionMatrix();
+const KEY_LIGHT_DIST = 280; // metres along body direction — close enough for shadow maps
 scene.add(sunLight);
 scene.add(sunLight.target);
 const fill = new THREE.DirectionalLight(0x8aa0b8, FILL_I0);
@@ -309,6 +312,20 @@ setAmbient(ambientLevel, true);
 
 const root = new THREE.Group();
 scene.add(root);
+
+/** Flat ground disc so long shadows (Heel → Altar) have something to fall on. */
+const groundGeo = new THREE.CircleGeometry(180, 64);
+groundGeo.rotateX(-Math.PI / 2);
+const groundMat = new THREE.MeshLambertMaterial({
+  color: 0x3a4538,
+  depthWrite: true,
+});
+const groundRecv = new THREE.Mesh(groundGeo, groundMat);
+groundRecv.position.y = -0.02;
+groundRecv.receiveShadow = true;
+groundRecv.castShadow = false;
+groundRecv.renderOrder = -2;
+scene.add(groundRecv);
 
 let terrainHorizonMesh = null, terrainNearMesh = null, terrainOn = false, labelsOn = false, stationsOn = false;
 let stationSidesGroup = null;
@@ -858,8 +875,10 @@ function rebuildStones() {
       transparent: true, opacity: 0.95,
     })
   : new THREE.MeshLambertMaterial({
-      color: col, transparent: true,
-      opacity: e.fig1_pixel_fail ? 0.55 : 0.78,
+      // Opaque: transparent materials often cast no usable shadows in Three.js
+      color: col,
+      transparent: !!e.fig1_pixel_fail,
+      opacity: e.fig1_pixel_fail ? 0.55 : 1,
     });
  const mesh = new THREE.Mesh(geo, mat);
  addEdges(mesh, geo);
@@ -1354,10 +1373,17 @@ function placeSun() {
  disc.renderOrder = 20;
  disc.position.copy(primary.pos);
  disc.scale.setScalar(Math.max(0.2, primary.dist / SUN_REF));
- // Key light follows sun or moon so cast shadows track the body (Meaden).
- sunLight.position.copy(primary.pos);
- sunLight.target.position.copy(primary.origin);
- sunLight.target.updateMatrixWorld();
+ // Key light aims with sun/moon, but stays nearby — sky disc can be ~20 km out and
+ // that breaks DirectionalLight shadow maps (camera far << light distance).
+ {
+   const dir = primary.pos.clone().sub(primary.origin);
+   if (dir.lengthSq() < 1e-6) dir.set(0.4, 0.5, 0.2);
+   dir.normalize();
+   sunLight.position.copy(primary.origin).addScaledVector(dir, KEY_LIGHT_DIST);
+   sunLight.target.position.copy(primary.origin);
+   sunLight.target.updateMatrixWorld();
+   sunLight.shadow.camera.updateProjectionMatrix();
+ }
  if (isSunMode(bodyMode)) {
    sunLight.color.setHex(0xffe2a8);
    sunLight.intensity = SUN_I0;

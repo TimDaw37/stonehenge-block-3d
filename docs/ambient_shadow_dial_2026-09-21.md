@@ -10,3 +10,13 @@ Terence Meaden’s point: shadows matter. The viewer already aimed a directional
 - Moon mode also drives the same key light (cool colour) so lunar shadows work.
 
 Live: https://timdaw37.github.io/stonehenge-block-3d/
+
+## Fix: shadows not visible (same day)
+
+Cause: key light was copied to the sky-disc position (~20 km). DirectionalLight shadow camera `far` was 1200 m, so the monument never entered the shadow map. Transparent stone materials also cast poorly.
+
+Fixes:
+- Key light at 280 m along sun/moon direction (disc still far)
+- Shadow frustum ±200 m, 4096 map, far 600
+- Opaque sarsens/bluestones for casting
+- Ground disc (r=180 m) under the site to receive long shadows (Heel → Altar)

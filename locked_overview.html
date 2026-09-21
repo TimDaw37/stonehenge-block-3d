@@ -6,7 +6,7 @@
 <meta http-equiv="Pragma" content="no-cache"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Stonehenge 3D Model</title>
-<!-- newham-bust epoch-sky-az-20260921 -->
+<!-- ambient-shadow-dial-20260921 -->
 <style>
  html,body{margin:0;height:100%;background:#1a2430;color:#eee;font:13px/1.35 system-ui,sans-serif;overflow:hidden}
  #c{position:fixed;inset:0;width:100%;height:100%;display:block}
@@ -86,6 +86,11 @@
     <button type="button" id="btnLimbGleam" class="active">Gleam</button>
     <button type="button" id="btnLimbHalf">Half orb</button>
     <button type="button" id="btnLimbFull">Full orb</button>
+  </div>
+  <label>Ambient <span id="ambLbl">100%</span></label>
+  <input type="range" id="ambient" min="0" max="100" value="100" style="width:100%"/>
+  <div style="opacity:.7;font-size:10px;margin:2px 0 4px 0;line-height:1.35">
+    Turn down so sun/moon shadows dominate (Meaden). 0% = key light only.
   </div>
   <div id="skyCaveat" style="opacity:.75;font-size:10px;line-height:1.35;margin:4px 0 6px">
     Azimuths use a LiDAR horizon with refraction/parallax. Gleam / Half orb / Full orb match Banton’s limb stages.
@@ -176,7 +181,7 @@
 })();
 </script>
 <script src="./data/site_ground_od.js?v=restore2"></script>
-<script src="./data/sky_events_path_a_hoyle_sample.js?v=epoch-newham-az-20260921"></script>
+<script src="./data/sky_events_path_a_hoyle_sample.js?v=ambient-shadow-20260921"></script>
 <script type="importmap">
 {"imports":{"three":"./vendor/three.module.js","three/addons/":"./vendor/"}}
 </script>
@@ -256,15 +261,51 @@ renderer.outputColorSpace = THREE.SRGBColorSpace;
 
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x2a3548);
-const hemi = new THREE.HemisphereLight(0xc9d4e8, 0x3d4a3a, 0.72);
+const HEMI_I0 = 0.72;
+const FILL_I0 = 0.35;
+const SUN_I0 = 1.35;
+const MOON_I0 = 1.15;
+const hemi = new THREE.HemisphereLight(0xc9d4e8, 0x3d4a3a, HEMI_I0);
 scene.add(hemi);
-const sunLight = new THREE.DirectionalLight(0xffe2a8, 1.35);
+const sunLight = new THREE.DirectionalLight(0xffe2a8, SUN_I0);
 sunLight.position.set(40, 60, 20);
+sunLight.castShadow = true;
+sunLight.shadow.mapSize.set(2048, 2048);
+sunLight.shadow.camera.near = 0.5;
+sunLight.shadow.camera.far = 1200;
+sunLight.shadow.camera.left = -140;
+sunLight.shadow.camera.right = 140;
+sunLight.shadow.camera.top = 140;
+sunLight.shadow.camera.bottom = -140;
+sunLight.shadow.bias = -0.0004;
+sunLight.shadow.normalBias = 0.02;
 scene.add(sunLight);
 scene.add(sunLight.target);
-const fill = new THREE.DirectionalLight(0x8aa0b8, 0.35);
+const fill = new THREE.DirectionalLight(0x8aa0b8, FILL_I0);
 fill.position.set(-30, 40, -20);
 scene.add(fill);
+
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+/** 1 = full ambient/fill (default); 0 = key light only → dominant sun/moon shadows (Meaden). */
+let ambientLevel = 1;
+try {
+  const raw = sessionStorage.getItem('sh_ambient');
+  if (raw != null && Number.isFinite(+raw)) ambientLevel = Math.max(0, Math.min(1, +raw));
+} catch (e) {}
+function setAmbient(level, fromUi) {
+  ambientLevel = Math.max(0, Math.min(1, +level));
+  hemi.intensity = HEMI_I0 * ambientLevel;
+  fill.intensity = FILL_I0 * ambientLevel;
+  const pct = Math.round(ambientLevel * 100);
+  const lbl = document.getElementById('ambLbl');
+  if (lbl) lbl.textContent = pct + '%';
+  const inp = document.getElementById('ambient');
+  if (inp && (fromUi || document.activeElement !== inp)) inp.value = String(pct);
+  try { sessionStorage.setItem('sh_ambient', String(ambientLevel)); } catch (e) {}
+}
+setAmbient(ambientLevel, true);
 
 const root = new THREE.Group();
 scene.add(root);
@@ -315,7 +356,10 @@ function meshFromTerrainBlock(block) {
   const mat = new THREE.MeshLambertMaterial({
     vertexColors: true, side: THREE.DoubleSide, flatShading: false,
   });
-  return new THREE.Mesh(geo, mat);
+  const mesh = new THREE.Mesh(geo, mat);
+  mesh.receiveShadow = true;
+  mesh.castShadow = false;
+  return mesh;
 }
 function applyTerrainExag(mesh) {
  if (!mesh) return;
@@ -819,6 +863,8 @@ function rebuildStones() {
     });
  const mesh = new THREE.Mesh(geo, mat);
  addEdges(mesh, geo);
+ mesh.castShadow = !isMarker;
+ mesh.receiveShadow = true;
  const y0 = seat.baseRel + H / 2;
  mesh.position.set(p.x, y0 * exaggeration, p.z);
  mesh.scale.y = exaggeration;
@@ -1308,13 +1354,18 @@ function placeSun() {
  disc.renderOrder = 20;
  disc.position.copy(primary.pos);
  disc.scale.setScalar(Math.max(0.2, primary.dist / SUN_REF));
+ // Key light follows sun or moon so cast shadows track the body (Meaden).
+ sunLight.position.copy(primary.pos);
+ sunLight.target.position.copy(primary.origin);
+ sunLight.target.updateMatrixWorld();
  if (isSunMode(bodyMode)) {
-   sunLight.position.copy(primary.pos);
-   sunLight.target.position.copy(primary.origin);
-   sunLight.target.updateMatrixWorld();
+   sunLight.color.setHex(0xffe2a8);
+   sunLight.intensity = SUN_I0;
    const dawn = bodyMode === 'sunrise' ? 1 : 0.55;
    scene.background.setRGB(0.14 + 0.16 * dawn, 0.18 + 0.12 * dawn, 0.28 + 0.10 * dawn);
  } else {
+   sunLight.color.setHex(0xc8d0dc);
+   sunLight.intensity = MOON_I0;
    scene.background.setRGB(0.08, 0.10, 0.16);
  }
  if (scene.fog) scene.fog.color.copy(scene.background);
@@ -1608,6 +1659,13 @@ const doyLb = document.getElementById('doyLbl');
 if (doyLb) doyLb.textContent = doyLabel(172);
 initPathAUi();
 initEpochUi();
+{
+  const amb = document.getElementById('ambient');
+  if (amb) {
+    amb.oninput = () => setAmbient((+amb.value) / 100, true);
+    setAmbient(ambientLevel, true);
+  }
+}
 setBodyMode('sunrise');
 syncSunDateMode();
 tick();

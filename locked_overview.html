@@ -6,7 +6,7 @@
 <meta http-equiv="Pragma" content="no-cache"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Stonehenge 3D Model</title>
-<!-- shadow-ambient-wash-20260921 -->
+<!-- no-ground-disc-shadow-20260921 -->
 <style>
  html,body{margin:0;height:100%;background:#1a2430;color:#eee;font:13px/1.35 system-ui,sans-serif;overflow:hidden}
  #c{position:fixed;inset:0;width:100%;height:100%;display:block}
@@ -330,19 +330,6 @@ setAmbient(ambientLevel, true);
 const root = new THREE.Group();
 scene.add(root);
 
-/** Flat ground disc so long shadows (Heel → Altar) have something to fall on. */
-const groundGeo = new THREE.CircleGeometry(180, 64);
-groundGeo.rotateX(-Math.PI / 2);
-const groundMat = new THREE.MeshLambertMaterial({
-  color: 0xb3c49a, // light turf — dark ground hides shadows
-  depthWrite: true,
-});
-const groundRecv = new THREE.Mesh(groundGeo, groundMat);
-groundRecv.position.y = -0.02;
-groundRecv.receiveShadow = true;
-groundRecv.castShadow = false;
-groundRecv.renderOrder = -2;
-scene.add(groundRecv);
 
 let terrainHorizonMesh = null, terrainNearMesh = null, terrainOn = false, labelsOn = false, stationsOn = false;
 let stationSidesGroup = null;

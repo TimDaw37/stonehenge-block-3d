@@ -27,3 +27,7 @@ Fixes:
 - Ambient **100%** turns `castShadow` off → shadows disappear.
 - Shadow key light uses **true azimuth** but altitude ≥ 14° (dawn gleam was breaking the map into a half-black disc). Sky disc still at true altitude.
 - Other dates: `approxSun` schematic follows the date slider; key light + shadows track that az/alt.
+
+## Remove ground disc (same day)
+
+The flat green disc under the circle was showing a hard two-tone sunrise shadow line. Removed the disc entirely (pre-shadow look). Stone↔stone and terrain shadows remain.

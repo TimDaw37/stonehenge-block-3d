@@ -135,15 +135,13 @@
       <div style="opacity:.7;font-size:10px;margin:2px 0 4px 0;line-height:1.35">Newham sun: midsummer sunrise or midwinter sunset only (Path A).</div>
     </div>
   </div>
-  <div id="moonAzPanel" style="display:none">
-    <label>Standstill <span id="moonAzLbl">most N</span></label>
-    <input type="range" id="moonAz" min="0" max="1000" value="0" style="width:100%"/>
+  <div id="alignPanel">
+    <label>Station alignments</label>
     <div class="row">
-      <button type="button" id="btnMoonAzN">Most N</button>
-      <button type="button" id="btnMoonAzMid">Mid</button>
-      <button type="button" id="btnMoonAzS">Most S</button>
+      <button type="button" id="btnAlignN">Most northerly</button>
+      <button type="button" id="btnAlignS">Most southerly</button>
     </div>
-    <div style="opacity:.7;font-size:10px;margin:2px 0 4px 0;line-height:1.35">Most N to Most S is the standstill envelope, not the moon on this date. Moving it stops Moon's day.</div>
+    <div style="opacity:.7;font-size:10px;margin:2px 0 4px 0;line-height:1.35">Both long sides, each along its own pair. Not the moon for the chosen year.</div>
   </div>
   <div class="check"><label style="display:inline;text-transform:none;letter-spacing:0;opacity:1"><input type="checkbox" id="geoOn" checked/> Georef / Coords</label></div>
   <div style="opacity:.7;font-size:10px;margin:2px 0 4px 0;line-height:1.35">Tap/click for coords; short tap pins. Drag to orbit (coords pause while dragging). Copy pin / Clear pin / Esc. Uncheck to hide the bottom box.</div>
@@ -1085,7 +1083,7 @@ function moonExtremesForYear(year) {
   };
 }
 
-let moonSpread = 0; // 0 = most northerly, 1 = most southerly
+let pairAlign = null; // 'north' | 'south' — stone-pair alignments, not a dated moon
 let MOON_EXTREMES = { moonrise: { nAz: 40.30, sAz: 140.22 }, moonset: { nAz: 319.74, sAz: 219.75 } };
 
 function refreshMoonExtremes() {
@@ -1162,36 +1160,32 @@ function localDateStartFromDoy(d) {
  // Browser-local midnight for that calendar day (Tim: Europe/London).
  return new Date(ymd.year, ymd.month - 1, ymd.day, 0, 0, 0, 0);
 }
-function moonAzFromSpread(mode, spread) {
- const ex = MOON_EXTREMES[mode];
- if (!ex) return null;
- const t = Math.max(0, Math.min(1, +spread || 0));
- // Interpolate north extreme -> south extreme (moonset nAz > sAz so this decreases)
- const az = ex.nAz + (ex.sAz - ex.nAz) * t;
- let alt = 0.35;
- if (Number.isFinite(+ex.nH) && Number.isFinite(+ex.sH)) {
-   const hHor = +ex.nH + (+ex.sH - +ex.nH) * t;
-   alt = limbCentreAltDeg(hHor, pathALimb, LUNAR_SD);
- }
- return { az, alt, spread: t, nAz: ex.nAz, sAz: ex.sAz };
+function longSideAlignments(which) {
+  const p91 = stationCornerEN('91');
+  const p92 = stationCornerEN('92');
+  const p93 = stationCornerEN('93');
+  const p94 = stationCornerEN('94');
+  if (!p91 || !p92 || !p93 || !p94) return null;
+  if (which === 'north') {
+    return [
+      { from: p91, to: p94, az: bearingEN(p91, p94), side: '91hole→94' },
+      { from: p92, to: p93, az: bearingEN(p92, p93), side: '92→93' },
+    ];
+  }
+  return [
+    { from: p94, to: p91, az: bearingEN(p94, p91), side: '94→91hole' },
+    { from: p93, to: p92, az: bearingEN(p93, p92), side: '93→92' },
+  ];
 }
-function moonSpreadLabel(mode, spread) {
- const ev = moonAzFromSpread(mode, spread);
- if (!ev) return '';
- const t = ev.spread;
- let tag = 'mid';
- if (t < 0.02) tag = 'most N';
- else if (t > 0.98) tag = 'most S';
- return tag + ' | ' + ev.az.toFixed(1) + ' deg';
+function paintAlignButtons() {
+  const n = document.getElementById('btnAlignN');
+  const s = document.getElementById('btnAlignS');
+  if (n) n.classList.toggle('active', pairAlign === 'north');
+  if (s) s.classList.toggle('active', pairAlign === 'south');
 }
-function updateMoonAzUi() {
- const panel = document.getElementById('moonAzPanel');
- const moon = isMoonMode(bodyMode);
- if (panel) panel.style.display = moon ? '' : 'none';
- const sl = document.getElementById('moonAz');
- if (sl) sl.value = String(Math.round(moonSpread * 1000));
- const lb = document.getElementById('moonAzLbl');
- if (lb && moon) lb.textContent = moonSpreadLabel(bodyMode, moonSpread);
+function showStationSides(on) {
+  if (on && !stationSidesGroup) buildStationSightlines();
+  if (stationSidesGroup) stationSidesGroup.visible = !!(on || stationsOn);
 }
 function doyLabel(d) {
  const names = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
@@ -1224,7 +1218,7 @@ let skyPlay = false;
 let playEnd = null;
 let pendingSeek = true;
 let aimAfterSeek = false;
-let moonEnvelope = false;
+
 
 function makeHorizonTexture(alts) {
   const n = alts.length;
@@ -1459,6 +1453,59 @@ function stationSightlineForMode(mode) {
 function isMoonMode(m) { return m === 'moonrise' || m === 'moonset'; }
 function isSunMode(m) { return m === 'sunrise' || m === 'sunset'; }
 
+function placeAlongSide(fromEN, az) {
+  const o = localXZ(fromEN.e, fromEN.n);
+  const origin = new THREE.Vector3(o.x, 1.6 * exaggeration, o.z);
+  const dir = sunDir(az);
+  const dist = distPastTerrain(origin, dir.x, dir.z);
+  const alt = Sky.sampleAlt(hoyleAlts, hoyleStep, az);
+  const rise = Math.tan(alt * Math.PI / 180) * exaggeration;
+  const pos = new THREE.Vector3(origin.x + dir.x * dist, origin.y + rise * dist, origin.z + dir.z * dist);
+  return { origin, pos };
+}
+function drawPairAlignments() {
+  const sides = longSideAlignments(pairAlign);
+  const readout = document.getElementById('sunReadout');
+  sunDisc.visible = false;
+  sunGlow.visible = false;
+  moonDisc.visible = false;
+  if (!sides) {
+    if (readout) readout.textContent = 'Station stones are not loaded';
+    return;
+  }
+  showStationSides(true);
+  function aim(ray, placed) {
+    const dir = placed.pos.clone().sub(placed.origin);
+    const len = dir.length();
+    if (len > 1e-3) {
+      ray.setDirection(dir.normalize());
+      ray.position.copy(placed.origin);
+      ray.setLength(len, Math.min(40, len * 0.03), Math.min(20, len * 0.015));
+    }
+    ray.visible = true;
+  }
+  ensureBodyRay(0xc8d0dc, 'A');
+  ensureBodyRay(0xc8d0dc, 'B');
+  aim(bodyRay, placeAlongSide(sides[0].from, sides[0].az));
+  aim(bodyRayB, placeAlongSide(sides[1].from, sides[1].az));
+  if (readout) {
+    const name = pairAlign === 'north' ? 'Most northerly' : 'Most southerly';
+    readout.innerHTML = '<b>' + name + '</b> · both long sides · '
+      + sides.map((s) => s.side + ' ' + s.az.toFixed(1) + '°').join(' · ')
+      + ' · stone pairs, not this year\'s moon';
+  }
+}
+function setPairAlign(which) {
+  stopDayPlay();
+  pairAlign = pairAlign === which ? null : which;
+  paintAlignButtons();
+  if (!pairAlign) showStationSides(false);
+  else {
+    const sides = longSideAlignments(which);
+    if (sides && !topMode) aimAlongAz(sides[0].az);
+  }
+  placeSun();
+}
 function placeSun() {
  // Legacy name kept for call sites; places active sky body (sun or moon).
  const readout = document.getElementById('sunReadout');
@@ -1467,6 +1514,10 @@ function placeSun() {
  moonDisc.visible = false;
  if (bodyRay) bodyRay.visible = false;
  if (bodyRayB) bodyRayB.visible = false;
+ if (pairAlign) {
+   drawPairAlignments();
+   return;
+ }
  if (bodyMode === 'off' || !terrainOn) {
    if (skyDome) skyDome.material.uniforms.sunAlt.value = -12;
    if (readout) readout.textContent = bodyMode === 'off' ? '' : 'Loading terrain…';
@@ -1476,7 +1527,7 @@ function placeSun() {
  let ev = null;
  let note = '';
  let sight = null;
- if (pendingSeek && !(isMoonMode(bodyMode) && moonEnvelope)) {
+ if (pendingSeek) {
    pendingSeek = false;
    const hit = Sky.seekLimb({
      body: isMoonMode(bodyMode) ? 'Moon' : 'Sun',
@@ -1492,7 +1543,7 @@ function placeSun() {
      syncUtUi();
    }
  }
- if (isSunMode(bodyMode) || (isMoonMode(bodyMode) && !moonEnvelope)) {
+ if (isSunMode(bodyMode) || isMoonMode(bodyMode)) {
    const body = isMoonMode(bodyMode) ? 'Moon' : 'Sun';
    const date = Sky.dateFromDoyMinute(epochYear, doy, minuteUt);
    const geo = Sky.horizontal(body, date, false);
@@ -1507,17 +1558,6 @@ function placeSun() {
      az: app.az, alt: app.alt, geoAlt: geo.alt, sky, sd, date, phaseCos,
      pathA: false, travelled: true,
    };
-   note = '';
- } else if (isMoonMode(bodyMode)) {
-   ev = moonAzFromSpread(bodyMode, moonSpread);
-   if (!ev) {
-     if (readout) readout.textContent = 'No moon azimuth';
-     return;
-   }
-   ev.sd = Sky.LUNAR_SD;
-   ev.sky = Sky.sampleAlt(hoyleAlts, hoyleStep, ev.az);
-   ev.phaseCos = 1;
-   ev.travelled = false;
    note = '';
  } else {
    if (readout) readout.textContent = '';
@@ -1655,9 +1695,7 @@ function placeSun() {
    bodyRayB.visible = false;
  }
  if (readout) {
-   const title = (isMoonMode(bodyMode) && moonEnvelope)
-     ? moonSpreadLabel(bodyMode, moonSpread)
-     : doyLabel(doy);
+   const title = doyLabel(doy);
    const limbTxt = LIMB_LABEL[pathALimb] || pathALimb;
    const epochTxt = epochYear < 0 ? (Math.abs(epochYear) + ' BC') : String(epochYear);
    const axis = stationAxisMode
@@ -1759,7 +1797,9 @@ function paintBodyButtons() {
 function setBodyMode(mode) {
  stopDayPlay();
  bodyMode = mode;
- moonEnvelope = false;
+ pairAlign = null;
+ paintAlignButtons();
+ showStationSides(false);
  pendingSeek = mode !== 'off';
  aimAfterSeek = mode === 'sunrise' || mode === 'sunset' || mode === 'moonrise' || mode === 'moonset';
  if (typeof syncShadowPolicy === 'function') syncShadowPolicy();
@@ -1770,7 +1810,6 @@ function setBodyMode(mode) {
  }
  paintBodyButtons();
  if (bodyMode !== 'off' && !terrainOn) setTerrain(true);
-  updateMoonAzUi();
   if (typeof syncSunDateMode === 'function') syncSunDateMode();
   else if (typeof syncSunDateButtons === 'function') syncSunDateButtons();
   placeSun();
@@ -1807,7 +1846,9 @@ document.getElementById('doy').oninput = (ev) => {
   const lb = document.getElementById('doyLbl');
   if (lb) lb.textContent = doyLabel(doy);
   pendingSeek = true;
-  moonEnvelope = false;
+  pairAlign = null;
+  paintAlignButtons();
+  showStationSides(false);
   placeSun();
 };
 document.querySelectorAll('[data-doy]').forEach((b) => {
@@ -1828,7 +1869,9 @@ if (utSl) utSl.oninput = () => {
   minuteUt = +utSl.value;
   stopDayPlay();
   pendingSeek = false;
-  moonEnvelope = false;
+  pairAlign = null;
+  paintAlignButtons();
+  showStationSides(false);
   syncUtUi();
   placeSun();
 };
@@ -1845,7 +1888,9 @@ function stopDayPlay() {
 function startDay(kind) {
   const body = kind === 'moon' ? 'Moon' : 'Sun';
   stopDayPlay();
-  moonEnvelope = false;
+  pairAlign = null;
+  paintAlignButtons();
+  showStationSides(false);
   pendingSeek = false;
   aimAfterSeek = false;
   bodyMode = kind === 'moon' ? 'moonrise' : 'sunrise';
@@ -1870,7 +1915,6 @@ function startDay(kind) {
   if (pause) pause.classList.add('active');
   if (!topMode) aimAlongAz(rise.geoAz);
   syncUtUi();
-  updateMoonAzUi();
   if (typeof syncSunDateMode === 'function') syncSunDateMode();
   placeSun();
 }
@@ -1890,41 +1934,8 @@ function aimAlongAz(azDeg) {
 }
 
 
-document.getElementById('moonAz').oninput = (ev) => {
-  stopDayPlay();
-  moonEnvelope = true;
-  moonSpread = (+ev.target.value) / 1000;
-  const lb = document.getElementById('moonAzLbl');
-  if (lb && isMoonMode(bodyMode)) lb.textContent = moonSpreadLabel(bodyMode, moonSpread);
-  if (isMoonMode(bodyMode)) placeSun();
-};
-document.getElementById('btnMoonAzN').onclick = () => {
-  stopDayPlay();
-  moonEnvelope = true;
-  moonSpread = 0;
-  document.getElementById('moonAz').value = '0';
-  const lb = document.getElementById('moonAzLbl');
-  if (lb && isMoonMode(bodyMode)) lb.textContent = moonSpreadLabel(bodyMode, moonSpread);
-  if (isMoonMode(bodyMode)) placeSun();
-};
-document.getElementById('btnMoonAzMid').onclick = () => {
-  stopDayPlay();
-  moonEnvelope = true;
-  moonSpread = 0.5;
-  document.getElementById('moonAz').value = '500';
-  const lb = document.getElementById('moonAzLbl');
-  if (lb && isMoonMode(bodyMode)) lb.textContent = moonSpreadLabel(bodyMode, moonSpread);
-  if (isMoonMode(bodyMode)) placeSun();
-};
-document.getElementById('btnMoonAzS').onclick = () => {
-  stopDayPlay();
-  moonEnvelope = true;
-  moonSpread = 1;
-  document.getElementById('moonAz').value = '1000';
-  const lb = document.getElementById('moonAzLbl');
-  if (lb && isMoonMode(bodyMode)) lb.textContent = moonSpreadLabel(bodyMode, moonSpread);
-  if (isMoonMode(bodyMode)) placeSun();
-};
+document.getElementById('btnAlignN').onclick = () => setPairAlign('north');
+document.getElementById('btnAlignS').onclick = () => setPairAlign('south');
 
 addEventListener('resize', () => {
  renderer.setSize(innerWidth, innerHeight);
@@ -1993,10 +2004,8 @@ function setLimb(limb) {
   pathALimb = limb;
   try { sessionStorage.setItem('sh_limb', pathALimb); } catch (e) {}
   refreshMoonExtremes();
-  moonEnvelope = false;
   pendingSeek = true;
   syncLimbUi();
-  updateMoonAzUi();
   placeSun();
 }
 const setPathALimb = setLimb;
@@ -2033,9 +2042,7 @@ function setEpochYear(year) {
   try { sessionStorage.setItem('sh_epoch_year', String(epochYear)); } catch (e) {}
   refreshMoonExtremes();
   pendingSeek = true;
-  moonEnvelope = false;
   syncEpochUi();
-  updateMoonAzUi();
   placeSun();
 }
 

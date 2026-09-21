@@ -90,6 +90,15 @@
   <div id="skyCaveat" style="opacity:.75;font-size:10px;line-height:1.35;margin:4px 0 6px">
     Azimuths use a LiDAR horizon with refraction/parallax. Gleam / Half orb / Full orb match Banton’s limb stages.
   </div>
+  <label>Epoch</label>
+  <div class="row">
+    <button type="button" id="btnEpochModern" class="active">Modern</button>
+    <button type="button" id="btnEpoch2500">c. 2500 BC</button>
+  </div>
+  <div class="row" style="align-items:center;gap:6px;margin:2px 0 4px 0">
+    <input type="number" id="epochYear" value="2026" step="1" style="width:5.5em;font:inherit;padding:2px 4px"/>
+    <span id="epochHelp" style="opacity:.7;font-size:10px">−2499 = 2500 BC · Modern / c.2500 BC</span>
+  </div>
   <div id="sunDatePanel">
     <div id="sunDateFull">
       <label>Date <span id="doyLbl">21 Jun</span></label>
@@ -135,7 +144,7 @@
   </div>
 </div>
 <canvas id="c"></canvas>
-<script src="./data/locked_poses.js?v=sun-dates-dual-20260920"></script>
+<script src="./data/locked_poses.js?v=epoch-restore-2026-09-21"></script>
 <script>
 /* lintel seat 2026-09-19: lengthen shorter uprights so tops match partners */
 (function () {
@@ -167,7 +176,7 @@
 })();
 </script>
 <script src="./data/site_ground_od.js?v=restore2"></script>
-<script src="./data/sky_events_path_a_hoyle_sample.js?v=patha-newham1"></script>
+<script src="./data/sky_events_path_a_hoyle_sample.js?v=epoch-restore-2026-09-21"></script>
 <script type="importmap">
 {"imports":{"three":"./vendor/three.module.js","three/addons/":"./vendor/"}}
 </script>
@@ -879,8 +888,13 @@ function limbCentreAltDeg(hHorDeg, limb, sdDeg) {
 
 // Horizon mesh ~12 km square; body must sit past the sheet (Bulford distPastSheet).
 const TERRAIN_HALF_M = 6500;
-const ASTRO_YEAR = 2026;
 const EPOCH_MODERN = 2026;
+const EPOCH_2500BC = -2499;
+let epochYear = EPOCH_MODERN;
+try {
+  const raw = sessionStorage.getItem('sh_epoch_year');
+  if (raw != null && raw !== '' && Number.isFinite(+raw)) epochYear = Math.trunc(+raw);
+} catch (e) { /* private mode */ }
 const SITE_LAT_DEG = 51.1789;
 const MOON_INCL_DEG = 5.145;
 const MOON_AZ_OFFSET_DEG = 0;
@@ -897,6 +911,12 @@ const LIMB_LABEL = {
 
 function getSkyEvents() {
   return window.SKY_EVENTS_PATH_A_HOYLE || window.SKY_EVENTS_PATH_A || null;
+}
+
+function pathAEpochKey(year) {
+  // Map UI epoch to the two precomputed blocks in the sample JSON.
+  if (year === EPOCH_2500BC || year <= -2000) return 'bc2500';
+  return 'modern';
 }
 
 function obliquityDeg(year) {
@@ -924,9 +944,11 @@ function moonExtremesSchematic(year) {
 
 function moonExtremesForYear(year) {
   const SE = getSkyEvents();
+  const ek = pathAEpochKey(year);
   const block = SE && SE.moon_major_standstill_envelope
-    && (SE.moon_major_standstill_envelope.modern_2025
-      || SE.moon_major_standstill_envelope.modern_2026);
+    && (ek === 'bc2500'
+      ? SE.moon_major_standstill_envelope.bc2500
+      : (SE.moon_major_standstill_envelope.modern_2025 || SE.moon_major_standstill_envelope.modern_2026));
   if (!block || !block.events) return moonExtremesSchematic(year);
   const e = block.events;
   function pa(key) {
@@ -967,7 +989,7 @@ let moonSpread = 0; // 0 = most northerly, 1 = most southerly
 let MOON_EXTREMES = { moonrise: { nAz: 40.30, sAz: 140.22 }, moonset: { nAz: 319.74, sAz: 219.75 } };
 
 function refreshMoonExtremes() {
-  MOON_EXTREMES = moonExtremesForYear(ASTRO_YEAR);
+  MOON_EXTREMES = moonExtremesForYear(epochYear);
 }
 refreshMoonExtremes();
 
@@ -983,7 +1005,8 @@ function pathASunFromSample(doy, mode) {
   if (!key) return null;
   const SE = getSkyEvents();
   if (!SE || !SE.sun_solstice) return null;
-  const block = SE.sun_solstice.modern_2026 || SE.sun_solstice.modern_2025;
+  const ek = pathAEpochKey(epochYear);
+  const block = ek === 'bc2500' ? SE.sun_solstice.bc2500 : (SE.sun_solstice.modern_2026 || SE.sun_solstice.modern_2025);
   if (!block || !block.events || !block.events[key]) return null;
   const ev = block.events[key];
   let az = null, alt = 0.35, limbUsed = pathALimb;
@@ -1005,7 +1028,7 @@ function pathASunFromSample(doy, mode) {
   }
   if (az == null) return null;
   const decl = ev.declination_deg != null ? +ev.declination_deg : null;
-  const eps = block.obliquity_deg != null ? +block.obliquity_deg : obliquityDeg(ASTRO_YEAR);
+  const eps = block.obliquity_deg != null ? +block.obliquity_deg : obliquityDeg(epochYear);
   return {
     az, alt, decl, eps,
     pathA: true,
@@ -1015,13 +1038,17 @@ function pathASunFromSample(doy, mode) {
 }
 
 function approxSunSchematic(d, mode) {
-  // Keep prior locked_overview schematic when Path A sample missing / non-solstice.
-  // Limb buttons remain; alt stays schematic unless Path A hits.
-  const decl = 23.4 * Math.sin(2 * Math.PI * (d - 81) / 365);
-  const azRise = 90 - decl * 1.7;
-  const azSet = 270 + decl * 1.7;
-  if (mode === 'sunrise') return { az: azRise, alt: 0.35 + Math.max(0, decl) * 0.01, decl, pathA: false, schematic: true };
-  return { az: azSet, alt: 0.35 + Math.max(0, -decl) * 0.01, decl, pathA: false, schematic: true };
+  // Geometric flat-horizon rise/set az at Stonehenge lat; ε from epochYear.
+  // Used only for non-solstice DOY (HUD marks schematic).
+  const eps = obliquityDeg(epochYear);
+  const decl = eps * Math.sin(2 * Math.PI * (d - 81) / 365);
+  const lat = SITE_LAT_DEG * Math.PI / 180;
+  const x = Math.sin(decl * Math.PI / 180) / Math.cos(lat);
+  const c = Math.max(-1, Math.min(1, x));
+  const azRise = Math.acos(c) * 180 / Math.PI;
+  const azSet = 360 - azRise;
+  if (mode === 'sunrise') return { az: azRise, alt: 0.35 + Math.max(0, decl) * 0.01, decl, eps, pathA: false, schematic: true };
+  return { az: azSet, alt: 0.35 + Math.max(0, -decl) * 0.01, decl, eps, pathA: false, schematic: true };
 }
 
 function approxSun(d, mode) {
@@ -1051,7 +1078,7 @@ function doyToYMD(d, year) {
  return { year, month: m + 1, day: n };
 }
 function localDateStartFromDoy(d) {
- const ymd = doyToYMD(d, ASTRO_YEAR);
+ const ymd = doyToYMD(d, epochYear);
  // Browser-local midnight for that calendar day (Tim: Europe/London).
  return new Date(ymd.year, ymd.month - 1, ymd.day, 0, 0, 0, 0);
 }
@@ -1090,7 +1117,7 @@ function updateMoonAzUi() {
 }
 function doyLabel(d) {
  const names = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
- const ymd = doyToYMD(d, ASTRO_YEAR);
+ const ymd = doyToYMD(d, epochYear);
  return ymd.day + ' ' + names[ymd.month - 1];
 }
 function fmtLocalTime(dt) {
@@ -1526,6 +1553,42 @@ function initPathAUi() {
   syncLimbUi();
 }
 
+function syncEpochUi() {
+  const y = epochYear;
+  const bMod = document.getElementById('btnEpochModern');
+  const bAnc = document.getElementById('btnEpoch2500');
+  if (bMod) bMod.classList.toggle('active', y === EPOCH_MODERN);
+  if (bAnc) bAnc.classList.toggle('active', y === EPOCH_2500BC);
+  const inp = document.getElementById('epochYear');
+  if (inp && document.activeElement !== inp) inp.value = String(y);
+  const help = document.getElementById('epochHelp');
+  if (help) help.textContent = (y < 0 ? (Math.abs(y) + ' BC') : String(y)) + ' · −2499 = 2500 BC';
+}
+
+function setEpochYear(year) {
+  const y = Math.trunc(+year);
+  if (!Number.isFinite(y)) return;
+  epochYear = y;
+  try { sessionStorage.setItem('sh_epoch_year', String(epochYear)); } catch (e) {}
+  refreshMoonExtremes();
+  syncEpochUi();
+  updateMoonAzUi();
+  placeSun();
+}
+
+function initEpochUi() {
+  const bMod = document.getElementById('btnEpochModern');
+  const bAnc = document.getElementById('btnEpoch2500');
+  const inp = document.getElementById('epochYear');
+  if (bMod) bMod.onclick = () => setEpochYear(EPOCH_MODERN);
+  if (bAnc) bAnc.onclick = () => setEpochYear(EPOCH_2500BC);
+  if (inp) {
+    inp.onchange = () => setEpochYear(inp.value);
+    inp.onkeydown = (ev) => { if (ev.key === 'Enter') { ev.preventDefault(); setEpochYear(inp.value); } };
+  }
+  syncEpochUi();
+}
+
 rebuildStones();
 setNewham(false);
 setOrbit();
@@ -1538,6 +1601,7 @@ if (doySl) doySl.value = '172';
 const doyLb = document.getElementById('doyLbl');
 if (doyLb) doyLb.textContent = doyLabel(172);
 initPathAUi();
+initEpochUi();
 setBodyMode('sunrise');
 syncSunDateMode();
 tick();

@@ -12,3 +12,9 @@ Restored from `index.html.lock-2026-09-20-pre-newham-promote`:
 - Newham dual date UI + limbs unchanged
 
 Default: Modern (2026).
+
+## Newham + epoch fix (same day)
+
+Newham rays had used fixed rectangle-side bearings (`bearingEN`), so Modern ↔ c. 2500 BC looked inert.
+
+Now Newham keeps station-corner **origins** and dual parallel rays, but aims them at Path A / epoch **sky azimuth** (`ev.az`). Geometric side az still shown in the readout as `(side …°)` for comparison.

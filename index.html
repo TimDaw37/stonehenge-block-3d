@@ -6,7 +6,7 @@
 <meta http-equiv="Pragma" content="no-cache"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Stonehenge 3D Model</title>
-<!-- newham-bust georef-copy-pin-limbs-20260920 -->
+<!-- newham-bust epoch-sky-az-20260921 -->
 <style>
  html,body{margin:0;height:100%;background:#1a2430;color:#eee;font:13px/1.35 system-ui,sans-serif;overflow:hidden}
  #c{position:fixed;inset:0;width:100%;height:100%;display:block}
@@ -176,7 +176,7 @@
 })();
 </script>
 <script src="./data/site_ground_od.js?v=restore2"></script>
-<script src="./data/sky_events_path_a_hoyle_sample.js?v=epoch-restore-2026-09-21"></script>
+<script src="./data/sky_events_path_a_hoyle_sample.js?v=epoch-newham-az-20260921"></script>
 <script type="importmap">
 {"imports":{"three":"./vendor/three.module.js","three/addons/":"./vendor/"}}
 </script>
@@ -1288,9 +1288,11 @@ function placeSun() {
    const pos = new THREE.Vector3(origin.x + x * dist, origin.y + rise * dist, origin.z + z * dist);
    return { origin, pos, azUse, dist };
  }
+ // Newham: origins at station corners, but azimuth from Path A / epoch (not fixed side bearings).
+ // Rectangle overlay still shows geometric sides for comparison.
  let primary;
  if (sights && sights.length) {
-   primary = placeOne(sights[0].from, sights[0].az, 'A');
+   primary = placeOne(sights[0].from, ev.az, 'A');
  } else {
    primary = placeOne(null, ev.az, 'A');
  }
@@ -1330,7 +1332,7 @@ function placeSun() {
  ensureBodyRay(rayColor, 'A');
  aimRay(bodyRay, primary);
  if (sights && sights.length > 1) {
-   const second = placeOne(sights[1].from, sights[1].az, 'B');
+   const second = placeOne(sights[1].from, ev.az, 'B');
    ensureBodyRay(rayColor, 'B');
    aimRay(bodyRayB, second);
  } else if (bodyRayB) {
@@ -1341,11 +1343,15 @@ function placeSun() {
      ? moonSpreadLabel(bodyMode, moonSpread)
      : doyLabel(doy);
    const limbTxt = LIMB_LABEL[pathALimb] || pathALimb;
+   const epochTxt = epochYear < 0 ? (Math.abs(epochYear) + ' BC') : String(epochYear);
    const axis = stationAxisMode
      ? ('Newham ' + (sights ? sights.map((s) => s.side).join(' + ') : ''))
      : 'Heel Stone (centre)';
-   let bits = '<b>' + title + '</b> | ' + bodyMode + ' | ' + limbTxt + ' | ' + axis +
+   let bits = '<b>' + title + '</b> | ' + bodyMode + ' | ' + limbTxt + ' | ' + epochTxt + ' | ' + axis +
      ' | az <b>' + primary.azUse.toFixed(1) + ' deg</b>';
+   if (stationAxisMode && sights && sights[0] && Number.isFinite(+sights[0].az)) {
+     bits += ' <span style="opacity:.75">(side ' + (+sights[0].az).toFixed(1) + '°)</span>';
+   }
    if (isSunMode(bodyMode) && ev && !ev.pathA) {
      bits += ' <span style="color:#f0c674">(schematic)</span>';
    }

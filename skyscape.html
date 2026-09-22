@@ -30,6 +30,10 @@
  button:hover{background:#5a6b55}
  button.active{background:#8a7a4a;color:#111}
  .row{margin-top:6px}
+ .legend{display:flex;flex-wrap:wrap;gap:4px 12px;margin-top:6px;font-size:12px;opacity:.9}
+ .legend .sw{width:10px;height:10px;border-radius:2px;display:inline-block;margin-right:5px;vertical-align:-1px;border:1px solid rgba(255,255,255,.28)}
+ .epochRow{display:flex;flex-wrap:wrap;align-items:center;gap:4px}
+ .epochRow input{width:5.4em;margin:3px 0 0;padding:4px 6px;border:0;border-radius:4px;background:#243044;color:#eee;font:inherit}
  label{display:block;margin:8px 0 2px;font-size:11px;letter-spacing:.04em;text-transform:uppercase;opacity:.8}
  #msg{opacity:.9;margin-top:6px}
  code{font-size:11px;opacity:.85}
@@ -42,6 +46,7 @@
  pointer-events:none;white-space:normal;overflow-wrap:anywhere;word-break:break-word;
  max-height:40vh;overflow-y:auto;box-shadow:0 2px 10px rgba(0,0,0,.45)}
 #geoReadout .muted{opacity:.65}
+#geoNote{display:block;margin-bottom:4px}
 #geoReadout #geoHover,#geoReadout #geoPinned{display:block;width:100%}
 #geoReadout #geoPinned{color:#f0a070;margin-top:4px}
 #geoReadout .geoBtns{pointer-events:auto;margin:6px 0 0;display:flex;flex-wrap:wrap;gap:6px}
@@ -61,20 +66,18 @@
 <button type="button" id="hudToggle" aria-expanded="true" aria-controls="hud" title="Show or hide controls">Controls ▾</button>
 <div id="hud">
   <div><b>Stonehenge</b></div>
-  <div style="opacity:.85;font-size:12px;margin-top:2px">Sarsen grey | bluestones blue | Altar pink | stations 92/94 bright silver (markers only)</div>
-  <div style="opacity:.75;font-size:11px;margin-top:4px;line-height:1.4">
-    <b>Coords</b> (bottom): OSGB E/N, SU grid, WGS84 — same framing as stonehenge-plan.<br/>
-    Hover = live; short click = pin; Copy pin / Clear pin / Esc.<br/>
-    Not GNSS. OSGB is the scene/Rees plan grid; WGS84 from that OSGB. GE may sit ~1.5&nbsp;m east — we do not warp to GE.<br/>
-    Uncheck <b>Georef</b> to hide the bottom box (handy on mobile).
+  <div class="legend">
+    <span><i class="sw" style="background:#8a8e94"></i>Sarsen</span>
+    <span><i class="sw" style="background:#6b8cae"></i>Bluestone</span>
+    <span><i class="sw" style="background:#ff69b4"></i>Altar</span>
+    <span><i class="sw" style="background:#f0f4fa"></i>92/94</span>
+    <span id="counts"></span>
   </div>
-  <div id="counts" class="row" style="opacity:.85"></div>
   <div class="row">
     <button type="button" id="btnTop" class="active">Top-down</button>
     <button type="button" id="btnOrbit">Orbit</button>
     <button type="button" id="btnTerrain">Terrain</button>
     <button type="button" id="btnLabels">Labels</button>
-    <button type="button" id="btnNewham" title="Newham station-rectangle enquiry (off = Heel Stone / general model)">Newham</button>
   </div>
   <label>Sky</label>
   <div class="row">
@@ -90,22 +93,13 @@
     <button type="button" id="btnLimbHalf">Half orb</button>
     <button type="button" id="btnLimbFull">Full orb</button>
   </div>
-  <label>Ambient <span id="ambLbl">40%</span></label>
+  <label>Ambient light <span id="ambLbl">40%</span></label>
   <input type="range" id="ambient" min="0" max="100" value="40" style="width:100%"/>
-  <div style="opacity:.7;font-size:10px;margin:2px 0 4px 0;line-height:1.35">
-    Shadows aim with the disc, azimuth and altitude. 100% washes them out. A Gleam shadow is hundreds of metres long; the map keeps that direction out to about 700&nbsp;m.
-  </div>
-  <div id="skyCaveat" style="opacity:.75;font-size:10px;line-height:1.35;margin:4px 0 6px">
-    The disc is clipped from the monument eye against the Hoyle skyline, so Gleam is a sliver, Half is cut through the middle, and Full sits just clear. The public model draws the whole glow on top of the hills.
-  </div>
   <label>Epoch</label>
-  <div class="row">
+  <div class="row epochRow">
     <button type="button" id="btnEpochModern" class="active">Modern</button>
-    <button type="button" id="btnEpoch2500">c. 2500 BC</button>
-  </div>
-  <div class="row" style="align-items:center;gap:6px;margin:2px 0 4px 0">
-    <input type="number" id="epochYear" value="2026" step="1" style="width:5.5em;font:inherit;padding:2px 4px"/>
-    <span id="epochHelp" style="opacity:.7;font-size:10px">−2499 = 2500 BC · Modern / c.2500 BC</span>
+    <button type="button" id="btnEpoch2500">2500 BC</button>
+    <input type="number" id="epochYear" value="2026" step="1" aria-label="Year"/>
   </div>
   <div id="sunDatePanel">
     <div id="sunDateFull">
@@ -120,11 +114,10 @@
       <label>Time <span id="utLbl">00:00 UT</span></label>
       <input type="range" id="utMin" min="0" max="2160" step="1" value="237" style="width:100%"/>
       <div class="row">
-        <button type="button" id="btnDaySun">Sun's day</button>
-        <button type="button" id="btnDayMoon">Moon's day</button>
+        <button type="button" id="btnDaySun">Sun's arc</button>
+        <button type="button" id="btnDayMoon">Moon's arc</button>
         <button type="button" id="btnSkyPlay">Pause</button>
       </div>
-      <div style="opacity:.7;font-size:10px;margin:2px 0 4px 0;line-height:1.35">Sun's day and Moon's day play that body from rise to set on the date above. The clock stays put so you can pause or scrub. Moonrise and Moonset jump to that limb.</div>
     </div>
     <div id="sunDateNewham" hidden>
       <label>Sun date <span id="doyLblNewham">21 Jun · sunrise</span></label>
@@ -132,25 +125,26 @@
         <button type="button" id="btnSunMidsummer" class="active" title="Midsummer sunrise (Newham short sides / Path A)">21 Jun sunrise</button>
         <button type="button" id="btnSunMidwinter" title="Midwinter sunset (Newham short sides / Path A)">21 Dec sunset</button>
       </div>
-      <div style="opacity:.7;font-size:10px;margin:2px 0 4px 0;line-height:1.35">Newham sun: midsummer sunrise or midwinter sunset only (Path A).</div>
     </div>
   </div>
-  <div id="alignPanel">
-    <label>Station alignments</label>
+  <label>Station stone alignment</label>
+  <div class="row">
+    <button type="button" id="btnNewham" title="Station rectangle">Newham</button>
+  </div>
+  <div id="alignExtra" hidden>
     <div class="row">
       <button type="button" id="btnAlignN">Most northerly</button>
       <button type="button" id="btnAlignS">Most southerly</button>
     </div>
-    <div style="opacity:.7;font-size:10px;margin:2px 0 4px 0;line-height:1.35">Both long sides, each along its own pair. Not the moon for the chosen year.</div>
   </div>
-  <div class="check"><label style="display:inline;text-transform:none;letter-spacing:0;opacity:1"><input type="checkbox" id="geoOn" checked/> Georef / Coords</label></div>
-  <div style="opacity:.7;font-size:10px;margin:2px 0 4px 0;line-height:1.35">Tap/click for coords; short tap pins. Drag to orbit (coords pause while dragging). Copy pin / Clear pin / Esc. Uncheck to hide the bottom box.</div>
+  <div class="check"><label style="display:inline;text-transform:none;letter-spacing:0;opacity:1"><input type="checkbox" id="geoOn" checked/> Georef</label></div>
   <div class="check"><label style="display:inline;text-transform:none;letter-spacing:0;opacity:1"><input type="checkbox" id="showRay"/> <span id="showRayLabel">Ray to centre</span></label></div>
-  <div style="opacity:.7;font-size:10px;margin:2px 0 4px 0;line-height:1.35"><b>Newham</b>: station-rectangle enquiry (91 = locked stonehole). Off = Heel Stone / centre.</div>
+  <div id="newhamNote" hidden style="opacity:.7;font-size:10px;margin:2px 0 4px 0;line-height:1.35">91 is the stonehole. Off returns the ray to the centre.</div>
   <div id="msg"></div>
   <div id="sunReadout" class="row" style="font-size:11px;opacity:.9"></div>
 </div>
 <div id="geoReadout" aria-live="polite">
+  <div id="geoNote" class="muted">Hover for OSGB and WGS84. Click to pin. Copy pin, Clear pin, or Esc. Plan grid, not GPS.</div>
   <div id="geoHover"><span class="muted">Hover</span> —</div>
   <div id="geoPinned" hidden></div>
   <div class="geoBtns" id="geoBtns" hidden>
@@ -571,6 +565,14 @@ function setNewham(on) {
   stationAxisMode = !!on;
   const btn = document.getElementById('btnNewham');
   if (btn) btn.classList.toggle('active', stationsOn);
+  const alignExtra = document.getElementById('alignExtra');
+  const newhamNote = document.getElementById('newhamNote');
+  if (alignExtra) alignExtra.hidden = !stationsOn;
+  if (newhamNote) newhamNote.hidden = !stationsOn;
+  if (!stationsOn && pairAlign) {
+    pairAlign = null;
+    paintAlignButtons();
+  }
   const rayLab = document.getElementById('showRayLabel');
   if (rayLab) rayLab.textContent = stationsOn ? 'Ray along Newham sides' : 'Ray to centre';
   if (stationsOn) {

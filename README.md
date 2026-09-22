@@ -16,8 +16,8 @@ This is a **platform for forks** (rounded stones, Skyfield bake, etc.), not a fi
 | [locked_overview.html](locked_overview.html) | Backup of the previous front page (21 Sep 2026 AOK) |
 
 Live: https://timdaw37.github.io/stonehenge-block-3d/  
-Backup: https://timdaw37.github.io/stonehenge-block-3d/locked_overview.html  
-Baseline tag: `live-2026-09-21-aok` (also `index.html.lock-2026-09-21-aok`)
+Lock: `live-2026-09-22` (`index.html.lock-2026-09-22`)  
+Previous front page: https://timdaw37.github.io/stonehenge-block-3d/locked_overview.html (`live-2026-09-21-aok`)
 
 Hover and pin both show OSGB and WGS84 (scene/plan grid, not GNSS; WGS84 converted from that grid). Same framing as [stonehenge-plan](https://timdaw37.github.io/stonehenge-plan/).
 

@@ -90,6 +90,7 @@
     <button type="button" id="btnLimbHalf">Half orb</button>
     <button type="button" id="btnLimbFull">Full orb</button>
   </div>
+  <div class="check"><label style="display:inline;text-transform:none;letter-spacing:0;opacity:1"><input type="checkbox" id="starsOn" checked/> Stars <span id="starNote" style="opacity:.7"></span></label></div>
   <label>Ambient light <span id="ambLbl">40%</span></label>
   <input type="range" id="ambient" min="0" max="100" value="40" style="width:100%"/>
   <label>Epoch</label>
@@ -151,6 +152,7 @@
 </div>
 <canvas id="c"></canvas>
 <script src="./data/locked_poses.js?v=epoch-restore-2026-09-21"></script>
+<script src="./data/bright_stars.js?v=stars-1"></script>
 <script>
 /* lintel seat 2026-09-19: lengthen shorter uprights so tops match partners */
 (function () {
@@ -199,6 +201,7 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/OrbitControls.js';
 import { osgbFromLocal, osgbToWgs84 } from './vendor/osgb_wgs84.js';
 import * as Sky from './skyscape_sky.js';
+import { starHorizontal, starsAbove } from './stars_sky.js';
 window.__THREE_OK = true;
 
 const msg = document.getElementById('msg');
@@ -390,6 +393,27 @@ function meshFromTerrainBlock(block) {
   mesh.castShadow = false;
   return mesh;
 }
+function fadeHorizonRim(mesh) {
+  if (!mesh || mesh.userData.rimFaded) return;
+  const pos = mesh.geometry.attributes.position;
+  const col = mesh.geometry.attributes.color;
+  const rgba = new Float32Array(pos.count * 4);
+  const inner = 5600;
+  const outer = 8457;
+  for (let i = 0; i < pos.count; i++) {
+    const r = Math.hypot(pos.getX(i), pos.getZ(i));
+    const t = r <= inner ? 1 : Math.max(0, 1 - (r - inner) / (outer - inner));
+    rgba[i * 4] = col.getX(i);
+    rgba[i * 4 + 1] = col.getY(i);
+    rgba[i * 4 + 2] = col.getZ(i);
+    rgba[i * 4 + 3] = t * t;
+  }
+  mesh.geometry.setAttribute('color', new THREE.Float32BufferAttribute(rgba, 4));
+  mesh.material.transparent = true;
+  mesh.material.depthWrite = true;
+  mesh.material.needsUpdate = true;
+  mesh.userData.rimFaded = true;
+}
 function applyTerrainExag(mesh) {
  if (!mesh) return;
  const y0 = mesh.geometry.userData.y0;
@@ -449,7 +473,8 @@ function setTerrain(on) {
     applyTerrainExag(terrainNearMesh);
     if (terrainHorizonMesh) terrainHorizonMesh.visible = true;
     if (terrainNearMesh) terrainNearMesh.visible = true;
-    if (!topMode) { persp.far = 25000; persp.updateProjectionMatrix(); }
+    if (!topMode) { persp.far = 140000; persp.updateProjectionMatrix(); }
+    fadeHorizonRim(terrainHorizonMesh);
     if (msg && /^Loading terrain/.test(msg.textContent || '')) msg.textContent = '';
     placeSun();
   }).catch((err) => {
@@ -589,11 +614,11 @@ function setNewham(on) {
 }
 
 const ortho = new THREE.OrthographicCamera(-20, 20, 20, -20, 0.1, 25000);
-const persp = new THREE.PerspectiveCamera(45, innerWidth / innerHeight, 0.1, 25000);
+const persp = new THREE.PerspectiveCamera(64, innerWidth / innerHeight, 0.1, 140000);
 let cam = ortho, topMode = true;
 const controls = new OrbitControls(cam, canvas);
 controls.enableDamping = true;
-controls.maxDistance = 20000;
+controls.maxDistance = 6500;
 
 /* Cursor georef: hover + optional pin — framing matches stonehenge-plan (OSGB grid → WGS84). */
 const geoEl = document.getElementById('geoReadout');
@@ -1330,7 +1355,7 @@ const sunDisc = makeClippedDisc(0xfff6c8, false);
 const sunGlow = makeClippedDisc(0xffc14d, true);
 const moonDisc = makeClippedDisc(0xe8eef8, false);
 const skyDome = new THREE.Mesh(
-  new THREE.SphereGeometry(22000, 48, 24),
+  new THREE.SphereGeometry(90000, 64, 40),
   new THREE.ShaderMaterial({
     side: THREE.BackSide,
     depthWrite: false,
@@ -1608,12 +1633,16 @@ function placeSun() {
  }
  seatDisc(disc, false);
  if (glow) seatDisc(glow, true);
+ let skySunAlt = null;
+ let skySunDir = null;
  if (moonNow) {
    const sunDate = ev.date || Sky.dateFromDoyMinute(epochYear, doy, minuteUt);
    const sunApp = Sky.horizontal('Sun', sunDate, true);
    const sr = sunApp.az * Math.PI / 180;
    const sa = sunApp.alt * Math.PI / 180;
    const sunVec = new THREE.Vector3(Math.sin(sr) * Math.cos(sa), Math.sin(sa), -Math.cos(sr) * Math.cos(sa));
+   skySunAlt = sunApp.alt;
+   skySunDir = sunVec.clone();
    const moonVec = primary.pos.clone().sub(eye).normalize();
    const axis = sunVec.sub(moonVec.clone().multiplyScalar(sunVec.dot(moonVec)));
    if (axis.lengthSq() < 1e-8) axis.set(1, 0, 0);
@@ -1649,9 +1678,10 @@ function placeSun() {
    camL.updateProjectionMatrix();
    shadowBodyUp = trueAlt > -0.25;
    sunLight.castShadow = shadowBodyUp && ambientLevel < 0.97 && bodyMode !== 'off';
-   skyDome.material.uniforms.sunAlt.value = moonNow ? -8 : trueAlt;
-   skyDome.material.uniforms.sunDir.value.copy(dir);
-   skyDay = Math.max(0, Math.min(1, ((moonNow ? -5 : trueAlt) + 0.4) / 12));
+   const domeAlt = skySunAlt == null ? trueAlt : skySunAlt;
+   skyDome.material.uniforms.sunAlt.value = domeAlt;
+   skyDome.material.uniforms.sunDir.value.copy(skySunDir || dir);
+   skyDay = Math.max(0, Math.min(1, (domeAlt + 0.4) / 12));
    applySkyFill();
  }
  if (aimAfterSeek && ev && Number.isFinite(+ev.az) && !topMode) {
@@ -1768,10 +1798,11 @@ function setOrbit() {
  topMode = false; cam = persp; controls.object = cam; controls.enableRotate = true;
  const p = localXZ(412244.458, 142191.758);
  persp.position.set(p.x + 22, 28 * Math.max(1, exaggeration), p.z + 18);
- persp.far = 25000; persp.near = 0.1; persp.up.set(0, 1, 0);
+ persp.fov = 64;
+ persp.far = 140000; persp.near = 0.1; persp.up.set(0, 1, 0);
  persp.updateProjectionMatrix();
  controls.target.set(p.x, 0, p.z);
- controls.maxDistance = 20000; controls.update();
+ controls.maxDistance = 6500; controls.update();
  document.getElementById('btnOrbit').classList.add('active');
  document.getElementById('btnTop').classList.remove('active');
 }
@@ -1970,9 +2001,96 @@ function syncUtUi() {
   if (sl && document.activeElement !== sl) sl.value = String(Math.round(Math.min(2160, Math.max(0, minuteUt))));
   if (lb) lb.textContent = formatClock(minuteUt);
 }
+let starsOn = true;
+let starKey = '';
+const starGeo = new THREE.BufferGeometry();
+const starMat = new THREE.ShaderMaterial({
+  uniforms: { sunAlt: { value: -10 } },
+  vertexShader: `
+    attribute float mag;
+    varying float vMag;
+    void main() {
+      vMag = mag;
+      vec4 mv = modelViewMatrix * vec4(position, 1.0);
+      gl_Position = projectionMatrix * mv;
+      gl_PointSize = clamp(7.0 - mag, 1.6, 8.0);
+    }
+  `,
+  fragmentShader: `
+    varying float vMag;
+    uniform float sunAlt;
+    void main() {
+      float r = length(gl_PointCoord - 0.5);
+      if (r > 0.5) discard;
+      float a = smoothstep(0.5, 0.12, r);
+      float night = 1.0 - smoothstep(-6.0, 4.0, sunAlt);
+      float bright = clamp((6.2 - vMag) / 5.2, 0.45, 1.0);
+      gl_FragColor = vec4(0.96, 0.97, 1.0, a * bright * night);
+    }
+  `,
+  transparent: true,
+  depthWrite: false,
+  depthTest: true,
+  fog: false,
+});
+const starPoints = new THREE.Points(starGeo, starMat);
+starPoints.frustumCulled = false;
+starPoints.renderOrder = 1;
+starPoints.visible = false;
+scene.add(starPoints);
+function updateStars() {
+  const note = document.getElementById('starNote');
+  const cat = window.BRIGHT_STARS;
+  if (!starsOn || !cat) {
+    starPoints.visible = false;
+    if (note) note.textContent = '';
+    return;
+  }
+  const key = epochYear + ':' + doy + ':' + Math.round(minuteUt);
+  starPoints.visible = true;
+  let sunAlt = -10;
+  try {
+    sunAlt = Sky.horizontal('Sun', Sky.dateFromDoyMinute(epochYear, doy, minuteUt), true).alt;
+  } catch (e) {}
+  starMat.uniforms.sunAlt.value = sunAlt;
+  if (key === starKey && starGeo.getAttribute('position')) {
+    if (note) writeStarNote(note, cat);
+    return;
+  }
+  starKey = key;
+  const rows = starsAbove(cat.s, epochYear, doy, minuteUt, -0.4);
+  const pos = new Float32Array(rows.length * 3);
+  const mag = new Float32Array(rows.length);
+  const R = 20000;
+  for (let i = 0; i < rows.length; i++) {
+    pos[i * 3] = rows[i].x * R;
+    pos[i * 3 + 1] = rows[i].y * R;
+    pos[i * 3 + 2] = rows[i].z * R;
+    mag[i] = rows[i].mag;
+  }
+  starGeo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  starGeo.setAttribute('mag', new THREE.BufferAttribute(mag, 1));
+  starGeo.computeBoundingSphere();
+  if (note) writeStarNote(note, cat);
+}
+function writeStarNote(note, cat) {
+  const which = epochYear < 0 ? 'Thuban' : 'Polaris';
+  const idx = cat.names && cat.names[which];
+  const s = idx == null ? null : cat.s[idx];
+  if (!s) { note.textContent = ''; return; }
+  const h = starHorizontal(s[0], s[1], epochYear, doy, minuteUt);
+  note.textContent = which + ' ' + h.alt.toFixed(1) + '°';
+}
+const starsCb = document.getElementById('starsOn');
+if (starsCb) starsCb.onchange = (e) => {
+  starsOn = e.target.checked;
+  starKey = '';
+  updateStars();
+};
 let skyClock = performance.now();
 function tick(now) {
   requestAnimationFrame(tick);
+  updateStars();
   if (skyPlay && bodyMode !== 'off' && terrainOn) {
     const dt = Math.min(0.05, (now - skyClock) / 1000);
     minuteUt += dt * 40;

@@ -5,8 +5,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
 <meta http-equiv="Pragma" content="no-cache"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<meta name="robots" content="noindex,nofollow"/>
-<title>Stonehenge stars — fork</title>
+<title>Stonehenge 3D Model</title>
 <!-- marker-labels-untruncate-20260921 -->
 <style>
  html,body{margin:0;height:100%;background:#1a2430;color:#eee;font:13px/1.35 system-ui,sans-serif;overflow:hidden}
@@ -63,7 +62,7 @@
 <div id="scaleWarn">Exaggerated - silhouette not to scale</div>
 <button type="button" id="hudToggle" aria-expanded="true" aria-controls="hud" title="Show or hide controls">Controls ▾</button>
 <div id="hud">
-  <div><b>Stonehenge</b> <span style="opacity:.7;font-weight:400">stars fork</span></div>
+  <div><b>Stonehenge</b></div>
   <div class="legend">
     <span><i class="sw" style="background:#8a8e94"></i>Sarsen</span>
     <span><i class="sw" style="background:#3f86b8"></i>Bluestone</span>
@@ -394,6 +393,27 @@ function meshFromTerrainBlock(block) {
   mesh.castShadow = false;
   return mesh;
 }
+function fadeHorizonRim(mesh) {
+  if (!mesh || mesh.userData.rimFaded) return;
+  const pos = mesh.geometry.attributes.position;
+  const col = mesh.geometry.attributes.color;
+  const rgba = new Float32Array(pos.count * 4);
+  const inner = 5600;
+  const outer = 8457;
+  for (let i = 0; i < pos.count; i++) {
+    const r = Math.hypot(pos.getX(i), pos.getZ(i));
+    const t = r <= inner ? 1 : Math.max(0, 1 - (r - inner) / (outer - inner));
+    rgba[i * 4] = col.getX(i);
+    rgba[i * 4 + 1] = col.getY(i);
+    rgba[i * 4 + 2] = col.getZ(i);
+    rgba[i * 4 + 3] = t * t;
+  }
+  mesh.geometry.setAttribute('color', new THREE.Float32BufferAttribute(rgba, 4));
+  mesh.material.transparent = true;
+  mesh.material.depthWrite = true;
+  mesh.material.needsUpdate = true;
+  mesh.userData.rimFaded = true;
+}
 function applyTerrainExag(mesh) {
  if (!mesh) return;
  const y0 = mesh.geometry.userData.y0;
@@ -453,7 +473,8 @@ function setTerrain(on) {
     applyTerrainExag(terrainNearMesh);
     if (terrainHorizonMesh) terrainHorizonMesh.visible = true;
     if (terrainNearMesh) terrainNearMesh.visible = true;
-    if (!topMode) { persp.far = 25000; persp.updateProjectionMatrix(); }
+    if (!topMode) { persp.far = 140000; persp.updateProjectionMatrix(); }
+    fadeHorizonRim(terrainHorizonMesh);
     if (msg && /^Loading terrain/.test(msg.textContent || '')) msg.textContent = '';
     placeSun();
   }).catch((err) => {
@@ -593,11 +614,11 @@ function setNewham(on) {
 }
 
 const ortho = new THREE.OrthographicCamera(-20, 20, 20, -20, 0.1, 25000);
-const persp = new THREE.PerspectiveCamera(45, innerWidth / innerHeight, 0.1, 25000);
+const persp = new THREE.PerspectiveCamera(64, innerWidth / innerHeight, 0.1, 140000);
 let cam = ortho, topMode = true;
 const controls = new OrbitControls(cam, canvas);
 controls.enableDamping = true;
-controls.maxDistance = 20000;
+controls.maxDistance = 6500;
 
 /* Cursor georef: hover + optional pin — framing matches stonehenge-plan (OSGB grid → WGS84). */
 const geoEl = document.getElementById('geoReadout');
@@ -1334,7 +1355,7 @@ const sunDisc = makeClippedDisc(0xfff6c8, false);
 const sunGlow = makeClippedDisc(0xffc14d, true);
 const moonDisc = makeClippedDisc(0xe8eef8, false);
 const skyDome = new THREE.Mesh(
-  new THREE.SphereGeometry(22000, 48, 24),
+  new THREE.SphereGeometry(90000, 64, 40),
   new THREE.ShaderMaterial({
     side: THREE.BackSide,
     depthWrite: false,
@@ -1612,12 +1633,16 @@ function placeSun() {
  }
  seatDisc(disc, false);
  if (glow) seatDisc(glow, true);
+ let skySunAlt = null;
+ let skySunDir = null;
  if (moonNow) {
    const sunDate = ev.date || Sky.dateFromDoyMinute(epochYear, doy, minuteUt);
    const sunApp = Sky.horizontal('Sun', sunDate, true);
    const sr = sunApp.az * Math.PI / 180;
    const sa = sunApp.alt * Math.PI / 180;
    const sunVec = new THREE.Vector3(Math.sin(sr) * Math.cos(sa), Math.sin(sa), -Math.cos(sr) * Math.cos(sa));
+   skySunAlt = sunApp.alt;
+   skySunDir = sunVec.clone();
    const moonVec = primary.pos.clone().sub(eye).normalize();
    const axis = sunVec.sub(moonVec.clone().multiplyScalar(sunVec.dot(moonVec)));
    if (axis.lengthSq() < 1e-8) axis.set(1, 0, 0);
@@ -1653,9 +1678,10 @@ function placeSun() {
    camL.updateProjectionMatrix();
    shadowBodyUp = trueAlt > -0.25;
    sunLight.castShadow = shadowBodyUp && ambientLevel < 0.97 && bodyMode !== 'off';
-   skyDome.material.uniforms.sunAlt.value = moonNow ? -8 : trueAlt;
-   skyDome.material.uniforms.sunDir.value.copy(dir);
-   skyDay = Math.max(0, Math.min(1, ((moonNow ? -5 : trueAlt) + 0.4) / 12));
+   const domeAlt = skySunAlt == null ? trueAlt : skySunAlt;
+   skyDome.material.uniforms.sunAlt.value = domeAlt;
+   skyDome.material.uniforms.sunDir.value.copy(skySunDir || dir);
+   skyDay = Math.max(0, Math.min(1, (domeAlt + 0.4) / 12));
    applySkyFill();
  }
  if (aimAfterSeek && ev && Number.isFinite(+ev.az) && !topMode) {
@@ -1772,10 +1798,11 @@ function setOrbit() {
  topMode = false; cam = persp; controls.object = cam; controls.enableRotate = true;
  const p = localXZ(412244.458, 142191.758);
  persp.position.set(p.x + 22, 28 * Math.max(1, exaggeration), p.z + 18);
- persp.far = 25000; persp.near = 0.1; persp.up.set(0, 1, 0);
+ persp.fov = 64;
+ persp.far = 140000; persp.near = 0.1; persp.up.set(0, 1, 0);
  persp.updateProjectionMatrix();
  controls.target.set(p.x, 0, p.z);
- controls.maxDistance = 20000; controls.update();
+ controls.maxDistance = 6500; controls.update();
  document.getElementById('btnOrbit').classList.add('active');
  document.getElementById('btnTop').classList.remove('active');
 }
@@ -1986,7 +2013,7 @@ const starMat = new THREE.ShaderMaterial({
       vMag = mag;
       vec4 mv = modelViewMatrix * vec4(position, 1.0);
       gl_Position = projectionMatrix * mv;
-      gl_PointSize = clamp(6.2 - mag, 1.15, 7.0);
+      gl_PointSize = clamp(7.0 - mag, 1.6, 8.0);
     }
   `,
   fragmentShader: `
@@ -1997,8 +2024,8 @@ const starMat = new THREE.ShaderMaterial({
       if (r > 0.5) discard;
       float a = smoothstep(0.5, 0.12, r);
       float night = 1.0 - smoothstep(-6.0, 4.0, sunAlt);
-      float bright = clamp((6.0 - vMag) / 6.0, 0.2, 1.0);
-      gl_FragColor = vec4(0.90, 0.94, 1.0, a * bright * night);
+      float bright = clamp((6.2 - vMag) / 5.2, 0.45, 1.0);
+      gl_FragColor = vec4(0.96, 0.97, 1.0, a * bright * night);
     }
   `,
   transparent: true,

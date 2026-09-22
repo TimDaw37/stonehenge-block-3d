@@ -65,7 +65,7 @@
   <div><b>Stonehenge</b></div>
   <div class="legend">
     <span><i class="sw" style="background:#8a8e94"></i>Sarsen</span>
-    <span><i class="sw" style="background:#6b8cae"></i>Bluestone</span>
+    <span><i class="sw" style="background:#3f86b8"></i>Bluestone</span>
     <span><i class="sw" style="background:#ff69b4"></i>Altar</span>
     <span><i class="sw" style="background:#f0f4fa"></i>92/94</span>
     <span id="counts"></span>
@@ -239,7 +239,7 @@ if (!LP || !LP.array) {
 const CE = 412245.35, CN = 142194.11;
 function localXZ(e, n) { return { x: e - CE, z: -(n - CN) }; }
 const SARSEN_GREY = 0x8a8e94; // elephantine grey (lighter)
-const BLUESTONE = 0x6b8cae; // unchanged
+const BLUESTONE = 0x3f86b8; // clearer blue, distinct from the sarsen grey
 const ALTAR = 0xff69b4; // unchanged pink
 const MARKER_SILVER = 0xf0f4fa; // 92/94 markers only (bright silver)
 
@@ -247,7 +247,7 @@ function colourFor(e) {
  const id = String(e.id);
  // Markers win over pose colour_class (e.g. gold_medium / seed).
  if (id === '92' || id === '94') return MARKER_SILVER;
- if (e.colour_class === 'blue_bluestone') return BLUESTONE;
+ if (e.role === 'bluestone' || e.role === 'bluestone_lintel' || e.colour_class === 'blue' || e.colour_class === 'blue_bluestone') return BLUESTONE;
  if (id === '80' || e.colour_class === 'altar_pink') return ALTAR;
  return SARSEN_GREY;
 }

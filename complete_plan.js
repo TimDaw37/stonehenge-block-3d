@@ -63,7 +63,13 @@ export function planComplete(array) {
   const sarsenH = 4.15;
   const sarsenW = 1.95;
   const sarsenT = 1.1;
-  for (const n of [9, 13, 17, 18, 20, 24]) {
+  // Missing uprights, and stumps such as 8, 12, 14, 15, 19, 25, 26: ghost the remains, stand a stone on the circle.
+  for (let n = 1; n <= 30; n++) {
+    const e = by[String(n)];
+    const st = e ? String(e.status || '') : '';
+    const needsUpright = !e || st === 'stump_or_low' || st === 'fallen' || st === 'fallen_fragment';
+    if (!needsUpright) continue;
+    if (e && st === 'stump_or_low') ghost.add(String(n));
     const a = (phase + (n - 1) * 12) * Math.PI / 180;
     const x = radius * Math.sin(a);
     const z = -radius * Math.cos(a);
@@ -76,7 +82,7 @@ export function planComplete(array) {
     const p = xy(s56.e_m, s56.n_m);
     const lx = localX(s56.yaw_deg);
     const w55 = 2.2;
-    const gap = s56.width_m / 2 + w55 / 2 + 0.35;
+    const gap = s56.width_m / 2 + w55 / 2 + 0.85;
     virtuals.push(pose('55', 'trilithon_upright', p.x + lx.x * gap, p.z + lx.z * gap, s56.yaw_deg, w55, 0.9, s56.height_m));
   }
   const s60 = by['60'];
@@ -114,30 +120,45 @@ export function planComplete(array) {
   }
   for (const v of virtuals) at[String(v.id)] = xy(v.e_m, v.n_m);
 
-  function lintel(id, a, b, role, h, thick) {
+  function widthOf(id, fallback) {
+    const e = by[id] || virtuals.find((v) => v.id === id);
+    return e && e.width_m ? e.width_m : fallback;
+  }
+  // Trilithon lintels reach the outer ends of the two uprights, as 152, 154 and 158 do.
+  function trilithonLintel(id, a, b, h, thick) {
     const A = at[a];
     const B = at[b];
     if (!A || !B) return;
     const dx = B.x - A.x;
     const dz = B.z - A.z;
-    const span = Math.hypot(dx, dz);
+    const centres = Math.hypot(dx, dz);
+    const along = centres + widthOf(a, 2.2) / 2 + widthOf(b, 2.2) / 2;
     const yaw = Math.atan2(-dz, dx) * 180 / Math.PI;
-    virtuals.push(pose(id, role, (A.x + B.x) / 2, (A.z + B.z) / 2, yaw, Math.max(span, 2.4), thick, h, {
+    virtuals.push(pose(id, 'trilithon_lintel', (A.x + B.x) / 2, (A.z + B.z) / 2, yaw, along, thick, h, {
       supports: [a, b],
       virtualLabel: String(id).replace(/^v/, ''),
     }));
   }
+  if (!by['156'] || ghost.has('156')) trilithonLintel('v156', '55', '56', 1.05, 0.95);
+  if (!by['160a'] || ghost.has('160a')) trilithonLintel('v160', '59', '60', 0.8, 1.2);
 
+  // Outer lintels sit on the sarsen circle. Stumps off that circle are not used as supports.
+  const step = 12 * Math.PI / 180;
+  const chord = 2 * radius * Math.sin(step / 2);
+  const lintelR = radius * Math.cos(step / 2);
   for (let n = 1; n <= 30; n++) {
-    const left = n === 1 ? '30' : String(n - 1);
-    const right = String(n);
     const lid = String(100 + n);
     const have = by[lid];
     if (have && !ghost.has(lid)) continue;
-    lintel('v' + lid, left, right, 'sarsen_lintel', 0.75, 1.05);
+    const mid = (phase + (n - 1) * 12 - 6) * Math.PI / 180;
+    const x = lintelR * Math.sin(mid);
+    const z = -lintelR * Math.cos(mid);
+    const yaw = -(phase + (n - 1) * 12 - 6);
+    virtuals.push(pose('v' + lid, 'sarsen_lintel', x, z, yaw, chord, 1.05, 0.75, {
+      virtualLabel: lid,
+      circleLintel: true,
+    }));
   }
-  if (!by['156'] || ghost.has('156')) lintel('v156', '55', '56', 'trilithon_lintel', 1.05, 0.95);
-  if (!by['160a'] || ghost.has('160a')) lintel('v160', '59', '60', 'trilithon_lintel', 0.85, 1.2);
 
   return { ghost, virtuals };
 }

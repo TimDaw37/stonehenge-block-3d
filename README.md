@@ -12,13 +12,16 @@ This is a **platform for forks** (rounded stones, Skyfield bake, etc.), not a fi
 
 | URL | Role |
 |-----|------|
-| [index.html](index.html) / live root | Public viewer — sun, moon, and stars (`skyscape.html` and `stars.html` match it) |
-| [locked_2026-09-22.html](locked_2026-09-22.html) | Backup of the previous live page (22 Sep, before stars) |
+| [index.html](index.html) / live root | Public viewer — sun, moon, stars, and the Complete button (`skyscape.html` and `complete.html` match it) |
+| [locked_stars.html](locked_stars.html) | Backup of the previous live page (stars, before Complete) |
+| [stars.html](stars.html) | Same backup |
+| [locked_2026-09-22.html](locked_2026-09-22.html) | Earlier backup (22 Sep, before stars) |
 | [locked_overview.html](locked_overview.html) | Older backup (21 Sep 2026 AOK) |
 
 Live: https://timdaw37.github.io/stonehenge-block-3d/  
-Previous live: https://timdaw37.github.io/stonehenge-block-3d/locked_2026-09-22.html (`live-2026-09-22`)  
-Older backup: https://timdaw37.github.io/stonehenge-block-3d/locked_overview.html (`live-2026-09-21-aok`)
+Previous live: https://timdaw37.github.io/stonehenge-block-3d/locked_stars.html (`live-stars`, commit 196c6d0)  
+Earlier: https://timdaw37.github.io/stonehenge-block-3d/locked_2026-09-22.html (`live-2026-09-22`)  
+Older: https://timdaw37.github.io/stonehenge-block-3d/locked_overview.html (`live-2026-09-21-aok`)
 
 Hover and pin both show OSGB and WGS84 (scene/plan grid, not GNSS; WGS84 converted from that grid). Same framing as [stonehenge-plan](https://timdaw37.github.io/stonehenge-plan/).
 

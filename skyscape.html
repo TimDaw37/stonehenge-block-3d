@@ -74,6 +74,7 @@
     <button type="button" id="btnTop" class="active">Top-down</button>
     <button type="button" id="btnOrbit">Orbit</button>
     <button type="button" id="btnTerrain">Terrain</button>
+    <button type="button" id="btnComplete" title="All stones standing. Fallen stones ghosted. Altar stays. 55 follows 56.">Complete</button>
     <button type="button" id="btnLabels">Labels</button>
   </div>
   <label>Sky</label>
@@ -201,6 +202,7 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/OrbitControls.js';
 import { osgbFromLocal, osgbToWgs84 } from './vendor/osgb_wgs84.js';
 import * as Sky from './skyscape_sky.js';
+import { planComplete } from './complete_plan.js';
 import { starHorizontal, starsAbove } from './stars_sky.js';
 window.__THREE_OK = true;
 
@@ -889,6 +891,10 @@ function isPresentLintel(e) {
 }
 function seatZ(e) {
  const id = String(e.id), H = realHeight(e), gRel = groundOd(id) - ORIGIN_OD;
+ // Full sarsen crowns share one level (about OD 106.55). Do not drop the ring onto a stump or a shortened stone.
+ if (completeOn && String(e.role) === 'sarsen_lintel' && !isFallenLike(e)) {
+  return { baseRel: 3.96, H, kind: 'circle_lintel' };
+ }
  const supports = (e.supports && e.supports.length >= 2) ? e.supports : LINTEL_SUPPORTS[id];
  if (isPresentLintel(e) && supports) {
  const [a, b] = supports;
@@ -906,11 +912,16 @@ function seatZ(e) {
  return { baseRel: gRel, H, kind: 'on_ground' };
 }
 
+let completeOn = false;
 function rebuildStones() {
  while (root.children.length) root.remove(root.children[0]);
  stoneBaseY.length = 0;
+ for (const id of Object.keys(byId)) if (byId[id] && byId[id].virtual) delete byId[id];
+ const plan = completeOn ? planComplete(LP.array) : { ghost: new Set(), virtuals: [] };
+ for (const v of plan.virtuals) byId[String(v.id)] = v;
  let lintelSeatNotes = 0;
- for (const e of LP.array) {
+ const stones = completeOn ? LP.array.concat(plan.virtuals) : LP.array;
+ for (const e of stones) {
  const col = colourFor(e);
  const en = poseEN(e);
  const p = localXZ(en.e, en.n);
@@ -925,20 +936,21 @@ function rebuildStones() {
  geo = new THREE.BoxGeometry(along, H, across);
  }
  const isMarker = (String(e.id) === '92' || String(e.id) === '94');
+ const ghost = completeOn && !e.virtual && plan.ghost.has(String(e.id));
  const mat = isMarker
   ? new THREE.MeshStandardMaterial({
       color: col, metalness: 0.82, roughness: 0.32,
-      transparent: true, opacity: 0.95,
+      transparent: true, opacity: ghost ? 0.2 : 0.95,
     })
   : new THREE.MeshLambertMaterial({
-      // Opaque: transparent materials often cast no usable shadows in Three.js
-      color: col,
-      transparent: !!e.fig1_pixel_fail,
-      opacity: e.fig1_pixel_fail ? 0.55 : 1,
+      color: e.virtual ? 0xd7c7a4 : col,
+      transparent: !!(ghost || e.virtual || e.fig1_pixel_fail),
+      opacity: ghost ? 0.22 : (e.virtual ? 0.8 : (e.fig1_pixel_fail ? 0.55 : 1)),
     });
  const mesh = new THREE.Mesh(geo, mat);
  addEdges(mesh, geo);
- mesh.castShadow = !isMarker;
+ if (ghost && mesh.children[0] && mesh.children[0].material) mesh.children[0].material.opacity = 0.25;
+ mesh.castShadow = !isMarker && !ghost && !e.virtual;
  mesh.receiveShadow = true;
  const y0 = seat.baseRel + H / 2;
  mesh.position.set(p.x, y0 * exaggeration, p.z);
@@ -946,7 +958,7 @@ function rebuildStones() {
  mesh.rotation.y = THREE.MathUtils.degToRad(poseYaw(e));
  mesh.userData = { id: e.id, seat, y0 };
  root.add(mesh);
- const lab = makeLabel(isMarker ? (String(e.id) + ' (marker)') : String(e.id));
+ const lab = makeLabel(isMarker ? (String(e.id) + ' (marker)') : String(e.virtualLabel || e.id));
  const ls = labelScaleFor(H);
  const aspect = (lab.userData && lab.userData.labelAspect) ? lab.userData.labelAspect : (1.6 / 0.8);
  lab.scale.set(ls * 0.6 * aspect, ls * 0.6, 1);
@@ -1811,6 +1823,11 @@ document.getElementById('btnTop').onclick = setTop;
 document.getElementById('btnOrbit').onclick = setOrbit;
 document.getElementById('btnTerrain').onclick = () => {
   setTerrain(!terrainOn);
+};
+document.getElementById('btnComplete').onclick = () => {
+  completeOn = !completeOn;
+  document.getElementById('btnComplete').classList.toggle('active', completeOn);
+  rebuildStones();
 };
 document.getElementById('btnLabels').onclick = () => {
   setLabels(!labelsOn);

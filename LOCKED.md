@@ -1,8 +1,13 @@
 # LOCKED — public Stonehenge block-3D
 
-**Current live:** sun, moon, and stars. `index.html`, `skyscape.html`, and `stars.html` are the same page.
+**Current live:** sun, moon, stars, and Complete. `index.html`, `skyscape.html`, and `complete.html` are the same page.
 **Live:** https://timdaw37.github.io/stonehenge-block-3d/
 **Title:** Stonehenge 3D Model
+
+**Backup of the previous live page** (stars, before Complete):
+- https://timdaw37.github.io/stonehenge-block-3d/locked_stars.html
+- https://timdaw37.github.io/stonehenge-block-3d/stars.html
+- Git tag: `live-stars` (commit 196c6d0)
 
 **Backup of the previous live page** (22 Sep 2026, before stars):
 - https://timdaw37.github.io/stonehenge-block-3d/locked_2026-09-22.html

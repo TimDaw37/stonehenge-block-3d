@@ -19,6 +19,7 @@ This is a **platform for forks** (rounded stones, Skyfield bake, etc.), not a fi
 | [locked_overview.html](locked_overview.html) | Older backup (21 Sep 2026 AOK) |
 
 Live: https://timdaw37.github.io/stonehenge-block-3d/  
+Lock: `live-2026-09-23` (`index.html.lock-2026-09-23`)  
 Previous live: https://timdaw37.github.io/stonehenge-block-3d/locked_stars.html (`live-stars`, commit 196c6d0)  
 Earlier: https://timdaw37.github.io/stonehenge-block-3d/locked_2026-09-22.html (`live-2026-09-22`)  
 Older: https://timdaw37.github.io/stonehenge-block-3d/locked_overview.html (`live-2026-09-21-aok`)

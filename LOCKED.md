@@ -1,6 +1,6 @@
 # LOCKED — public Stonehenge block-3D
 
-**Current live:** sun, moon, stars, and Complete. `index.html`, `skyscape.html`, and `complete.html` are the same page.
+**Current live:** sun, moon, stars, and Complete. The page is `index.html`. `skyscape.html` and `complete.html` redirect to it.
 **Live:** https://timdaw37.github.io/stonehenge-block-3d/
 **Title:** Stonehenge 3D Model
 

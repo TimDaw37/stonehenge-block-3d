@@ -574,8 +574,9 @@ function buildStationSightlines() {
 function syncSunDateMode() {
   const full = document.getElementById('sunDateFull');
   const nh = document.getElementById('sunDateNewham');
-  if (full) full.hidden = !!stationsOn;
-  if (nh) nh.hidden = !stationsOn;
+  const moon = bodyMode === 'moonrise' || bodyMode === 'moonset';
+  if (full) full.hidden = !!stationsOn && !moon;
+  if (nh) nh.hidden = !stationsOn || moon;
   if (stationsOn) syncSunDateButtons();
   else {
     const lb = document.getElementById('doyLbl');
@@ -964,6 +965,7 @@ function rebuildStones() {
  lab.scale.set(ls * 0.6 * aspect, ls * 0.6, 1);
  const labY0 = seat.baseRel + H + 0.35;
  lab.position.set(p.x, labY0 * exaggeration, p.z);
+ lab.visible = labelsOn;
  root.add(lab);
  stoneBaseY.push({ mesh, lab, y0, labY0 });
  if (seat.kind === 'lintel_on_uprights') lintelSeatNotes++;

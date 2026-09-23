@@ -12,7 +12,7 @@ This is a **platform for forks** (rounded stones, Skyfield bake, etc.), not a fi
 
 | URL | Role |
 |-----|------|
-| [index.html](index.html) / live root | Public viewer — sun, moon, stars, and the Complete button (`skyscape.html` and `complete.html` match it) |
+| [index.html](index.html) / live root | The public viewer. `skyscape.html` and `complete.html` redirect here |
 | [locked_stars.html](locked_stars.html) | Backup of the previous live page (stars, before Complete) |
 | [stars.html](stars.html) | Same backup |
 | [locked_2026-09-22.html](locked_2026-09-22.html) | Earlier backup (22 Sep, before stars) |
@@ -35,7 +35,7 @@ python -m http.server 8000
 
 Then open:
 
-[http://localhost:8000/locked_overview.html](http://localhost:8000/locked_overview.html)
+[http://localhost:8000/](http://localhost:8000/)
 
 Do **not** open via `file://` — the import map and lazy terrain load will fail.
 
@@ -45,8 +45,12 @@ Do **not** open via `file://` — the import map and lazy terrain load will fail
 |---------|---------|
 | View | **Orbit** |
 | Terrain | Off until you toggle **Terrain** (or pick a sky body — loads lazy ~18 MB) |
-| Sky | **21 Jun sunrise** |
-| Labels | Off |
+| Sky | **21 Jun sunrise**, with a clock. **Sun's arc** and **Moon's arc** play that passage |
+| Epoch | **Modern** (2026). **2500 BC** or a typed year. Pole label is Polaris or Thuban |
+| Stars | On. They fade once the sun is up |
+| Complete | Off. One click fills the missing stones; fallen stones stay ghosted |
+| Newham | Off. Most northerly / Most southerly appear only while it is on |
+| Labels | Off until you press **Labels** |
 | Ray to centre | On with sunrise boot |
 
 Import map (relative paths):
@@ -60,7 +64,7 @@ Import map (relative paths):
 }
 ```
 
-(`vendor/astronomy.esm.js` remains in-tree for a future optional date-mode; live moon UI is the standstill dial — see moon docs below.)
+The live sky uses `skyscape_sky.js`, which imports `vendor/astronomy.esm.js`. Sun and moon are apparent places for the chosen date and year. Stars are the bright-star list in `data/bright_stars.js`.
 
 ## Colours legend
 

@@ -4,6 +4,8 @@
 
 The disc is placed by `skyscape_sky.js` using `vendor/astronomy.esm.js`: apparent azimuth and altitude, refraction on, lunar parallax for the Moon. Rise and set are the moment the chosen limb meets the Hoyle skyline. The Path A sample is the check shown in the readout, not a second sun.
 
+Years before the modern epoch are proleptic Gregorian. Stellarium uses the Julian calendar by default. For the major lunar standstill in -2498 the same moon position differs by about 3 minutes, which is acceptable.
+
 There is no `#skyCaveat`. The old flat-horizon dial described below is not what the page draws.
 
 ## Path A (now the live placement)

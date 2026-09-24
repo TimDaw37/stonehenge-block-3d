@@ -1,5 +1,4 @@
-// Skyscape fork only. Apparent place from vendored astronomy-engine.
-// The public index does not import this file.
+// Apparent place for the live viewer, from the vendored astronomy-engine.
 import * as AE from './vendor/astronomy.esm.js';
 
 export const SITE = { lat: 51.178851, lon: -1.826177, height: 104 };
@@ -31,7 +30,13 @@ function isLeap(year) {
   return (year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0));
 }
 
-/** Match the viewer's doy slider (1 = 1 Jan). Proleptic Gregorian, same rule as index.html. */
+/**
+ * Match the viewer's day-of-year slider (1 = 1 Jan).
+ * Dates before the modern epoch are proleptic Gregorian (Date.UTC leap rule).
+ * Stellarium uses the Julian calendar by default for those years. For the major
+ * lunar standstill in -2498 the same moon position differs by about 3 minutes,
+ * which is acceptable.
+ */
 export function dateFromDoyMinute(year, doy, minuteUt) {
   const md = [31, isLeap(year) ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
   const yearDays = md.reduce((a, b) => a + b, 0);

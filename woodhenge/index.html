@@ -91,7 +91,6 @@
 <script src="./posts.js"></script>
 <script src="../data/bright_stars.js"></script>
 <script src="./horizon.js"></script>
-<script src="./avon.js"></script>
 <script type="importmap">
 {"imports":{"three":"../vendor/three.module.js","three/addons/":"../vendor/"}}
 </script>
@@ -301,20 +300,33 @@ starPoints.rotation.y = GRID_CONV * Math.PI / 180;
 const axisLines = {};
 function buildAxes() {
   for (const a of AXES) {
-    if (axisLines[a.id]) scene.remove(axisLines[a.id]);
     const g = (a.az - GRID_CONV) * Math.PI / 180;
     const dx = Math.sin(g), dz = -Math.cos(g);
-    const pts = [];
-    for (let k = -a.half; k <= a.half; k += 1) {
-      const x = centre.x + dx * k, z = centre.z + dz * k;
-      pts.push(new THREE.Vector3(x, groundAt(x, z) + 0.12, z));
+    const samples = a.half * 2 + 1;
+    let line = axisLines[a.id];
+    if (!line) {
+      const geo = new THREE.BufferGeometry();
+      geo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(samples * 3), 3));
+      line = new THREE.Line(geo, new THREE.LineBasicMaterial({
+        color: a.colour, depthTest: false, transparent: true, opacity: 0.95,
+      }));
+      line.renderOrder = 5;
+      line.frustumCulled = false;
+      line.visible = document.getElementById(a.id).checked;
+      scene.add(line);
+      axisLines[a.id] = line;
     }
-    const line = new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts),
-      new THREE.LineBasicMaterial({ color: a.colour, depthTest: false, transparent: true, opacity: 0.95 }));
-    line.renderOrder = 5;
-    line.visible = document.getElementById(a.id).checked;
-    scene.add(line);
-    axisLines[a.id] = line;
+    const arr = line.geometry.attributes.position.array;
+    for (let s = -a.half, k = 0; s <= a.half; s += 1, k++) {
+      const x = centre.x + dx * s;
+      const z = centre.z + dz * s;
+      const h = gridHeight ? gridHeight(x, z) : null;
+      arr[k * 3] = x;
+      arr[k * 3 + 1] = (h == null ? groundY : h) + 0.12;
+      arr[k * 3 + 2] = z;
+    }
+    line.geometry.attributes.position.needsUpdate = true;
+    line.geometry.computeBoundingSphere();
   }
 }
 function viewFromCentre(azTrue) {
@@ -376,10 +388,45 @@ nGroup.position.set(centre.x, 0, centre.z - NORTH_CLEAR);
 scene.add(nGroup);
 const groundRay = new THREE.Raycaster();
 const groundMeshes = [];
+// The 10 m sheet is a regular grid. Sampling it directly keeps the axis lines
+// on the ground without raycasting two million triangles, which removed the
+// lines and never got as far as drawing them again.
+let gridHeight = null;
+function gridSampler(positions) {
+  const n = Math.round(Math.sqrt(positions.length / 3));
+  if (n * n * 3 !== positions.length) return null;
+  const x0 = positions[0];
+  const z0 = positions[2];
+  const dx = positions[3] - x0;
+  const dz = positions[n * 3 + 2] - z0;
+  if (!(dx > 2 && dx < 40 && dz > 2 && dz < 40)) return null;
+  return (x, z) => {
+    const c = (x - x0) / dx;
+    const r = (z - z0) / dz;
+    if (c < 0 || r < 0 || c > n - 1 || r > n - 1) return null;
+    const c0 = Math.floor(c), r0 = Math.floor(r);
+    const c1 = Math.min(n - 1, c0 + 1), r1 = Math.min(n - 1, r0 + 1);
+    const tx = c - c0, tz = r - r0;
+    const at = (rr, cc) => positions[(rr * n + cc) * 3 + 1];
+    const y0 = at(r0, c0) * (1 - tx) + at(r0, c1) * tx;
+    const y1 = at(r1, c0) * (1 - tx) + at(r1, c1) * tx;
+    return y0 * (1 - tz) + y1 * tz;
+  };
+}
 function groundAt(x, z) {
-  if (!groundMeshes.length) return groundY;
+  if (gridHeight) {
+    const h = gridHeight(x, z);
+    if (h != null) return h;
+  }
+  const meshes = [];
+  for (const mesh of groundMeshes) {
+    const idx = mesh.geometry.index;
+    if (idx && idx.count > 400000) continue;
+    meshes.push(mesh);
+  }
+  if (!meshes.length) return groundY;
   groundRay.set(new THREE.Vector3(x, 800, z), new THREE.Vector3(0, -1, 0));
-  const hits = groundRay.intersectObjects(groundMeshes, false);
+  const hits = groundRay.intersectObjects(meshes, false);
   return hits.length ? hits[0].point.y : groundY;
 }
 
@@ -418,7 +465,7 @@ function meshFromBlock(block) {
   geo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(block.positions), 3));
   if (block.normals) geo.setAttribute('normal', new THREE.Float32BufferAttribute(new Float32Array(block.normals), 3));
   if (block.colors) geo.setAttribute('color', new THREE.Float32BufferAttribute(new Float32Array(block.colors), 3));
-  geo.setIndex(block.indices);
+  geo.setIndex(new THREE.Uint32BufferAttribute(block.indices, 1));
   if (!block.normals) geo.computeVertexNormals();
   const mesh = new THREE.Mesh(geo, new THREE.MeshLambertMaterial({ vertexColors: true, side: THREE.DoubleSide }));
   mesh.receiveShadow = true;
@@ -426,6 +473,7 @@ function meshFromBlock(block) {
 }
 
 const readout = document.getElementById('readout');
+let landscapeError = '';
 const sunOrigin = new THREE.Vector3(centre.x, 2, centre.z);
 const SKYLINE = window.WOODHENGE_HORIZON || { alt_deg: [], step_deg: 0.25, encode: { offset: -5, span: 9 } };
 const hoyleAlts = SKYLINE.alt_deg || [];
@@ -719,7 +767,7 @@ function placeSun() {
     if (bodyRay) bodyRay.visible = false;
     sunLight.intensity = 0.35;
     skyDome.material.uniforms.sunAlt.value = -8;
-    if (!picked.length) readout.textContent = P.posts.length + ' posts.';
+    if (!picked.length) readout.textContent = landscapeError || (P.posts.length + ' posts.');
     return;
   }
   const body = skyBody();
@@ -727,7 +775,8 @@ function placeSun() {
   const hor = Sky.horizontal(body, date, true);
   placeBody(body, hor.alt, hor.az, date);
   if (!picked.length) {
-    readout.textContent = body + ' ' + hor.alt.toFixed(1) + '° at ' + hor.az.toFixed(0) + '°. ' + doyLabel(doy) + ' ' + epochYear + '.';
+    const sky = body + ' ' + hor.alt.toFixed(1) + '° at ' + hor.az.toFixed(0) + '°. ' + doyLabel(doy) + ' ' + epochYear + '.';
+    readout.textContent = landscapeError ? landscapeError + ' ' + sky : sky;
   }
 }
 
@@ -1000,6 +1049,78 @@ function loadScript(src) {
   });
 }
 
+function saneHeight(positions) {
+  let best = 1e18, y = 0, finite = 0;
+  for (let i = 0; i < positions.length; i += 3) {
+    const x = positions[i], yy = positions[i + 1], z = positions[i + 2];
+    if (!Number.isFinite(x) || !Number.isFinite(yy) || !Number.isFinite(z)) continue;
+    finite++;
+    const d = (x - centre.x) * (x - centre.x) + (z - centre.z) * (z - centre.z);
+    if (d < best) { best = d; y = yy; }
+  }
+  if (!finite || best > 200 * 200 || y < -40 || y > 40) return null;
+  return y;
+}
+function loadAvon() {
+  return fetch('./avon.bin').then((r) => {
+    if (!r.ok) throw new Error('avon.bin');
+    return r.arrayBuffer();
+  }).then((buf) => {
+    const view = new DataView(buf);
+    if (view.getUint32(0, true) !== 0x56414857) throw new Error('avon.bin');
+    const nvert = view.getUint32(8, true);
+    const nidx = view.getUint32(12, true);
+    const nrv = view.getUint32(16, true);
+    const nri = view.getUint32(20, true);
+    let o = 28;
+    const positions = new Float32Array(new Float32Array(buf, o, nvert * 3)); o += nvert * 12;
+    const bytes = new Uint8Array(buf, o, nvert * 3); o += nvert * 3;
+    const colors = new Float32Array(nvert * 3);
+    for (let i = 0; i < bytes.length; i++) colors[i] = bytes[i] / 255;
+    const indices = new Uint32Array(new Uint32Array(buf, o, nidx)); o += nidx * 4;
+    const riverPos = new Float32Array(new Float32Array(buf, o, nrv * 3)); o += nrv * 12;
+    const riverIdx = new Uint32Array(new Uint32Array(buf, o, nri));
+    if (saneHeight(positions) == null) throw new Error('avon.bin rejected');
+    return { positions, colors, indices, riverPos, riverIdx };
+  });
+}
+function addRiver(A) {
+  if (!A.riverIdx.length) return;
+  const geo = new THREE.BufferGeometry();
+  geo.setAttribute('position', new THREE.BufferAttribute(A.riverPos, 3));
+  geo.setIndex(new THREE.Uint32BufferAttribute(A.riverIdx, 1));
+  const river = new THREE.Mesh(geo, new THREE.MeshBasicMaterial({
+    color: 0x1a78c2, side: THREE.DoubleSide,
+    polygonOffset: true, polygonOffsetFactor: -3, polygonOffsetUnits: -3,
+  }));
+  river.renderOrder = 2;
+  river.frustumCulled = false;
+  scene.add(river);
+}
+let cameraSeated = false;
+function seatOn(mesh) {
+  const y = saneHeight(mesh.geometry.attributes.position.array);
+  if (y == null) return;
+  const camDy = cam.position.y - (groundY + 55);
+  seatPosts(y);
+  cam.position.y = y + 55 + camDy;
+  if (!cameraSeated) {
+    controls.target.set(centre.x, y + 2, centre.z);
+    cameraSeated = true;
+  } else {
+    controls.target.y = y + 2;
+  }
+  controls.update();
+  sunOrigin.y = y + 2;
+  buildAxes();
+  placeSun();
+}
+
+// Lines exist before the ground arrives, and a later drape only moves their
+// vertices. The switches keep the same objects for the life of the page.
+buildAxes();
+
+// Posts are already on screen. The heavy ground follows, and a bad file is refused.
 loadScript('../data/terrain_horizon.js').then(() => {
   const T = window.TERRAIN_HORIZON;
   if (!T || !T.horizon) throw new Error('horizon missing');
@@ -1013,43 +1134,24 @@ loadScript('../data/terrain_horizon.js').then(() => {
     scene.add(near);
     groundMeshes.push(near);
   }
-  let seatMesh = horizon;
-  if (window.WOODHENGE_AVON) {
-    const avon = meshFromBlock(window.WOODHENGE_AVON);
-    avon.material.polygonOffset = true;
-    avon.material.polygonOffsetFactor = -0.4;
-    avon.material.polygonOffsetUnits = -0.4;
-    avon.renderOrder = 0;
-    scene.add(avon);
-    groundMeshes.unshift(avon);
-    seatMesh = avon;
-  }
-  if (window.WOODHENGE_RIVER) {
-    const R = window.WOODHENGE_RIVER;
-    const geo = new THREE.BufferGeometry();
-    geo.setAttribute('position', new THREE.Float32BufferAttribute(R.positions, 3));
-    geo.setIndex(R.indices);
-    const river = new THREE.Mesh(geo, new THREE.MeshBasicMaterial({
-      color: 0x1a78c2,
-      side: THREE.DoubleSide,
-      polygonOffset: true,
-      polygonOffsetFactor: -3,
-      polygonOffsetUnits: -3,
-    }));
-    river.renderOrder = 2;
-    river.frustumCulled = false;
-    scene.add(river);
-  }
-  const y = sampleGround(seatMesh);
-  addEarthwork(y);
-  seatPosts(y);
-  buildAxes();
-  cam.position.set(centre.x - 60, y + 200, centre.z + 180);
-  controls.target.set(centre.x + 40, y + 1.6, centre.z - 120);
-  sunOrigin.y = y + 2;
+  seatOn(horizon);
+  addEarthwork(groundY);
+  return loadAvon();
+}).then((A) => {
+  const avon = meshFromBlock(A);
+  avon.material.polygonOffset = true;
+  avon.material.polygonOffsetFactor = -0.4;
+  avon.material.polygonOffsetUnits = -0.4;
+  avon.renderOrder = 0;
+  scene.add(avon);
+  gridHeight = gridSampler(A.positions);
+  groundMeshes.unshift(avon);
+  seatOn(avon);
+  addRiver(A);
+  landscapeError = '';
   placeSun();
 }).catch((err) => {
-  readout.textContent = 'Landscape failed: ' + err.message;
+  landscapeError = 'Landscape failed: ' + err.message + '.';
   placeSun();
 });
 placeSun();

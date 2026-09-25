@@ -25,6 +25,7 @@
  .chk{display:flex;align-items:center;gap:6px;margin:3px 0}
  .swatch{width:10px;height:10px;border-radius:2px;display:inline-block}
  #readout{margin-top:8px;font-size:12px;line-height:1.4}
+ .note{opacity:.75;font-size:11px;margin:2px 0 6px}
  input[type=range]{width:100%}
  @media (max-width:700px){
   #hud button{min-height:36px;padding:6px 10px}
@@ -77,9 +78,9 @@
     <button type="button" id="btnSkyPlay">Pause</button>
   </div>
   <div class="chk"><label><input type="checkbox" id="showSunRay" checked/> Sun ray</label></div>
-  <div class="chk"><label><input type="checkbox" id="showAxes" checked/> Axes</label>
-    <i class="swatch" style="background:#d5dbe3"></i> 44°
-    <i class="swatch" style="background:#f0c14a"></i> 50¾°</div>
+  <div class="chk"><label><input type="checkbox" id="showAxes" checked/> Axis 44°</label></div>
+  <div class="chk"><label><input type="checkbox" id="showCunnington" checked/> Cunnington 50¾°</label></div>
+  <div class="note">Her line was claimed as midsummer sunrise. In 2500 BC first gleam is 49.4°, so it misses.</div>
   <div id="readout">Loading landscape…</div>
 </div>
 <script src="./posts.js"></script>
@@ -358,8 +359,10 @@ function throughCentre(azDeg, color, dashed) {
   return line;
 }
 const axisGroup = new THREE.Group();
-axisGroup.add(throughCentre(44, 0xd5dbe3, false));
-axisGroup.add(throughCentre(50.75, 0xf0c14a, true));
+const fittedAxis = throughCentre(44, 0xd5dbe3, false);
+const cunningtonAxis = throughCentre(50.75, 0xf0c14a, true);
+axisGroup.add(fittedAxis);
+axisGroup.add(cunningtonAxis);
 axisGroup.position.set(centre.x, 0, centre.z);
 scene.add(axisGroup);
 
@@ -734,7 +737,10 @@ document.getElementById('showSunRay').onchange = (ev) => {
   placeSun();
 };
 document.getElementById('showAxes').onchange = (ev) => {
-  axisGroup.visible = ev.target.checked;
+  fittedAxis.visible = ev.target.checked;
+};
+document.getElementById('showCunnington').onchange = (ev) => {
+  cunningtonAxis.visible = ev.target.checked;
 };
 renderer.domElement.addEventListener('pointerdown', (ev) => {
   const r = renderer.domElement.getBoundingClientRect();

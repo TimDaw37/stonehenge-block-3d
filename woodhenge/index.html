@@ -1069,8 +1069,11 @@ loadTerrain().then((T) => {
   addEarthwork(y);
   seatPosts(y);
   buildAxes();
-  cam.position.set(centre.x - 60, y + 200, centre.z + 180);
-  controls.target.set(centre.x + 40, y + 1.6, centre.z - 120);
+  // Stay on the posts. The previous camera looked past them into the sky,
+  // and the orbit then kept that empty point in the middle of the view.
+  cam.position.set(centre.x, y + 55, centre.z + 75);
+  controls.target.set(centre.x, y + 2, centre.z);
+  controls.update();
   sunOrigin.y = y + 2;
   placeSun();
   loadAvon().then((A) => {

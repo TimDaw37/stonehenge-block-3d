@@ -78,9 +78,14 @@
     <button type="button" id="btnSkyPlay">Pause</button>
   </div>
   <div class="chk"><label><input type="checkbox" id="showSunRay" checked/> Sun ray</label></div>
-  <div class="chk"><label><input type="checkbox" id="showAxes" checked/> Axis 44°</label></div>
-  <div class="chk"><label><input type="checkbox" id="showCunnington" checked/> Cunnington's line</label></div>
-  <div class="note">50° on the ground, 0.6° from the 2500 BC first gleam. Close enough.</div>
+  <label class="t">Axes (true azimuth)</label>
+  <div class="chk"><label><input type="checkbox" id="axisCun" checked/> <i class="swatch" style="background:#ffffff"></i> Cunnington's line, 49.4°</label></div>
+  <div class="chk"><label><input type="checkbox" id="axisCF" checked/> <i class="swatch" style="background:#3fd08a"></i> Fitted axis, rings C–F, 43.3°</label></div>
+  <div class="chk"><label><input type="checkbox" id="axisAB" checked/> <i class="swatch" style="background:#ff8a3d"></i> Fitted axis, rings A–B, 38.6°</label></div>
+  <div class="row">
+    <button type="button" id="btnEye">Eye at centre, facing 49.4°</button>
+    <button type="button" id="btnTop">Plan view</button>
+  </div>
   <div id="readout">Loading landscape…</div>
 </div>
 <script src="./posts.js"></script>
@@ -282,6 +287,54 @@ for (const hole of P.posts) {
   posts.push(mesh);
 }
 
+// Grid convergence at Woodhenge: true azimuth = OSGB grid bearing + 0.167°.
+const GRID_CONV = 0.167;
+// Axis lines through the post centre, drawn in true azimuth.
+// Cunnington: the dashed line on her 1929 plan, registered to the marker posts.
+// Fitted: mean of the ellipse long axes of each ring group.
+const AXES = [
+  { id: 'axisCun', az: 49.4, colour: 0xffffff, half: 60 },
+  { id: 'axisCF', az: 43.3, colour: 0x3fd08a, half: 60 },
+  { id: 'axisAB', az: 38.6, colour: 0xff8a3d, half: 60 },
+];
+starPoints.rotation.y = GRID_CONV * Math.PI / 180;
+const axisLines = {};
+function buildAxes() {
+  for (const a of AXES) {
+    if (axisLines[a.id]) scene.remove(axisLines[a.id]);
+    const g = (a.az - GRID_CONV) * Math.PI / 180;
+    const dx = Math.sin(g), dz = -Math.cos(g);
+    const pts = [];
+    for (let k = -a.half; k <= a.half; k += 1) {
+      const x = centre.x + dx * k, z = centre.z + dz * k;
+      pts.push(new THREE.Vector3(x, groundAt(x, z) + 0.12, z));
+    }
+    const line = new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts),
+      new THREE.LineBasicMaterial({ color: a.colour, depthTest: false, transparent: true, opacity: 0.95 }));
+    line.renderOrder = 5;
+    line.visible = document.getElementById(a.id).checked;
+    scene.add(line);
+    axisLines[a.id] = line;
+  }
+}
+function viewFromCentre(azTrue) {
+  const g = (azTrue - GRID_CONV) * Math.PI / 180;
+  const y = groundY + 1.6;
+  cam.position.set(centre.x - Math.sin(g) * 0.5, y, centre.z + Math.cos(g) * 0.5);
+  controls.target.set(centre.x + Math.sin(g) * 40, y - 1.5, centre.z - Math.cos(g) * 40);
+  controls.update();
+}
+function viewPlan() {
+  cam.position.set(centre.x, groundY + 95, centre.z + 0.01);
+  controls.target.set(centre.x, groundY, centre.z);
+  controls.update();
+}
+document.getElementById('btnEye').onclick = () => viewFromCentre(49.4);
+document.getElementById('btnTop').onclick = () => viewPlan();
+for (const a of AXES) {
+  document.getElementById(a.id).onchange = (ev) => { if (axisLines[a.id]) axisLines[a.id].visible = ev.target.checked; };
+}
+
 // North is local −Z, the same frame as the Stonehenge model.
 // Flat arrow on the ground, tail 80 m north of the post centre, clear of the bank.
 // Shape is drawn in XY with the tip at +Y; rotation.x = −π/2 lays that tip on −Z.
@@ -343,33 +396,9 @@ function sampleGround(mesh) {
   }
   return y;
 }
-function throughCentre(azDeg, color, dashed) {
-  const az = azDeg * Math.PI / 180;
-  const dx = Math.sin(az), dz = -Math.cos(az);
-  const L = 95;
-  const geo = new THREE.BufferGeometry().setFromPoints([
-    new THREE.Vector3(-dx * L, 1.3, -dz * L),
-    new THREE.Vector3(dx * L, 1.3, dz * L),
-  ]);
-  const mat = dashed
-    ? new THREE.LineDashedMaterial({ color, dashSize: 3.5, gapSize: 2.2 })
-    : new THREE.LineBasicMaterial({ color });
-  const line = new THREE.Line(geo, mat);
-  if (dashed) line.computeLineDistances();
-  return line;
-}
-const axisGroup = new THREE.Group();
-const fittedAxis = throughCentre(44, 0xd5dbe3, false);
-const cunningtonAxis = throughCentre(50, 0xf0c14a, true);
-axisGroup.add(fittedAxis);
-axisGroup.add(cunningtonAxis);
-axisGroup.position.set(centre.x, 0, centre.z);
-scene.add(axisGroup);
-
 function seatPosts(y) {
   groundY = y;
   controls.target.y = y + 1.6;
-  axisGroup.position.y = y;
   const tailZ = centre.z - NORTH_CLEAR;
   const tipZ = tailZ - 18.5;
   nGroup.position.y = Math.max(groundAt(centre.x, tailZ), groundAt(centre.x, tipZ), y) + 0.45;
@@ -594,7 +623,7 @@ function paintSkyButtons() {
   document.getElementById('btnEpoch2500').classList.toggle('active', epochYear === -2499);
 }
 function placeBody(body, altDeg, azDeg, date) {
-  const az = THREE.MathUtils.degToRad(azDeg);
+  const az = THREE.MathUtils.degToRad(azDeg - GRID_CONV);
   const alt = THREE.MathUtils.degToRad(altDeg);
   const dir = new THREE.Vector3(Math.sin(az) * Math.cos(alt), Math.sin(alt), -Math.cos(az) * Math.cos(alt));
   const eye = new THREE.Vector3(centre.x, groundY + 1.6, centre.z);
@@ -637,7 +666,7 @@ function placeBody(body, altDeg, azDeg, date) {
   if (!moonNow) seatDisc(sunGlow, true);
   if (moonNow) {
     const sunApp = Sky.horizontal('Sun', date, true);
-    const sr = sunApp.az * Math.PI / 180;
+    const sr = (sunApp.az - GRID_CONV) * Math.PI / 180;
     const sa = sunApp.alt * Math.PI / 180;
     const sunVec = new THREE.Vector3(Math.sin(sr) * Math.cos(sa), Math.sin(sa), -Math.cos(sr) * Math.cos(sa));
     const moonVec = pos.clone().sub(eye).normalize();
@@ -709,7 +738,7 @@ const raycaster = new THREE.Raycaster();
 const pointer = new THREE.Vector2();
 function azimuth(a, b) {
   const dE = b.e - a.e, dN = b.n - a.n;
-  let az = Math.atan2(dE, dN) * 180 / Math.PI;
+  let az = Math.atan2(dE, dN) * 180 / Math.PI + GRID_CONV;
   if (az < 0) az += 360;
   return { az, dist: Math.hypot(dE, dN) };
 }
@@ -729,18 +758,12 @@ function showRay() {
   rayGroup.add(new THREE.Line(geo, new THREE.LineBasicMaterial({ color: 0xfff2a8 })));
   const fwd = azimuth(ea, eb), back = azimuth(eb, ea);
   readout.innerHTML = picked[0].userData.ring + ' → ' + picked[1].userData.ring
-    + '<br>bearing <b>' + fwd.az.toFixed(1) + '°</b> · back ' + back.az.toFixed(1) + '°'
+    + '<br>true azimuth <b>' + fwd.az.toFixed(1) + '°</b> · back ' + back.az.toFixed(1) + '°'
     + '<br>' + fwd.dist.toFixed(1) + ' m';
 }
 document.getElementById('showSunRay').onchange = (ev) => {
   showSunRay = ev.target.checked;
   placeSun();
-};
-document.getElementById('showAxes').onchange = (ev) => {
-  fittedAxis.visible = ev.target.checked;
-};
-document.getElementById('showCunnington').onchange = (ev) => {
-  cunningtonAxis.visible = ev.target.checked;
 };
 renderer.domElement.addEventListener('pointerdown', (ev) => {
   const r = renderer.domElement.getBoundingClientRect();
@@ -1020,6 +1043,7 @@ loadScript('../data/terrain_horizon.js').then(() => {
   const y = sampleGround(seatMesh);
   addEarthwork(y);
   seatPosts(y);
+  buildAxes();
   cam.position.set(centre.x - 60, y + 200, centre.z + 180);
   controls.target.set(centre.x + 40, y + 1.6, centre.z - 120);
   sunOrigin.y = y + 2;

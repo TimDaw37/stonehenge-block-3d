@@ -6,9 +6,18 @@
 <title>Woodhenge</title>
 <style>
  html,body{margin:0;height:100%;background:#071018;color:#eee;font:13px/1.35 system-ui,sans-serif;overflow:hidden}
- #c{position:fixed;inset:0}
- #hud{position:fixed;left:10px;top:10px;width:260px;max-height:calc(100% - 20px);overflow:auto;
+ #c{position:fixed;inset:0;width:100%;height:100%;display:block}
+ #hudToggle{position:fixed;left:10px;top:10px;z-index:4;min-width:44px;min-height:44px;
+  padding:8px 12px;border:0;border-radius:8px;background:rgba(10,16,24,.92);color:#e8d9a8;
+  font:600 13px system-ui,sans-serif;cursor:pointer}
+ #hud{position:fixed;left:10px;top:58px;width:260px;max-width:calc(100% - 20px);max-height:calc(100% - 70px);overflow:auto;
   background:rgba(10,16,24,.9);padding:10px 12px;border-radius:8px;z-index:2}
+ #hud.collapsed{display:none}
+ @media (min-width:701px){
+  #hud{top:10px}
+  #hudToggle{display:none}
+  #hud.collapsed{display:block}
+ }
  button,label,input{font:inherit}
  button{margin:3px 4px 0 0;padding:4px 8px;border:0;border-radius:4px;background:#243044;color:#eee;cursor:pointer}
  button.active{background:#c45c26}
@@ -16,20 +25,21 @@
  .chk{display:flex;align-items:center;gap:6px;margin:3px 0}
  .swatch{width:10px;height:10px;border-radius:2px;display:inline-block}
  #readout{margin-top:8px;font-size:12px;line-height:1.4}
- .note{opacity:.7;font-size:11px;margin-top:6px}
  input[type=range]{width:100%}
+ @media (max-width:700px){
+  #hud button{min-height:36px;padding:6px 10px}
+ }
 </style>
 </head>
 <body>
 <div id="c"></div>
+<button type="button" id="hudToggle" aria-expanded="true" aria-controls="hud" title="Show or hide controls">Controls ▾</button>
 <div id="hud">
   <div><b>Woodhenge</b></div>
-  <div class="note">156 timber posts, Maud Cunnington’s six rings, seated on the concrete markers. Smooth contour of the bank, ditch and north entrance. Durrington Walls is the earthwork to the north. 10.6 m east and 4.9 m north of SU 15060 43370.</div>
   <label class="t">Rings</label>
   <div id="rings"></div>
   <label class="t">Height <span id="hLbl">7.5 m</span></label>
   <input type="range" id="postH" min="1" max="12" step="0.1" value="7.5"/>
-  <div class="note">Cunnington’s figure for the tallest posts. The claimed line is midsummer sunrise.</div>
   <label class="t">Sky</label>
   <div class="row">
     <button type="button" id="btnSunOff">Off</button>
@@ -66,7 +76,7 @@
     <button type="button" id="btnDayMoon">Moon's arc</button>
     <button type="button" id="btnSkyPlay">Pause</button>
   </div>
-  <div class="note">Click two posts for a bearing. Click the ground to clear.</div>
+  <div class="chk"><label><input type="checkbox" id="showSunRay" checked/> Sun ray</label></div>
   <div id="readout">Loading landscape…</div>
 </div>
 <script src="./posts.js"></script>
@@ -81,6 +91,27 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/OrbitControls.js';
 import * as Sky from '../skyscape_sky.js';
 import { starHorizontal, starsAbove } from '../stars_sky.js';
+
+const hudEl = document.getElementById('hud');
+const hudToggle = document.getElementById('hudToggle');
+function isNarrow() { return window.matchMedia('(max-width: 700px)').matches; }
+function setHudOpen(open) {
+  hudEl.classList.toggle('collapsed', !open);
+  hudToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  hudToggle.textContent = open ? 'Controls ▾' : 'Controls ▸';
+  try { sessionStorage.setItem('wh_hud_open', open ? '1' : '0'); } catch (e) {}
+}
+(function initHud() {
+  let open;
+  try {
+    const stored = sessionStorage.getItem('wh_hud_open');
+    open = (stored === '0' || stored === '1') ? stored === '1' : !isNarrow();
+  } catch (e) { open = !isNarrow(); }
+  setHudOpen(open);
+  hudToggle.addEventListener('click', () => {
+    setHudOpen(hudToggle.getAttribute('aria-expanded') !== 'true');
+  });
+})();
 
 const CE = 412245.35, CN = 142194.11;
 const P = window.WOODHENGE_POSTS;
@@ -590,7 +621,28 @@ function placeBody(body, altDeg, azDeg, date) {
   skyDome.material.uniforms.sunAlt.value = moonNow ? -6 : altDeg;
   skyDome.material.uniforms.sunDir.value.copy(dir);
   hemi.intensity = moonNow ? 0.18 : 0.22 + 0.5 * Math.max(0, Math.min(1, (altDeg + 2) / 14));
+  aimSunRay(eye, pos, moonNow);
   return dir;
+}
+let showSunRay = true;
+let bodyRay = null;
+function aimSunRay(eye, pos, moon) {
+  const hex = moon ? 0xc8d0dc : 0xffcc66;
+  if (!bodyRay) {
+    bodyRay = new THREE.ArrowHelper(new THREE.Vector3(0, 0, -1), new THREE.Vector3(), 1, hex, 8, 4);
+    scene.add(bodyRay);
+  }
+  if (bodyRay.line && bodyRay.line.material) {
+    bodyRay.line.material.color.setHex(hex);
+    bodyRay.cone.material.color.setHex(hex);
+  }
+  const dir = pos.clone().sub(eye);
+  const len = dir.length();
+  if (!showSunRay || len < 1) { bodyRay.visible = false; return; }
+  bodyRay.position.copy(eye);
+  bodyRay.setDirection(dir.normalize());
+  bodyRay.setLength(len, Math.min(40, len * 0.03), Math.min(20, len * 0.015));
+  bodyRay.visible = true;
 }
 function placeSun() {
   if (pendingSeek && bodyMode !== 'off' && hoyleAlts.length) {
@@ -607,6 +659,7 @@ function placeSun() {
     sunDisc.visible = false;
     sunGlow.visible = false;
     moonDisc.visible = false;
+    if (bodyRay) bodyRay.visible = false;
     sunLight.intensity = 0.35;
     skyDome.material.uniforms.sunAlt.value = -8;
     if (!picked.length) readout.textContent = P.posts.length + ' posts.';
@@ -651,6 +704,10 @@ function showRay() {
     + '<br>bearing <b>' + fwd.az.toFixed(1) + '°</b> · back ' + back.az.toFixed(1) + '°'
     + '<br>' + fwd.dist.toFixed(1) + ' m';
 }
+document.getElementById('showSunRay').onchange = (ev) => {
+  showSunRay = ev.target.checked;
+  placeSun();
+};
 renderer.domElement.addEventListener('pointerdown', (ev) => {
   const r = renderer.domElement.getBoundingClientRect();
   pointer.x = ((ev.clientX - r.left) / r.width) * 2 - 1;

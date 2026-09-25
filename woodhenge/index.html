@@ -77,6 +77,9 @@
     <button type="button" id="btnSkyPlay">Pause</button>
   </div>
   <div class="chk"><label><input type="checkbox" id="showSunRay" checked/> Sun ray</label></div>
+  <div class="chk"><label><input type="checkbox" id="showAxes" checked/> Axes</label>
+    <i class="swatch" style="background:#d5dbe3"></i> 44°
+    <i class="swatch" style="background:#f0c14a"></i> 50¾°</div>
   <div id="readout">Loading landscape…</div>
 </div>
 <script src="./posts.js"></script>
@@ -339,9 +342,31 @@ function sampleGround(mesh) {
   }
   return y;
 }
+function throughCentre(azDeg, color, dashed) {
+  const az = azDeg * Math.PI / 180;
+  const dx = Math.sin(az), dz = -Math.cos(az);
+  const L = 95;
+  const geo = new THREE.BufferGeometry().setFromPoints([
+    new THREE.Vector3(-dx * L, 1.3, -dz * L),
+    new THREE.Vector3(dx * L, 1.3, dz * L),
+  ]);
+  const mat = dashed
+    ? new THREE.LineDashedMaterial({ color, dashSize: 3.5, gapSize: 2.2 })
+    : new THREE.LineBasicMaterial({ color });
+  const line = new THREE.Line(geo, mat);
+  if (dashed) line.computeLineDistances();
+  return line;
+}
+const axisGroup = new THREE.Group();
+axisGroup.add(throughCentre(44, 0xd5dbe3, false));
+axisGroup.add(throughCentre(50.75, 0xf0c14a, true));
+axisGroup.position.set(centre.x, 0, centre.z);
+scene.add(axisGroup);
+
 function seatPosts(y) {
   groundY = y;
   controls.target.y = y + 1.6;
+  axisGroup.position.y = y;
   const tailZ = centre.z - NORTH_CLEAR;
   const tipZ = tailZ - 18.5;
   nGroup.position.y = Math.max(groundAt(centre.x, tailZ), groundAt(centre.x, tipZ), y) + 0.45;
@@ -707,6 +732,9 @@ function showRay() {
 document.getElementById('showSunRay').onchange = (ev) => {
   showSunRay = ev.target.checked;
   placeSun();
+};
+document.getElementById('showAxes').onchange = (ev) => {
+  axisGroup.visible = ev.target.checked;
 };
 renderer.domElement.addEventListener('pointerdown', (ev) => {
   const r = renderer.domElement.getBoundingClientRect();

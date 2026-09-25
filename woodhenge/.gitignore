@@ -1,0 +1,6 @@
+# Public page only. Plan drawing, Google aerial, lidar and working notes stay local.
+*
+!.gitignore
+!index.html
+!woodhenge.html
+!posts.js

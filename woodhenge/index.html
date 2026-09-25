@@ -1036,13 +1036,19 @@ function loadAvon() {
     const nrv = view.getUint32(16, true);
     const nri = view.getUint32(20, true);
     let o = 28;
-    const positions = new Float32Array(buf, o, nvert * 3); o += nvert * 12;
+    // This Three.js build ignores a typed array's byteOffset, so each block
+    // has to be its own buffer or the ground is read from the file header.
+    const positions = new Float32Array(nvert * 3);
+    positions.set(new Float32Array(buf, o, nvert * 3)); o += nvert * 12;
     const bytes = new Uint8Array(buf, o, nvert * 3); o += nvert * 3;
     const colors = new Float32Array(nvert * 3);
     for (let i = 0; i < bytes.length; i++) colors[i] = bytes[i] / 255;
-    const indices = new Uint32Array(buf, o, nidx); o += nidx * 4;
-    const riverPos = new Float32Array(buf, o, nrv * 3); o += nrv * 12;
-    const riverIdx = new Uint32Array(buf, o, nri);
+    const indices = new Uint32Array(nidx);
+    indices.set(new Uint32Array(buf, o, nidx)); o += nidx * 4;
+    const riverPos = new Float32Array(nrv * 3);
+    riverPos.set(new Float32Array(buf, o, nrv * 3)); o += nrv * 12;
+    const riverIdx = new Uint32Array(nri);
+    riverIdx.set(new Uint32Array(buf, o, nri));
     return { positions, colors, indices, riverPos, riverIdx };
   });
 }

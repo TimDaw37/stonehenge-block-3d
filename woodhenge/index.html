@@ -79,8 +79,8 @@
   </div>
   <div class="chk"><label><input type="checkbox" id="showSunRay" checked/> Sun ray</label></div>
   <div class="chk"><label><input type="checkbox" id="showAxes" checked/> Axis 44°</label></div>
-  <div class="chk"><label><input type="checkbox" id="showCunnington" checked/> Cunnington 50¾°</label></div>
-  <div class="note">Her line was claimed as midsummer sunrise. In 2500 BC first gleam is 49.4°, so it misses.</div>
+  <div class="chk"><label><input type="checkbox" id="showCunnington" checked/> Cunnington's line</label></div>
+  <div class="note">50° on the ground, 0.6° from the 2500 BC first gleam. Close enough.</div>
   <div id="readout">Loading landscape…</div>
 </div>
 <script src="./posts.js"></script>
@@ -360,7 +360,7 @@ function throughCentre(azDeg, color, dashed) {
 }
 const axisGroup = new THREE.Group();
 const fittedAxis = throughCentre(44, 0xd5dbe3, false);
-const cunningtonAxis = throughCentre(50.75, 0xf0c14a, true);
+const cunningtonAxis = throughCentre(50, 0xf0c14a, true);
 axisGroup.add(fittedAxis);
 axisGroup.add(cunningtonAxis);
 axisGroup.position.set(centre.x, 0, centre.z);

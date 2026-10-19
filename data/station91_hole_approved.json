@@ -1,10 +1,10 @@
 {
   "id": "91",
   "kind": "stonehole",
-  "status": "TIM_X_NW_END",
-  "e_m": 412284.883,
-  "n_m": 142174.378,
-  "method": "Half width along long side toward 94 (NW end of fallen box) \u2014 Tim X on locked_overview screenshot",
+  "status": "TIM_APPROVED_2026-09-20",
+  "e_m": 412287.630,
+  "n_m": 142174.136,
+  "method": "Stonehole value approved by Tim on 20 Sep 2026 (green mark on Cleal Plan 1 west-end oval, +0.5 m WNW +0.5 m NW); replaces the earlier TIM_X_NW_END point 412284.883/142174.378",
   "fallen_e_m": 412285.696,
   "fallen_n_m": 142173.451
 }
